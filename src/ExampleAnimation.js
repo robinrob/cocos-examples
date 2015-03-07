@@ -11,7 +11,6 @@ var ExampleAnimationLayer = BaseLayer.extend({
 
         cc.spriteFrameCache.addSpriteFrames(mrrobinsmith.res.fish_plist);
         var spriteSheet = new cc.SpriteBatchNode(mrrobinsmith.res.fish_png);
-        this.addChild(spriteSheet);
 
         var animFrames = [];
         for (var i = 1; i < 4; i++) {
