@@ -30,7 +30,10 @@ mrrobinsmith.g = {
     buttonTextColor: mrrobinsmith.colors.orange
 }
 
-mrrobinsmith.res = {}
+mrrobinsmith.res = {
+    fish_png  : "res/fish.png",
+    fish_plist : "res/fish.plist"
+}
 
 mrrobinsmith.resources = [];
 for (var i in mrrobinsmith.res) {

@@ -2,7 +2,7 @@
     "project_type": "javascript",
 
     "debugMode" : 1,
-    "showFPS" : true,
+    "showFPS" : false,
     "frameRate" : 60,
     "id" : "gameCanvas",
     "renderMode" : 0,
@@ -11,8 +11,12 @@
     "modules" : ["cocos2d"],
 
     "jsList" : [
+        "src/BaseLayer.js",
         "src/globals.js",
         "src/MenuLayer.js",
-        "src/MenuScene.js"
+        "src/MenuScene.js",
+        "src/ui.js",
+
+        "src/ExampleAnimation.js"
     ]
 }
