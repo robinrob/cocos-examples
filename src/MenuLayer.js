@@ -11,7 +11,9 @@ var MenuLayer = cc.Layer.extend({
         var winSize = cc.director.getWinSize();
         var centerpos = cc.p(winSize.width / 2, winSize.height / 2);
 
-        var menu = new cc.Menu(this.menuItems());
+        var items = this.menuItems()
+        var menu = new cc.Menu(items);
+
         menu.alignItemsVertically()
         menu.setPosition(centerpos);
         this.addChild(menu);
@@ -20,7 +22,8 @@ var MenuLayer = cc.Layer.extend({
     // Add new example scenes here
     menuItems: function() {
         var items = [
-            ui.constructMenuItem("Animation", new ExampleAnimation.Scene())
+            ui.constructMenuItem("Animation", new ExampleAnimation.Scene()),
+            ui.constructMenuItem("Body", new ExampleBody.Scene())
         ]
         return items
     }

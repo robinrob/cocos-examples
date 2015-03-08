@@ -13,17 +13,6 @@ mrrobinsmith.colors = {
     white: new cc.color(255, 255, 255, 255)
 }
 
-mrrobinsmith.tileColors = [
-    mrrobinsmith.colors.yellow,
-    mrrobinsmith.colors.green,
-    mrrobinsmith.colors.purple,
-    mrrobinsmith.colors.pink,
-    mrrobinsmith.colors.orange,
-    mrrobinsmith.colors.maroon,
-    mrrobinsmith.colors.brown,
-    mrrobinsmith.colors.blue
-]
-
 mrrobinsmith.g = {
     buttonOuterColor: mrrobinsmith.colors.orange,
     buttonInnerColor: mrrobinsmith.colors.green,
