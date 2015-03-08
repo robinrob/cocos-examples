@@ -1,4 +1,7 @@
-mrrobinsmith = {}
+mrrobinsmith = {
+    gravity: -350,
+    groundHeight: 10
+}
 
 mrrobinsmith.colors = {
     yellow: new cc.color(255, 255, 0, 255),
@@ -18,6 +21,10 @@ mrrobinsmith.g = {
     buttonInnerColor: mrrobinsmith.colors.green,
     buttonTextColor: mrrobinsmith.colors.orange
 }
+
+mrrobinsmith.tagOfLayer = {
+    Animation: 1
+};
 
 mrrobinsmith.res = {
     fish_png  : "res/fish.png",

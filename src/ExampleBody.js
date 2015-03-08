@@ -23,138 +23,84 @@ config.CENTER = config.ARM_WIDTH + config.ARMPIT_WIDTH + config.TORSO_WIDTH / 2
 
 var ExampleBody = {
     Layer: BaseLayer.extend({
-        ctor: function () {
+        balls: null,
+        man: null,
+        space: null,
+        gameLayer: null,
+
+        ctor: function (space) {
             this._super();
+            this.space = space
+            this.init()
         },
 
         init: function () {
             this._super()
 
-            var space = new cp.Space();
-
             var draw = new cc.DrawNode()
             this.addChild(draw)
 
-            this.addChild(new Man(space, draw))
+            var winSize = cc.director.getWinSize()
+            var center = cc.p(winSize.width / 2, winSize.height / 2)
+
+            this.man = new Man(center, this.space, draw)
+            this.addChild(this.man)
+
+            var platform = new Platform(
+                cc.p(center.x - 20, center.y),
+                cc.p(center.x + 20, center.y),
+                2,
+                this.space)
+            this.addChild(platform)
+
+            var pos = cc.p(center.x, center.y + 100)
+
+            this.balls = []
+            for (var i = 0; i < 10; ++i) {
+                var ball = new Ball(pos, 10, this.space, draw)
+                this.balls.push(ball)
+                this.addChild(ball)
+            }
+
+            var wallBottom = new cp.SegmentShape(this.space.staticBody,
+                cp.v(0, mrrobinsmith.groundHeight),
+                cp.v(winSize.width, mrrobinsmith.groundHeight),
+                0);
+            wallBottom.setElasticity(1.0)
+            this.space.addStaticShape(wallBottom);
+        },
+
+        update: function(dt) {
+            this.balls.forEach(function(ball) {
+                ball.move()
+            })
+            this.man.move()
         }
     }),
 
     Scene: cc.Scene.extend({
+        space: null,
+
         onEnter:function () {
             cc.log("Scene.onEnter ...")
             this._super();
-            var layer = new ExampleBody.Layer();
-            layer.init();
-            this.addChild(layer);
+
+            this.space = new cp.Space();
+            this.space.gravity = cp.v(0, mrrobinsmith.gravity);
+
+            this.gameLayer = new cc.Layer();
+            this.gameLayer.addChild(new ExampleBody.Layer(this.space), 0, mrrobinsmith.tagOfLayer.Animation)
+
+            this.addChild(this.gameLayer);
+
+            this.scheduleUpdate();
+        },
+
+        update: function(dt) {
+            this.space.step(dt);
+
+            var layer = this.gameLayer.getChildByTag(mrrobinsmith.tagOfLayer.Animation);
+            layer.update(dt);
         }
     })
 }
-
-var Man = cc.Node.extend({
-
-
-    space: null,
-    _draw: null,
-
-    ctor: function(space, draw) {
-        this._super()
-
-        this.space = space
-        this._draw = draw
-
-        this.init()
-    },
-
-    init: function() {
-        cc.log("Man.init ...")
-        this._super()
-
-        // legs
-        var legP = this._constructLeg(config.CENTER - config.LEG_WIDTH - config.CROTCH_WIDTH / 2, 0)
-        this._constructLeg(config.CENTER + config.CROTCH_WIDTH / 2, 0)
-
-        // torso
-        var torsoP = this._constructTorso(
-            this.worldX(config.CENTER - config.TORSO_WIDTH / 2),
-            legP.y + config.CROTCH_HEIGHT)
-
-        // arms
-        this._constructArm(
-            this.worldX(config.CENTER - config.TORSO_WIDTH / 2 - config.ARMPIT_WIDTH - config.ARM_WIDTH),
-            torsoP.y - config.ARM_HEIGHT
-        )
-        this._constructArm(
-            this.worldX(config.CENTER + config.TORSO_WIDTH / 2 + config.ARMPIT_WIDTH),
-            torsoP.y - config.ARM_HEIGHT
-        )
-
-        // head
-        this._constructHead(
-            this.worldX(config.CENTER - config.HEAD_SIZE / 2),
-            torsoP.y + config.NECK_HEIGHT
-        )
-    },
-
-    worldX: function(x) {
-        var winWidth = cc.director.getWinSize().width
-        return winWidth / 2 + x
-    },
-
-    worldCoords: function(x, y) {
-        var winSize = cc.director.getWinSize()
-
-        return cc.p(winSize.width / 2 + x, winSize.height / 2 + y)
-    },
-
-    _constructLimb: function(mass, pos, width, height, color) {
-        // physics
-        var body = new cp.Body(mass, 1.0)
-        body.setPos(pos)
-        this.space.addBody(body);
-
-        var shape = new cp.BoxShape(body, width, height)
-        this.space.addShape(shape)
-
-        var blue = cc.color(0, 0, 255, 255)
-
-        this._draw.drawRect(pos, cc.p(pos.x + width, pos.y + height), color, 2, color)
-
-        return cc.p(pos.x, pos.y + height)
-    },
-
-    _constructLeg: function(x, y) {
-        return this._constructLimb(
-            1.0,
-            this.worldCoords(x, y),
-            config.LEG_WIDTH, config.LEG_HEIGHT,
-            mrrobinsmith.colors.green
-        )
-    },
-
-    _constructArm: function(x, y) {
-        return this._constructLimb(
-            1.0,
-            cc.p(x, y),
-            config.ARM_WIDTH, config.ARM_HEIGHT,
-            mrrobinsmith.colors.yellow
-        )
-    },
-
-    _constructTorso: function(x, y) {
-        return this._constructLimb(
-            1.0,
-            cc.p(x, y),
-            config.TORSO_WIDTH, config.TORSO_HEIGHT,
-            mrrobinsmith.colors.orange
-        )
-    },
-
-    _constructHead: function(x, y) {
-        return this._constructLimb(
-            1.0,
-            cc.p(x, y),
-            config.HEAD_SIZE, config.HEAD_SIZE,
-            mrrobinsmith.colors.pink
-        )
-    }
-})
