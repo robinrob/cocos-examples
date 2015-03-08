@@ -20,7 +20,7 @@ var MenuLayer = cc.Layer.extend({
     // Add new example scenes here
     menuItems: function() {
         var items = [
-            ui.constructMenuItem("Animation", new ExampleAnimationScene())
+            ui.constructMenuItem("Animation", new ExampleAnimation.Scene())
         ]
         return items
     }
