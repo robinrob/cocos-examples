@@ -16,7 +16,7 @@ var Man = cc.Node.extend({
     },
 
     init: function() {
-        cc.log("Man.init ...")
+        cc.log("rss.man.init ...")
         this._super()
 
         //this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this._width, this._height))
@@ -31,34 +31,34 @@ var Man = cc.Node.extend({
 
         // legs
         var leftLeg = this._constructLeg(
-            this.worldX(-1 * (rss.cfg.width.leg + rss.cfg.width.crotch) / 2),
-            this.worldY(rss.cfg.height.leg / 2)
+            this.worldX(-1 * (rss.man.width.leg + rss.man.width.crotch) / 2),
+            this.worldY(rss.man.height.leg / 2)
         )
         var rightLeg = this._constructLeg(
-            this.worldX(+1 * (rss.cfg.width.leg + rss.cfg.width.crotch) / 2),
-            this.worldY(rss.cfg.height.leg / 2)
+            this.worldX(+1 * (rss.man.width.leg + rss.man.width.crotch) / 2),
+            this.worldY(rss.man.height.leg / 2)
         )
 
         // torso
         var torso = this._constructTorso(
             this.worldX(0),
-            leftLeg.getTopLeft().y + rss.cfg.width.torso + rss.cfg.height.torso / 2)
+            leftLeg.getTopLeft().y + rss.man.height.crotch + rss.man.width.torso / 2)
         this.torso = torso
 
         // arms
         var rightArm = this._constructArm(
-            this.worldX(-1 * (rss.cfg.width.torso + rss.cfg.width.armpit + rss.cfg.width.arm) / 2),
-            torso.getTopLeft().y - rss.cfg.height.arm / 2
+            this.worldX(-1 * (rss.man.width.torso + rss.man.width.armpit + rss.man.width.arm) / 2),
+            torso.getTopLeft().y - rss.man.height.arm / 2
         )
         var leftArm = this._constructArm(
-            this.worldX(+1 * (rss.cfg.width.torso + rss.cfg.width.armpit + rss.cfg.width.arm) / 2),
-            torso.getTopLeft().y - rss.cfg.height.arm / 2
+            this.worldX(+1 * (rss.man.width.torso + rss.man.width.armpit + rss.man.width.arm) / 2),
+            torso.getTopLeft().y - rss.man.height.arm / 2
         )
 
         // head
         var head = this._constructHead(
             this.worldX(0),
-            torso.getTopLeft().y + rss.cfg.height.neck + rss.cfg.height.head / 2
+            torso.getTopLeft().y + rss.man.height.neck + rss.man.height.head / 2
         )
 
         this.joinLimbs(torso, head)
@@ -101,8 +101,8 @@ var Man = cc.Node.extend({
     _constructLeg: function(x, y) {
         return this._constructLimb(
             cc.p(x, y),
-            cc.size(rss.cfg.width.leg, rss.cfg.height.leg),
-            1.0,
+            cc.size(rss.man.width.leg, rss.man.height.leg),
+            rss.man.mass.leg,
             rss.colors.green
         )
     },
@@ -110,8 +110,8 @@ var Man = cc.Node.extend({
     _constructArm: function(x, y) {
         return this._constructLimb(
             cc.p(x, y),
-            cc.size(rss.cfg.width.arm, rss.cfg.height.arm),
-            1.0,
+            cc.size(rss.man.width.arm, rss.man.height.arm),
+            rss.man.mass.arm,
             rss.colors.yellow
         )
     },
@@ -119,8 +119,8 @@ var Man = cc.Node.extend({
     _constructTorso: function(x, y) {
         return this._constructLimb(
             cc.p(x, y),
-            cc.size(rss.cfg.width.torso, rss.cfg.height.torso),
-            1.0,
+            cc.size(rss.man.width.torso, rss.man.height.torso),
+            rss.man.mass.torso,
             rss.colors.orange
         )
     },
@@ -128,30 +128,64 @@ var Man = cc.Node.extend({
     _constructHead: function(x, y) {
         return this._constructLimb(
             cc.p(x, y),
-            cc.size(rss.cfg.width.head, rss.cfg.height.head),
-            1.0,
+            cc.size(rss.man.width.head, rss.man.height.head),
+            rss.man.mass.head,
             rss.colors.pink
         )
     },
 
-    getPosition: function() {
+    getPos: function() {
+        var comX = 0.0
+        var comY = 0.0
+        var mass = this.getMass()
 
+        this.limbs.forEach(function(limb) {
+            comX += limb.getX() * limb.mass / mass
+            comY += limb.getY() * limb.mass / mass
+        })
+
+        return cc.p(comX, comY)
+    },
+
+    setPos: function(x, y) {
+        var com = this.getPos()
+        var deltaX = x - com.x
+        var deltaY = y - com.y
+
+        this.limbs.forEach(function(limb) {
+            var x = limb.getPos().x + deltaX
+            var y = limb.getPos().y + deltaY
+            limb.setPos(x, y)
+        })
+    },
+
+    setVel: function(vel) {
+        this.limbs.forEach(function(limb) {
+            limb.setVel(vel)
+        })
+    },
+
+    getMass: function() {
+        mass = 0.0
+        this.limbs.forEach(function(limb) {
+            mass += limb.mass
+        })
+        return mass
     },
 
     move: function() {
-        var p = this.torso.getPos()
+        var p = this.getPos()
+        var height = rss.man.height.total
 
         var winSize = cc.director.getWinSize()
         if (p.x > winSize.width) {
-            this.limbs.forEach(function(limb) {
-                var diff = winSize.width - limb.getPos().x
-                limb.setPos(0, p.y)
-            })
+            this.setPos(0, p.y)
         }
         else if (p.x < 0) {
-            this.limbs.forEach(function(limb) {
-                limb.setPos(winSize.width, p.y)
-            })
+            this.setPos(winSize.width, p.y)
         }
+
+        cc.log("x: " + p.x)
+        cc.log("y: " + p.y)
     }
 })

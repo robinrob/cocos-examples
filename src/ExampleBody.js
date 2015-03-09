@@ -27,6 +27,7 @@ var ExampleBody = {
             var center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.man = new Man(center, this.space)
+            this.man.setVel(cp.v(50, 0))
             this.addChild(this.man)
 
             var platform = new Platform(
@@ -46,8 +47,8 @@ var ExampleBody = {
             }
 
             var wallBottom = new cp.SegmentShape(this.space.staticBody,
-                cp.v(0, rss.groundHeight),
-                cp.v(winSize.width, rss.groundHeight),
+                cp.v(-winSize.width / 2, rss.groundHeight),
+                cp.v(winSize.width * 3 / 2, rss.groundHeight),
                 0);
             wallBottom.setElasticity(1.0)
             this.space.addStaticShape(wallBottom);

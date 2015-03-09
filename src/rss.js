@@ -52,41 +52,41 @@ rss.sum = function(obj) {
     return total
 }
 
-var cfg = {
+var man = {
     width: {},
     height: {},
     mass: {}
 }
-rss.cfg = cfg
+rss.man = man
 
 var width = {}
-cfg.width = width
+man.width = width
 width.leg = 10
 width.crotch = 5
 width.arm = 5
 width.armpit = 5
-width.torso = width.leg + width.crotch
+width.torso = 2 * width.leg + width.crotch
 width.head = 20
-width.man = rss.sum(width)
+width.total = rss.sum(width)
 
 var height = {}
-cfg.height = height
+man.height = height
 height.leg = 40
 height.crotch = 5
 height.arm = 30
 height.torso = width.torso
 height.neck = 5
 height.head = width.head
-height.man = rss.sum(height)
+height.total = rss.sum(height)
 
 var mass = {}
-cfg.mass = mass
+man.mass = mass
 mass.leg = 16
 mass.arm = 6
 mass.torso = 20
 mass.head = 8
-mass.man = rss.sum(mass)
+mass.total = rss.sum(mass)
 
 var y = {}
-cfg.y = y
+man.y = y
 y.shoulder = height.leg + height.torso
