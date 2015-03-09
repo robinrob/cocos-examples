@@ -26,10 +26,12 @@ var Limb = cc.Node.extend({
     init: function() {
         this._super()
         // physics
-        this.body = this.space.addBody(new cp.Body(this.mass, 1.0, cp.momentForBox(1, 30, 30)))
+        this.body = new cp.Body(this.mass, cp.momentForBox(1, 30, 30))
+        this.space.addBody(this.body)
         this.body.setPos(this.startV)
 
-        var shape = this.space.addShape(new cp.BoxShape(this.body, this._width, this._height))
+        var shape = new cp.BoxShape(this.body, this._width, this._height)
+        var shape = this.space.addShape(shape)
         shape.setElasticity(0);
 
         this.draw()

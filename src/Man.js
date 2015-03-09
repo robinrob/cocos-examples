@@ -26,10 +26,10 @@ var Man = cc.Node.extend({
                 config.CENTER - config.LEG_WIDTH - config.CROTCH_WIDTH / 2),
             this.worldY(0)
         )
-        //this._constructLeg(
-        //    legP.x + config.LEG_WIDTH + config.CROTCH_WIDTH,
-        //    0
-        //)
+        this._constructLeg(
+            legP.x + config.LEG_WIDTH + config.CROTCH_WIDTH + 100,
+            legP.y
+        )
         //
         //// torso
         //var torsoP = this._constructTorso(
@@ -73,7 +73,8 @@ var Man = cc.Node.extend({
             1.0,
             config.LEG_WIDTH, config.LEG_HEIGHT,
             this.space,
-            mrrobinsmith.colors.green, this._draw
+            mrrobinsmith.colors.green,
+            this._draw
         )
         this.addChild(limb)
         this.limbs.push(limb)
@@ -85,12 +86,13 @@ var Man = cc.Node.extend({
         var limb = new Limb(
             x, y,
             1.0,
-            this.space,
             config.ARM_WIDTH, config.ARM_HEIGHT,
+            this.space,
             mrrobinsmith.colors.yellow,
             this._draw
         )
         this.addChild(limb)
+        this.limbs.push(limb)
 
         return limb.getTopLeft()
     },
@@ -99,12 +101,13 @@ var Man = cc.Node.extend({
         var limb = new Limb(
             x, y,
             1.0,
-            this.space,
             config.TORSO_WIDTH, config.TORSO_HEIGHT,
+            this.space,
             mrrobinsmith.colors.orange,
             this._draw
         )
         this.addChild(limb)
+        this.limbs.push(limb)
 
         return limb.getTopLeft()
     },
@@ -112,18 +115,20 @@ var Man = cc.Node.extend({
     _constructHead: function(x, y) {
         var limb = new Limb(
             x, y,
-            this.space,
             1.0,
             config.HEAD_SIZE, config.HEAD_SIZE,
+            this.space,
             mrrobinsmith.colors.pink,
             this._draw
         )
         this.addChild(limb)
+        this.limbs.push(limb)
 
         return limb.getTopLeft()
     },
 
     move: function() {
+        cc.log("limbs.length: " + this.limbs.length)
         this.limbs.forEach(function(limb) {
             limb.move()
         })
