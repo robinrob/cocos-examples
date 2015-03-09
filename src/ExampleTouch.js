@@ -17,22 +17,19 @@ var ExampleTouch = {
             this.balls = []
 
             var that = this
-            var listener = cc.EventListener.create({
+            cc.eventManager.addListener({
                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
                 swallowTouches: true,
-                onTouch: that.onTouch
-            })
-            cc.eventManager.addListener(listener.clone, this)
+                onTouchBegan: function(touch, event) {
+                    var pos = touch.getLocation();
+                    var ball = new Ball(pos, 10, that.space)
+                    that.balls.push(ball)
+                    that.addChild(ball)
+                }
+            }, this)
         },
 
-        onTouch:function(touch, event) {
-            cc.log("Clicked!")
-            var pos = touch.getLocation();
-            //this.balls.push(new Ball(pos, 10, this.space))
-            return true
-        },
-
-        update: function(dt) {
+        update: function() {
             this.balls.forEach(function(ball) {
                 ball.move()
             })
@@ -59,7 +56,7 @@ var ExampleTouch = {
         update: function(dt) {
             this.space.step(dt);
 
-            this.layer.update(dt);
+            this.layer.update();
         }
     })
 }

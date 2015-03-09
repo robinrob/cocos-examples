@@ -40,7 +40,7 @@ var Ball = cc.Node.extend({
         this.draw()
 
         // ball collision model
-        this.shape = new cp.CircleShape(this.body, this.radius, cp.v(0,0))
+        this.shape = new cp.CircleShape(this.body, this.radius, cp.v(0, 0))
         this.shape.setElasticity(0.8)
         this.space.addShape(this.shape)
     },
