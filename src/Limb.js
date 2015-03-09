@@ -47,7 +47,7 @@ var Limb = cc.Node.extend({
     },
 
     draw: function() {
-        var pos = this.startPos
+        var pos = this.body.getPos()
 
         this._draw.clear()
         this._draw.drawRect(pos, cc.p(pos.x + this._width, pos.y + this._height), this._color, 2, this._color)

@@ -31,7 +31,13 @@ var ExampleBody = {
         ctor: function (space) {
             this._super();
             this.space = space
+
             this.init()
+
+            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode.setVisible(true);
+            // Parallax ratio and offset
+            this.addChild(this._debugNode, 10);
         },
 
         init: function () {
