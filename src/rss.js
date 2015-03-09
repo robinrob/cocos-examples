@@ -52,6 +52,13 @@ rss.sum = function(obj) {
     return total
 }
 
+var ball = {
+    mass: {}
+}
+rss.ball = ball
+
+ball.mass.total = 100
+
 var man = {
     width: {},
     height: {},

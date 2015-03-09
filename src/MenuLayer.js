@@ -25,7 +25,8 @@ var MenuLayer = cc.Layer.extend({
             ui.constructMenuItem("Animation", new ExampleAnimation.Scene()),
             ui.constructMenuItem("Body", new ExampleBody.Scene()),
             ui.constructMenuItem("Draw", new ExampleDraw.Scene()),
-            ui.constructMenuItem("Touch", new ExampleTouch.Scene())
+            ui.constructMenuItem("Touch", new ExampleTouch.Scene()),
+            ui.constructMenuItem("Move", new ExampleMove.Scene())
         ]
         return items
     }

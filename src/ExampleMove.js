@@ -1,4 +1,6 @@
-var Example = {
+/* Example of moving a body around using keyboard controls */
+
+var ExampleMove = {
     Layer: BaseLayer.extend({
         ctor: function () {
             this._super();
@@ -15,7 +17,7 @@ var Example = {
         onEnter:function () {
             this._super()
 
-            this.addChild(new Example.Layer())
+            this.addChild(new ExampleMove.Layer())
         }
     })
 }

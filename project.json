@@ -24,6 +24,7 @@
         "src/ExampleAnimation.js",
         "src/ExampleBody.js",
         "src/ExampleDraw.js",
-        "src/ExampleTouch.js"
+        "src/ExampleTouch.js",
+        "src/ExampleMove.js"
     ]
 }

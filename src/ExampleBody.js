@@ -27,7 +27,7 @@ var ExampleBody = {
             var center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.man = new Man(center, this.space)
-            this.man.setVel(cp.v(50, 0))
+            this.man.setVel(cp.v(0, 0))
             this.addChild(this.man)
 
             var platform = new Platform(
@@ -41,17 +41,43 @@ var ExampleBody = {
 
             this.balls = []
             for (var i = 0; i < 10; ++i) {
-                var ball = new Ball(pos, 10, this.space)
+                var ball = new Ball(pos, 10, rss.ball.mass.total, this.space)
                 this.balls.push(ball)
                 this.addChild(ball)
             }
 
-            var wallBottom = new cp.SegmentShape(this.space.staticBody,
-                cp.v(-winSize.width / 2, rss.groundHeight),
-                cp.v(winSize.width * 3 / 2, rss.groundHeight),
-                0);
-            wallBottom.setElasticity(1.0)
-            this.space.addStaticShape(wallBottom);
+            var margin = 20
+            // left wall
+            this.constructWall(
+                cp.v(margin, rss.groundHeight),
+                cp.v(margin, winSize.height * 10)
+            )
+
+            // right wall
+            this.constructWall(
+                cp.v(winSize.width - margin, rss.groundHeight),
+                cp.v(winSize.width - margin, winSize.height * 10)
+            )
+
+            // ground
+            this.constructWall(
+                cp.v(margin, rss.groundHeight),
+                cp.v(winSize.width - margin, rss.groundHeight)
+            )
+            //this.constructWall(
+            //    cp.v(-winSize.width * 2, rss.groundHeight),
+            //    cp.v(winSize.width * 2, rss.groundHeight)
+            //)
+        },
+
+        constructWall: function(v1, v2) {
+            var wall = new cp.SegmentShape(
+                this.space.staticBody,
+                v1, v2,
+                0
+            );
+            wall.setElasticity(1.0)
+            this.space.addStaticShape(wall);
         },
 
         update: function(dt) {

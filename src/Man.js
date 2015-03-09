@@ -175,9 +175,8 @@ var Man = cc.Node.extend({
 
     move: function() {
         var p = this.getPos()
-        var height = rss.man.height.total
-
         var winSize = cc.director.getWinSize()
+
         if (p.x > winSize.width) {
             this.setPos(0, p.y)
         }
