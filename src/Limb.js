@@ -31,14 +31,14 @@ var Limb = cc.Node.extend({
         var shape = new cp.BoxShape(this.body, this._width, this._height)
         var shape = this.space.addShape(shape)
         shape.setElasticity(0);
-
-        this._draw = new cc.DrawNode()
-        this.addChild(this._draw)
-        this.draw()
     },
 
     getPos: function() {
         return this.body.getPos()
+    },
+
+    setPos: function(x, y) {
+        this.body.setPos(cp.v(x, y))
     },
 
     getTopLeft: function() {
@@ -57,13 +57,5 @@ var Limb = cc.Node.extend({
     getJointV: function() {
         var p = this.getPos()
         return cp.v(p.x, p.y + this._height / 2)
-    },
-
-    draw: function() {
-        var pos = this.body.getPos()
-    },
-
-    move: function() {
-        this.draw()
     }
 })

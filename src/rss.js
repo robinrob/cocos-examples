@@ -43,3 +43,50 @@ for (var i in rss.res) {
 rss.toV = function(p) {
     return cp.v(p.x, p.y)
 }
+
+rss.sum = function(obj) {
+    var total = 0
+    for (var i in obj) {
+        total += obj[i]
+    }
+    return total
+}
+
+var cfg = {
+    width: {},
+    height: {},
+    mass: {}
+}
+rss.cfg = cfg
+
+var width = {}
+cfg.width = width
+width.leg = 10
+width.crotch = 5
+width.arm = 5
+width.armpit = 5
+width.torso = width.leg + width.crotch
+width.head = 20
+width.man = rss.sum(width)
+
+var height = {}
+cfg.height = height
+height.leg = 40
+height.crotch = 5
+height.arm = 30
+height.torso = width.torso
+height.neck = 5
+height.head = width.head
+height.man = rss.sum(height)
+
+var mass = {}
+cfg.mass = mass
+mass.leg = 16
+mass.arm = 6
+mass.torso = 20
+mass.head = 8
+mass.man = rss.sum(mass)
+
+var y = {}
+cfg.y = y
+y.shoulder = height.leg + height.torso
