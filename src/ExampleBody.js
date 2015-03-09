@@ -46,8 +46,8 @@ var ExampleBody = {
             }
 
             var wallBottom = new cp.SegmentShape(this.space.staticBody,
-                cp.v(0, mrrobinsmith.groundHeight),
-                cp.v(winSize.width, mrrobinsmith.groundHeight),
+                cp.v(0, rss.groundHeight),
+                cp.v(winSize.width, rss.groundHeight),
                 0);
             wallBottom.setElasticity(1.0)
             this.space.addStaticShape(wallBottom);
@@ -69,10 +69,10 @@ var ExampleBody = {
             this._super();
 
             this.space = new cp.Space();
-            this.space.gravity = cp.v(0, mrrobinsmith.gravity);
+            this.space.gravity = cp.v(0, rss.gravity);
 
             this.gameLayer = new cc.Layer();
-            this.gameLayer.addChild(new ExampleBody.Layer(this.space), 0, mrrobinsmith.tagOfLayer.Animation)
+            this.gameLayer.addChild(new ExampleBody.Layer(this.space), 0, rss.tagOfLayer.Animation)
 
             this.addChild(this.gameLayer);
 
@@ -82,7 +82,7 @@ var ExampleBody = {
         update: function(dt) {
             this.space.step(dt);
 
-            var layer = this.gameLayer.getChildByTag(mrrobinsmith.tagOfLayer.Animation);
+            var layer = this.gameLayer.getChildByTag(rss.tagOfLayer.Animation);
             layer.update(dt);
         }
     })

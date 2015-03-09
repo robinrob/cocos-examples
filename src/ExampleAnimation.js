@@ -11,8 +11,8 @@ var ExampleAnimation = {
             cc.log("AnimationLayer.init ...")
             this._super()
 
-            cc.spriteFrameCache.addSpriteFrames(mrrobinsmith.res.fish_plist);
-            var spriteSheet = new cc.SpriteBatchNode(mrrobinsmith.res.fish_png);
+            cc.spriteFrameCache.addSpriteFrames(rss.res.fish_plist);
+            var spriteSheet = new cc.SpriteBatchNode(rss.res.fish_png);
 
             var animFrames = [];
             for (var i = 1; i < 4; i++) {

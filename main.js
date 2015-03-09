@@ -52,7 +52,7 @@ cc.game.onStart = function(){
     cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
     //load resources
-    cc.LoaderScene.preload(mrrobinsmith.resources, function () {
+    cc.LoaderScene.preload(rss.resources, function () {
         cc.director.runScene(new MenuScene());
     }, this);
 };

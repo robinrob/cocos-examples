@@ -1,9 +1,13 @@
-mrrobinsmith = {
-    gravity: -350,
-    groundHeight: 10
+rss = {
+    gravity: -35,
+    groundHeight: 10,
+
+    toV: function(p) {
+    return cp.v(p.x, p.y)
+    }
 }
 
-mrrobinsmith.colors = {
+rss.colors = {
     yellow: new cc.color(255, 255, 0, 255),
     green: new cc.color(0, 255, 0, 255),
     purple: new cc.color(174, 0, 255, 255),
@@ -16,22 +20,26 @@ mrrobinsmith.colors = {
     white: new cc.color(255, 255, 255, 255)
 }
 
-mrrobinsmith.g = {
-    buttonOuterColor: mrrobinsmith.colors.orange,
-    buttonInnerColor: mrrobinsmith.colors.green,
-    buttonTextColor: mrrobinsmith.colors.orange
+rss.g = {
+    buttonOuterColor: rss.colors.orange,
+    buttonInnerColor: rss.colors.green,
+    buttonTextColor: rss.colors.orange
 }
 
-mrrobinsmith.tagOfLayer = {
+rss.tagOfLayer = {
     Animation: 1
 };
 
-mrrobinsmith.res = {
+rss.res = {
     fish_png  : "res/fish.png",
     fish_plist : "res/fish.plist"
 }
 
-mrrobinsmith.resources = [];
-for (var i in mrrobinsmith.res) {
-    mrrobinsmith.resources.push(mrrobinsmith.res[i]);
+rss.resources = [];
+for (var i in rss.res) {
+    rss.resources.push(rss.res[i]);
+}
+
+rss.toV = function(p) {
+    return cp.v(p.x, p.y)
 }

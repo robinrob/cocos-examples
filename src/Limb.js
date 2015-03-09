@@ -7,14 +7,14 @@ var Limb = cc.Node.extend({
     _draw: null,
     _color: null,
 
-    ctor: function(x, y, mass, width, height, space, color) {
+    ctor: function(pos, size, mass, space, color) {
         this._super()
 
-        this.startPos = cc.p(x, y)
-        this.startV = cp.v(x, y)
+        this.startPos = pos
+        this.startV = cp.v(pos.x, pos.y)
         this.mass = mass
-        this._width = width
-        this._height = height
+        this._width = size.width
+        this._height = size.height
         this.space = space
         this._color = color
 
@@ -24,7 +24,7 @@ var Limb = cc.Node.extend({
     init: function() {
         this._super()
         // physics
-        this.body = new cp.Body(this.mass, cp.momentForBox(1, this._width, this._height))
+        this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this._width, this._height))
         this.space.addBody(this.body)
         this.body.setPos(this.startV)
 
@@ -44,6 +44,19 @@ var Limb = cc.Node.extend({
     getTopLeft: function() {
         var pos = this.getPos()
         return cc.p(pos.x, pos.y + this._height / 2)
+    },
+
+    getV: function() {
+        return rss.toV(this.getPos())
+    },
+
+    getTopLeftV: function() {
+        return rss.toV(this.getTopLeft())
+    },
+
+    getJointV: function() {
+        var p = this.getPos()
+        return cp.v(p.x, p.y + this._height / 2)
     },
 
     draw: function() {

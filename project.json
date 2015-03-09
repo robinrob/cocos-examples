@@ -13,12 +13,12 @@
     "jsList" : [
         "src/Ball.js",
         "src/BaseLayer.js",
-        "src/globals.js",
         "src/Limb.js",
         "src/Man.js",
         "src/MenuLayer.js",
         "src/MenuScene.js",
         "src/Platform.js",
+        "src/rss.js",
         "src/ui.js",
 
         "src/ExampleAnimation.js",
