@@ -4,11 +4,10 @@ var Limb = cc.Node.extend({
     _width: null,
     _height: null,
     body: null,
-    shape: null,
     _draw: null,
     _color: null,
 
-    ctor: function(x, y, mass, width, height, space, color, draw) {
+    ctor: function(x, y, mass, width, height, space, color) {
         this._super()
 
         this.startPos = cc.p(x, y)
@@ -18,7 +17,6 @@ var Limb = cc.Node.extend({
         this._height = height
         this.space = space
         this._color = color
-        this._draw = draw
 
         this.init()
     },
@@ -34,6 +32,8 @@ var Limb = cc.Node.extend({
         var shape = this.space.addShape(shape)
         shape.setElasticity(0);
 
+        this._draw = new cc.DrawNode()
+        this.addChild(this._draw)
         this.draw()
     },
 

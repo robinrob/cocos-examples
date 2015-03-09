@@ -43,7 +43,7 @@ var ExampleBody = {
             var winSize = cc.director.getWinSize()
             var center = cc.p(winSize.width / 2, winSize.height / 2)
 
-            this.man = new Man(center, this.space, draw)
+            this.man = new Man(center, this.space)
             this.addChild(this.man)
 
             var platform = new Platform(

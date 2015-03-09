@@ -6,7 +6,7 @@ var Ball = cc.Node.extend({
     sprite: null,
     startPos: null,
 
-    ctor:function(position, radius, space, draw) {
+    ctor:function(position, radius, space) {
         cc.log("Ball.ctor ...")
 
         this._super();

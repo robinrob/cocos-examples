@@ -1,15 +1,13 @@
 var Man = cc.Node.extend({
     startPos: null,
     space: null,
-    _draw: null,
     limbs: null,
 
-    ctor: function(position, space, draw) {
+    ctor: function(position, space) {
         this._super()
 
         this.startPos = position
         this.space = space
-        this._draw = draw
 
         this.init()
     },
@@ -27,30 +25,30 @@ var Man = cc.Node.extend({
             this.worldY(0)
         )
         this._constructLeg(
-            legP.x + config.LEG_WIDTH + config.CROTCH_WIDTH + 100,
-            legP.y
+            legP.x + config.LEG_WIDTH + config.CROTCH_WIDTH,
+            this.worldY(0)
         )
-        //
-        //// torso
-        //var torsoP = this._constructTorso(
-        //    this.worldX(config.CENTER - config.TORSO_WIDTH / 2),
-        //    legP.y + config.CROTCH_HEIGHT)
-        //
-        //// arms
-        //this._constructArm(
-        //    this.worldX(config.CENTER - config.TORSO_WIDTH / 2 - config.ARMPIT_WIDTH - config.ARM_WIDTH),
-        //    torsoP.y - config.ARM_HEIGHT
-        //)
-        //this._constructArm(
-        //    this.worldX(config.CENTER + config.TORSO_WIDTH / 2 + config.ARMPIT_WIDTH),
-        //    torsoP.y - config.ARM_HEIGHT
-        //)
-        //
-        //// head
-        //this._constructHead(
-        //    this.worldX(config.CENTER - config.HEAD_SIZE / 2),
-        //    torsoP.y + config.NECK_HEIGHT
-        //)
+
+        // torso
+        var torsoP = this._constructTorso(
+            this.worldX(config.CENTER - config.TORSO_WIDTH / 2),
+            legP.y + config.CROTCH_HEIGHT)
+
+        // arms
+        this._constructArm(
+            this.worldX(config.CENTER - config.TORSO_WIDTH / 2 - config.ARMPIT_WIDTH - config.ARM_WIDTH),
+            torsoP.y - config.ARM_HEIGHT
+        )
+        this._constructArm(
+            this.worldX(config.CENTER + config.TORSO_WIDTH / 2 + config.ARMPIT_WIDTH),
+            torsoP.y - config.ARM_HEIGHT
+        )
+
+        // head
+        this._constructHead(
+            this.worldX(config.CENTER - config.HEAD_SIZE / 2),
+            torsoP.y + config.NECK_HEIGHT
+        )
     },
 
     worldX: function(x) {
