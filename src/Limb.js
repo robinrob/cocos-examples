@@ -26,7 +26,7 @@ var Limb = cc.Node.extend({
     init: function() {
         this._super()
         // physics
-        this.body = new cp.Body(this.mass, cp.momentForBox(1, 30, 30))
+        this.body = new cp.Body(this.mass, cp.momentForBox(1, this._width, this._height))
         this.space.addBody(this.body)
         this.body.setPos(this.startV)
 
