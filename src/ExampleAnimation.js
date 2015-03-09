@@ -2,8 +2,9 @@ var ExampleAnimation = {
     Layer: BaseLayer.extend({
         ctor: function () {
             cc.log("AnimationLayer.ctor ...")
-            //1. call super class's ctor function
             this._super();
+
+            this.init()
         },
 
         init: function () {
@@ -34,11 +35,9 @@ var ExampleAnimation = {
 
     Scene: cc.Scene.extend({
         onEnter:function () {
-            cc.log("AnimationScene.onEnter ...")
             this._super();
-            var layer = new ExampleAnimation.Layer();
-            layer.init();
-            this.addChild(layer);
+
+            this.addChild(new ExampleAnimation.Layer());
         }
     })
 }

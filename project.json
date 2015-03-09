@@ -22,6 +22,7 @@
         "src/ui.js",
 
         "src/ExampleAnimation.js",
-        "src/ExampleBody.js"
+        "src/ExampleBody.js",
+        "src/ExampleDraw.js"
     ]
 }

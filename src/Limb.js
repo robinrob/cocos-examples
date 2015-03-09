@@ -43,14 +43,11 @@ var Limb = cc.Node.extend({
 
     getTopLeft: function() {
         var pos = this.getPos()
-        return cc.p(pos.x, pos.y + this._height)
+        return cc.p(pos.x, pos.y + this._height / 2)
     },
 
     draw: function() {
         var pos = this.body.getPos()
-
-        this._draw.clear()
-        this._draw.drawRect(pos, cc.p(pos.x + this._width, pos.y + this._height), this._color, 2, this._color)
     },
 
     move: function() {

@@ -1,26 +1,3 @@
-var config = {}
-config.LEG_WIDTH = 10
-config.LEG_HEIGHT = 40
-
-config.CROTCH_WIDTH = 5
-config.CROTCH_HEIGHT = 5
-
-config.ARM_WIDTH = 5
-config.ARM_HEIGHT = 30
-
-config.ARMPIT_WIDTH = 5
-
-config.TORSO_WIDTH = config.LEG_WIDTH * 2 + config.CROTCH_WIDTH
-config.TORSO_HEIGHT = config.TORSO_WIDTH
-
-config.NECK_HEIGHT = 5
-
-config.HEAD_SIZE = 20
-
-config.SHOULDER_HEIGHT = config.TORSO_HEIGHT + config.LEG_HEIGHT
-
-config.CENTER = config.ARM_WIDTH + config.ARMPIT_WIDTH + config.TORSO_WIDTH / 2
-
 var ExampleBody = {
     Layer: BaseLayer.extend({
         balls: null,
