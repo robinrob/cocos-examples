@@ -71,10 +71,9 @@ var ExampleBody = {
             this.space = new cp.Space();
             this.space.gravity = cp.v(0, rss.gravity);
 
-            this.gameLayer = new cc.Layer();
-            this.gameLayer.addChild(new ExampleBody.Layer(this.space), 0, rss.tagOfLayer.Animation)
+            this.layer = new ExampleBody.Layer(this.space);
 
-            this.addChild(this.gameLayer);
+            this.addChild(this.layer);
 
             this.scheduleUpdate();
         },
@@ -82,8 +81,7 @@ var ExampleBody = {
         update: function(dt) {
             this.space.step(dt);
 
-            var layer = this.gameLayer.getChildByTag(rss.tagOfLayer.Animation);
-            layer.update(dt);
+            this.layer.update(dt);
         }
     })
 }
