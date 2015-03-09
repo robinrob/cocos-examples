@@ -22,7 +22,7 @@ var ExampleTouch = {
                 swallowTouches: true,
                 onTouchBegan: function(touch, event) {
                     var pos = touch.getLocation();
-                    var ball = new Ball(pos, 10, that.space)
+                    var ball = new Ball(pos, 10, 10, that.space)
                     that.balls.push(ball)
                     that.addChild(ball)
                 }
