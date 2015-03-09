@@ -40,7 +40,7 @@ var ExampleBody = {
 
             this.balls = []
             for (var i = 0; i < 10; ++i) {
-                var ball = new Ball(pos, 10, this.space, draw)
+                var ball = new Ball(pos, 10, this.space)
                 this.balls.push(ball)
                 this.addChild(ball)
             }
