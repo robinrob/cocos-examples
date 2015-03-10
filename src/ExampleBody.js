@@ -4,10 +4,14 @@ var ExampleBody = {
         man: null,
         space: null,
         gameLayer: null,
+        center: null,
 
         ctor: function (space) {
             this._super();
             this.space = space
+
+            var winSize = cc.director.getWinSize()
+            this.center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
@@ -20,50 +24,59 @@ var ExampleBody = {
         init: function () {
             this._super()
 
-            var draw = new cc.DrawNode()
-            this.addChild(draw)
+            this.constructMan()
 
-            var winSize = cc.director.getWinSize()
-            var center = cc.p(winSize.width / 2, winSize.height / 2)
+            this.constructPlatform()
 
-            this.man = new Man(center, this.space)
-            this.man.setVel(cp.v(0, 0))
+            this.constructBalls()
+
+            this.constructWalls()
+        },
+
+        constructMan: function() {
+            this.man = new Man(this.center, this.space)
+            this.man.setVel(0, 0)
             this.addChild(this.man)
+        },
 
+        constructPlatform: function() {
             var platform = new Platform(
-                cc.p(center.x - 20, center.y),
-                cc.p(center.x + 20, center.y),
+                cc.p(this.center.x - 20, this.center.y),
+                cc.p(this.center.x + 20, this.center.y),
                 2,
                 this.space)
             this.addChild(platform)
+        },
 
-            var pos = cc.p(center.x, center.y + 100)
-
+        constructBalls: function() {
+            var pos = cc.p(this.center.x, this.center.y + 100)
             this.balls = []
             for (var i = 0; i < 10; ++i) {
                 var ball = new Ball(pos, 10, rss.ball.mass.total, this.space)
                 this.balls.push(ball)
                 this.addChild(ball)
             }
+        },
 
+        constructWalls: function() {
+            var winSize = cc.director.getWinSize()
             var margin = 20
             // left wall
             this.constructWall(
                 cp.v(margin, rss.groundHeight),
                 cp.v(margin, winSize.height * 10)
             )
-
             // right wall
             this.constructWall(
                 cp.v(winSize.width - margin, rss.groundHeight),
                 cp.v(winSize.width - margin, winSize.height * 10)
             )
-
             // ground
             this.constructWall(
                 cp.v(margin, rss.groundHeight),
                 cp.v(winSize.width - margin, rss.groundHeight)
             )
+
             //this.constructWall(
             //    cp.v(-winSize.width * 2, rss.groundHeight),
             //    cp.v(winSize.width * 2, rss.groundHeight)
@@ -80,11 +93,11 @@ var ExampleBody = {
             this.space.addStaticShape(wall);
         },
 
-        update: function(dt) {
+        update: function() {
             this.balls.forEach(function(ball) {
                 ball.move()
             })
-            this.man.move()
+            this.man.update
         }
     }),
 
@@ -108,7 +121,7 @@ var ExampleBody = {
         update: function(dt) {
             this.space.step(dt);
 
-            this.layer.update(dt);
+            this.layer.update();
         }
     })
 }

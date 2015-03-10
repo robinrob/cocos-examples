@@ -1,10 +1,9 @@
+var rss = rss || {};
+
 rss = {
     gravity: -35,
+    impulse: 1,
     groundHeight: 10,
-
-    toV: function(p) {
-    return cp.v(p.x, p.y)
-    }
 }
 
 rss.colors = {
@@ -97,3 +96,9 @@ mass.total = rss.sum(mass)
 var y = {}
 man.y = y
 y.shoulder = height.leg + height.torso
+
+rss.keys = []
+
+rss.toV = function(p) {
+    return cp.v(p.x, p.y)
+}

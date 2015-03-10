@@ -159,9 +159,29 @@ var Man = cc.Node.extend({
         })
     },
 
-    setVel: function(vel) {
+    getVel: function() {
+        var vComX = 0.0
+        var vComY = 0.0
+        var mass = this.getMass()
+
         this.limbs.forEach(function(limb) {
-            limb.setVel(vel)
+            var vel = limb.getVel()
+            vComX += vel.x * limb.mass / mass
+            vComY += vel.y * limb.mass / mass
+        })
+
+        return cc.p(vComX, vComY)
+    },
+
+    setVel: function(vx, vy) {
+        this.limbs.forEach(function(limb) {
+            limb.setVel(vx, vy)
+        })
+    },
+
+    applyDeltaV: function(dvx, dvy) {
+        this.limbs.forEach(function(limb) {
+            limb.applyDeltaV(dvx, dvy)
         })
     },
 
@@ -171,20 +191,43 @@ var Man = cc.Node.extend({
             mass += limb.mass
         })
         return mass
-    },
-
-    move: function() {
+    }, 
+    
+    update: function(dt) {
         var p = this.getPos()
         var winSize = cc.director.getWinSize()
+        var x = p.x
+        var y = p.y
+        var dvx = 0.0
+        var dvy = 0.0
 
-        if (p.x > winSize.width) {
-            this.setPos(0, p.y)
+        if ((rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]) && y <= winSize.height) {
+            //y += 10
+            dvy = rss.impulse / dt
         }
-        else if (p.x < 0) {
-            this.setPos(winSize.width, p.y)
+        if ((rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]) && y >= 0) {
+            //y -= 10
+            dvy = -1 * rss.impulse / dt
+        }
+        if ((rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]) && x >= 0) {
+            //x -= 10
+            dvx = -1 * rss.impulse / dt
+        }
+        if ((rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]) && x <= winSize.width) {
+            //x += 10
+            dvx = 1 * rss.impulse / dt
         }
 
-        cc.log("x: " + p.x)
-        cc.log("y: " + p.y)
+        if (x > winSize.width) {
+            this.setPos(0, y)
+        }
+        else if (x < 0) {
+            this.setPos(winSize.width, y)
+        }
+        //else {
+        //    this.setPos(x, y)
+        //}
+
+        this.applyDeltaV(dvx, dvy)
     }
 })

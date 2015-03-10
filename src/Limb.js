@@ -26,6 +26,10 @@ var Limb = cc.Node.extend({
     init: function() {
         this._super()
         // physics
+        //var shape = new cp.BoxShape(this.space.staticBody, this._width, this._height)
+        //var shape = this.space.addStaticShape(shape)
+        //shape.setElasticity(0);
+
         this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this._width, this._height))
         this.space.addBody(this.body)
         this.body.setPos(this.startV)
@@ -43,8 +47,16 @@ var Limb = cc.Node.extend({
         this.body.setPos(cp.v(x, y))
     },
 
-    setVel: function(vel) {
-        this.body.setVel(vel)
+    getVel: function() {
+        return this.body.getVel()
+    },
+
+    setVel: function(vx, vy) {
+        this.body.setVel(cp.v(vx, vy))
+    },
+
+    applyDeltaV: function(dvx, dvy) {
+        this.body.applyImpulse(cp.v(dvx, dvy), cp.v(0, 0))
     },
 
     getX: function() {
