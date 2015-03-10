@@ -21,19 +21,19 @@ var Man2 = Man.extend({
 
         if ((rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]) && y <= winSize.height) {
             //y += 10
-            dvy = rss.exampleMove.impulse / dt
+            dvy = rss.exampleMan.impulse / dt
         }
         if ((rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]) && y >= 0) {
             //y -= 10
-            dvy = -1 * rss.exampleMove.impulse / dt
+            dvy = -1 * rss.exampleMan.impulse / dt
         }
         if ((rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]) && x >= 0) {
             //x -= 10
-            dvx = -1 * rss.exampleMove.impulse / dt
+            dvx = -1 * rss.exampleMan.impulse / dt
         }
         if ((rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]) && x <= winSize.width) {
             //x += 10
-            dvx = 1 * rss.exampleMove.impulse / dt
+            dvx = 1 * rss.exampleMan.impulse / dt
         }
 
         if (x > winSize.width) {
