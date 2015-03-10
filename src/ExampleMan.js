@@ -1,6 +1,6 @@
 /* Example of moving a body around using keyboard controls */
 
-var ExampleMove = {
+var ExampleMan = {
     Layer: BaseLayer.extend({
         MARGIN: 5,
 
@@ -61,7 +61,7 @@ var ExampleMove = {
             if ('mouse' in cc.sys.capabilities)
                 cc.eventManager.addListener({
                     event: cc.EventListener.MOUSE,
-                    onMouseMove: function(event){
+                    onMouseMan: function(event){
                         if(event.getButton() == cc.EventMouse.BUTTON_LEFT)
                             event.getCurrentTarget().processEvent(event);
                     }
@@ -71,7 +71,7 @@ var ExampleMove = {
                 cc.eventManager.addListener({
                     prevTouchId: -1,
                     event: cc.EventListener.TOUCH_ALL_AT_ONCE,
-                    onTouchesMoved:function (touches, event) {
+                    onTouchesMand:function (touches, event) {
                         var touch = touches[0];
                         if (this.prevTouchId != touch.getID())
                             this.prevTouchId = touch.getID();
@@ -105,9 +105,9 @@ var ExampleMove = {
             this._super();
 
             this.space = new cp.Space();
-            this.space.gravity = cp.v(0, rss.exampleMove.gravity);
+            this.space.gravity = cp.v(0, rss.exampleMan.gravity);
 
-            this.layer = new ExampleMove.Layer(this.space);
+            this.layer = new ExampleMan.Layer(this.space);
 
             this.addChild(this.layer);
 

@@ -5,9 +5,13 @@ rss = {
     groundHeight: 10
 }
 
-rss.exampleMove = {}
-rss.exampleMove.impulse = 5
-rss.exampleMove.gravity = -350
+rss.exampleMan = {}
+rss.exampleMan.impulse = 5
+rss.exampleMan.gravity = -350
+
+rss.exampleCar = {}
+rss.exampleCar.impulse = 5
+rss.exampleCar.gravity = -350
 
 rss.colors = {
     yellow: new cc.color(255, 255, 0, 255),
@@ -105,3 +109,28 @@ rss.keys = []
 rss.toV = function(p) {
     return cp.v(p.x, p.y)
 }
+
+var car = {}
+rss.car = car
+
+var width = {}
+car.width = width
+width.wheel = 30
+width.bonnet = 20
+width.body = 60
+width.chassis = width.bonnet + width.body
+width.total = width.chassic
+
+var height = {}
+car.height = height
+height.wheel = width.wheel
+height.bonnet = 20
+height.body = 40
+height.chassis = 10
+
+var mass = {}
+car.mass = mass
+mass.wheel = 10
+mass.bonnet = 20
+mass.body = 40
+mass.chassis = 20
