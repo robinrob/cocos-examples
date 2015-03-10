@@ -13,6 +13,7 @@
     "jsList" : [
         "src/Ball.js",
         "src/BaseLayer.js",
+        "src/Box.js",
         "src/Limb.js",
         "src/Man.js",
         "src/Man2.js",

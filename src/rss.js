@@ -2,9 +2,12 @@ var rss = rss || {};
 
 rss = {
     gravity: -35,
-    impulse: 1,
-    groundHeight: 10,
+    groundHeight: 10
 }
+
+rss.exampleMove = {}
+rss.exampleMove.impulse = 5
+rss.exampleMove.gravity = -350
 
 rss.colors = {
     yellow: new cc.color(255, 255, 0, 255),

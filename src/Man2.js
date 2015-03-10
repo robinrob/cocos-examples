@@ -4,6 +4,8 @@ var Man2 = Man.extend({
     },
 
     applyDeltaV: function(dvx, dvy) {
+        //var scale = this.getMass() / this.torso.getMass()
+        //this.torso.applyDeltaV(dvx * scale, dvy * scale)
         this.limbs.forEach(function(limb) {
             limb.applyDeltaV(dvx, dvy)
         })
@@ -19,19 +21,19 @@ var Man2 = Man.extend({
 
         if ((rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]) && y <= winSize.height) {
             //y += 10
-            dvy = rss.impulse / dt
+            dvy = rss.exampleMove.impulse / dt
         }
         if ((rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]) && y >= 0) {
             //y -= 10
-            dvy = -1 * rss.impulse / dt
+            dvy = -1 * rss.exampleMove.impulse / dt
         }
         if ((rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]) && x >= 0) {
             //x -= 10
-            dvx = -1 * rss.impulse / dt
+            dvx = -1 * rss.exampleMove.impulse / dt
         }
         if ((rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]) && x <= winSize.width) {
             //x += 10
-            dvx = 1 * rss.impulse / dt
+            dvx = 1 * rss.exampleMove.impulse / dt
         }
 
         if (x > winSize.width) {

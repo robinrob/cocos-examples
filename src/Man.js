@@ -19,14 +19,6 @@ var Man = cc.Node.extend({
         cc.log("rss.man.init ...")
         this._super()
 
-        //this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this._width, this._height))
-        //this.space.addBody(this.body)
-        //this.body.setPos(this.startV)
-        //
-        //var shape = new cp.BoxShape(this.body, this._width, this._height)
-        //var shape = this.space.addShape(shape)
-        //shape.setElasticity(0);
-
         this.limbs = []
 
         // legs

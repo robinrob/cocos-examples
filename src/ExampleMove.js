@@ -43,42 +43,7 @@ var ExampleMove = {
         },
 
         constructWalls: function() {
-            // left wall
-            var left = this.MARGIN
-            var right = this.MARGIN + this.size.width
-            var bottom = rss.groundHeight
-            var top = bottom + this.size.height
-
-            // left wall
-            this.constructWall(
-                cp.v(left, bottom),
-                cp.v(left, top)
-            )
-            // right wall
-            this.constructWall(
-                cp.v(right, bottom),
-                cp.v(right, top)
-            )
-            // ground
-            this.constructWall(
-                cp.v(left, bottom),
-                cp.v(right, bottom)
-            )
-            // ceiling
-            this.constructWall(
-                cp.v(left, top),
-                cp.v(right, top)
-            )
-        },
-
-        constructWall: function(v1, v2) {
-            var wall = new cp.SegmentShape(
-                this.space.staticBody,
-                v1, v2,
-                this.MARGIN
-            );
-            wall.setElasticity(1.0)
-            this.space.addStaticShape(wall);
+            new Box(cc.p(this.MARGIN, this.MARGIN), this.size, 10, this.space)
         },
 
         constructListeners: function() {
@@ -133,8 +98,6 @@ var ExampleMove = {
     }),
 
     Scene: cc.Scene.extend({
-        GRAVITY: 0,
-
         space: null,
 
         onEnter:function () {
@@ -142,7 +105,7 @@ var ExampleMove = {
             this._super();
 
             this.space = new cp.Space();
-            this.space.gravity = cp.v(0, this.GRAVITY);
+            this.space.gravity = cp.v(0, rss.exampleMove.gravity);
 
             this.layer = new ExampleMove.Layer(this.space);
 
