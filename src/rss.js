@@ -119,7 +119,7 @@ width.wheel = 30
 width.bonnet = 20
 width.body = 60
 width.chassis = width.bonnet + width.body
-width.total = width.chassic
+width.total = width.chassis
 
 var height = {}
 car.height = height
