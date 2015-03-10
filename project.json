@@ -15,6 +15,7 @@
         "src/BaseLayer.js",
         "src/Limb.js",
         "src/Man.js",
+        "src/Man2.js",
         "src/MenuLayer.js",
         "src/MenuScene.js",
         "src/Platform.js",

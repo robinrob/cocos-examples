@@ -1,4 +1,4 @@
-var Man = cc.Node.extend({
+var Man2 = cc.Node.extend({
     startPos: null,
     origin: null,
     space: null,
@@ -198,6 +198,25 @@ var Man = cc.Node.extend({
         var winSize = cc.director.getWinSize()
         var x = p.x
         var y = p.y
+        var dvx = 0.0
+        var dvy = 0.0
+
+        if ((rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]) && y <= winSize.height) {
+            //y += 10
+            dvy = rss.impulse / dt
+        }
+        if ((rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]) && y >= 0) {
+            //y -= 10
+            dvy = -1 * rss.impulse / dt
+        }
+        if ((rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]) && x >= 0) {
+            //x -= 10
+            dvx = -1 * rss.impulse / dt
+        }
+        if ((rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]) && x <= winSize.width) {
+            //x += 10
+            dvx = 1 * rss.impulse / dt
+        }
 
         if (x > winSize.width) {
             this.setPos(0, y)
@@ -205,5 +224,10 @@ var Man = cc.Node.extend({
         else if (x < 0) {
             this.setPos(winSize.width, y)
         }
+        //else {
+        //    this.setPos(x, y)
+        //}
+
+        this.applyDeltaV(dvx, dvy)
     }
 })

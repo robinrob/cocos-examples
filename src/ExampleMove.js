@@ -2,7 +2,7 @@
 
 var ExampleMove = {
     Layer: BaseLayer.extend({
-        MARGIN: 20,
+        MARGIN: 5,
 
         space: null,
         man: null,
@@ -15,7 +15,7 @@ var ExampleMove = {
 
             var winSize = cc.director.getWinSize()
 
-            this.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height * 10)
+            this.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - rss.groundHeight)
             this.center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
@@ -37,7 +37,7 @@ var ExampleMove = {
         },
 
         constructMan: function() {
-            this.man = new Man(this.center, this.space)
+            this.man = new Man2(this.center, this.space)
             this.man.setVel(0, 0)
             this.addChild(this.man)
         },
@@ -45,22 +45,29 @@ var ExampleMove = {
         constructWalls: function() {
             // left wall
             var left = this.MARGIN
-            var right = this.MARGIN + this.size.x
+            var right = this.MARGIN + this.size.width
+            var bottom = rss.groundHeight
+            var top = bottom + this.size.height
 
-            cc.log("left: " + left)
+            // left wall
             this.constructWall(
-                cp.v(left, rss.groundHeight),
-                cp.v(left, this.size.y)
+                cp.v(left, bottom),
+                cp.v(left, top)
             )
             // right wall
             this.constructWall(
-                cp.v(right, rss.groundHeight),
-                cp.v(right, this.size.y)
+                cp.v(right, bottom),
+                cp.v(right, top)
             )
             // ground
             this.constructWall(
-                cp.v(left, rss.groundHeight),
-                cp.v(right, rss.groundHeight)
+                cp.v(left, bottom),
+                cp.v(right, bottom)
+            )
+            // ceiling
+            this.constructWall(
+                cp.v(left, top),
+                cp.v(right, top)
             )
         },
 
@@ -68,7 +75,7 @@ var ExampleMove = {
             var wall = new cp.SegmentShape(
                 this.space.staticBody,
                 v1, v2,
-                0
+                this.MARGIN
             );
             wall.setElasticity(1.0)
             this.space.addStaticShape(wall);
