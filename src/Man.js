@@ -179,12 +179,6 @@ var Man = cc.Node.extend({
         })
     },
 
-    applyDeltaV: function(dvx, dvy) {
-        this.limbs.forEach(function(limb) {
-            limb.applyDeltaV(dvx, dvy)
-        })
-    },
-
     getMass: function() {
         mass = 0.0
         this.limbs.forEach(function(limb) {
@@ -193,7 +187,7 @@ var Man = cc.Node.extend({
         return mass
     }, 
     
-    update: function(dt) {
+    update: function() {
         var p = this.getPos()
         var winSize = cc.director.getWinSize()
         var x = p.x

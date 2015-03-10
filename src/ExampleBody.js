@@ -97,7 +97,7 @@ var ExampleBody = {
             this.balls.forEach(function(ball) {
                 ball.move()
             })
-            this.man.update
+            this.man.update()
         }
     }),
 
