@@ -1,9 +1,20 @@
 var rss = rss || {};
 
-rss = {
-    gravity: -35,
-    groundHeight: 10
+/* Functions */
+rss.toV = function(p) {
+    return cp.v(p.x, p.y)
 }
+
+rss.sum = function(obj) {
+    var total = 0
+    for (var i in obj) {
+        total += obj[i]
+    }
+    return total
+}
+
+rss.gravity = -35
+rss.groundHeight = 10
 
 rss.exampleMan = {}
 rss.exampleMan.impulse = 5
@@ -121,16 +132,3 @@ mass.wheel = 10
 mass.bonnet = 20
 mass.body = 40
 mass.chassis = 20
-
-/* Functions */
-rss.toV = function(p) {
-    return cp.v(p.x, p.y)
-}
-
-rss.sum = function(obj) {
-    var total = 0
-    for (var i in obj) {
-        total += obj[i]
-    }
-    return total
-}
