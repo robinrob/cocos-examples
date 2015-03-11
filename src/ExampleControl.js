@@ -1,7 +1,7 @@
 /* Example of moving a body around using keyboard controls */
 
-var ExampleMan = {
-    Layer: BaseLayer.extend({
+var ExampleControl = {
+    Layer: MoveableObjectsLayer.extend({
         MARGIN: 5,
 
         space: null,
@@ -32,8 +32,6 @@ var ExampleMan = {
             this.constructMan()
 
             this.constructWalls()
-
-            this.constructListeners()
         },
 
         constructMan: function() {
@@ -44,41 +42,6 @@ var ExampleMan = {
 
         constructWalls: function() {
             new Box(cc.p(this.MARGIN, this.MARGIN), this.size, 10, this.space)
-        },
-
-        constructListeners: function() {
-            if (cc.sys.capabilities.hasOwnProperty('keyboard'))
-                cc.eventManager.addListener({
-                    event: cc.EventListener.KEYBOARD,
-                    onKeyPressed:function (key, event) {
-                        rss.keys[key] = true;
-                    },
-                    onKeyReleased:function (key, event) {
-                        rss.keys[key] = false;
-                    }
-                }, this);
-
-            if ('mouse' in cc.sys.capabilities)
-                cc.eventManager.addListener({
-                    event: cc.EventListener.MOUSE,
-                    onMouseMan: function(event){
-                        if(event.getButton() == cc.EventMouse.BUTTON_LEFT)
-                            event.getCurrentTarget().processEvent(event);
-                    }
-                }, this);
-
-            if (cc.sys.capabilities.hasOwnProperty('touches')){
-                cc.eventManager.addListener({
-                    prevTouchId: -1,
-                    event: cc.EventListener.TOUCH_ALL_AT_ONCE,
-                    onTouchesMand:function (touches, event) {
-                        var touch = touches[0];
-                        if (this.prevTouchId != touch.getID())
-                            this.prevTouchId = touch.getID();
-                        else event.getCurrentTarget().processEvent(touches[0]);
-                    }
-                }, this);
-            }
         },
 
         processEvent:function (event) {
@@ -107,7 +70,7 @@ var ExampleMan = {
             this.space = new cp.Space();
             this.space.gravity = cp.v(0, rss.exampleMan.gravity);
 
-            this.layer = new ExampleMan.Layer(this.space);
+            this.layer = new ExampleControl.Layer(this.space);
 
             this.addChild(this.layer);
 

@@ -11,28 +11,31 @@
     "modules" : ["cocos2d", "chipmunk"],
 
     "jsList" : [
+        "src/rss.js",
+        "src/ui.js",
+
         "src/Part.js",
         "src/Limb.js",
         "src/Wheel.js",
+        "src/Box.js",
+        "src/Ball.js",
+        "src/Platform.js",
+
+        "src/BaseLayer.js",
+        "src/MenuLayer.js",
+        "src/MenuScene.js",
 
         "src/Man.js",
         "src/Man2.js",
         "src/Car.js",
 
-        "src/Ball.js",
-        "src/BaseLayer.js",
-        "src/Box.js",
-        "src/MenuLayer.js",
-        "src/MenuScene.js",
-        "src/Platform.js",
-        "src/rss.js",
-        "src/ui.js",
+        "src/MoveableObjectsLayer.js",
 
         "src/ExampleAnimation.js",
         "src/ExampleBody.js",
         "src/ExampleDraw.js",
         "src/ExampleTouch.js",
-        "src/ExampleMan.js",
+        "src/ExampleControl.js",
         "src/ExampleCar.js"
     ]
 }
