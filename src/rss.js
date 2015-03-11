@@ -41,35 +41,27 @@ rss.res = {
     fish_plist : "res/fish.plist"
 }
 
+// Resources for pre-loading
 rss.resources = [];
 for (var i in rss.res) {
     rss.resources.push(rss.res[i]);
 }
 
-rss.toV = function(p) {
-    return cp.v(p.x, p.y)
-}
+// Used by keyboard listeners
+rss.keys = []
 
-rss.sum = function(obj) {
-    var total = 0
-    for (var i in obj) {
-        total += obj[i]
-    }
-    return total
-}
 
-var ball = {
-    mass: {}
-}
+/* Object configs */
+
+// Ball
+var ball = {}
 rss.ball = ball
 
 ball.mass.total = 100
 
-var man = {
-    width: {},
-    height: {},
-    mass: {}
-}
+
+// Man
+var man = {}
 rss.man = man
 
 var width = {}
@@ -104,12 +96,7 @@ var y = {}
 man.y = y
 y.shoulder = height.leg + height.torso
 
-rss.keys = []
-
-rss.toV = function(p) {
-    return cp.v(p.x, p.y)
-}
-
+// Car
 var car = {}
 rss.car = car
 
@@ -134,3 +121,16 @@ mass.wheel = 10
 mass.bonnet = 20
 mass.body = 40
 mass.chassis = 20
+
+/* Functions */
+rss.toV = function(p) {
+    return cp.v(p.x, p.y)
+}
+
+rss.sum = function(obj) {
+    var total = 0
+    for (var i in obj) {
+        total += obj[i]
+    }
+    return total
+}
