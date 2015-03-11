@@ -1,18 +1,14 @@
 /* Example of moving a body around using keyboard controls */
 
 var MoveableObjectsLayer = BaseLayer.extend({
-    MARGIN: 5,
-
-    space: null,
-    man: null,
-    size: null,
-
     ctor: function (space) {
         this._super();
     },
 
     init: function () {
         this._super()
+
+        this.constructListeners()
     },
 
     constructListeners: function() {
@@ -48,9 +44,9 @@ var MoveableObjectsLayer = BaseLayer.extend({
                 }
             }, this);
         }
-    },
+    }
 
-    processEvent:function (event) {
+    //processEvent:function (event) {
         // Example implementation
         //var winSize = cc.director.getWinSize();
         //var delta = event.getDelta();
@@ -59,5 +55,5 @@ var MoveableObjectsLayer = BaseLayer.extend({
         //curPos = cc.pClamp(curPos, cc.p(0, 0), cc.p(winSize.width, winSize.height));
         //// Do stuff here
         //curPos = null;
-    }
+    //}
 })
