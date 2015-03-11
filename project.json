@@ -20,6 +20,7 @@
         "src/Box.js",
         "src/Ball.js",
         "src/Platform.js",
+        "src/Controllable.js",
 
         "src/BaseLayer.js",
         "src/MenuLayer.js",
@@ -28,6 +29,7 @@
         "src/Man.js",
         "src/Man2.js",
         "src/Car.js",
+        "src/Spaceship.js",
 
         "src/MoveableObjectsLayer.js",
 
@@ -36,6 +38,7 @@
         "src/ExampleDraw.js",
         "src/ExampleTouch.js",
         "src/ExampleControl.js",
-        "src/ExampleCar.js"
+        "src/ExampleCar.js",
+        "src/ExampleSpaceship.js"
     ]
 }

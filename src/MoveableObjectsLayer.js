@@ -1,6 +1,8 @@
-/* Example of moving a body around using keyboard controls */
+/* Listens for movement control inputs */
 
-var MoveableObjectsLayer = BaseLayer.extend({
+var MoveableObjectsLayer = cc.Layer.extend({
+    controllee: null,
+
     ctor: function (space) {
         this._super();
     },
@@ -44,16 +46,16 @@ var MoveableObjectsLayer = BaseLayer.extend({
                 }
             }, this);
         }
-    }
+    },
 
-    //processEvent:function (event) {
-        // Example implementation
-        //var winSize = cc.director.getWinSize();
-        //var delta = event.getDelta();
-        //var curPos = this.man.getPos()
-        //curPos = cc.pAdd(curPos, delta);
-        //curPos = cc.pClamp(curPos, cc.p(0, 0), cc.p(winSize.width, winSize.height));
-        //// Do stuff here
-        //curPos = null;
-    //}
+    processEvent:function (event) {
+        //Example implementation
+        var winSize = cc.director.getWinSize();
+        var delta = event.getDelta();
+        var curPos = this.man.getPos()
+        curPos = cc.pAdd(curPos, delta);
+        curPos = cc.pClamp(curPos, cc.p(0, 0), cc.p(winSize.width, winSize.height));
+        this.controllee.setPos(curPos.x, curPos.x)
+        curPos = null;
+    }
 })

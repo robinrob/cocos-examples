@@ -24,6 +24,10 @@ rss.exampleCar = {}
 rss.exampleCar.impulse = 5
 rss.exampleCar.gravity = -350
 
+rss.exampleSpaceship = {}
+rss.exampleSpaceship.impulse = 5
+rss.exampleSpaceship.gravity = 0
+
 rss.colors = {
     yellow: new cc.color(255, 255, 0, 255),
     green: new cc.color(0, 255, 0, 255),
@@ -48,8 +52,10 @@ rss.tagOfLayer = {
 };
 
 rss.res = {
-    fish_png  : "res/fish.png",
-    fish_plist : "res/fish.plist"
+    fish_png  : "res/fish/fish.png",
+    fish_plist : "res/fish/fish.plist",
+    spaceship_png  : "res/spaceship/spaceship-0001-default.png",
+    spaceship_plist : "res/spaceship/spaceship-0001-default.plist"
 }
 
 // Resources for pre-loading
@@ -68,7 +74,7 @@ rss.keys = []
 var ball = {}
 rss.ball = ball
 
-ball.mass.total = 100
+ball.mass = 100
 
 
 // Man
