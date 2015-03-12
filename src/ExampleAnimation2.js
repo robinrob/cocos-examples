@@ -11,7 +11,7 @@ var ExampleAnimation2 = {
             cc.log("AnimationLayer.init ...")
             this._super()
 
-            this.addChild(new FishAnimation())
+            this.addChild(new FishAnimation2())
         }
     }),
 

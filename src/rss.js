@@ -27,7 +27,7 @@ rss.exampleCar = {
 }
 
 rss.exampleSpaceship = {
-    gravity: 0
+    gravity: -50
 }
 
 rss.spaceship = {}
@@ -60,13 +60,9 @@ rss.tagOfLayer = {
 rss.res = {
     fish_png  : "res/fish/fish.png",
     fish_plist : "res/fish/fish.plist",
-    fish_1_png: "res/fish/fish1.png",
-    spaceship_png : "res/spaceship/spaceship-0001-default.png",
-    spaceship_plist : "res/spaceship/spaceship-0001-default.plist",
-    spaceship_0_png : "res/spaceship/0.png",
-    spaceship_1_png : "res/spaceship/1.png",
-    spaceship_2_png : "res/spaceship/2.png",
-    spaceship_3_png : "res/spaceship/3.png"
+
+    spaceship_png : "res/spaceship/spaceship.png",
+    spaceship_plist : "res/spaceship/spaceship.plist"
 }
 
 // Resources for pre-loading

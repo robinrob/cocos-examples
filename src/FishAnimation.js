@@ -1,6 +1,8 @@
-var FishAnimation = cc.Node.extend({
+var FishAnimation = cc.Layer.extend({
     ctor: function() {
         this._super()
+
+        this.init()
     },
 
     init: function() {
@@ -8,6 +10,7 @@ var FishAnimation = cc.Node.extend({
 
         cc.spriteFrameCache.addSpriteFrames(rss.res.fish_plist);
         var spriteSheet = new cc.SpriteBatchNode(rss.res.fish_png);
+        var sprite = new cc.Sprite("#fish1.png");
 
         var animFrames = [];
         for (var i = 1; i < 4; i++) {
@@ -16,14 +19,14 @@ var FishAnimation = cc.Node.extend({
             animFrames.push(frame);
         }
 
-        var animation = new cc.Animation(animFrames, 0.1);
+        animation = new cc.Animation(animFrames, 0.1);
 
         var winSize = cc.director.getWinSize()
         var center = cc.p(winSize.width / 2, winSize.height / 2)
 
         var sprite = new cc.Sprite("#fish1.png");
         sprite.setPosition(center)
-        this.addChild(sprite)
         sprite.runAction(cc.animate(animation).repeatForever());
+        this.addChild(sprite)
     }
 })

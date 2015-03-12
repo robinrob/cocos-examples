@@ -20,17 +20,16 @@ var Spaceship = Steerable.extend({
         this._super()
 
         // create sprite sheet
-        //cc.spriteFrameCache.addSpriteFrames(rss.res.spaceship_plist);
-        //this.spriteSheet = new cc.SpriteBatchNode(rss.res.spaceship_png);
-        //this.addChild(this.spriteSheet)
-        cc.spriteFrameCache.addSpriteFrames(rss.res.fish_plist);
-        var spriteSheet = new cc.SpriteBatchNode(rss.res.fish_png);
+        cc.spriteFrameCache.addSpriteFrames(rss.res.spaceship_plist);
+        var spriteSheet = new cc.SpriteBatchNode(rss.res.spaceship_png);
+        //cc.spriteFrameCache.addSpriteFrames(rss.res.fish_plist);
+        //var spriteSheet = new cc.SpriteBatchNode(rss.res.fish_png);
 
         //1. create PhysicsSprite with a sprite frame name
-        this.sprite = new cc.PhysicsSprite("res/fish/fish1.png");
+        this.sprite = new cc.PhysicsSprite("#0.png");
+        //this.sprite = new cc.PhysicsSprite("#fish1.png");
 
         this.addChild(this.sprite)
-        //this.spriteSheet.addChild(this.sprite);
         var contentSize = this.sprite.getContentSize();
 
         this._height = contentSize.height
@@ -48,24 +47,11 @@ var Spaceship = Steerable.extend({
         this.sprite.setBody(this.body);
 
 
-        //var animFrames = [];
-        //var animation = new cc.Animation([], 0.1);
-        //var animation = new cc.Animation()
-        //
-        //for (var i = 1; i < 4; i++) {
-        //    //var str = "res/spaceship/" + i + ".png";
-        //    var str = "res/fish/fish" + i + ".png";
-        //    animation.addSpriteFrameWithFile(str)
-        //    //var frame = cc.spriteFrameCache.getSpriteFrame(str);
-        //    //var frame = new cc.SpriteFrame(str)
-        //    //cc.log("frame: " + frame)
-        //    //animFrames.push(frame);
-        //    //animFrames.push(cc.addSpriteFrameWithFile(str));
-        //}
-
         var animFrames = [];
+
         for (var i = 1; i < 4; i++) {
-            var str = "fish" + i + ".png";
+            var str = "" + i + ".png";
+            //var str = "fish" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             animFrames.push(frame);
         }

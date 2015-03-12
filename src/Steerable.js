@@ -38,19 +38,17 @@ var Steerable = cc.Node.extend({
         var dvy = 0.0
 
         var impulse = this.mass * rss.spaceship.acc * dt
+        var ax = impulse * this.body.rot.x * dt
+        var ay = impulse * this.body.rot.y * dt
 
         var thrust = 50
 
         if ((rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]) && y <= winSize.height) {
             var sign = +1
-            var ax = impulse * this.body.rot.x * dt
-            var ay = impulse * this.body.rot.y * dt
             this.applyImpulse(sign * thrust * ax, sign * thrust * ay)
         }
         if ((rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]) && y >= 0) {
             var sign = -1
-            var ax = impulse * this.body.rot.x * dt
-            var ay = impulse * this.body.rot.y * dt
             this.applyImpulse(sign * thrust * ax, sign * thrust * ay)
         }
         if ((rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]) && x >= 0) {
