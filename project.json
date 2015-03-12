@@ -23,7 +23,6 @@
         "src/Controllable.js",
         "src/Steerable.js",
         "src/FishAnimation.js",
-        "src/FishAnimation2.js",
 
         "src/BaseLayer.js",
         "src/MenuLayer.js",
@@ -37,7 +36,6 @@
         "src/MoveableObjectsLayer.js",
 
         "src/ExampleAnimation.js",
-        "src/ExampleAnimation2.js",
         "src/ExampleBody.js",
         "src/ExampleDraw.js",
         "src/ExampleTouch.js",

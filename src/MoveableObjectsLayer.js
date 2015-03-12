@@ -1,6 +1,6 @@
 /* Listens for movement control inputs */
 
-var MoveableObjectsLayer = cc.Layer.extend({
+var MoveableObjectsLayer = BaseLayer.extend({
     controllee: null,
 
     ctor: function (space) {

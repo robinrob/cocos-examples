@@ -17,7 +17,7 @@ rss.gravity = -35
 rss.groundHeight = 10
 
 rss.exampleMan = {
-    impulse: 5,
+    impulse: 20,
     gravity: -350
 }
 

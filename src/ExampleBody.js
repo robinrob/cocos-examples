@@ -52,7 +52,7 @@ var ExampleBody = {
             var pos = cc.p(this.center.x, this.center.y + 100)
             this.balls = []
             for (var i = 0; i < 10; ++i) {
-                var ball = new Ball(pos, 10, rss.ball.mass.total, this.space)
+                var ball = new Ball(pos, 10, rss.ball.mass, this.space)
                 this.balls.push(ball)
                 this.addChild(ball)
             }
