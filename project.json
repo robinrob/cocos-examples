@@ -3,7 +3,7 @@
 
     "debugMode" : 1,
     "showFPS" : false,
-    "frameRate" : 60,
+    "frameRate" : 20,
     "id" : "gameCanvas",
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
@@ -21,6 +21,9 @@
         "src/Ball.js",
         "src/Platform.js",
         "src/Controllable.js",
+        "src/Steerable.js",
+        "src/FishAnimation.js",
+        "src/FishAnimation2.js",
 
         "src/BaseLayer.js",
         "src/MenuLayer.js",
@@ -34,6 +37,7 @@
         "src/MoveableObjectsLayer.js",
 
         "src/ExampleAnimation.js",
+        "src/ExampleAnimation2.js",
         "src/ExampleBody.js",
         "src/ExampleDraw.js",
         "src/ExampleTouch.js",

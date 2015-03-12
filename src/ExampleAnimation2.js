@@ -1,4 +1,4 @@
-var ExampleAnimation = {
+var ExampleAnimation2 = {
     Layer: BaseLayer.extend({
         ctor: function () {
             cc.log("AnimationLayer.ctor ...")
@@ -19,7 +19,7 @@ var ExampleAnimation = {
         onEnter:function () {
             this._super();
 
-            this.addChild(new ExampleAnimation.Layer());
+            this.addChild(new ExampleAnimation2.Layer());
         }
     })
 }

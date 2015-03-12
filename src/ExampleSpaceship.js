@@ -21,7 +21,7 @@ var ExampleSpaceship = {
             this.init()
 
             this._debugNode = new cc.PhysicsDebugNode(this.space);
-            this._debugNode.setVisible(true);
+            this._debugNode.setVisible(false);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
         },
@@ -35,8 +35,9 @@ var ExampleSpaceship = {
         },
 
         constructControllee: function() {
-            this.controllee = new Spaceship(this.center, 10.0, this.space)
+            this.controllee = new Spaceship(this.center, rss.spaceship.mass, this.space)
             this.controllee.setVel(0, 0)
+            this.controllee.setAngle(cc.degreesToRadians(90))
             this.addChild(this.controllee)
         },
 

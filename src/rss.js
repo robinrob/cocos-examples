@@ -16,17 +16,23 @@ rss.sum = function(obj) {
 rss.gravity = -35
 rss.groundHeight = 10
 
-rss.exampleMan = {}
-rss.exampleMan.impulse = 5
-rss.exampleMan.gravity = -350
+rss.exampleMan = {
+    impulse: 5,
+    gravity: -350
+}
 
-rss.exampleCar = {}
-rss.exampleCar.impulse = 5
-rss.exampleCar.gravity = -350
+rss.exampleCar = {
+    impulse: 5,
+    gravity: -350
+}
 
-rss.exampleSpaceship = {}
-rss.exampleSpaceship.impulse = 5
-rss.exampleSpaceship.gravity = 0
+rss.exampleSpaceship = {
+    gravity: 0
+}
+
+rss.spaceship = {}
+rss.spaceship.mass = 100
+rss.spaceship.acc = 50
 
 rss.colors = {
     yellow: new cc.color(255, 255, 0, 255),
@@ -54,8 +60,13 @@ rss.tagOfLayer = {
 rss.res = {
     fish_png  : "res/fish/fish.png",
     fish_plist : "res/fish/fish.plist",
-    spaceship_png  : "res/spaceship/spaceship-0001-default.png",
-    spaceship_plist : "res/spaceship/spaceship-0001-default.plist"
+    fish_1_png: "res/fish/fish1.png",
+    spaceship_png : "res/spaceship/spaceship-0001-default.png",
+    spaceship_plist : "res/spaceship/spaceship-0001-default.plist",
+    spaceship_0_png : "res/spaceship/0.png",
+    spaceship_1_png : "res/spaceship/1.png",
+    spaceship_2_png : "res/spaceship/2.png",
+    spaceship_3_png : "res/spaceship/3.png"
 }
 
 // Resources for pre-loading

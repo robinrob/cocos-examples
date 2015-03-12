@@ -53,7 +53,8 @@ cc.game.onStart = function(){
     cc.view.resizeWithBrowserSize(true);
     //load resources
     cc.LoaderScene.preload(rss.resources, function () {
-        cc.director.runScene(new MenuScene());
+        //cc.director.runScene(new MenuScene());
+        cc.director.runScene(new ExampleSpaceship.Scene())
     }, this);
 };
 cc.game.run();
