@@ -1,6 +1,10 @@
 var BaseLayer = cc.Layer.extend({
+    MARGIN: 20,
+
     ctor : function(){
         this._super();
+
+        this.size = cc.size(rss.winWidth - 2 * this.MARGIN, rss.winHeight - 2 * this.MARGIN)
     },
 
     init:function() {

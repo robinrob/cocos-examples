@@ -29,19 +29,15 @@ var ExampleControl = {
         init: function () {
             this._super()
 
-            this.constructMan()
+            new Box(cc.p(this.MARGIN, this.MARGIN), this.size, 10, this.space)
 
-            this.constructWalls()
+            this.constructMan()
         },
 
         constructMan: function() {
             this.controllee = new Man2(this.center, this.space)
             this.controllee.setVel(0, 0)
             this.addChild(this.controllee)
-        },
-
-        constructWalls: function() {
-            new Box(cc.p(this.MARGIN, this.MARGIN), this.size, 10, this.space)
         },
 
         processEvent:function (event) {

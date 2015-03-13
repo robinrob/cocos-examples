@@ -49,12 +49,15 @@
 
 cc.game.onStart = function(){
     cc.view.adjustViewPort(true);
-    cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);
+    cc.view.setDesignResolutionSize(1200, 1200, cc.ResolutionPolicy.SHOW_ALL);
+    rss.winSize = cc.director.getWinSize()
+    rss.winWidth = rss.winSize.width
+    rss.winHeight = rss.winSize.height
     cc.view.resizeWithBrowserSize(true);
     //load resources
     cc.LoaderScene.preload(rss.resources, function () {
         cc.director.runScene(new MenuScene());
-        //cc.director.runScene(new ExampleSpaceship.Scene())
+        //cc.director.runScene(new ExampleSpaceship2.Scene())
     }, this);
 };
 cc.game.run();

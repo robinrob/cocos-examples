@@ -13,6 +13,10 @@ rss.sum = function(obj) {
     return total
 }
 
+rss.sign = function(number) {
+    return number?number<0?-1:1:0
+}
+
 rss.gravity = -35
 rss.groundHeight = 10
 
@@ -27,12 +31,12 @@ rss.exampleCar = {
 }
 
 rss.exampleSpaceship = {
-    gravity: -50
+    gravity: -700
 }
 
 rss.spaceship = {}
 rss.spaceship.mass = 100
-rss.spaceship.acc = 50
+rss.spaceship.acc = 1000
 
 rss.colors = {
     yellow: new cc.color(255, 255, 0, 255),

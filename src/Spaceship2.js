@@ -1,4 +1,4 @@
-var Spaceship = Steerable.extend({
+var Spaceship2 = Steerable.extend({
     mass: null,
     body: null,
     shape: null,
@@ -16,7 +16,6 @@ var Spaceship = Steerable.extend({
 
         this.axialMult = 3.0
         this.rotMult = 0.3
-
         this.vertical = 90
         this.angleLimit = 90
 
@@ -80,22 +79,24 @@ var Spaceship = Steerable.extend({
 
         var impulse = this.mass * rss.spaceship.acc * dt
 
-        if (this.upInput() && y <= winSize.height) {
-            var sign = +1
-            this.applyAxialImpulse(sign * this.axialMult * impulse)
-        }
-        if (this.downInput() && y >= 0) {
-            var sign = -1
-            this.applyAxialImpulse(sign * this.axialMult * impulse)
-        }
-        if (this.leftInput() && x >= 0) {
-            this.applyTransRotImpulse(-1 * this.rotMult * impulse, dt)
-        }
-        if (this.rightInput() && x <= winSize.width) {
-            this.applyTransRotImpulse(+1 * this.rotMult * impulse, dt)
+        if (this.spaceInput()) {
+            var acc = -1 * rss.exampleSpaceship.gravity + rss.spaceship.acc
+            this.applyAxialImpulse(this.mass * acc * dt)
+            this.stabilise(dt)
         }
 
-        if (!this.horizontalInput()) {
+        if (this.horizontalInput()) {
+            if (this.leftInput() && !this.rightInput()) {
+                this.applyTransRotImpulse(-1 * this.rotMult * impulse, dt)
+            }
+            else if (this.rightInput() && !this.leftInput()) {
+                this.applyTransRotImpulse(+1 * this.rotMult * impulse, dt)
+            }
+            else {
+                this.stabilise(dt)
+            }
+        }
+        else {
             this.stabilise(dt)
         }
 
@@ -120,7 +121,7 @@ var Spaceship = Steerable.extend({
     },
 
     angleWithinLimits: function() {
-      return Math.abs(this.getAngle())  < this.angleLimit
+        return Math.abs(this.getAngle())  < this.angleLimit
     },
 
     applyRotImpulse: function(imp) {
@@ -135,10 +136,10 @@ var Spaceship = Steerable.extend({
 
         var sign = rss.sign(imp)
         if ((sign > 0 && this.positiveAngle()) || (sign < 0 && !this.positiveAngle())) {
-            this.applyImpulse(10 * imp, 0)
+            this.applyImpulse(this.axialMult * imp, 0)
         }
 
-        //this.applyImpulse(0, -1 * this.mass * rss.exampleSpaceship.gravity * dt)
+        this.applyImpulse(0, -1 * this.mass * rss.exampleSpaceship.gravity * dt)
     },
 
     positiveAngle: function() {
@@ -150,11 +151,7 @@ var Spaceship = Steerable.extend({
 
         var diff = this.angleFromVertical()
 
-        this.applyRotImpulse(-1 * diff * 1 * this.rotMult * impulse)
-    },
-
-    stabiliseAgain: function(dt) {
-        this.stabilise(dt)
+        this.applyRotImpulse(-1 * diff * 0.3 * impulse)
     },
 
     angleFromVertical: function() {
@@ -168,5 +165,9 @@ var Spaceship = Steerable.extend({
         }
         cc.log("ang: " + ang)
         return ang
+    },
+
+    spaceInput: function() {
+        return rss.keys[cc.KEY.space]
     }
 })

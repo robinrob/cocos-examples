@@ -25,39 +25,39 @@ var Steerable = cc.Node.extend({
         this.body.applyImpulse(cp.v(ix, iy), cp.v(rx, ry))
     },
 
-    setAngle: function(angle) {
-        this.body.setAngle(angle)
+    applyAxialImpulse: function(impulse) {
+        this.applyImpulse(impulse * this.body.rot.x, impulse * this.body.rot.y)
     },
 
-    update: function (dt) {
-        var p = this.body.getPos()
-        var winSize = cc.director.getWinSize()
-        var x = p.x
-        var y = p.y
-        var dvx = 0.0
-        var dvy = 0.0
+    getAngle: function() {
+        return -1 * cc.radiansToDegrees(this.body.a) % 360
+    },
 
-        var impulse = this.mass * rss.spaceship.acc * dt
-        var ax = impulse * this.body.rot.x * dt
-        var ay = impulse * this.body.rot.y * dt
+    setAngle: function(angle) {
+        this.body.setAngle(-1 * cc.degreesToRadians(angle))
+    },
 
-        var thrust = 50
+    upInput: function() {
+        return rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]
+    },
 
-        if ((rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]) && y <= winSize.height) {
-            var sign = +1
-            this.applyImpulse(sign * thrust * ax, sign * thrust * ay)
-        }
-        if ((rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]) && y >= 0) {
-            var sign = -1
-            this.applyImpulse(sign * thrust * ax, sign * thrust * ay)
-        }
-        if ((rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]) && x >= 0) {
-            this.applyImpulseAt(-1 * impulse, 0, 0, this._height / 2)
-            this.applyImpulseAt(+1 * impulse, 0, 0, -1 * this._height / 2)
-        }
-        if ((rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]) && x <= winSize.width) {
-            this.applyImpulseAt(+1 * impulse, 0, 0, this._height / 2)
-            this.applyImpulseAt(-1 * impulse, 0, 0, -1 * this._height / 2)
-        }
+    downInput: function() {
+        return rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]
+    },
+
+    rightInput: function() {
+        return rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]
+    },
+
+    leftInput: function() {
+        return rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]
+    },
+
+    horizontalInput: function() {
+        return this.rightInput() || this.leftInput()
+    },
+
+    input: function() {
+        return this.upInput() || this.downInput() || this.rightInput() || this.leftInput()
     }
 })

@@ -1,6 +1,6 @@
 /* Example of moving a body around using keyboard controls */
 
-var ExampleSpaceship = {
+var ExampleSpaceship2 = {
     Layer: MoveableObjectsLayer.extend({
         MARGIN: 5,
 
@@ -14,8 +14,6 @@ var ExampleSpaceship = {
             this.space = space
 
             var winSize = cc.director.getWinSize()
-
-            this.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - 2 * this.MARGIN)
             this.center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
@@ -35,7 +33,7 @@ var ExampleSpaceship = {
         },
 
         constructControllee: function() {
-            this.controllee = new Spaceship(this.center, rss.spaceship.mass, this.space)
+            this.controllee = new Spaceship2(this.center, rss.spaceship.mass, this.space)
             this.controllee.setVel(0, 0)
             this.controllee.setAngle(0)
             this.addChild(this.controllee)
@@ -66,9 +64,9 @@ var ExampleSpaceship = {
 
             this.space = new cp.Space();
             this.space.gravity = cp.v(0, rss.exampleSpaceship.gravity);
-            this.space.damping = 0.1
+            this.space.damping = 0.8
 
-            this.layer = new ExampleSpaceship.Layer(this.space);
+            this.layer = new ExampleSpaceship2.Layer(this.space);
 
             this.addChild(this.layer);
 

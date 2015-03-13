@@ -24,13 +24,11 @@ var ExampleBody = {
         init: function () {
             this._super()
 
+            new Box(cc.p(20, 0), this.size, 10, this.space)
+
             this.constructMan()
-
             this.constructPlatform()
-
             this.constructBalls()
-
-            this.constructWalls()
         },
 
         constructMan: function() {
@@ -56,41 +54,6 @@ var ExampleBody = {
                 this.balls.push(ball)
                 this.addChild(ball)
             }
-        },
-
-        constructWalls: function() {
-            var winSize = cc.director.getWinSize()
-            var margin = 20
-            // left wall
-            this.constructWall(
-                cp.v(margin, rss.groundHeight),
-                cp.v(margin, winSize.height * 10)
-            )
-            // right wall
-            this.constructWall(
-                cp.v(winSize.width - margin, rss.groundHeight),
-                cp.v(winSize.width - margin, winSize.height * 10)
-            )
-            // ground
-            this.constructWall(
-                cp.v(margin, rss.groundHeight),
-                cp.v(winSize.width - margin, rss.groundHeight)
-            )
-
-            //this.constructWall(
-            //    cp.v(-winSize.width * 2, rss.groundHeight),
-            //    cp.v(winSize.width * 2, rss.groundHeight)
-            //)
-        },
-
-        constructWall: function(v1, v2) {
-            var wall = new cp.SegmentShape(
-                this.space.staticBody,
-                v1, v2,
-                0
-            );
-            wall.setElasticity(1.0)
-            this.space.addStaticShape(wall);
         },
 
         update: function() {
