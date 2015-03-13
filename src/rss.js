@@ -149,3 +149,29 @@ mass.wheel = 10
 mass.bonnet = 20
 mass.body = 40
 mass.chassis = 20
+
+// Chair
+var chair = {}
+rss.chair = chair
+
+var width = {}
+chair.width = width
+width.leg = 10
+width.crotch = 20
+width.back = 10
+width.seat= 2 * width.leg + width.crotch
+width.total = rss.sum(width)
+
+var height = {}
+chair.height = height
+height.leg = 40
+height.back = 30
+height.seat = 10
+height.total = rss.sum(height)
+
+var mass = {}
+chair.mass = mass
+mass.leg = 1
+mass.back = 5
+mass.seat = 5
+mass.total = rss.sum(mass)

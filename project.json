@@ -33,6 +33,7 @@
         "src/Car.js",
         "src/Spaceship.js",
         "src/Spaceship2.js",
+        "src/Chair.js",
 
         "src/MoveableObjectsLayer.js",
 
@@ -43,6 +44,7 @@
         "src/ExampleControl.js",
         "src/ExampleCar.js",
         "src/ExampleSpaceship.js",
-        "src/ExampleSpaceship2.js"
+        "src/ExampleSpaceship2.js",
+        "src/ExampleChair.js"
     ]
 }

@@ -24,8 +24,6 @@ var ExampleBody = {
         init: function () {
             this._super()
 
-            new Box(cc.p(20, 0), this.size, 10, this.space)
-
             this.constructMan()
             this.constructPlatform()
             this.constructBalls()
