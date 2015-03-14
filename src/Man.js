@@ -84,6 +84,7 @@ var Man = cc.Node.extend({
             this.space,
             color
         )
+        limb.setJointP(pos.x, pos.y + size.height / 2)
         this.addChild(limb)
         this.limbs.push(limb)
 

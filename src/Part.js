@@ -1,20 +1,15 @@
 var Part = cc.Node.extend({
-    startPos: null,
-    startV: null,
-    size: null,
-    mass: null,
-    space: null,
-    body: null,
-    _color: null,
-
     ctor: function(pos, size, mass, space, color) {
         this._super()
 
         this.startPos = pos
         this.startV = cp.v(pos.x, pos.y)
         this.size = size
+        this.width = size.width
+        this.height = size.height
         this.mass = mass
         this.space = space
+        this.jointP = pos
         this._color = color
     },
 
@@ -67,11 +62,23 @@ var Part = cc.Node.extend({
         return rss.toV(this.getTopLeft())
     },
 
+    getJointP: function() {
+        return this.jointP
+    },
+
+    setJointP: function(p) {
+        this.jointP = p
+    },
+
     getJointV: function() {
-        return rss.toV(this.getPos())
+        return rss.toV(this.jointP)
     },
 
     getMass: function() {
         return this.body.m
+    },
+
+    setGroup: function(group) {
+        this.shape.group = group
     }
 })

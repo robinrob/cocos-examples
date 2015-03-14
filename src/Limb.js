@@ -16,12 +16,7 @@ var Limb = Part.extend({
 
         // shape
         var shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
-        shape = this.space.addShape(shape)
         shape.setElasticity(0);
-    },
-
-    getJointV: function() {
-        var p = this.getPos()
-        return cp.v(p.x, p.y + this.size.height / 2)
+        this.shape = this.space.addShape(shape)
     }
 })

@@ -1,21 +1,4 @@
-var rss = rss || {};
-
-/* Functions */
-rss.toV = function(p) {
-    return cp.v(p.x, p.y)
-}
-
-rss.sum = function(obj) {
-    var total = 0
-    for (var i in obj) {
-        total += obj[i]
-    }
-    return total
-}
-
-rss.sign = function(number) {
-    return number?number<0?-1:1:0
-}
+var rss = rss || {}
 
 rss.gravity = -35
 rss.groundHeight = 10
@@ -59,7 +42,7 @@ rss.g = {
 
 rss.tagOfLayer = {
     Animation: 1
-};
+}
 
 rss.res = {
     fish_png  : "res/fish/fish.png",
@@ -70,9 +53,9 @@ rss.res = {
 }
 
 // Resources for pre-loading
-rss.resources = [];
+rss.resources = []
 for (var i in rss.res) {
-    rss.resources.push(rss.res[i]);
+    rss.resources.push(rss.res[i])
 }
 
 // Used by keyboard listeners

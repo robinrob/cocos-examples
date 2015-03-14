@@ -24,6 +24,8 @@ var ExampleChair = {
             this._super()
 
             this.constructChair()
+
+            this.addChild(new Platform(rss.addX(this.center, -40), rss.addX(this.center, 40), 10, this.space))
         },
 
         constructChair: function() {
@@ -32,7 +34,7 @@ var ExampleChair = {
         },
 
         update: function() {
-            this.chair.update()
+            //this.chair.update()
         }
     }),
 

@@ -11,6 +11,7 @@
     "modules" : ["cocos2d", "chipmunk"],
 
     "jsList" : [
+        "src/functions.js",
         "src/rss.js",
         "src/ui.js",
 

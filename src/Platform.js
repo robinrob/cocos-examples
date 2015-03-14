@@ -17,8 +17,8 @@ var Platform = cc.Node.extend({
             this.p1 = p1
             this.p2 = p2
 
-            this.v1 = cp.v(this.p1.x, this.p1.y)
-            this.v2 = cp.v(this.p2.x, this.p2.y)
+            this.v1 = rss.toV(p1)
+            this.v2 = rss.toV(p2)
 
             this.thickness = thickness
 
