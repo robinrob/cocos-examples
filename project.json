@@ -15,8 +15,11 @@
         "src/rss.js",
         "src/ui.js",
 
+        "src/StaticPart.js",
         "src/Part.js",
+
         "src/Limb.js",
+        "src/StaticLimb.js",
         "src/Wheel.js",
         "src/Box.js",
         "src/Ball.js",
@@ -46,6 +49,7 @@
         "src/ExampleCar.js",
         "src/ExampleSpaceship.js",
         "src/ExampleSpaceship2.js",
-        "src/ExampleChair.js"
+        "src/ExampleChair.js",
+        "src/ExampleJoints.js"
     ]
 }

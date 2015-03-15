@@ -57,7 +57,7 @@ cc.game.onStart = function(){
     //load resources
     cc.LoaderScene.preload(rss.resources, function () {
         //cc.director.runScene(new MenuScene());
-        cc.director.runScene(new ExampleChair.Scene())
+        cc.director.runScene(new ExampleJoints.Scene())
     }, this);
 };
 cc.game.run();

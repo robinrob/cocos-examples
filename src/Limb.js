@@ -1,7 +1,7 @@
 var Limb = Part.extend({
 
-    ctor: function(pos, size, mass, space, color) {
-        this._super(pos, size, mass, space, color)
+    ctor: function(pos, size, mass, space) {
+        this._super(pos, size, mass, space)
 
         this.init()
     },
@@ -16,7 +16,6 @@ var Limb = Part.extend({
 
         // shape
         var shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
-        shape.setElasticity(0);
         this.shape = this.space.addShape(shape)
     }
 })

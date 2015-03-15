@@ -33,7 +33,7 @@ var Chair = cc.Node.extend({
         //)
         //rightLeg.setJointP(rss.addY(rightLeg.getPos(), rightLeg.size.height / 2 - 5))
 
-        // seat
+        seat
         var seat = this._constructSeat(
             leftLeg.getJointP().x + rss.chair.width.seat / 2 - rss.chair.width.leg / 2,
             leftLeg.getJointP().y - 10
@@ -56,7 +56,7 @@ var Chair = cc.Node.extend({
     joinLimbs: function(limb1, limb2) {
         //this.space.addConstraint(new cp.PinJoint(limb1.body, limb2.body, limb1.getJointV(), limb2.getJointV()))
         //var grooveJoint = new cp.GrooveJoint(body1, body2, v(30,30), v(30,-30), v(-30,0));
-        this.space.addConstraint(new cp.GrooveJoint(limb1.body, limb2.body, limb1.getJointV(), limb1.getJointV(), limb2.getJointV()))
+        //this.space.addConstraint(new cp.GrooveJoint(limb1.body, limb2.body, limb1.getJointV(), limb1.getJointV(), limb2.getJointV()))
     },
 
     worldX: function(x) {

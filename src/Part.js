@@ -1,28 +1,15 @@
-var Part = cc.Node.extend({
-    ctor: function(pos, size, mass, space, color) {
-        this._super()
+var Part = StaticPart.extend({
+    ctor: function(pos, size, mass, space) {
+        this._super(pos, size, space)
 
         this.startPos = pos
         this.startV = cp.v(pos.x, pos.y)
-        this.size = size
-        this.width = size.width
-        this.height = size.height
+
         this.mass = mass
-        this.space = space
-        this.jointP = pos
-        this._color = color
     },
 
     init: function() {
         this._super()
-    },
-
-    getPos: function() {
-        return this.body.getPos()
-    },
-
-    setPos: function(x, y) {
-        this.body.setPos(cp.v(x, y))
     },
 
     getVel: function() {
@@ -37,48 +24,15 @@ var Part = cc.Node.extend({
         this.body.applyImpulse(cp.v(dvx, dvy), cp.v(0, 0))
     },
 
-    getX: function() {
-        return this.body.getPos().x
-    },
-
-    getY: function() {
-        return this.body.getPos().y
-    },
-
-    setPos: function(x, y) {
-        this.body.setPos(cp.v(x, y))
-    },
-
-    getTopLeft: function() {
-        var pos = this.getPos()
-        return cc.p(pos.x, pos.y + this.size.height / 2)
-    },
-
     getV: function() {
         return rss.toV(this.getPos())
-    },
-
-    getTopLeftV: function() {
-        return rss.toV(this.getTopLeft())
-    },
-
-    getJointP: function() {
-        return this.jointP
-    },
-
-    setJointP: function(p) {
-        this.jointP = p
-    },
-
-    getJointV: function() {
-        return rss.toV(this.jointP)
     },
 
     getMass: function() {
         return this.body.m
     },
 
-    setGroup: function(group) {
-        this.shape.group = group
+    setAngle: function(deg) {
+        this.body.setAngle(cc.degreesToRadians(deg))
     }
 })

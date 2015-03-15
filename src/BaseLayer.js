@@ -6,6 +6,8 @@ var BaseLayer = cc.Layer.extend({
         this._super();
 
         this.size = cc.size(rss.winWidth - 2 * this.MARGIN, rss.winHeight - 2 * this.MARGIN)
+        var winSize = cc.director.getWinSize()
+        this.center = cc.p(winSize.width / 2, winSize.height / 2)
     },
 
     init:function() {

@@ -65,3 +65,9 @@ rss.addX = function(obj, dx) {
 rss.addY = function(obj, dy) {
     return cc.p(obj.x, obj.y + dy)
 }
+
+rss.grooveJoint = function(obj1, obj2, space) {
+    var joint = new cp.GrooveJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())
+    space.addConstraint(joint)
+    return joint
+}
