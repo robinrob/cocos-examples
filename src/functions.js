@@ -66,8 +66,46 @@ rss.addY = function(obj, dy) {
     return cc.p(obj.x, obj.y + dy)
 }
 
-rss.grooveJoint = function(obj1, obj2, space) {
+rss.distance = function(p1, p2) {
+    return Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2))
+}
+
+rss.toRad = function(deg) {
+    return cc.degreesToRadians(deg)
+}
+
+rss.toDeg = function(rad) {
+    return cc.radiansToDegrees(rad)
+}
+
+rss.pinJoint = function(space, obj1, obj2) {
+    var p1 = obj1.getJointP()
+    var p2 = obj2.getJointP()
+    var joint = new cp.PinJoint(p1, p2, rss.distance(p1, p2))
+    space.addConstraint(joint)
+    return joint
+}
+
+rss.pivotJoint = function(space, obj1, obj2) {
+    var joint = new cp.PivotJoint(obj1.body, obj2.body, obj1.getJointP())
+    space.addConstraint(joint)
+    return joint
+}
+
+rss.slideJoint = function(space, obj1, obj2) {
+    var joint = new cp.SlideJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())
+    space.addConstraint(joint)
+    return joint
+}
+
+rss.grooveJoint = function(space, obj1, obj2) {
     var joint = new cp.GrooveJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())
+    space.addConstraint(joint)
+    return joint
+}
+
+rss.ratchetJoint = function(space, obj1, obj2, offset, phase) {
+    var joint = new cp.RatchetJoint(obj1.body, obj2.body, offset, phase)
     space.addConstraint(joint)
     return joint
 }

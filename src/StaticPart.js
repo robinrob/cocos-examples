@@ -55,6 +55,7 @@ var StaticPart = cc.Node.extend({
     },
 
     setJointPs: function(points) {
+        this.jointP = points[0]
         this.jointPs = points
     },
 

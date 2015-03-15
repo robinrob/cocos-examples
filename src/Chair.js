@@ -26,14 +26,14 @@ var Chair = cc.Node.extend({
             this.worldX(-1 * (rss.chair.width.leg + rss.chair.width.crotch) / 2),
             this.worldY(rss.chair.height.leg / 2)
         )
-        leftLeg.setJointP(rss.addY(leftLeg.getPos(), (leftLeg.height - rss.chair.height.seat / 2)))
-        //var rightLeg = this._constructLeg(
-        //    this.worldX(+1 * (rss.chair.width.leg + rss.chair.width.crotch) / 2),
-        //    this.worldY(rss.chair.height.leg / 2)
-        //)
-        //rightLeg.setJointP(rss.addY(rightLeg.getPos(), rightLeg.size.height / 2 - 5))
+        leftLeg.setJointP(rss.addY(cc.p(), (leftLeg.height - rss.chair.height.seat / 2)))
+        var rightLeg = this._constructLeg(
+            this.worldX(+1 * (rss.chair.width.leg + rss.chair.width.crotch) / 2),
+            this.worldY(rss.chair.height.leg / 2)
+        )
+        rightLeg.setJointP(rss.addY(cc.p(), rightLeg.size.height / 2 - 5))
 
-        seat
+        // seat
         var seat = this._constructSeat(
             leftLeg.getJointP().x + rss.chair.width.seat / 2 - rss.chair.width.leg / 2,
             leftLeg.getJointP().y - 10
@@ -41,22 +41,20 @@ var Chair = cc.Node.extend({
         seat.setJointP(leftLeg.getJointP())
         this.seat = seat
 
-        // arms
-        //var back = this._constructBack(
-        //    this.worldX((-1 * rss.chair.width.seat + rss.chair.width.back) / 2),
-        //    seat.getTopLeft().y + rss.chair.height.seat
-        //)
-        //back.setJointP(rss.addY(back.getPos(), -1 * back.size.height / 2))
+        // back
+        var back = this._constructBack(
+            this.worldX((-1 * rss.chair.width.seat + rss.chair.width.back) / 2),
+            seat.getTopLeft().y + rss.chair.height.seat
+        )
+        back.setJointP(rss.addY(cc.p(), -1 * back.size.height / 2))
 
         this.joinLimbs(leftLeg, seat)
-        //this.joinLimbs(rightLeg, seat)
-        //this.joinLimbs(seat, back)
+        this.joinLimbs(rightLeg, seat)
+        this.joinLimbs(back, seat)
     },
 
     joinLimbs: function(limb1, limb2) {
-        //this.space.addConstraint(new cp.PinJoint(limb1.body, limb2.body, limb1.getJointV(), limb2.getJointV()))
-        //var grooveJoint = new cp.GrooveJoint(body1, body2, v(30,30), v(30,-30), v(-30,0));
-        //this.space.addConstraint(new cp.GrooveJoint(limb1.body, limb2.body, limb1.getJointV(), limb1.getJointV(), limb2.getJointV()))
+        rss.pinJoint(this.space, limb1, limb2)
     },
 
     worldX: function(x) {
