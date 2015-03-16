@@ -25,11 +25,13 @@ var ExampleJoints = {
 
             var box = this.constructBox()
             var slider = this.constructSlider()
+            //var box = this.constructSlider()
+            //slider.setPos(rss.add(box.getPos(), cc.p(50, 50)))
 
+            //rss.pinJoint(this.space, box, slider)
+            //rss.pivotJoint(this.space, box, slider)
+            rss.slideJoint(this.space, box, slider)
             //rss.grooveJoint(this.space, box, slider)
-            //rss.slideJoint(this.space, box, slider)
-            //rss.ratchetJoint(this.space, box, slider, rss.toRad(0), rss.toRad(90))
-            rss.pinJoint(this.space, box, slider)
         },
 
         constructBox: function() {

@@ -2,8 +2,7 @@ var StaticPart = cc.Node.extend({
     ctor: function(pos, size, space) {
         this._super()
 
-        this.pos = pos
-        this.jointP = pos
+        this.startPos = pos
         this.jointPs = [pos]
 
         this.size = size
@@ -11,18 +10,24 @@ var StaticPart = cc.Node.extend({
         this.height = size.height
 
         this.space = space
+
+        this.globalJointCoords = false
     },
 
     init: function() {
         this._super()
     },
 
+    getStartPos: function() {
+        return this.startPos
+    },
+
     getPos: function() {
         return this.body.getPos()
     },
 
-    setPos: function(x, y) {
-        this.body.setPos(cp.v(x, y))
+    setPos: function(p) {
+        this.body.setPos(p)
     },
 
     getX: function() {
@@ -42,12 +47,17 @@ var StaticPart = cc.Node.extend({
         return rss.toV(this.getTopLeft())
     },
 
-    getJointP: function() {
-        return this.jointP
+    getJointP: function(wantGlobal) {
+        if (wantGlobal) {
+            return rss.add(this.getPos(), this.jointPs[0])
+        }
+        else {
+            return this.jointPs[0]
+        }
     },
 
     setJointP: function(p) {
-        this.jointP = p
+        this.jointPs[0] = p
     },
 
     getJointPs: function() {
@@ -55,12 +65,15 @@ var StaticPart = cc.Node.extend({
     },
 
     setJointPs: function(points) {
-        this.jointP = points[0]
         this.jointPs = points
     },
 
     getJointV: function() {
         return rss.toV(this.jointP)
+    },
+
+    setGlobalJointCoords: function(bool) {
+        this.globalJointCoords = bool
     },
 
     setGroup: function(group) {

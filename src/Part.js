@@ -2,7 +2,6 @@ var Part = StaticPart.extend({
     ctor: function(pos, size, mass, space) {
         this._super(pos, size, space)
 
-        this.startPos = pos
         this.startV = cp.v(pos.x, pos.y)
 
         this.mass = mass

@@ -54,8 +54,8 @@ rss.sign = function(number) {
     return number?number<0?-1:1:0
 }
 
-rss.p = function(x, y) {
-    return new cc.Point(x, y)
+rss.add = function(p1, p2) {
+    return cp.v.add(p1, p2)
 }
 
 rss.addX = function(obj, dx) {
@@ -67,6 +67,7 @@ rss.addY = function(obj, dy) {
 }
 
 rss.distance = function(p1, p2) {
+    //return cp.v.distance(p1, p2)
     return Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2))
 }
 
@@ -79,15 +80,13 @@ rss.toDeg = function(rad) {
 }
 
 rss.pinJoint = function(space, obj1, obj2) {
-    var p1 = obj1.getJointP()
-    var p2 = obj2.getJointP()
-    var joint = new cp.PinJoint(p1, p2, rss.distance(p1, p2))
+    var joint = new cp.PinJoint(obj1.body, obj2.body, rss.toV(obj1.getJointP()), rss.toV(obj2.getJointP()))
     space.addConstraint(joint)
     return joint
 }
 
 rss.pivotJoint = function(space, obj1, obj2) {
-    var joint = new cp.PivotJoint(obj1.body, obj2.body, obj1.getJointP())
+    var joint = new cp.PivotJoint(obj1.body, obj2.body, obj1.getJointP(true))
     space.addConstraint(joint)
     return joint
 }

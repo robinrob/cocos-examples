@@ -1,5 +1,4 @@
 var StaticLimb = StaticPart.extend({
-
     ctor: function(pos, size, space, color) {
         this._super(pos, size, space, color)
 
@@ -11,7 +10,7 @@ var StaticLimb = StaticPart.extend({
 
         // body
         this.body = new cp.StaticBody()
-        this.body.setPos(this.pos)
+        this.body.setPos(this.getStartPos())
 
         // shape
         var shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
