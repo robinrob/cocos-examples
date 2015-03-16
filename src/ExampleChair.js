@@ -23,6 +23,8 @@ var ExampleChair = {
         init: function () {
             this._super()
 
+            new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
+
             this.constructChair()
 
             this.addChild(new Platform(rss.addX(this.center, -40), rss.addX(this.center, 40), 10, this.space))

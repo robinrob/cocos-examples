@@ -20,6 +20,7 @@
 
         "src/RectBody.js",
         "src/StaticBody.js",
+        "src/StaticRectBody.js",
         "src/CircBody.js",
         "src/Box.js",
         "src/Ball.js",

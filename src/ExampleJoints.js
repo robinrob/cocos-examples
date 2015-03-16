@@ -23,6 +23,8 @@ var ExampleJoints = {
         init: function () {
             this._super()
 
+            new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
+            
             var box = this.constructBox()
             var slider = this.constructSlider()
             //var box = this.constructSlider()
@@ -35,7 +37,7 @@ var ExampleJoints = {
         },
 
         constructBox: function() {
-            var box = new StaticBody(this.center, cc.size(200, 200), this.space)
+            var box = new StaticRectBody(this.center, cc.size(200, 200), this.space)
             box.setJointPs([cc.p(0, 50), cc.p(0, -50)])
             box.setGroup(1)
             return box
