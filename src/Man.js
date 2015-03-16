@@ -54,14 +54,14 @@ var Man = cc.Node.extend({
             torso.getTopLeft().y + rss.man.height.neck + rss.man.height.head / 2
         )
 
-        this.joinLimbs(torso, head)
-        this.joinLimbs(leftArm, torso)
-        this.joinLimbs(rightArm, torso)
-        this.joinLimbs(leftLeg, torso)
-        this.joinLimbs(rightLeg, torso)
+        this.joinRectBodys(torso, head)
+        this.joinRectBodys(leftArm, torso)
+        this.joinRectBodys(rightArm, torso)
+        this.joinRectBodys(leftLeg, torso)
+        this.joinRectBodys(rightLeg, torso)
     },
 
-    joinLimbs: function(limb1, limb2) {
+    joinRectBodys: function(limb1, limb2) {
         rss.pivotJoint(this.space, limb1, limb2)
         //rss.pinJoint(this.space, limb1, limb2)
     },
@@ -78,8 +78,8 @@ var Man = cc.Node.extend({
         return cc.p(this.origin.x + x, this.origin.y + y)
     },
 
-    _constructLimb: function(pos, size, mass, color) {
-        var limb = new Limb(
+    _constructRectBody: function(pos, size, mass, color) {
+        var limb = new RectBody(
             pos,
             size,
             mass,
@@ -93,7 +93,7 @@ var Man = cc.Node.extend({
     },
 
     _constructLeg: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.man.width.leg, rss.man.height.leg),
             rss.man.mass.leg,
@@ -102,7 +102,7 @@ var Man = cc.Node.extend({
     },
 
     _constructArm: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.man.width.arm, rss.man.height.arm),
             rss.man.mass.arm,
@@ -111,7 +111,7 @@ var Man = cc.Node.extend({
     },
 
     _constructTorso: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.man.width.torso, rss.man.height.torso),
             rss.man.mass.torso,
@@ -120,7 +120,7 @@ var Man = cc.Node.extend({
     },
 
     _constructHead: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.man.width.head, rss.man.height.head),
             rss.man.mass.head,

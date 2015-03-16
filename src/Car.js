@@ -22,12 +22,12 @@ var Car = cc.Node.extend({
         this.parts = []
 
         // wheels
-        var wheel1 = this._constructWheel(
+        var wheel1 = this._constructCircBody(
             this.worldX(-1 * (rss.car.width.chassis + rss.car.width.wheel) / 2),
             this.worldY(rss.car.height.wheel / 2)
         )
 
-        var wheel2 = this._constructWheel(
+        var wheel2 = this._constructCircBody(
             this.worldX(+1 * (rss.car.width.chassis + rss.car.width.wheel) / 2),
             this.worldY(rss.car.height.wheel / 2)
         )
@@ -37,11 +37,11 @@ var Car = cc.Node.extend({
             this.worldY(rss.car.height.wheel / 2)
         )
 
-        this.joinParts(wheel1, chassis)
-        this.joinParts(wheel2, chassis)
+        this.joinDynamicBodys(wheel1, chassis)
+        this.joinDynamicBodys(wheel2, chassis)
     },
 
-    _constructWheel: function(x, y) {
+    _constructCircBody: function(x, y) {
         var part = this._constructCircle(
             cc.p(x, y),
             cc.size(rss.car.width.wheel, rss.car.height.wheel),
@@ -62,7 +62,7 @@ var Car = cc.Node.extend({
     },
 
     _constructBox: function(pos, size, mass, color) {
-        var part = new Limb(
+        var part = new RectBody(
             pos,
             size,
             mass,
@@ -76,7 +76,7 @@ var Car = cc.Node.extend({
     },
 
     _constructCircle: function(pos, size, mass, color) {
-        var part = new Wheel(
+        var part = new CircBody(
             pos,
             size,
             mass,
@@ -89,7 +89,7 @@ var Car = cc.Node.extend({
         return part
     },
 
-    joinParts: function(limb1, limb2) {
+    joinDynamicBodys: function(limb1, limb2) {
         this.space.addConstraint(new cp.PivotJoint(limb1.body, limb2.body, limb1.getJointV()))
     },
 

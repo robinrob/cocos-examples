@@ -1,4 +1,4 @@
-var Limb = Part.extend({
+var RectBody = rss.RectBody = DynamicBody.extend({
     ctor: function(pos, size, mass, space) {
         this._super(pos, size, mass, space)
 

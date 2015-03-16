@@ -1,4 +1,4 @@
-var Ball = Part.extend({
+var Ball = DynamicBody.extend({
     _draw: null,
     body: null,
     shape: null,

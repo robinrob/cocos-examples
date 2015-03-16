@@ -35,14 +35,14 @@ var ExampleChipmunkJoints = {
         },
 
         constructBox: function() {
-            var box = new StaticLimb(this.center, cc.size(200, 200), this.space)
+            var box = new StaticBody(this.center, cc.size(200, 200), this.space)
             box.setJointPs([cc.p(0, 50), cc.p(0, -50)])
             box.setGroup(1)
             return box
         },
 
         constructSlider: function() {
-            var slider = new Limb(rss.addY(this.center, 50), cc.size(50, 50), 50, this.space)
+            var slider = new RectBody(rss.addY(this.center, 50), cc.size(50, 50), 50, this.space)
             slider.setJointP(cc.p(0, 0))
             slider.setGroup(1)
             return slider

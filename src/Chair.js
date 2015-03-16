@@ -48,12 +48,12 @@ var Chair = cc.Node.extend({
         )
         back.setJointP(rss.addY(cc.p(), -1 * back.size.height / 2))
 
-        this.joinLimbs(leftLeg, seat)
-        this.joinLimbs(rightLeg, seat)
-        this.joinLimbs(back, seat)
+        this.joinRectBodys(leftLeg, seat)
+        this.joinRectBodys(rightLeg, seat)
+        this.joinRectBodys(back, seat)
     },
 
-    joinLimbs: function(limb1, limb2) {
+    joinRectBodys: function(limb1, limb2) {
         rss.pinJoint(this.space, limb1, limb2)
     },
 
@@ -69,8 +69,8 @@ var Chair = cc.Node.extend({
         return cc.p(this.origin.x + x, this.origin.y + y)
     },
 
-    _constructLimb: function(pos, size, mass, color) {
-        var limb = new Limb(
+    _constructRectBody: function(pos, size, mass, color) {
+        var limb = new RectBody(
             pos,
             size,
             mass,
@@ -85,7 +85,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructLeg: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.chair.width.leg, rss.chair.height.leg),
             rss.chair.mass.leg,
@@ -94,7 +94,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructArm: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.chair.width.arm, rss.chair.height.arm),
             rss.chair.mass.arm,
@@ -103,7 +103,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructSeat: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.chair.width.seat, rss.chair.height.seat),
             rss.chair.mass.seat,
@@ -112,7 +112,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructBack: function(x, y) {
-        return this._constructLimb(
+        return this._constructRectBody(
             cc.p(x, y),
             cc.size(rss.chair.width.back, rss.chair.height.back),
             rss.chair.mass.back,

@@ -1,4 +1,4 @@
-var Fish = Part.extend({
+var Fish = DynamicBody.extend({
     body: null,
     shape: null,
 

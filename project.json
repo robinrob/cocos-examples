@@ -15,12 +15,12 @@
         "src/rss.js",
         "src/ui.js",
 
-        "src/StaticPart.js",
-        "src/Part.js",
+        "src/StaticBody.js",
+        "src/DynamicBody.js",
 
-        "src/Limb.js",
-        "src/StaticLimb.js",
-        "src/Wheel.js",
+        "src/RectBody.js",
+        "src/StaticBody.js",
+        "src/CircBody.js",
         "src/Box.js",
         "src/Ball.js",
         "src/Fish.js",
