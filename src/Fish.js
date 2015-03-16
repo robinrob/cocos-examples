@@ -26,8 +26,9 @@ var Fish = Part.extend({
         cc.log("Ball.init ...")
         this._super()
 
-        this.sprite = new cc.PhysicsSprite(rss.res.fish1_png);
-        this.size = this.sprite.getContentSize();
+        this.sprite = new cc.PhysicsSprite(rss.res.fish1_png)
+        this.addChild(this.sprite)
+        this.size = this.sprite.getContentSize()
 
         this.body = new cp.Body(10, cp.momentForCircle(10, 0, this.size.width / 2, cp.v(0,0)));
         this.body.setPos(this.startPos)
@@ -52,11 +53,13 @@ var Fish = Part.extend({
         var bodyDef = new Box2D.Dynamics.b2BodyDef
         bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody
         bodyDef.position.Set(this.startPos.x, this.startPos.y)
+
         this.sprite = cc.Sprite.create(rss.res.fish1_png)
         this.addChild(this.sprite, 0)
         this.sprite.setPosition(this.startPos.x, this.startPos.y)
+
         bodyDef.userData = {
-            type: "ball",
+            type: "fish",
             asset: this.sprite
         }
 
@@ -79,9 +82,11 @@ var Fish = Part.extend({
 
     updateBox2D: function() {
         cc.log("here!")
-        //var sprite = this.body.GetUserData().asset
-        //var p = this.body.GetPosition()
-        //sprite.setPosition(p.x, p.y)
-        //sprite.setRotation(-1 * cc.radiansToDegrees (this.body.GetAngle()))
+        var sprite = this.body.GetUserData().asset
+        var p = this.body.GetPosition()
+        cc.log("p.x: " + this.body.GetPosition().x)
+        cc.log("p.y: " + p.y)
+        sprite.setPosition(p.x, p.y)
+        sprite.setRotation(-1 * cc.radiansToDegrees(this.body.GetAngle()))
     }
 })

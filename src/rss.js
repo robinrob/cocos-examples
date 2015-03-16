@@ -10,7 +10,7 @@ switch(rss.physics) {
         rss.gravity = -350
         break;
     case rss.box2D:
-        rss.gravity = new Box2D.Common.Math.b2Vec2(0, -30);
+        rss.gravity = new Box2D.Common.Math.b2Vec2(0, 0);
         break;
 }
 
