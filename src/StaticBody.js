@@ -34,7 +34,14 @@ var StaticBody = rss.StaticBody = cc.Node.extend({
     },
 
     setPos: function(p) {
-        this.body.setPos(p)
+        switch(rss.physics) {
+            case rss.chipmunk:
+                this.body.setPos(p)
+                break;
+            case rss.box2D:
+                this.body.setPosition(p.x, p.y)
+                break;
+        }
     },
 
     getX: function() {
@@ -75,16 +82,12 @@ var StaticBody = rss.StaticBody = cc.Node.extend({
         this.jointPs = points
     },
 
-    getJointV: function() {
-        return rss.toV(this.jointP)
-    },
-
-    setGlobalJointCoords: function(bool) {
-        this.globalJointCoords = bool
-    },
-
     setGroup: function(group) {
         this.shape.group = group
+    },
+
+    getColor: function() {
+        return this._color
     },
 
     setColor: function(color) {

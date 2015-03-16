@@ -24,6 +24,8 @@ var ExampleCompositeBody = {
         init: function () {
             this._super()
 
+            new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
+
             this.constructMan()
             this.constructPlatform()
             this.constructBalls()
@@ -43,9 +45,10 @@ var ExampleCompositeBody = {
         },
 
         constructBalls: function() {
-            var pos = cc.p(this.center.x, this.center.y + 100)
             this.balls = []
             for (var i = 0; i < 10; ++i) {
+                var pos = rss.add(this.man.getPos(), cc.p(i * 10, 150))
+                cc.log("new ball")
                 var ball = new Ball(pos, 10, rss.ball.mass, this.space)
                 this.balls.push(ball)
             }

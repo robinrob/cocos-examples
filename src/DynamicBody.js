@@ -2,9 +2,9 @@ var DynamicBody = rss.DynamicBody = rss.StaticBody.extend({
     ctor: function(pos, size, mass, space) {
         this._super(pos, size, space)
 
-        this.startV = cp.v(pos.x, pos.y)
-
         this.mass = mass
+
+        this.startV = cp.v(pos.x, pos.y)
     },
 
     init: function() {

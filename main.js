@@ -58,7 +58,6 @@ cc.game.onStart = function(){
     cc.LoaderScene.preload(rss.resources, function () {
         cc.director.runScene(new MenuScene());
         //cc.director.runScene(new ExampleBody.Scene())
-        //cc.director.runScene(new ExampleCompositeBody.Scene())
         //cc.director.runScene(new ExamplePhysicsSprite.Scene())
     }, this);
 };

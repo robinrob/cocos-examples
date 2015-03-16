@@ -29,6 +29,8 @@ var ExampleControl = {
         init: function () {
             this._super()
 
+            new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
+
             this.constructMan()
         },
 

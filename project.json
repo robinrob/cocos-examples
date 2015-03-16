@@ -4,7 +4,7 @@
     "debugMode" : 1,
     "showFPS" : false,
     "frameRate" : 20,
-    "id" : "gameCanvas",
+    "id" : "game",
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
@@ -53,7 +53,6 @@
         "src/ExampleSpaceship.js",
         "src/ExampleSpaceship2.js",
         "src/ExampleChair.js",
-        "src/ExampleChipmunkJoints.js",
-        "src/ExampleBox2DJoints.js"
+        "src/ExampleJoints.js"
     ]
 }

@@ -11,25 +11,29 @@ var ExampleDraw = {
 
             var draw = new cc.DrawNode()
             this.addChild(draw)
-            
-            var winSize = cc.director.getWinSize()
-            var pos = cc.p(winSize.width, winSize.height)
+
+            var pos = this.center
             
             var width = 50
             var height = 50
 
-            var verts = [
+            var square = [
                 cc.p(pos.x + width / 2, pos.y - height / 2),
                 cc.p(pos.x + width / 2, pos.y + height / 2),
                 cc.p(pos.x - width / 2, pos.y + height / 2),
                 cc.p(pos.x - width / 2, pos.y - height / 2)
             ]
-            draw.drawPoly(verts, this._color, 0, this._color)
+            draw.drawPoly(square, this._color, 0, this._color)
 
 
-            var vertices = [cc.p(150, 100), cc.p(200, 150), cc.p(150, 200), cc.p(100, 150)];
-            var vertices = [cc.p(150, 100), cc.p(150, 150), cc.p(100, 150), cc.p(100, 100)];
-            draw.drawPoly(vertices, null, 5, cc.color(255, 255, 0, 255));
+            var pos1 = rss.add(pos, cc.p(-200, 0))
+            var square45 = [
+                rss.add(pos1, cc.p(width, 0)),
+                rss.add(pos1, cc.p(width * 2, width)),
+                rss.add(pos1, cc.p(width, width * 2)),
+                rss.add(pos1, cc.p(0, width))
+            ]
+            draw.drawPoly(square45, null, 5, cc.color(255, 255, 0, 255));
 
             o=180;
             w=20;

@@ -31,10 +31,6 @@ var ExampleChair = {
         constructChair: function() {
             this.chair = new Chair(this.center, this.space)
             this.addChild(this.chair)
-        },
-
-        update: function() {
-            //this.chair.update()
         }
     }),
 

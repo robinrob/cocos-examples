@@ -2,7 +2,7 @@ var Chair = cc.Node.extend({
     startPos: null,
     origin: null,
     space: null,
-    limbs: null,
+    parts: null,
     seat: null,
 
     ctor: function(position, space) {
@@ -19,42 +19,41 @@ var Chair = cc.Node.extend({
         cc.log("rss.chair.init ...")
         this._super()
 
-        this.limbs = []
+        this.parts = []
 
         // legs
         var leftLeg = this._constructLeg(
             this.worldX(-1 * (rss.chair.width.leg + rss.chair.width.crotch) / 2),
             this.worldY(rss.chair.height.leg / 2)
         )
-        leftLeg.setJointP(rss.addY(cc.p(), (leftLeg.height - rss.chair.height.seat / 2)))
+        leftLeg.setJointP(cc.p(0, (leftLeg.height - rss.chair.height.seat) / 2))
         var rightLeg = this._constructLeg(
             this.worldX(+1 * (rss.chair.width.leg + rss.chair.width.crotch) / 2),
             this.worldY(rss.chair.height.leg / 2)
         )
-        rightLeg.setJointP(rss.addY(cc.p(), rightLeg.size.height / 2 - 5))
+        rightLeg.setJointP(cc.p(0, (rightLeg.height - rss.chair.height.seat) / 2))
 
         // seat
         var seat = this._constructSeat(
-            leftLeg.getJointP().x + rss.chair.width.seat / 2 - rss.chair.width.leg / 2,
-            leftLeg.getJointP().y - 10
+            leftLeg.getJointP(true).x + (rss.chair.width.seat - rss.chair.width.leg) / 2,
+            leftLeg.getJointP(true).y
         )
-        seat.setJointP(leftLeg.getJointP())
         this.seat = seat
 
         // back
         var back = this._constructBack(
             this.worldX((-1 * rss.chair.width.seat + rss.chair.width.back) / 2),
-            seat.getTopLeft().y + rss.chair.height.seat
+            leftLeg.getJointP(true).y + (rss.chair.height.back - seat.height) / 2
         )
-        back.setJointP(rss.addY(cc.p(), -1 * back.size.height / 2))
+        back.setJointP(cc.p(0, (-1 * back.height + seat.height) / 2))
 
-        this.joinRectBodys(leftLeg, seat)
-        this.joinRectBodys(rightLeg, seat)
-        this.joinRectBodys(back, seat)
+        this.joinParts(leftLeg, seat)
+        this.joinParts(rightLeg, seat)
+        this.joinParts(back, seat)
     },
 
-    joinRectBodys: function(limb1, limb2) {
-        rss.pinJoint(this.space, limb1, limb2)
+    joinParts: function(part1, part2) {
+        rss.pivotJoint(this.space, part1, part2)
     },
 
     worldX: function(x) {
@@ -69,23 +68,22 @@ var Chair = cc.Node.extend({
         return cc.p(this.origin.x + x, this.origin.y + y)
     },
 
-    _constructRectBody: function(pos, size, mass, color) {
-        var limb = new RectBody(
+    _constructPart: function(pos, size, mass, color) {
+        var part = new RectBody(
             pos,
             size,
             mass,
-            this.space,
-            color
-        )
-        limb.setGroup(1)
-        this.addChild(limb)
-        this.limbs.push(limb)
+            this.space)
+        part.setColor(color)
+        part.setGroup(1)
+        this.addChild(part)
+        this.parts.push(part)
 
-        return limb
+        return part
     },
 
     _constructLeg: function(x, y) {
-        return this._constructRectBody(
+        return this._constructPart(
             cc.p(x, y),
             cc.size(rss.chair.width.leg, rss.chair.height.leg),
             rss.chair.mass.leg,
@@ -94,7 +92,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructArm: function(x, y) {
-        return this._constructRectBody(
+        return this._constructPart(
             cc.p(x, y),
             cc.size(rss.chair.width.arm, rss.chair.height.arm),
             rss.chair.mass.arm,
@@ -103,7 +101,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructSeat: function(x, y) {
-        return this._constructRectBody(
+        return this._constructPart(
             cc.p(x, y),
             cc.size(rss.chair.width.seat, rss.chair.height.seat),
             rss.chair.mass.seat,
@@ -112,7 +110,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructBack: function(x, y) {
-        return this._constructRectBody(
+        return this._constructPart(
             cc.p(x, y),
             cc.size(rss.chair.width.back, rss.chair.height.back),
             rss.chair.mass.back,
@@ -125,9 +123,9 @@ var Chair = cc.Node.extend({
         var comY = 0.0
         var mass = this.getMass()
 
-        this.limbs.forEach(function(limb) {
-            comX += limb.getX() * limb.mass / mass
-            comY += limb.getY() * limb.mass / mass
+        this.parts.forEach(function(part) {
+            comX += part.getX() * part.mass / mass
+            comY += part.getY() * part.mass / mass
         })
 
         return cc.p(comX, comY)
@@ -138,10 +136,10 @@ var Chair = cc.Node.extend({
         var deltaX = x - com.x
         var deltaY = y - com.y
 
-        this.limbs.forEach(function(limb) {
-            var x = limb.getPos().x + deltaX
-            var y = limb.getPos().y + deltaY
-            limb.setPos(x, y)
+        this.parts.forEach(function(part) {
+            var x = part.getPos().x + deltaX
+            var y = part.getPos().y + deltaY
+            part.setPos(x, y)
         })
     },
 
@@ -150,40 +148,26 @@ var Chair = cc.Node.extend({
         var vComY = 0.0
         var mass = this.getMass()
 
-        this.limbs.forEach(function(limb) {
-            var vel = limb.getVel()
-            vComX += vel.x * limb.mass / mass
-            vComY += vel.y * limb.mass / mass
+        this.parts.forEach(function(part) {
+            var vel = part.getVel()
+            vComX += vel.x * part.mass / mass
+            vComY += vel.y * part.mass / mass
         })
 
         return cc.p(vComX, vComY)
     },
 
     setVel: function(vx, vy) {
-        this.limbs.forEach(function(limb) {
-            limb.setVel(vx, vy)
+        this.parts.forEach(function(part) {
+            part.setVel(vx, vy)
         })
     },
 
     getMass: function() {
         mass = 0.0
-        this.limbs.forEach(function(limb) {
-            mass += limb.mass
+        this.parts.forEach(function(part) {
+            mass += part.mass
         })
         return mass
-    },
-
-    update: function() {
-        var p = this.getPos()
-        var winSize = cc.director.getWinSize()
-        var x = p.x
-        var y = p.y
-
-        if (x > winSize.width) {
-            this.setPos(0, y)
-        }
-        else if (x < 0) {
-            this.setPos(winSize.width, y)
-        }
     }
 })

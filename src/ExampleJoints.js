@@ -1,4 +1,4 @@
-var ExampleChipmunkJoints = {
+var ExampleJoints = {
     Layer: BaseLayer.extend({
         chair: null,
         space: null,
@@ -59,7 +59,7 @@ var ExampleChipmunkJoints = {
             this.space = new cp.Space();
             this.space.gravity = cp.v(0, rss.gravity);
 
-            this.layer = new ExampleChipmunkJoints.Layer(this.space);
+            this.layer = new ExampleJoints.Layer(this.space);
 
             this.addChild(this.layer);
 

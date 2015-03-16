@@ -2,12 +2,12 @@ var rss = rss || {}
 
 rss.chipmunk = "chipmunk"
 rss.box2D = "box2d"
-rss.physics = rss.box2D
-//rss.physics = rss.chipmunk
+//rss.physics = rss.box2D
+rss.physics = rss.chipmunk
 
 switch(rss.physics) {
     case rss.chipmunk:
-        rss.gravity = -350
+        rss.gravity = -35
         break;
     case rss.box2D:
         rss.gravity = new Box2D.Common.Math.b2Vec2(0, -350);
@@ -151,19 +151,21 @@ mass.chassis = 20
 var chair = {}
 rss.chair = chair
 
+rss.chair.scale = 5.0
+
 var width = {}
 chair.width = width
-width.leg = 10
-width.crotch = 20
-width.back = 10
+width.leg = 10 * rss.chair.scale
+width.crotch = 20 * rss.chair.scale
+width.back = 10 * rss.chair.scale
 width.seat= 2 * width.leg + width.crotch
 width.total = rss.sum(width)
 
 var height = {}
 chair.height = height
-height.leg = 40
-height.back = 30
-height.seat = 10
+height.leg = 40 * rss.chair.scale
+height.back = 30 * rss.chair.scale
+height.seat = 10 * rss.chair.scale
 height.total = rss.sum(height)
 
 var mass = {}

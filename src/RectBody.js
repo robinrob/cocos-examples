@@ -14,7 +14,7 @@ var RectBody = rss.RectBody = DynamicBody.extend({
         this.body.setPos(this.getStartPos())
 
         // shape
-        var shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
-        this.shape = this.space.addShape(shape)
+        this.shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
+        this.space.addShape(this.shape)
     }
 })

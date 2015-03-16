@@ -22,32 +22,38 @@ var Car = cc.Node.extend({
         this.parts = []
 
         // wheels
-        var wheel1 = this._constructCircBody(
+        var wheel1 = this._constructWheel(
             this.worldX(-1 * (rss.car.width.chassis + rss.car.width.wheel) / 2),
             this.worldY(rss.car.height.wheel / 2)
         )
+        wheel1.setJointP(cc.p(0, 0))
 
-        var wheel2 = this._constructCircBody(
+        var wheel2 = this._constructWheel(
             this.worldX(+1 * (rss.car.width.chassis + rss.car.width.wheel) / 2),
             this.worldY(rss.car.height.wheel / 2)
         )
+        wheel2.setJointP(cc.p(0, 0))
 
         var chassis = this._constructChassis(
             this.worldX(0),
             this.worldY(rss.car.height.wheel / 2)
         )
 
-        this.joinDynamicBodys(wheel1, chassis)
-        this.joinDynamicBodys(wheel2, chassis)
+        this.joinParts(wheel1, chassis)
+        this.joinParts(wheel2, chassis)
     },
 
-    _constructCircBody: function(x, y) {
-        var part = this._constructCircle(
+    _constructWheel: function(x, y) {
+        var part = new CircBody(
             cc.p(x, y),
-            cc.size(rss.car.width.wheel, rss.car.height.wheel),
+            rss.car.width.wheel,
             rss.car.mass.wheel,
-            rss.colors.green
+            this.space
         )
+        part.setColor(rss.colors.green)
+        this.addChild(part)
+        this.parts.push(part)
+
         return part
     },
 
@@ -75,22 +81,9 @@ var Car = cc.Node.extend({
         return part
     },
 
-    _constructCircle: function(pos, size, mass, color) {
-        var part = new CircBody(
-            pos,
-            size,
-            mass,
-            this.space,
-            color
-        )
-        this.addChild(part)
-        this.parts.push(part)
-
-        return part
-    },
-
-    joinDynamicBodys: function(limb1, limb2) {
-        this.space.addConstraint(new cp.PivotJoint(limb1.body, limb2.body, limb1.getJointV()))
+    joinParts: function(o1, o2) {
+        rss.pivotJoint(this.space, o1, o2)
+        //this.space.addConstraint(new cp.PivotJoint(limb1.body, limb2.body, limb1.getJointP()))
     },
 
     worldX: function(x) {
