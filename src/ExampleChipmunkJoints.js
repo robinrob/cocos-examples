@@ -29,8 +29,8 @@ var ExampleChipmunkJoints = {
             //slider.setPos(rss.add(box.getPos(), cc.p(50, 50)))
 
             //rss.pinJoint(this.space, box, slider)
-            rss.pivotJoint(this.space, box, slider)
-            //rss.slideJoint(this.space, box, slider)
+            //rss.pivotJoint(this.space, box, slider)
+            rss.slideJoint(this.space, box, slider)
             //rss.grooveJoint(this.space, box, slider)
         },
 

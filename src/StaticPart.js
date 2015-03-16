@@ -23,7 +23,14 @@ var StaticPart = cc.Node.extend({
     },
 
     getPos: function() {
-        return this.body.getPos()
+        switch(rss.physics) {
+            case rss.chipmunk:
+                return this.body.getPos()
+                break;
+            case rss.box2D:
+                return this.body.GetPosition()
+                break;
+        }
     },
 
     setPos: function(p) {

@@ -1,5 +1,4 @@
 var Limb = Part.extend({
-
     ctor: function(pos, size, mass, space) {
         this._super(pos, size, mass, space)
 

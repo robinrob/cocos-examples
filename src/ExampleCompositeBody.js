@@ -32,7 +32,6 @@ var ExampleCompositeBody = {
         constructMan: function() {
             this.man = new Man(this.center, this.space)
             this.man.setVel(0, 0)
-            this.addChild(this.man)
         },
 
         constructPlatform: function() {
@@ -41,7 +40,6 @@ var ExampleCompositeBody = {
                 cc.p(this.center.x + 20, this.center.y),
                 2,
                 this.space)
-            this.addChild(platform)
         },
 
         constructBalls: function() {
@@ -50,13 +48,12 @@ var ExampleCompositeBody = {
             for (var i = 0; i < 10; ++i) {
                 var ball = new Ball(pos, 10, rss.ball.mass, this.space)
                 this.balls.push(ball)
-                this.addChild(ball)
             }
         },
 
         update: function() {
             this.balls.forEach(function(ball) {
-                ball.move()
+                ball.update()
             })
             this.man.update()
         }

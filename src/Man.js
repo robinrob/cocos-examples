@@ -26,31 +26,27 @@ var Man = cc.Node.extend({
             this.worldX(-1 * (rss.man.width.leg + rss.man.width.crotch) / 2),
             this.worldY(rss.man.height.leg / 2)
         )
-        leftLeg.setJointP(rss.addY(leftLeg.getPos(), leftLeg.height / 2))
+
         var rightLeg = this._constructLeg(
             this.worldX(+1 * (rss.man.width.leg + rss.man.width.crotch) / 2),
             this.worldY(rss.man.height.leg / 2)
         )
-        rightLeg.setJointP(rss.addY(rightLeg.getPos(), rightLeg.height / 2))
 
         // torso
         var torso = this._constructTorso(
             this.worldX(0),
             leftLeg.getTopLeft().y + rss.man.height.crotch + rss.man.width.torso / 2)
         this.torso = torso
-        torso.setJointP(rss.addY(torso.getPos(), torso.height / 2))
 
         // arms
         var rightArm = this._constructArm(
             this.worldX(-1 * (rss.man.width.torso + rss.man.width.armpit + rss.man.width.arm) / 2),
             torso.getTopLeft().y - rss.man.height.arm / 2
         )
-        rightArm.setJointP(rss.addY(rightArm.getPos(), rightArm.height / 2))
         var leftArm = this._constructArm(
             this.worldX(+1 * (rss.man.width.torso + rss.man.width.armpit + rss.man.width.arm) / 2),
             torso.getTopLeft().y - rss.man.height.arm / 2
         )
-        leftArm.setJointP(rss.addY(leftArm.getPos(), leftArm.height / 2))
 
         // head
         var head = this._constructHead(
@@ -87,11 +83,10 @@ var Man = cc.Node.extend({
             pos,
             size,
             mass,
-            this.space,
-            color
+            this.space
         )
-        limb.setJointP(pos.x, pos.y + size.height / 2)
-        this.addChild(limb)
+        limb.setColor(color)
+        limb.setJointP(cc.p(0, size.height / 2))
         this.limbs.push(limb)
 
         return limb

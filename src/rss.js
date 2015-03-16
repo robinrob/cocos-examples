@@ -1,9 +1,20 @@
 var rss = rss || {}
 
-rss.gravity = -35
-rss.groundHeight = 10
+rss.chipmunk = "chipmunk"
+rss.box2D = "box2d"
+rss.physics = rss.box2D
+//rss.physics = rss.chipmunk
 
-rss.gravityBox2D = new Box2D.Common.Math.b2Vec2(0, -10);
+switch(rss.physics) {
+    case rss.chipmunk:
+        rss.gravity = -350
+        break;
+    case rss.box2D:
+        rss.gravity = new Box2D.Common.Math.b2Vec2(0, -30);
+        break;
+}
+
+rss.groundHeight = 10
 
 rss.exampleMan = {
     impulse: 20,
@@ -47,6 +58,7 @@ rss.tagOfLayer = {
 }
 
 rss.res = {
+    fish1_png  : "res/fish/fish1.png",
     fish_png  : "res/fish/fish.png",
     fish_plist : "res/fish/fish.plist",
 

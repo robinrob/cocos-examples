@@ -12,11 +12,25 @@ var Part = StaticPart.extend({
     },
 
     getVel: function() {
-        return this.body.getVel()
+        switch(rss.physics) {
+            case rss.chipmunk:
+                this.body.getVel()
+                break;
+            case rss.box2D:
+                this.body.GetVelocity()
+                break;
+        }
     },
 
     setVel: function(vx, vy) {
-        this.body.setVel(cp.v(vx, vy))
+        switch(rss.physics) {
+            case rss.chipmunk:
+                this.body.setVel(cp.v(vx, vy))
+                break;
+            case rss.box2D:
+                this.body.SetVelocity(vx, vy)
+                break;
+        }
     },
 
     applyDeltaV: function(dvx, dvy) {

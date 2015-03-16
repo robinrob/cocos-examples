@@ -31,7 +31,7 @@ var ExampleTouch = {
 
         update: function() {
             this.balls.forEach(function(ball) {
-                ball.move()
+                ball.update()
             })
         }
     }),

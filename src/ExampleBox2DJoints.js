@@ -1,4 +1,4 @@
-var ExampleChipmunkJoints = {
+var ExampleBox2DJoints = {
     Layer: BaseLayer.extend({
         chair: null,
         space: null,

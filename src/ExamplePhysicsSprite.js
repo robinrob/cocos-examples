@@ -1,4 +1,4 @@
-var ExampleBody = {
+var ExamplePhysicsSprite = {
     Layer: BaseLayer.extend({
         space: null,
 
@@ -24,13 +24,12 @@ var ExampleBody = {
         init: function () {
             this._super()
 
-            var pos = cc.p(this.center.x, this.center.y + 100)
-            this.ball = new Ball(pos, cc.size(20, 20), rss.ball.mass, this.space)
-            this.addChild(this.ball)
+            this.fish = new Fish(this.center, cc.size(), 10, this.space)
+            this.addChild(this.fish)
         },
 
         update: function() {
-            this.ball.update()
+            this.fish.update()
         }
     }),
 
@@ -52,7 +51,7 @@ var ExampleBody = {
                     break;
             }
 
-            this.layer = new ExampleBody.Layer(this.space);
+            this.layer = new ExamplePhysicsSprite.Layer(this.space);
 
             this.addChild(this.layer);
 

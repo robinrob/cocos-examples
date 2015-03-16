@@ -13,7 +13,7 @@ var BaseLayer = cc.Layer.extend({
     init:function() {
         this._super()
 
-        new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
+        //new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
 
         var items = [
             ui.constructMenuItem("Back", new MenuScene())
