@@ -43,6 +43,7 @@
 
         "src/ExampleAnimation.js",
         "src/ExampleBody.js",
+        "src/ExampleCompositeBody.js",
         "src/ExampleDraw.js",
         "src/ExampleTouch.js",
         "src/ExampleControl.js",
@@ -50,6 +51,7 @@
         "src/ExampleSpaceship.js",
         "src/ExampleSpaceship2.js",
         "src/ExampleChair.js",
-        "src/ExampleJoints.js"
+        "src/ExampleChipmunkJoints.js",
+        "src/ExampleBox2DJoints.js"
     ]
 }

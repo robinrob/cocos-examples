@@ -1,6 +1,10 @@
-var ExampleBody = {
+var ExampleCompositeBody = {
     Layer: BaseLayer.extend({
+        balls: null,
+        man: null,
         space: null,
+        gameLayer: null,
+        center: null,
 
         ctor: function (space) {
             this._super();
@@ -20,13 +24,41 @@ var ExampleBody = {
         init: function () {
             this._super()
 
+            this.constructMan()
+            this.constructPlatform()
+            this.constructBalls()
+        },
+
+        constructMan: function() {
+            this.man = new Man(this.center, this.space)
+            this.man.setVel(0, 0)
+            this.addChild(this.man)
+        },
+
+        constructPlatform: function() {
+            var platform = new Platform(
+                cc.p(this.center.x - 20, this.center.y),
+                cc.p(this.center.x + 20, this.center.y),
+                2,
+                this.space)
+            this.addChild(platform)
+        },
+
+        constructBalls: function() {
             var pos = cc.p(this.center.x, this.center.y + 100)
-            this.ball = new Ball(pos, 10, rss.ball.mass, this.space)
-            this.addChild(this.ball)
+            this.balls = []
+            for (var i = 0; i < 10; ++i) {
+                var ball = new Ball(pos, 10, rss.ball.mass, this.space)
+                this.balls.push(ball)
+                this.addChild(ball)
+            }
         },
 
         update: function() {
-            this.ball.move()
+            this.balls.forEach(function(ball) {
+                ball.move()
+            })
+            this.man.update()
         }
     }),
 

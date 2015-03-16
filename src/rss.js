@@ -3,6 +3,8 @@ var rss = rss || {}
 rss.gravity = -35
 rss.groundHeight = 10
 
+rss.gravityBox2D = new Box2D.Common.Math.b2Vec2(0, -10);
+
 rss.exampleMan = {
     impulse: 20,
     gravity: -350

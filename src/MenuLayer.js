@@ -11,7 +11,8 @@ var MenuLayer = cc.Layer.extend({
         var winSize = cc.director.getWinSize();
         var centerpos = cc.p(winSize.width / 2, winSize.height / 2);
 
-        var items = this.menuItems()
+        //var items = this.menuItemsChipmunk()
+        var items = this.menuItemsBox2D()
         var menu = new cc.Menu(items);
 
         menu.alignItemsVertically()
@@ -20,10 +21,11 @@ var MenuLayer = cc.Layer.extend({
     },
 
     // Add new example scenes here
-    menuItems: function() {
+    menuItemsChipmunk: function() {
         var items = [
             ui.constructMenuItem("Animation", new ExampleAnimation.Scene()),
             ui.constructMenuItem("Body", new ExampleBody.Scene()),
+            ui.constructMenuItem("Composite Body", new ExampleCompositeBody.Scene()),
             ui.constructMenuItem("Draw", new ExampleDraw.Scene()),
             ui.constructMenuItem("Touch", new ExampleTouch.Scene()),
             ui.constructMenuItem("Control", new ExampleControl.Scene()),
@@ -31,7 +33,14 @@ var MenuLayer = cc.Layer.extend({
             ui.constructMenuItem("Spaceship", new ExampleSpaceship.Scene()),
             ui.constructMenuItem("Spaceship2", new ExampleSpaceship2.Scene()),
             ui.constructMenuItem("Chair", new ExampleChair.Scene()),
-            ui.constructMenuItem("Joints", new ExampleJoints.Scene())
+            ui.constructMenuItem("Joints", new ExampleChipmunkJoints.Scene())
+        ]
+        return items
+    },
+
+    menuItemsBox2D: function() {
+        var items = [
+            ui.constructMenuItem("Joints", new ExampleBox2DJoints.Scene())
         ]
         return items
     }

@@ -1,4 +1,4 @@
-var ExampleJoints = {
+var ExampleChipmunkJoints = {
     Layer: BaseLayer.extend({
         chair: null,
         space: null,
@@ -29,8 +29,8 @@ var ExampleJoints = {
             //slider.setPos(rss.add(box.getPos(), cc.p(50, 50)))
 
             //rss.pinJoint(this.space, box, slider)
-            //rss.pivotJoint(this.space, box, slider)
-            rss.slideJoint(this.space, box, slider)
+            rss.pivotJoint(this.space, box, slider)
+            //rss.slideJoint(this.space, box, slider)
             //rss.grooveJoint(this.space, box, slider)
         },
 
@@ -59,7 +59,7 @@ var ExampleJoints = {
             this.space = new cp.Space();
             this.space.gravity = cp.v(0, rss.gravity);
 
-            this.layer = new ExampleJoints.Layer(this.space);
+            this.layer = new ExampleChipmunkJoints.Layer(this.space);
 
             this.addChild(this.layer);
 
