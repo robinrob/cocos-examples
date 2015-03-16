@@ -43,19 +43,21 @@ var Fish = Part.extend({
     },
 
     initBox2D: function() {
+        this.sprite = cc.Sprite.create(rss.res.fish1_png)
+        this.size = this.sprite.getContentSize()
+        this.addChild(this.sprite, 0)
+
         var fixtureDef = new  Box2D.Dynamics.b2FixtureDef
         fixtureDef.density = 1.0
         fixtureDef.friction = 0.5
         fixtureDef.restitution = 0.2
         fixtureDef.shape = new Box2D.Collision.Shapes.b2PolygonShape
-        fixtureDef.shape.SetAsBox(this.radius, this.radius)
+        fixtureDef.shape.SetAsBox(this.size.width, this.size.height)
 
         var bodyDef = new Box2D.Dynamics.b2BodyDef
         bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody
         bodyDef.position.Set(this.startPos.x, this.startPos.y)
 
-        this.sprite = cc.Sprite.create(rss.res.fish1_png)
-        this.addChild(this.sprite, 0)
         this.sprite.setPosition(this.startPos.x, this.startPos.y)
 
         bodyDef.userData = {
@@ -81,11 +83,8 @@ var Fish = Part.extend({
     updateChipmunk:function() {},
 
     updateBox2D: function() {
-        cc.log("here!")
         var sprite = this.body.GetUserData().asset
         var p = this.body.GetPosition()
-        cc.log("p.x: " + this.body.GetPosition().x)
-        cc.log("p.y: " + p.y)
         sprite.setPosition(p.x, p.y)
         sprite.setRotation(-1 * cc.radiansToDegrees(this.body.GetAngle()))
     }
