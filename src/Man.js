@@ -1,10 +1,4 @@
 var Man = cc.Node.extend({
-    startPos: null,
-    origin: null,
-    space: null,
-    limbs: null,
-    torso: null,
-
     ctor: function(position, space) {
         this._super()
 

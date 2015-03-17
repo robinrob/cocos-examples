@@ -1,10 +1,5 @@
 var ExampleChair = {
     Layer: BaseLayer.extend({
-        chair: null,
-        space: null,
-        gameLayer: null,
-        center: null,
-
         ctor: function (space) {
             this._super();
             this.space = space

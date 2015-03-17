@@ -1,7 +1,5 @@
 var ExampleBody = {
     Layer: BaseLayer.extend({
-        space: null,
-
         ctor: function (space) {
             this._super();
             this.space = space

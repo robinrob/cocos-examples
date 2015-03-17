@@ -1,8 +1,6 @@
 /* Listens for movement control inputs */
 
 var MoveableObjectsLayer = BaseLayer.extend({
-    controllee: null,
-
     ctor: function (space) {
         this._super();
     },

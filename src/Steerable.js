@@ -1,8 +1,4 @@
 var Steerable = cc.Node.extend({
-    body: null,
-    mass: null,
-    _height: null,
-
     ctor: function(mass) {
         this._super()
 

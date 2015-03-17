@@ -1,6 +1,4 @@
 var Controllable = cc.Node.extend({
-    body: null,
-
     ctor: function() {
         this._super()
     },

@@ -29,13 +29,19 @@ cp.Vect.prototype.toP = function() {
 }
 
 cp.Vect.prototype.addX = function(dx) {
-    this.x += dx
-    return this
+    return cp.v(this.x + dx, this.y)
 }
 
 cp.Vect.prototype.addY = function(dy) {
-    this.y += dy
-    return this
+    return cp.v(this.x, this.y + dy)
+}
+
+cp.Vect.prototype.subX = function(dx) {
+    return cp.v(this.x - dx, this.y)
+}
+
+cp.Vect.prototype.subY = function(dy) {
+    return cp.v(this.x, this.y - dy)
 }
 
 rss.toV = function(p) {
@@ -64,6 +70,22 @@ rss.addX = function(obj, dx) {
 
 rss.addY = function(obj, dy) {
     return cc.p(obj.x, obj.y + dy)
+}
+
+rss.addW = function(s, dw) {
+    return cc.size(s.width + dw, s.height)
+}
+
+rss.subW = function(s, dw) {
+    return cc.size(s.width - dw, s.height)
+}
+
+rss.addH = function(s, dh) {
+    return cc.size(s.width, s.height + dh)
+}
+
+rss.subH = function(s, dh) {
+    return cc.size(s.width, s.height - dh)
 }
 
 rss.distance = function(p1, p2) {

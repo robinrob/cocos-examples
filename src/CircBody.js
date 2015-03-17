@@ -1,5 +1,4 @@
 var CircBody = DynamicBody.extend({
-
     ctor: function(pos, radius, mass, space) {
         this._super(pos, cc.size(radius * 2, radius * 2), mass, space)
 
@@ -32,7 +31,7 @@ var CircBody = DynamicBody.extend({
 
         // ball collision model
         this.shape = new cp.CircleShape(this.body, this.radius, cp.v(0, 0))
-        this.shape.setElasticity(0.8)
+        this.shape.setElasticity(1.0)
         this.space.addShape(this.shape)
     },
 

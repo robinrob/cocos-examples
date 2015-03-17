@@ -1,12 +1,4 @@
 var Spaceship2 = Steerable.extend({
-    mass: null,
-    body: null,
-    shape: null,
-    sprite: null,
-    startPos: null,
-    rotMult: null,
-    axialMult: null,
-
     ctor:function(position, mass, space) {
         cc.log("Spaceship.ctor ...")
         this._super(mass)

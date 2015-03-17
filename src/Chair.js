@@ -1,10 +1,4 @@
 var Chair = cc.Node.extend({
-    startPos: null,
-    origin: null,
-    space: null,
-    parts: null,
-    seat: null,
-
     ctor: function(position, space) {
         this._super()
 

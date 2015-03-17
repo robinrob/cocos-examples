@@ -1,10 +1,4 @@
 var Car = cc.Node.extend({
-    startPos: null,
-    origin: null,
-    space: null,
-    parts: null,
-    torso: null,
-
     ctor: function(position, space) {
         this._super()
 

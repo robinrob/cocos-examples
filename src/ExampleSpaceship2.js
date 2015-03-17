@@ -4,10 +4,6 @@ var ExampleSpaceship2 = {
     Layer: MoveableObjectsLayer.extend({
         MARGIN: 5,
 
-        space: null,
-        controllee: null,
-        size: null,
-
         ctor: function (space) {
             this._super();
 

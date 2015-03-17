@@ -1,8 +1,5 @@
 var ExampleTouch = {
     Layer: BaseLayer.extend({
-        balls: null,
-        space: null,
-
         ctor: function (space) {
             this._super();
 

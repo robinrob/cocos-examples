@@ -1,4 +1,4 @@
-var StaticBody = rss.StaticBody = cc.Node.extend({
+rss.StaticBody = cc.Node.extend({
     ctor: function(pos, size, space) {
         this._super()
 

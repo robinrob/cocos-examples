@@ -4,10 +4,6 @@ var ExampleCar = {
     Layer: BaseLayer.extend({
         MARGIN: 5,
 
-        space: null,
-        car: null,
-        size: null,
-
         ctor: function (space) {
             this._super();
 

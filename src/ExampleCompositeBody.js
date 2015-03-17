@@ -1,11 +1,5 @@
 var ExampleCompositeBody = {
     Layer: BaseLayer.extend({
-        balls: null,
-        man: null,
-        space: null,
-        gameLayer: null,
-        center: null,
-
         ctor: function (space) {
             this._super();
             this.space = space

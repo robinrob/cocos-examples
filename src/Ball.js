@@ -1,6 +1,4 @@
 var Ball = CircBody.extend({
-    _draw: null,
-
     ctor:function(pos, radius, mass, space) {
         cc.log("Ball.ctor ...")
         this._super(pos, radius, mass, space)

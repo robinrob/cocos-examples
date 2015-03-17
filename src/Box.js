@@ -1,14 +1,11 @@
 var Box = cc.Node.extend({
-    position: null,
-    size: null,
-    thickness: null,
-    space:null,
-
     ctor: function(position, size, thickness, space) {
         this._super()
 
         this.position = position
         this.size = size
+        this.width = size.width
+        this.height = size.height
         this.thickness = thickness
         this.space = space
 
@@ -18,24 +15,17 @@ var Box = cc.Node.extend({
     init: function() {
         this._super()
 
-        var p = this.position
+        var left = cp.v(this.thickness / 2, this.height / 2)
+        var right = cp.v(this.width - this.thickness / 2, this.height / 2)
+        var sVert = cc.size(this.thickness, this.height - this.thickness * 2)
 
-        var bL = cp.v(p.x, p.y)
-        var tL = cp.v(p.x, p.y + this.size.height)
-        var bR = cp.v(p.x + this.size.width, p.y)
-        var tR = cp.v(p.x + this.size.width, p.y + this.size.height)
+        var top = cp.v(this.width / 2, this.height - this.thickness / 2)
+        var bottom = cp.v(this.width / 2, this.thickness / 2)
+        var sHoriz = cc.size(this.width, this.thickness)
 
-        var shapes = [
-            new cp.SegmentShape(this.space.staticBody, bL, tL, this.thickness),
-            new cp.SegmentShape(this.space.staticBody, bR, tR, this.thickness),
-            new cp.SegmentShape(this.space.staticBody, bL, bR, this.thickness),
-            new cp.SegmentShape(this.space.staticBody, tL, tR, this.thickness)
-        ]
-
-        var that = this
-        shapes.forEach(function(shape) {
-            shape.setElasticity(1.0)
-            that.space.addStaticShape(shape)
-        })
+        new rss.StaticRectBody(left, sVert, this.space)
+        new rss.StaticRectBody(right, sVert, this.space)
+        new rss.StaticRectBody(bottom, sHoriz, this.space)
+        new rss.StaticRectBody(top, sHoriz, this.space)
     }
 })

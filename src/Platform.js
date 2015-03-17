@@ -1,13 +1,4 @@
 var Platform = cc.Node.extend({
-        space: null,
-        shape: null,
-        _draw: null,
-        thickness: null,
-        p1: null,
-        p2: null,
-        v1: null,
-        v2: null,
-
         ctor:function(p1, p2, thickness, space) {
             cc.log("Platform.ctor ...")
             this._super()

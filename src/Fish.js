@@ -1,7 +1,4 @@
 var Fish = DynamicBody.extend({
-    body: null,
-    shape: null,
-
     ctor:function(pos, size, mass, space) {
         cc.log("Ball.ctor ...")
         this._super(pos, size, mass, space)

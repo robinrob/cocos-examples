@@ -1,10 +1,5 @@
 var ExampleJoints = {
     Layer: BaseLayer.extend({
-        chair: null,
-        space: null,
-        gameLayer: null,
-        center: null,
-
         ctor: function (space) {
             this._super();
             this.space = space
@@ -24,7 +19,7 @@ var ExampleJoints = {
             this._super()
 
             new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
-            
+
             var box = this.constructBox()
             var slider = this.constructSlider()
             //var box = this.constructSlider()

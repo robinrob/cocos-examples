@@ -1,6 +1,6 @@
-var StaticRectBody = rss.StaticRectBody = rss.StaticBody.extend({
-    ctor: function(pos, size, space, color) {
-        this._super(pos, size, space, color)
+rss.StaticRectBody = rss.StaticBody.extend({
+    ctor: function(pos, size, space) {
+        this._super(pos, size, space)
 
         this.init()
     },
