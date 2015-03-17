@@ -25,9 +25,9 @@ var ExampleCar = {
         init: function () {
             this._super()
 
-            this.constructCar()
+            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
 
-            this.constructWalls()
+            this.constructCar()
 
             this.constructListeners()
         },
@@ -36,10 +36,6 @@ var ExampleCar = {
             this.car = new Car(this.center, this.space)
             this.car.setVel(0, 0)
             this.addChild(this.car)
-        },
-
-        constructWalls: function() {
-            new Box(cc.p(this.MARGIN, this.MARGIN), this.size, 10, this.space)
         },
 
         constructListeners: function() {

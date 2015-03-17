@@ -18,7 +18,7 @@ var ExampleCompositeBody = {
         init: function () {
             this._super()
 
-            new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
 
             this.constructMan()
             this.constructPlatform()

@@ -14,18 +14,18 @@ var ExampleSpaceship = {
             this.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - 2 * this.MARGIN)
             this.center = cc.p(winSize.width / 2, winSize.height / 2)
 
-            this.init()
-
             this._debugNode = new cc.PhysicsDebugNode(this.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
+
+            this.init()
         },
 
         init: function () {
             this._super()
 
-            new Box(cc.p(this.MARGIN, this.MARGIN), this.size, 10, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
 
             this.constructControllee()
         },

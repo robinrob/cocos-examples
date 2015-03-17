@@ -11,6 +11,8 @@ var Ball = rss.CircBody.extend({
     init: function() {
         this._super()
 
+        this.shape.setElasticity(1.0)
+
         this._draw = new cc.DrawNode()
         this.addChild(this._draw)
     },

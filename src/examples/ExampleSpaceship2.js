@@ -23,7 +23,7 @@ var ExampleSpaceship2 = {
         init: function () {
             this._super()
 
-            new Box(cc.p(this.MARGIN, this.MARGIN), this.size, 10, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
 
             this.constructControllee()
         },

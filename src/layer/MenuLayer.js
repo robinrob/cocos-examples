@@ -23,17 +23,17 @@ var MenuLayer = cc.Layer.extend({
     // Add new example scenes here
     menuItems: function() {
         var items = [
-            ui.constructMenuItem("Animation", new ExampleAnimation.Scene()),
-            ui.constructMenuItem("Body", new ExampleBody.Scene()),
-            ui.constructMenuItem("Composite Body", new ExampleCompositeBody.Scene()),
-            ui.constructMenuItem("Draw", new ExampleDraw.Scene()),
-            ui.constructMenuItem("Touch", new ExampleTouch.Scene()),
-            ui.constructMenuItem("Control", new ExampleControl.Scene()),
-            ui.constructMenuItem("Car", new ExampleCar.Scene()),
-            ui.constructMenuItem("Spaceship", new ExampleSpaceship.Scene()),
-            ui.constructMenuItem("Spaceship2", new ExampleSpaceship2.Scene()),
-            ui.constructMenuItem("Chair", new ExampleChair.Scene()),
-            ui.constructMenuItem("Joints", new ExampleJoints.Scene())
+            rss.ui.constructMenuItem("Animation", new ExampleAnimation.Scene()),
+            rss.ui.constructMenuItem("Body", new ExampleBody.Scene()),
+            rss.ui.constructMenuItem("Composite Body", new ExampleCompositeBody.Scene()),
+            rss.ui.constructMenuItem("Draw", new ExampleDraw.Scene()),
+            rss.ui.constructMenuItem("Touch", new ExampleTouch.Scene()),
+            rss.ui.constructMenuItem("Control", new ExampleControl.Scene()),
+            rss.ui.constructMenuItem("Car", new ExampleCar.Scene()),
+            rss.ui.constructMenuItem("Spaceship", new ExampleSpaceship.Scene()),
+            rss.ui.constructMenuItem("Spaceship2", new ExampleSpaceship2.Scene()),
+            rss.ui.constructMenuItem("Chair", new ExampleChair.Scene()),
+            rss.ui.constructMenuItem("Joints", new ExampleJoints.Scene())
         ]
         return items
     }

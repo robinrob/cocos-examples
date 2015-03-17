@@ -23,10 +23,14 @@ var Box = cc.Node.extend({
         var bottom = cp.v(this.width / 2, this.thickness / 2)
         var sHoriz = cc.size(this.width, this.thickness)
 
-        new rss.StaticRectBody(left, sVert, this.space)
-        new rss.StaticRectBody(right, sVert, this.space)
-        new rss.StaticRectBody(bottom, sHoriz, this.space)
-        new rss.StaticRectBody(top, sHoriz, this.space)
+        var w = new rss.StaticRectBody(left, sVert, this.space)
+        w.shape.setElasticity(1.0)
+        w = new rss.StaticRectBody(right, sVert, this.space)
+        w.shape.setElasticity(1.0)
+        w = new rss.StaticRectBody(bottom, sHoriz, this.space)
+        w.shape.setElasticity(1.0)
+        w =new rss.StaticRectBody(top, sHoriz, this.space)
+        w.shape.setElasticity(1.0)
     }
 })
 

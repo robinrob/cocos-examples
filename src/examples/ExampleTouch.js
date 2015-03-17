@@ -5,6 +5,11 @@ var ExampleTouch = {
 
             this.space = space
 
+            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode.setVisible(true);
+            // Parallax ratio and offset
+            this.addChild(this._debugNode, 10);
+
             this.init()
         },
 
@@ -12,6 +17,8 @@ var ExampleTouch = {
             this._super()
 
             this.balls = []
+
+            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
 
             var that = this
             cc.eventManager.addListener({

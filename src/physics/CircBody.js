@@ -22,16 +22,11 @@ rss.CircBody = rss._DynamicBody.extend({
         cc.log("Ball.init ...")
         this._super()
 
-        var angle = Math.random() * 360
-
-        // ball physics
         this.body = new cp.Body(this.mass, cp.momentForCircle(this.mass, 0, this.radius, cp.v(0,0)))
         this.body.setPos(this.startPos)
         this.space.addBody(this.body)
 
-        // ball collision model
         this.shape = new cp.CircleShape(this.body, this.radius, cp.v(0, 0))
-        this.shape.setElasticity(1.0)
         this.space.addShape(this.shape)
     },
 
