@@ -73,7 +73,7 @@ var Man = cc.Node.extend({
     },
 
     _constructLimb: function(pos, size, mass, color) {
-        var limb = new RectBody(
+        var limb = new rss.RectBody(
             pos,
             size,
             mass,

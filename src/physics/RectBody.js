@@ -1,4 +1,4 @@
-var RectBody = rss.RectBody = DynamicBody.extend({
+rss.RectBody = rss._DynamicBody.extend({
     ctor: function(pos, size, mass, space) {
         this._super(pos, size, mass, space)
 

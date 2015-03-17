@@ -1,4 +1,4 @@
-var Fish = DynamicBody.extend({
+var Fish = rss._DynamicBody.extend({
     ctor:function(pos, size, mass, space) {
         cc.log("Ball.ctor ...")
         this._super(pos, size, mass, space)

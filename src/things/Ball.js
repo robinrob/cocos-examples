@@ -1,4 +1,4 @@
-var Ball = CircBody.extend({
+var Ball = rss.CircBody.extend({
     ctor:function(pos, radius, mass, space) {
         cc.log("Ball.ctor ...")
         this._super(pos, radius, mass, space)

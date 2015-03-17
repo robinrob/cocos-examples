@@ -1,4 +1,4 @@
-rss.StaticRectBody = rss.StaticBody.extend({
+rss.StaticRectBody = rss._StaticBody.extend({
     ctor: function(pos, size, space) {
         this._super(pos, size, space)
 

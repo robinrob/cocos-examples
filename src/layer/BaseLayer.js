@@ -14,10 +14,10 @@ var BaseLayer = cc.Layer.extend({
         this._super()
 
         var items = [
-            ui.constructMenuItem("Back", new MenuScene())
+            rss.ui.constructMenuItem("Back", new MenuScene())
         ]
         var back = new cc.Menu(items);
-        back.setPosition(ui.FONT_SIZE, ui.FONT_SIZE);
+        back.setPosition(rss.ui.FONT_SIZE, rss.ui.FONT_SIZE);
         this.addChild(back)
     }
 });

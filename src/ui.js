@@ -1,4 +1,4 @@
-var ui = {
+rss.ui = {
     FONT_SIZE: 45,
 
     constructMenuItem: function (name, scene) {
