@@ -3,7 +3,7 @@ rss._StaticBody = cc.Node.extend({
         this._super()
 
         this.startPos = pos
-        this.jointPs = [pos]
+        this.jointPs = [cc.p()]
 
         this.size = size
         this.width = size.width

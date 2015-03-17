@@ -61,15 +61,27 @@ rss.sign = function(number) {
 }
 
 rss.add = function(p1, p2) {
-    return cp.v.add(p1, p2)
+    return cc.p(p1.x + p2.x, p1.y + p2.y)
+}
+
+rss.sub = function(p1, p2) {
+    return cc.p(p1.x - p2.x, p1.y - p2.y)
 }
 
 rss.addX = function(obj, dx) {
     return cc.p(obj.x + dx, obj.y)
 }
 
+rss.subX = function(obj, dx) {
+    return cc.p(obj.x - dx, obj.y)
+}
+
 rss.addY = function(obj, dy) {
     return cc.p(obj.x, obj.y + dy)
+}
+
+rss.subY = function(obj, dy) {
+    return cc.p(obj.x, obj.y - dy)
 }
 
 rss.addW = function(s, dw) {
