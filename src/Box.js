@@ -29,3 +29,7 @@ var Box = cc.Node.extend({
         new rss.StaticRectBody(top, sHoriz, this.space)
     }
 })
+
+Box.create = function(pos, size, space) {
+    return new Box(pos, size, 50, space)
+}

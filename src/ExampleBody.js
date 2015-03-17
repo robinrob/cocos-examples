@@ -4,18 +4,15 @@ var ExampleBody = {
             this._super();
             this.space = space
 
-            var winSize = cc.director.getWinSize()
-            this.center = cc.p(winSize.width / 2, winSize.height / 2)
-
             this.init()
 
             switch(rss.physics) {
                 case rss.chipmunk:
-                    new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
+                    Box.create(cc.p(), this.size, this.space)
                     this.debugNodeChipmunk()
                     break
                 case rss.box2D:
-                    //this.debugNodeBox2D()
+                    this.debugNodeBox2D()
                     break
             }
         },

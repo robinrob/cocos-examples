@@ -9,11 +9,6 @@ var ExampleControl = {
 
             this.space = space
 
-            var winSize = cc.director.getWinSize()
-
-            this.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - rss.groundHeight)
-            this.center = cc.p(winSize.width / 2, winSize.height / 2)
-
             this.init()
 
             this._debugNode = new cc.PhysicsDebugNode(this.space);
@@ -25,9 +20,8 @@ var ExampleControl = {
         init: function () {
             this._super()
 
-            new Box(cc.p(this.MARGIN, 0), this.size, this.THICKNESS, this.space)
-
             this.constructMan()
+            new Box(cc.p(), this.size, rss.man.height.total, this.space)
         },
 
         constructMan: function() {
