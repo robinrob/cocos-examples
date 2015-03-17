@@ -38,8 +38,9 @@
 
         "src/layer/BaseLayer.js",
         "src/layer/MenuLayer.js",
-        "src/layer/MenuScene.js",
         "src/layer/MoveableObjectsLayer.js",
+
+        "src/scene/MenuScene.js",
 
         "src/examples/ExampleAnimation.js",
         "src/examples/ExampleBody.js",
