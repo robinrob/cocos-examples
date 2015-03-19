@@ -27,6 +27,7 @@ var MenuLayer = cc.Layer.extend({
             rss.ui.constructMenuItem("Body", new ExampleBody.Scene()),
             rss.ui.constructMenuItem("Composite Body", new ExampleCompositeBody.Scene()),
             rss.ui.constructMenuItem("Draw", new ExampleDraw.Scene()),
+            rss.ui.constructMenuItem("Physics Sprite", new ExamplePhysicsSprite.Scene()),
             rss.ui.constructMenuItem("Touch", new ExampleTouch.Scene()),
             rss.ui.constructMenuItem("Control", new ExampleControl.Scene()),
             rss.ui.constructMenuItem("Car", new ExampleCar.Scene()),

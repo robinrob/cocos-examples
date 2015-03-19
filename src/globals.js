@@ -30,9 +30,10 @@ rss.exampleSpaceship = {
     gravity: -700
 }
 
-rss.spaceship = {}
-rss.spaceship.mass = 100
-rss.spaceship.acc = 1000
+rss.spaceship = {
+    mass: 100,
+    acc: 1000
+}
 
 rss.colors = {
     yellow: new cc.color(255, 255, 0, 255),
