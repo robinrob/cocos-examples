@@ -4,8 +4,6 @@ rss.CircBody = rss._DynamicBody.extend({
         this._super(args)
 
         this.radius = args.radius
-
-        this.init()
     },
 
     init: function() {

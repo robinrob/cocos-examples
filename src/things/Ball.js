@@ -1,11 +1,9 @@
 var Ball = rss.CircBody.extend({
-    ctor:function(pos, radius, mass, space) {
+    ctor:function(args) {
         cc.log("Ball.ctor ...")
-        this._super(pos, radius, mass, space)
+        this._super(args)
 
         this.setColor(cc.color(255, 0, 0, 255))
-
-        this.init()
     },
 
     init: function() {
@@ -15,6 +13,8 @@ var Ball = rss.CircBody.extend({
 
         this._draw = new cc.DrawNode()
         this.addChild(this._draw)
+
+        return this
     },
 
     draw:function() {
@@ -40,3 +40,7 @@ var Ball = rss.CircBody.extend({
         this.draw()
     }
 })
+
+Ball.create = function(args) {
+    return new Ball(args).init()
+}

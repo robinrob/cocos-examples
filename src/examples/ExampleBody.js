@@ -4,17 +4,17 @@ var ExampleBody = {
             this._super();
             this.space = space
 
-            this.init()
-
             switch(rss.physics) {
                 case rss.chipmunk:
-                    Box.create(cc.p(), this.size, this.space)
+                    rss.Box.create({pos: cc.p(), size: this.size}).addToSpace(this.space)
                     this.debugNodeChipmunk()
                     break
                 case rss.box2D:
                     this.debugNodeBox2D()
                     break
             }
+
+            this.init()
         },
 
         debugNodeChipmunk: function() {
@@ -39,7 +39,8 @@ var ExampleBody = {
             this._super()
 
             var pos = cc.p(this.center.x, this.center.y + 100)
-            this.ball = new Ball(pos, 10, rss.ball.mass, this.space)
+
+            this.ball = Ball.create({pos: pos, radius: 10, mass: rss.ball.mass}).addToSpace(this.space)
             this.addChild(this.ball)
         },
 
