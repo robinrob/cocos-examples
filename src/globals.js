@@ -152,7 +152,7 @@ mass.chassis = 20
 var chair = {}
 rss.chair = chair
 
-rss.chair.scale = 5.0
+rss.chair.scale = 2.0
 
 var width = {}
 chair.width = width
@@ -165,7 +165,7 @@ width.total = rss.sum(width)
 var height = {}
 chair.height = height
 height.leg = 40 * rss.chair.scale
-height.back = 30 * rss.chair.scale
+height.back = 35 * rss.chair.scale
 height.seat = 10 * rss.chair.scale
 height.total = rss.sum(height)
 

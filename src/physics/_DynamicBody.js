@@ -75,29 +75,5 @@ rss._DynamicBody = rss._StaticBody.extend({
 
     applyAxialImpulse: function(impulse) {
         this.applyImpulse(impulse * this.body.rot.x, impulse * this.body.rot.y)
-    },
-
-    upInput: function() {
-        return rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]
-    },
-
-    downInput: function() {
-        return rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]
-    },
-
-    rightInput: function() {
-        return rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]
-    },
-
-    leftInput: function() {
-        return rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]
-    },
-
-    horizontalInput: function() {
-        return this.rightInput() || this.leftInput()
-    },
-
-    input: function() {
-        return this.upInput() || this.downInput() || this.rightInput() || this.leftInput()
     }
 })
