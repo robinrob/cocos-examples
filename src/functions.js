@@ -119,6 +119,12 @@ rss.pinJoint = function(space, obj1, obj2) {
     return joint
 }
 
+rss.gearJoint = function(space, obj1, obj2) {
+    var joint = new cp.GearJoint(obj1.body, obj2.body, 0, 1)
+    space.addConstraint(joint)
+    return joint
+}
+
 rss.pivotJoint = function(space, obj1, obj2) {
     var joint = new cp.PivotJoint(obj1.body, obj2.body, obj1.getJointP(true))
     space.addConstraint(joint)

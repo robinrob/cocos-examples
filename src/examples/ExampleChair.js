@@ -22,7 +22,7 @@ var ExampleChair = {
 
             this.constructChair()
 
-            this.addChild(new Platform(rss.addX(this.center, -40), rss.addX(this.center, 40), 10, this.space))
+            this.addChild(new Platform(rss.addX(this.center, -100), rss.addX(this.center, 40), 10, this.space))
         },
 
         constructChair: function() {

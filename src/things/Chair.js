@@ -47,6 +47,7 @@ var Chair = cc.Node.extend({
     },
 
     joinParts: function(part1, part2) {
+        rss.gearJoint(this.space, part1, part2)
         rss.pivotJoint(this.space, part1, part2)
     },
 
@@ -63,7 +64,7 @@ var Chair = cc.Node.extend({
     },
 
     _constructPart: function(pos, size, mass, color) {
-        var part = new RectBody(
+        var part = new rss.RectBody(
             pos,
             size,
             mass,

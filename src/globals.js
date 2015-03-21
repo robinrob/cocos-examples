@@ -32,7 +32,7 @@ rss.exampleSpaceship = {
 
 rss.spaceship = {
     mass: 100,
-    acc: 1000
+    acc: 3000
 }
 
 rss.colors = {
