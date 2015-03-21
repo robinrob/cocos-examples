@@ -26,6 +26,7 @@
         "src/physics/StaticRectBody.js",
         "src/physics/CircBody.js",
         "src/physics/RectPhysicsSprite.js",
+        "src/physics/PolyBody.js",
 
         "src/things/Box.js",
         "src/things/Ball.js",
@@ -56,6 +57,7 @@
         "src/examples/ExampleSpaceship.js",
         "src/examples/ExampleSpaceship2.js",
         "src/examples/ExampleChair.js",
-        "src/examples/ExampleJoints.js"
+        "src/examples/ExampleJoints.js",
+        "src/examples/ExamplePolyBody.js"
     ]
 }

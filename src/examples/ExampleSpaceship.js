@@ -9,11 +9,6 @@ var ExampleSpaceship = {
 
             this.space = space
 
-            var winSize = cc.director.getWinSize()
-
-            this.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - 2 * this.MARGIN)
-            this.center = cc.p(winSize.width / 2, winSize.height / 2)
-
             this._debugNode = new cc.PhysicsDebugNode(this.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
