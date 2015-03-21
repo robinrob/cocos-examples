@@ -1,12 +1,10 @@
-var Chair = cc.Node.extend({
-    ctor: function(position, space) {
-        this._super()
+Chair = rss._CompositeDynamicBody.extend({
+    ctor: function(args) {
+        args.size = cc.size()
+        this._super(args)
 
-        this.startPos = position
-        this.origin = this.startPos
-        this.space = space
-
-        this.init()
+        this.startPos = args.pos
+        this.origin = args.pos
     },
 
     init: function() {
@@ -44,11 +42,12 @@ var Chair = cc.Node.extend({
         this.joinParts(leftLeg, seat)
         this.joinParts(rightLeg, seat)
         this.joinParts(back, seat)
+
+        return this
     },
 
     joinParts: function(part1, part2) {
-        rss.gearJoint(this.space, part1, part2)
-        rss.pivotJoint(this.space, part1, part2)
+        this.addConstraints(rss.fixedJoint(part1, part2))
     },
 
     worldX: function(x) {
@@ -63,106 +62,48 @@ var Chair = cc.Node.extend({
         return cc.p(this.origin.x + x, this.origin.y + y)
     },
 
-    _constructPart: function(pos, size, mass, color) {
-        var part = new rss.RectBody(
-            pos,
-            size,
-            mass,
-            this.space)
-        part.setColor(color)
+    _constructPart: function(args) {
+        var part = rss.RectBody.create(args)
         part.setGroup(1)
-        this.addChild(part)
-        this.parts.push(part)
+
+        this.addComp(part)
 
         return part
     },
 
     _constructLeg: function(x, y) {
-        return this._constructPart(
-            cc.p(x, y),
-            cc.size(rss.chair.width.leg, rss.chair.height.leg),
-            rss.chair.mass.leg,
-            rss.colors.green
-        )
+        return this._constructPart({
+            pos: cc.p(x, y),
+            size: cc.size(rss.chair.width.leg, rss.chair.height.leg),
+            mass: rss.chair.mass.leg
+        })
     },
 
     _constructArm: function(x, y) {
-        return this._constructPart(
-            cc.p(x, y),
-            cc.size(rss.chair.width.arm, rss.chair.height.arm),
-            rss.chair.mass.arm,
-            rss.colors.yellow
-        )
+        return this._constructPart({
+            pos: cc.p(x, y),
+            size: cc.size(rss.chair.width.arm, rss.chair.height.arm),
+            mass: rss.chair.mass.arm
+        })
     },
 
     _constructSeat: function(x, y) {
-        return this._constructPart(
-            cc.p(x, y),
-            cc.size(rss.chair.width.seat, rss.chair.height.seat),
-            rss.chair.mass.seat,
-            rss.colors.orange
-        )
+        return this._constructPart({
+            pos: cc.p(x, y),
+            size: cc.size(rss.chair.width.seat, rss.chair.height.seat),
+            mass: rss.chair.mass.seat
+        })
     },
 
     _constructBack: function(x, y) {
-        return this._constructPart(
-            cc.p(x, y),
-            cc.size(rss.chair.width.back, rss.chair.height.back),
-            rss.chair.mass.back,
-            rss.colors.orange
-        )
-    },
-
-    getPos: function() {
-        var comX = 0.0
-        var comY = 0.0
-        var mass = this.getMass()
-
-        this.parts.forEach(function(part) {
-            comX += part.getX() * part.mass / mass
-            comY += part.getY() * part.mass / mass
+        return this._constructPart({
+            pos: cc.p(x, y),
+            size: cc.size(rss.chair.width.back, rss.chair.height.back),
+            mass: rss.chair.mass.back
         })
-
-        return cc.p(comX, comY)
-    },
-
-    setPos: function(x, y) {
-        var com = this.getPos()
-        var deltaX = x - com.x
-        var deltaY = y - com.y
-
-        this.parts.forEach(function(part) {
-            var x = part.getPos().x + deltaX
-            var y = part.getPos().y + deltaY
-            part.setPos(x, y)
-        })
-    },
-
-    getVel: function() {
-        var vComX = 0.0
-        var vComY = 0.0
-        var mass = this.getMass()
-
-        this.parts.forEach(function(part) {
-            var vel = part.getVel()
-            vComX += vel.x * part.mass / mass
-            vComY += vel.y * part.mass / mass
-        })
-
-        return cc.p(vComX, vComY)
-    },
-
-    setVel: function(vx, vy) {
-        this.parts.forEach(function(part) {
-            part.setVel(vx, vy)
-        })
-    },
-
-    getMass: function() {
-        mass = 0.0
-        this.parts.forEach(function(part) {
-            mass += part.mass
-        })
-        return mass
     }
 })
+
+Chair.create = function(args) {
+    return new Chair(args).init()
+}

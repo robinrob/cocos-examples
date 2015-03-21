@@ -1,4 +1,4 @@
-rss.CircBody = rss._DynamicBody.extend({
+rss.CircPhysicsSprite = rss._DynamicBody.extend({
     ctor: function(args) {
         args.size = cc.size(args.radius * 2, args.radius * 2)
         this._super(args)
@@ -27,8 +27,10 @@ rss.CircBody = rss._DynamicBody.extend({
 
         this.body = new cp.Body(this.mass, cp.momentForCircle(this.mass, 0, this.radius, cp.v(0,0)))
         this.body.setPos(this.startPos)
+        this.space.addBody(this.body)
 
         this.shape = new cp.CircleShape(this.body, this.radius, cp.v(0, 0))
+        this.space.addShape(this.shape)
     },
 
     initBox2D: function() {
@@ -79,6 +81,6 @@ rss.CircBody = rss._DynamicBody.extend({
     }
 })
 
-rss.CircBody.create = function(args) {
-    return new rss.CircBody(args).init()
+rss.CircPhysicsSprite.create = function(args) {
+    return new rss.CircPhysicsSprite(args).init()
 }

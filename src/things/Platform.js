@@ -1,33 +1,32 @@
-var Platform = cc.Node.extend({
-        ctor:function(p1, p2, thickness, space) {
+var Platform = rss._StaticBody.extend({
+        ctor:function(args) {
             cc.log("Platform.ctor ...")
-            this._super()
+            args.size = cc.size()
+            this._super(args)
 
-            this.space = space
+            this.p1 = args.p1
+            this.p2 = args.p2
 
-            this.p1 = p1
-            this.p2 = p2
-
-            this.v1 = rss.toV(p1)
-            this.v2 = rss.toV(p2)
-
-            this.thickness = thickness
-
-            this.init()
+            this.thickness = args.thickness
         },
 
         init:function() {
             cc.log("Platform.init ...")
             this._super()
 
-            this.shape = new cp.SegmentShape(this.space.staticBody, this.v1, this.v2, this.thickness)
+            this.body = new cp.StaticBody()
+            this.shape = new cp.SegmentShape(this.body, this.p1, this.p2, this.thickness)
             this.shape.setElasticity(1.0)
-            this.space.addStaticShape(this.shape)
 
             var blue = cc.color(0, 0, 255, 255)
-
             this._draw = new cc.DrawNode()
             this._draw.drawSegment(this.p1, this.p2, this.thickness, blue)
             this.addChild(this._draw)
+
+            return this
         }
 })
+
+Platform.create = function(args) {
+    return new Platform(args).init()
+}

@@ -1,23 +1,27 @@
 rss._DynamicBody = rss._StaticBody.extend({
-    ctor: function(pos, size, mass, space) {
-        this._super(pos, size, space)
+    ctor: function(args) {
+        this._super(args)
 
-        this.mass = mass
-
-        this.startV = cp.v(pos.x, pos.y)
+        this.mass = args.mass
     },
 
     init: function() {
         this._super()
     },
 
+    addToSpace: function(space) {
+        space.addBody(this.body)
+        space.addShape(this.shape)
+        return this
+    },
+
     getVel: function() {
         switch(rss.physics) {
             case rss.chipmunk:
-                this.body.getVel()
+                return this.body.getVel()
                 break;
             case rss.box2D:
-                this.body.GetVelocity()
+                return this.body.GetVelocity()
                 break;
         }
     },
@@ -33,10 +37,6 @@ rss._DynamicBody = rss._StaticBody.extend({
         }
     },
 
-    applyDeltaV: function(dvx, dvy) {
-        this.body.applyImpulse(cp.v(dvx, dvy), cp.v(0, 0))
-    },
-
     getV: function() {
         return rss.toV(this.getPos())
     },
@@ -45,28 +45,36 @@ rss._DynamicBody = rss._StaticBody.extend({
         return this.body.m
     },
 
-    applyForce: function (fx, fy, rx, ry) {
-        this.body.applyForce(cp.v(fx, fy), cp.v(rx, ry))
+    setAngle: function(deg) {
+        this.body.setAngle(cc.degreesToRadians(deg))
     },
 
-    applyImpulse: function (ix, iy) {
-        this.body.applyImpulse(cp.v(ix, iy), cp.v(0, 0))
+    getAngVel: function() {
+        return this.body.w
     },
 
-    applyImpulseAt: function (ix, iy, rx, ry) {
-        this.body.applyImpulse(cp.v(ix, iy), cp.v(rx, ry))
+    setAngVel: function(w) {
+        this.body.w = w
+    },
+
+    applyForce: function (f) {
+        this.body.applyForce(f, cp.v(0, 0))
+    },
+
+    applyForceAt: function (f, r) {
+        this.body.applyForce(f, r)
+    },
+
+    applyImpulse: function (i) {
+        this.body.applyImpulse(i, cp.v(0, 0))
+    },
+
+    applyImpulseAt: function (i, r) {
+        this.body.applyImpulse(i, r)
     },
 
     applyAxialImpulse: function(impulse) {
         this.applyImpulse(impulse * this.body.rot.x, impulse * this.body.rot.y)
-    },
-
-    getAngle: function() {
-        return -1 * cc.radiansToDegrees(this.body.a) % 360
-    },
-
-    setAngle: function(angle) {
-        this.body.setAngle(-1 * cc.degreesToRadians(angle))
     },
 
     upInput: function() {
@@ -89,7 +97,7 @@ rss._DynamicBody = rss._StaticBody.extend({
         return this.rightInput() || this.leftInput()
     },
 
-    directionInput: function() {
+    input: function() {
         return this.upInput() || this.downInput() || this.rightInput() || this.leftInput()
     }
 })

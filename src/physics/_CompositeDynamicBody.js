@@ -1,6 +1,6 @@
 rss._CompositeDynamicBody = rss._CompositeStaticBody.extend({
-    ctor: function(pos, size, mass, space) {
-        this._super(pos, size, space)
+    ctor: function(args) {
+        this._super(args)
     },
 
     init: function() {
@@ -12,9 +12,9 @@ rss._CompositeDynamicBody = rss._CompositeStaticBody.extend({
         var comY = 0.0
         var mass = this.getMass()
 
-        this.comps.forEach(function(limb) {
-            comX += limb.getX() * limb.mass / mass
-            comY += limb.getY() * limb.mass / mass
+        this.comps.forEach(function(comp) {
+            comX += comp.getX() * comp.getMass() / mass
+            comY += comp.getY() * comp.getMass() / mass
         })
 
         return cc.p(comX, comY)
@@ -25,10 +25,10 @@ rss._CompositeDynamicBody = rss._CompositeStaticBody.extend({
         var deltaX = x - com.x
         var deltaY = y - com.y
 
-        this.comps.forEach(function(limb) {
-            var x = limb.getPos().x + deltaX
-            var y = limb.getPos().y + deltaY
-            limb.setPos(x, y)
+        this.comps.forEach(function(comp) {
+            var x = comp.getPos().x + deltaX
+            var y = comp.getPos().y + deltaY
+            comp.setPos(x, y)
         })
     },
 
@@ -37,26 +37,32 @@ rss._CompositeDynamicBody = rss._CompositeStaticBody.extend({
         var vComY = 0.0
         var mass = this.getMass()
 
-        this.comps.forEach(function(limb) {
-            var vel = limb.getVel()
-            vComX += vel.x * limb.mass / mass
-            vComY += vel.y * limb.mass / mass
+        this.comps.forEach(function(comp) {
+            var vel = comp.getVel()
+            vComX += vel.x * comp.getMass() / mass
+            vComY += vel.y * comp.getMass() / mass
         })
 
-        return cc.p(vComX, vComY)
+        return cp.v(vComX, vComY)
     },
 
     setVel: function(vx, vy) {
-        this.comps.forEach(function(limb) {
-            limb.setVel(vx, vy)
+        this.comps.forEach(function(comp) {
+            comp.setVel(vx, vy)
         })
     },
 
     getMass: function() {
-        mass = 0.0
-        this.comps.forEach(function(limb) {
-            mass += limb.mass
+        var mass = 0.0
+        this.comps.forEach(function(comp) {
+            mass += comp.getMass()
         })
         return mass
+    },
+
+    applyImpulse: function(i) {
+        this.comps.forEach(function(comp) {
+            comp.applyImpulse(i)
+        })
     }
 })

@@ -1,8 +1,6 @@
 rss.RectBody = rss._DynamicBody.extend({
-    ctor: function(pos, size, mass, space) {
-        this._super(pos, size, mass, space)
-
-        this.init()
+    ctor: function(args) {
+        this._super(args)
     },
 
     init: function() {
@@ -10,11 +8,15 @@ rss.RectBody = rss._DynamicBody.extend({
 
         // body
         this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this.size.width, this.size.height))
-        this.space.addBody(this.body)
         this.body.setPos(this.getStartPos())
 
         // shape
         this.shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
-        this.space.addShape(this.shape)
+
+        return this
     }
 })
+
+rss.RectBody.create = function(args) {
+    return new rss.RectBody(args).init()
+}

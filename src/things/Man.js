@@ -1,19 +1,13 @@
-var Man = cc.Node.extend({
-    ctor: function(position, space) {
-        this._super()
-
-        this.startPos = position
-        this.origin = this.startPos
-        this.space = space
-
-        this.init()
+var Man = rss._CompositeDynamicBody.extend({
+    ctor: function(args) {
+        this._super(args)
     },
 
     init: function() {
         cc.log("rss.man.init ...")
         this._super()
 
-        this.limbs = []
+        this.state = rss.player.state.jumpDown
 
         // legs
         var leftLeg = this._constructLeg(
@@ -53,11 +47,13 @@ var Man = cc.Node.extend({
         this.joinLimbs(rightArm, torso)
         this.joinLimbs(leftLeg, torso)
         this.joinLimbs(rightLeg, torso)
+
+        this.setCollisionType(rss.tag.player)
+        return this
     },
 
     joinLimbs: function(limb1, limb2) {
         rss.pivotJoint(this.space, limb1, limb2)
-        //rss.pinJoint(this.space, limb1, limb2)
     },
 
     worldX: function(x) {
@@ -81,18 +77,22 @@ var Man = cc.Node.extend({
         )
         limb.setColor(color)
         limb.setJointP(cc.p(0, size.height / 2))
-        this.limbs.push(limb)
+
+        limb.shape.setCollisionType(rss.tag.man);
+
+        this.addComp(limb)
 
         return limb
     },
 
     _constructLeg: function(x, y) {
-        return this._constructLimb(
+        var limb = this._constructLimb(
             cc.p(x, y),
             cc.size(rss.man.width.leg, rss.man.height.leg),
             rss.man.mass.leg,
             rss.colors.green
         )
+        return limb
     },
 
     _constructArm: function(x, y) {
@@ -120,72 +120,9 @@ var Man = cc.Node.extend({
             rss.man.mass.head,
             rss.colors.pink
         )
-    },
-
-    getPos: function() {
-        var comX = 0.0
-        var comY = 0.0
-        var mass = this.getMass()
-
-        this.limbs.forEach(function(limb) {
-            comX += limb.getX() * limb.mass / mass
-            comY += limb.getY() * limb.mass / mass
-        })
-
-        return cc.p(comX, comY)
-    },
-
-    setPos: function(x, y) {
-        var com = this.getPos()
-        var deltaX = x - com.x
-        var deltaY = y - com.y
-
-        this.limbs.forEach(function(limb) {
-            var x = limb.getPos().x + deltaX
-            var y = limb.getPos().y + deltaY
-            limb.setPos(x, y)
-        })
-    },
-
-    getVel: function() {
-        var vComX = 0.0
-        var vComY = 0.0
-        var mass = this.getMass()
-
-        this.limbs.forEach(function(limb) {
-            var vel = limb.getVel()
-            vComX += vel.x * limb.mass / mass
-            vComY += vel.y * limb.mass / mass
-        })
-
-        return cc.p(vComX, vComY)
-    },
-
-    setVel: function(vx, vy) {
-        this.limbs.forEach(function(limb) {
-            limb.setVel(vx, vy)
-        })
-    },
-
-    getMass: function() {
-        mass = 0.0
-        this.limbs.forEach(function(limb) {
-            mass += limb.mass
-        })
-        return mass
-    }, 
-    
-    update: function() {
-        var p = this.getPos()
-        var winSize = cc.director.getWinSize()
-        var x = p.x
-        var y = p.y
-
-        if (x > winSize.width) {
-            this.setPos(0, y)
-        }
-        else if (x < 0) {
-            this.setPos(winSize.width, y)
-        }
     }
 })
+
+Man.create = function(args) {
+    return new Man(args).init()
+}

@@ -19,10 +19,13 @@
         "src/control/Steerable.js",
 
         "src/physics/_StaticBody.js",
+        "src/physics/_CompositeStaticBody.js",
+        "src/physics/_CompositeDynamicBody.js",
         "src/physics/_DynamicBody.js",
         "src/physics/RectBody.js",
         "src/physics/StaticRectBody.js",
         "src/physics/CircBody.js",
+        "src/physics/RectPhysicsSprite.js",
 
         "src/things/Box.js",
         "src/things/Ball.js",

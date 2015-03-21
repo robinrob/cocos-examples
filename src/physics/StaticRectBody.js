@@ -1,11 +1,10 @@
 rss.StaticRectBody = rss._StaticBody.extend({
-    ctor: function(pos, size, space) {
-        this._super(pos, size, space)
-
-        this.init()
+    ctor: function(args) {
+        this._super(args)
     },
 
     init: function() {
+        cc.log("StaticRectBody.init ...")
         this._super()
 
         if (rss.physics == rss.chipmunk) {
@@ -14,16 +13,18 @@ rss.StaticRectBody = rss._StaticBody.extend({
         else if (rss.physics == rss.box2D) {
             this.initBox2D()
         }
+
+        return this
     },
     
     initChipmunk: function() {
+        cc.log("StaticRectBody.initChipmunk ...")
         // body
         this.body = new cp.StaticBody()
         this.body.setPos(this.getStartPos())
 
         // shape
-        var shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
-        this.shape = this.space.addStaticShape(shape)
+        this.shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
     },
     
     initBox2D: function() {
@@ -52,3 +53,7 @@ rss.StaticRectBody = rss._StaticBody.extend({
         body.CreateFixture(fixtureDef);
     }
 })
+
+rss.StaticRectBody.create = function(args) {
+    return new rss.StaticRectBody(args).init()
+}

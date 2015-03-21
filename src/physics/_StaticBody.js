@@ -1,21 +1,24 @@
 rss._StaticBody = cc.Node.extend({
-    ctor: function(pos, size, space) {
+    ctor: function(args) {
         this._super()
 
-        this.startPos = pos
+        this.startPos = args.pos
+        this.origin = args.pos
         this.jointPs = [cc.p()]
 
-        this.size = size
-        this.width = size.width
-        this.height = size.height
-
-        this.space = space
-
-        this.globalJointCoords = false
+        this.size = args.size
+        this.width = args.size.width
+        this.height = args.size.height
     },
 
     init: function() {
+        cc.log("_StaticBody.init ...")
         this._super()
+    },
+
+    addToSpace: function(space) {
+        space.addStaticShape(this.shape)
+        return this
     },
 
     getStartPos: function() {
@@ -92,5 +95,25 @@ rss._StaticBody = cc.Node.extend({
 
     setColor: function(color) {
         this._color = color
+    },
+
+    getState: function() {
+        return this.state
+    },
+
+    setState: function(state) {
+        this.state = state
+    },
+
+    setElasticity: function(e) {
+        this.shape.setElasticity(e)
+    },
+
+    setFriction: function(f) {
+        this.shape.setFriction(f)
+    },
+
+    setSensor: function(bool) {
+        this.shape.setSensor(bool)
     }
 })
