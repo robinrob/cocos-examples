@@ -25,6 +25,8 @@
         "src/physics/RectBody.js",
         "src/physics/StaticRectBody.js",
         "src/physics/CircBody.js",
+        "src/physics/ConeBody.js",
+        "src/physics/CircSegmentBody.js",
         "src/physics/RectPhysicsSprite.js",
         "src/physics/PolyBody.js",
 

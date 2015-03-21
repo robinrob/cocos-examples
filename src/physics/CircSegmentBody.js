@@ -1,11 +1,13 @@
-rss.PolyBody = rss._DynamicBody.extend({
+rss.CircSegmentBody = rss._DynamicBody.extend({
     ctor: function(args) {
-        args.size = cc.size(args.radius * 2, args.radius + args.coneLength)
+        args.size = cc.size(args.radius, args.radius)
         this._super(args)
 
         this.radius = args.radius
-        this.coneLength = args.coneLength
+        this.angle = args.angle
         this.segments = args.segments
+        this.rotation = args.rotation
+        this.extension = args.extension
     },
 
     init: function() {
@@ -20,16 +22,15 @@ rss.PolyBody = rss._DynamicBody.extend({
 
         var verts = []
 
-        var p = cc.p(pos.x, pos.y - this.coneLength)
+        var p = cc.p(pos.x, pos.y - this.radius)
+        verts.push(p.x, p.y)
 
-        for (var a = 0; a < 180; a += 180 / this.segments) {
-            var x = pos.x + (this.radius * Math.cos(cc.degreesToRadians(a + 180)))
+        for (var a = 0; a < this.angle; a += this.angle / this.segments) {
+            var x = pos.x + (this.radius * Math.cos(cc.degreesToRadians(a + 180 + this.rotation)))
             verts.push(x)
-            var y = pos.y + this.radius * Math.sin(cc.degreesToRadians(a))
+            var y = pos.y + this.radius + this.extension * Math.sin(cc.degreesToRadians(a + this.rotation))
             verts.push(y)
         }
-
-        verts.push(p.x, p.y)
 
         for (var i = 0; i < verts.length; i += 2) {
             cc.log("x: " + verts[i])
@@ -43,6 +44,6 @@ rss.PolyBody = rss._DynamicBody.extend({
     }
 })
 
-rss.PolyBody.create = function(args) {
-    return new rss.PolyBody(args).init()
+rss.CircSegmentBody.create = function(args) {
+    return new rss.CircSegmentBody(args).init()
 }

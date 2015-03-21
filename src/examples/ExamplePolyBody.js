@@ -20,7 +20,23 @@ var ExamplePolyBody = {
         init: function () {
             this._super()
 
-            var poly = rss.PolyBody.create({pos: cc.p(300, 300), radius: 50, coneLength: 100, mass: 10}).addToSpace(this.space)
+            //rss.ConeBody.create({
+            //    pos: cc.p(300, 300),
+            //    radius: 50,
+            //    coneLength: 100,
+            //    segments: 20,
+            //    mass: 10
+            //}).addToSpace(this.space)
+
+            rss.CircSegmentBody.create({
+                pos: cc.p(300, 300),
+                radius: 200,
+                angle: 10,
+                segments: 20,
+                rotation: 90,
+                extension: 20,
+                mass: 10
+            }).addToSpace(this.space)
         },
 
         update: function() {
@@ -41,7 +57,7 @@ var ExamplePolyBody = {
 
             this.addChild(this.layer);
 
-            this.scheduleUpdate();
+            //this.scheduleUpdate();
         },
 
         update: function(dt) {
