@@ -21,22 +21,17 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
 
         var verts = []
 
-        var p = cc.p(pos.x, pos.y)
-        verts.push(p.x, p.y)
+        verts.push(pos.x, pos.y)
 
         for (var a = 0; a <= this.angle; a += this.angle / this.segments) {
+            rss.logP(cc.p(x, y))
             var x = pos.x + (this.radius * Math.cos(cc.degreesToRadians(a + 180 + this.rotation)))
             verts.push(x)
             var y = pos.y + this.radius * Math.sin(cc.degreesToRadians(a + this.rotation))
             verts.push(y)
         }
 
-        for (var i = 0; i < verts.length; i += 2) {
-            cc.log("x: " + verts[i])
-            cc.log("y: " + verts[i+1])
-        }
-
-        this.shape = new cp.PolyShape(this.body, verts, cp.v(0, 0))
+        this.shape = new cp.PolyShape(this.body, verts, cp.v(-1 * pos.x, -1 * pos.y))
 
         return this
     }
