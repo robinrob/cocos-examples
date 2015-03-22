@@ -7,7 +7,6 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         this.angle = args.angle
         this.segments = args.segments
         this.rotation = args.rotation
-        this.extension = args.extension
     },
 
     init: function() {
@@ -22,13 +21,13 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
 
         var verts = []
 
-        var p = cc.p(pos.x, pos.y - this.radius)
+        var p = cc.p(pos.x, pos.y)
         verts.push(p.x, p.y)
 
-        for (var a = 0; a < this.angle; a += this.angle / this.segments) {
+        for (var a = 0; a <= this.angle; a += this.angle / this.segments) {
             var x = pos.x + (this.radius * Math.cos(cc.degreesToRadians(a + 180 + this.rotation)))
             verts.push(x)
-            var y = pos.y + this.radius + this.extension * Math.sin(cc.degreesToRadians(a + this.rotation))
+            var y = pos.y + this.radius * Math.sin(cc.degreesToRadians(a + this.rotation))
             verts.push(y)
         }
 

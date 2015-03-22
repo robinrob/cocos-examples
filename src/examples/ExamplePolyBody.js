@@ -31,10 +31,9 @@ var ExamplePolyBody = {
             rss.CircSegmentBody.create({
                 pos: cc.p(300, 300),
                 radius: 200,
-                angle: 10,
+                angle: 30,
                 segments: 20,
-                rotation: 90,
-                extension: 20,
+                rotation: 120,
                 mass: 10
             }).addToSpace(this.space)
         },
@@ -57,7 +56,7 @@ var ExamplePolyBody = {
 
             this.addChild(this.layer);
 
-            //this.scheduleUpdate();
+            this.scheduleUpdate();
         },
 
         update: function(dt) {
