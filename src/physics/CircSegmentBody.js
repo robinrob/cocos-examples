@@ -36,7 +36,6 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
             cc.log("y: " + verts[i+1])
         }
 
-        //this.shape = new cp.PolyShape(this.body, verts, cp.v(0, 0))
         this.shape = new cp.PolyShape(this.body, verts, cp.v(0, 0))
 
         return this
