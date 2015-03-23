@@ -18,6 +18,8 @@ var MenuLayer = cc.Layer.extend({
         menu.alignItemsVertically()
         menu.setPosition(centerpos);
         this.addChild(menu);
+
+        return this
     },
 
     // Add new example scenes here
@@ -40,3 +42,7 @@ var MenuLayer = cc.Layer.extend({
         return items
     }
 });
+
+MenuLayer.create = function() {
+    return new MenuLayer().init()
+}

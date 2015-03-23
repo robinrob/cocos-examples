@@ -6,12 +6,24 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         this.radius = args.radius
         this.angle = args.angle
         this.segments = args.segments
-        this.rotation = args.rotation
+        this.rotation = args.rotation - this.angle
+        this.length = args.length || 0.5
     },
 
     init: function() {
         this._super()
 
+        if (this.angle > 0) {
+            this.initMe()
+        }
+        else {
+            cc.log("angle should be greater than zero!")
+        }
+
+        return this
+    },
+
+    initMe: function() {
         // body
         this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this.size.width, this.size.height))
         this.body.setPos(this.getStartPos())
@@ -21,19 +33,30 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
 
         var verts = []
 
-        verts.push(pos.x, pos.y)
+        verts.push(
+            this.radius * (1 - this.length) * Math.cos(cc.degreesToRadians(this.rotation + this.angle)),
+            this.radius * (1 - this.length) * Math.sin(cc.degreesToRadians(this.rotation + this.angle))
+        )
 
-        for (var a = 0; a <= this.angle; a += this.angle / this.segments) {
-            rss.logP(cc.p(x, y))
-            var x = pos.x + (this.radius * Math.cos(cc.degreesToRadians(a + 180 + this.rotation)))
-            verts.push(x)
-            var y = pos.y + this.radius * Math.sin(cc.degreesToRadians(a + this.rotation))
-            verts.push(y)
+        var gap = this.angle / this.segments
+        for (var a = this.angle; a >= 0; a -= gap) {
+            verts.push(
+                this.radius * Math.cos(cc.degreesToRadians(a + this.rotation)),
+                this.radius * Math.sin(cc.degreesToRadians(a + this.rotation))
+            )
         }
 
-        this.shape = new cp.PolyShape(this.body, verts, cp.v(-1 * pos.x, -1 * pos.y))
+        verts.push(
+            this.radius * (1 - this.length) * Math.cos(cc.degreesToRadians(this.rotation)),
+            this.radius * (1 - this.length) * Math.sin(cc.degreesToRadians(this.rotation))
+        )
 
-        return this
+        this.shape = new cp.PolyShape(this.body, verts, cp.v(0, 0))
+
+        this.setJointP(cc.p(
+            this.radius * (1 - this.length / 2) * Math.cos(cc.degreesToRadians(this.rotation + this.angle / 2)),
+            this.radius * (1 - this.length / 2) * Math.sin(cc.degreesToRadians(this.rotation + this.angle / 2))
+        ))
     }
 })
 
