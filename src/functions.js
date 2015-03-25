@@ -1,5 +1,12 @@
 var rss = rss || {}
 
+cp.Space.prototype.addConstraints = function(constraints) {
+    var that = this
+    constraints.forEach(function(constr) {
+        that.addConstraint(constr)
+    })
+}
+
 cc.Node.prototype.seq = function() {
     var action = arguments.length > 1 ? cc.Sequence.create.apply(cc.Sequence, arguments) : arguments[0]
     this.runAction(action)
@@ -11,6 +18,8 @@ cc.Node.prototype.spawn = function(x, y) {
     this.runAction(action)
     return action
 }
+
+cc.Node.prototype.r = {}
 
 cp.Vect.prototype.toP = function() {
     return cc.p(this.x, this.y)
@@ -59,6 +68,23 @@ rss.toV = function(p) {
     return cp.v(p.x, p.y)
 }
 
+rss.vertsToPs = function(verts, offset) {
+    offset = offset || cc.p()
+    var vertPs = []
+    for (var i = 0; i < verts.length - 1; i+=2) {
+        vertPs.push(cc.p(verts[i] + offset.x, verts[i+1] + offset.y))
+    }
+    return vertPs
+}
+
+rss.offsetVerts = function(verts1, offset) {
+    var verts = []
+    verts1.forEach(function(v) {
+        verts.push(cc.p(v.x + offset.x, v.y + offset.y))
+    })
+    return verts
+}
+
 rss.sum = function(obj) {
     var total = 0
     for (var i in obj) {
@@ -96,7 +122,7 @@ rss.subY = function(obj, dy) {
 }
 
 rss.mult = function(p, m) {
-    return cp.v(p.x * m, p.y * m)
+    return cc.p(p.x * m, p.y * m)
 }
 
 rss.addW = function(s, dw) {
@@ -144,37 +170,80 @@ rss.toDeg = function(rad) {
 }
 
 rss.pinJoint = function(obj1, obj2) {
-    return new cp.PinJoint(obj1.body, obj2.body, rss.toV(obj1.getJointP()), rss.toV(obj2.getJointP()))
+    return [new cp.PinJoint(obj1.body, obj2.body, rss.toV(obj1.getJointP()), rss.toV(obj2.getJointP()))]
 }
 
 rss.pivotJoint = function(obj1, obj2) {
-    return new cp.PivotJoint(obj1.body, obj2.body, obj1.getJointP(true))
+    return [new cp.PivotJoint(obj1.body, obj2.body, obj1.getJointP(true))]
 }
 
 rss.gearJoint = function(obj1, obj2, phase, ratio) {
-    return new cp.GearJoint(obj1.body, obj2.body, phase, ratio)
+    return [new cp.GearJoint(obj1.body, obj2.body, phase, ratio)]
 }
 
 rss.slideJoint = function(obj1, obj2) {
-    return new cp.SlideJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())
+    return [new cp.SlideJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())]
 }
 
 rss.grooveJoint = function(obj1, obj2) {
-    return new cp.GrooveJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())
+    return [new cp.GrooveJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())]
 }
 
 rss.ratchetJoint = function(obj1, obj2, offset, phase) {
-    return new cp.RatchetJoint(obj1.body, obj2.body, offset, phase)
+    return [new cp.RatchetJoint(obj1.body, obj2.body, offset, phase)]
 }
 
-rss.fixedJoint = function(obj1, obj2) {
-    var joints = []
-    joints.push(rss.gearJoint(obj1, obj2, 0.0, 1.0))
-    joints.push(rss.pivotJoint(obj1, obj2))
-    return joints
+rss.fixedJoint = function(obj1, obj2, angle) {
+    var angle = angle || 0.0
+    return rss.gearJoint(obj1, obj2, cc.degreesToRadians(angle), 1.0).concat(rss.pivotJoint(obj1, obj2))
+}
+
+rss.size = function() {
+    return cc.director.getWinSize()
+}
+
+rss.width = function() {
+    return cc.director.getWinSize().width
+}
+
+rss.height = function() {
+    return cc.director.getWinSize().height
+}
+
+rss.top = function() {
+    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height)
+}
+
+rss.bottom = function() {
+    return cc.p(cc.director.getWinSize().width / 2, 0)
+}
+
+rss.left = function() {
+    return cc.p(0, cc.director.getWinSize().height / 2)
+}
+
+rss.right = function() {
+    return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height / 2)
+}
+
+rss.center = function() {
+    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height / 2)
+}
+
+/* Global game controls */
+rss.pause = function() {
+    rss.keys[cc.KEY.p] = true
 }
 
 /* Control inputs */
+rss.pauseInput = function() {
+    return rss.keys[cc.KEY.p]
+}
+
+rss.restartInput = function() {
+    return rss.keys[cc.KEY.r]
+}
+
 rss.upInput = function() {
     return rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]
 }

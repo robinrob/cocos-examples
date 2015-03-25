@@ -4,6 +4,5 @@ var MenuScene = cc.Scene.extend({
         this._super();
 
         this.addChild(MenuLayer.create());
-        this.addChild(StatsLayer.create())
     }
 });
