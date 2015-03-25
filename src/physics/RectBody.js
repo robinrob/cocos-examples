@@ -1,6 +1,10 @@
 rss.RectBody = rss._DynamicBody.extend({
     ctor: function(args) {
         this._super(args)
+
+        if (args.offset) {
+            this.size = cc.size(this.size.width + args.offset.x, this.size.height + args.offset.y)
+        }
     },
 
     init: function() {

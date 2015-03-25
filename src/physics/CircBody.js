@@ -3,6 +3,7 @@ rss.CircBody = rss._DynamicBody.extend({
         args.size = cc.size(args.radius * 2, args.radius * 2)
         this._super(args)
 
+        this.offset = args.offset || 0
         this.r.radius = args.radius
     },
 
@@ -58,6 +59,14 @@ rss.CircBody = rss._DynamicBody.extend({
             cp.v(f, 0),
             cp.v(this.getX(), this.getY() + this.r.radius)
         )
+    },
+
+    getAngle: function() {
+        return cc.radiansToDegrees(this.body.a) - this.offset
+    },
+
+    getTop: function() {
+        return rss.addY(this.getPos(), this.radius)
     },
 
     getSurfaceVel: function() {

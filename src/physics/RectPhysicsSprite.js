@@ -1,12 +1,10 @@
 rss.RectPhysicsSprite = rss.RectBody.extend({
     ctor: function(args) {
-        switch(typeof args.spriteCfg) {
-            case "string":
-                this.sprite = new cc.PhysicsSprite(args.spriteCfg);
-                break
-            case "object":
-                this.initAnimSprite(args.spriteCfg)
-                break
+        if (args.spriteCfg.pList) {
+            this.constructAnimSprite(args.spriteCfg)
+        }
+        else {
+            this.sprite = new cc.PhysicsSprite(args.spriteCfg.image)
         }
         args.size = this.sprite.getContentSize()
 
@@ -22,7 +20,7 @@ rss.RectPhysicsSprite = rss.RectBody.extend({
         return this
     },
 
-    initAnimSprite: function(spriteCfg) {
+    constructAnimSprite: function(spriteCfg) {
         cc.spriteFrameCache.addSpriteFrames(spriteCfg.pList);
         var spriteSheet = new cc.SpriteBatchNode(spriteCfg.spriteSheet)
         this.sprite = new cc.PhysicsSprite("#" + spriteCfg.name + "0.png");

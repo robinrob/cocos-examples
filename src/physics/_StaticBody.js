@@ -117,5 +117,9 @@ rss._StaticBody = cc.Node.extend({
 
     setSensor: function(bool) {
         this.r.shape.setSensor(bool)
+    },
+
+    setCollisionType: function(type) {
+        this.r.shape.setCollisionType(type)
     }
 })

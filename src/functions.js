@@ -168,27 +168,27 @@ rss.toDeg = function(rad) {
 }
 
 rss.pinJoint = function(obj1, obj2) {
-    return [new cp.PinJoint(obj1.body, obj2.body, rss.toV(obj1.getJointP()), rss.toV(obj2.getJointP()))]
+    return [new cp.PinJoint(obj1.r.body, obj2.r.body, rss.toV(obj1.getJointP()), rss.toV(obj2.getJointP()))]
 }
 
 rss.pivotJoint = function(obj1, obj2) {
-    return [new cp.PivotJoint(obj1.body, obj2.body, obj1.getJointP(true))]
+    return [new cp.PivotJoint(obj1.r.body, obj2.r.body, obj1.getJointP(true))]
 }
 
 rss.gearJoint = function(obj1, obj2, phase, ratio) {
-    return [new cp.GearJoint(obj1.body, obj2.body, phase, ratio)]
+    return [new cp.GearJoint(obj1.r.body, obj2.r.body, phase, ratio)]
 }
 
 rss.slideJoint = function(obj1, obj2) {
-    return [new cp.SlideJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())]
+    return [new cp.SlideJoint(obj1.r.body, obj2.r.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())]
 }
 
 rss.grooveJoint = function(obj1, obj2) {
-    return [new cp.GrooveJoint(obj1.body, obj2.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())]
+    return [new cp.GrooveJoint(obj1.r.body, obj2.r.body, obj1.getJointPs()[0], obj1.getJointPs()[1], obj2.getJointP())]
 }
 
 rss.ratchetJoint = function(obj1, obj2, offset, phase) {
-    return [new cp.RatchetJoint(obj1.body, obj2.body, offset, phase)]
+    return [new cp.RatchetJoint(obj1.r.body, obj2.r.body, offset, phase)]
 }
 
 rss.fixedJoint = function(obj1, obj2, angle) {
