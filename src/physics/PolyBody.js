@@ -3,29 +3,29 @@ rss.PolyBody = rss._DynamicBody.extend({
         args.size = cc.size(args.radius * 2, args.radius + args.coneLength)
         this._super(args)
 
-        this.radius = args.radius
+        this.r.radius = args.radius
         this.coneLength = args.coneLength
-        this.segments = args.segments
+        this.r.segments = args.segments
     },
 
     init: function() {
         this._super()
 
         // body
-        this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this.size.width, this.size.height))
-        this.body.setPos(this.getStartPos())
+        this.r.body = new cp.Body(this.r.mass, cp.momentForBox(this.r.mass, this.r.size.width, this.r.size.height))
+        this.r.body.setPos(this.getStartPos())
 
         // shape
-        var pos = this.startPos
+        var pos = this.r.startPos
 
         var verts = []
 
         var p = cc.p(pos.x, pos.y - this.coneLength)
 
-        for (var a = 0; a < 180; a += 180 / this.segments) {
-            var x = pos.x + (this.radius * Math.cos(cc.degreesToRadians(a + 180)))
+        for (var a = 0; a < 180; a += 180 / this.r.segments) {
+            var x = pos.x + (this.r.radius * Math.cos(cc.degreesToRadians(a + 180)))
             verts.push(x)
-            var y = pos.y + this.radius * Math.sin(cc.degreesToRadians(a))
+            var y = pos.y + this.r.radius * Math.sin(cc.degreesToRadians(a))
             verts.push(y)
         }
 
@@ -36,8 +36,8 @@ rss.PolyBody = rss._DynamicBody.extend({
             cc.log("y: " + verts[i+1])
         }
 
-        //this.shape = new cp.PolyShape(this.body, verts, cp.v(0, 0))
-        this.shape = new cp.PolyShape(this.body, verts, cp.v(0, 0))
+        //this.r.shape = new cp.PolyShape(this.r.body, verts, cp.v(0, 0))
+        this.r.shape = new cp.PolyShape(this.r.body, verts, cp.v(0, 0))
 
         return this
     }

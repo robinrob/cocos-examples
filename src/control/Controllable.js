@@ -8,11 +8,11 @@ var Controllable = cc.Node.extend({
     },
 
     applyDeltaV: function (dvx, dvy) {
-        this.body.applyImpulse(cp.v(dvx, dvy), cp.v(0, 0))
+        this.r.body.applyImpulse(cp.v(dvx, dvy), cp.v(0, 0))
     },
 
     update: function (dt) {
-        var p = this.body.getPos()
+        var p = this.r.body.getPos()
         var winSize = cc.director.getWinSize()
         var x = p.x
         var y = p.y

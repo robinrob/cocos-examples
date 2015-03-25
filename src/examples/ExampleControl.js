@@ -7,11 +7,11 @@ var ExampleControl = {
         ctor: function (space) {
             this._super();
 
-            this.space = space
+            this.r.space = space
 
             this.init()
 
-            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
@@ -21,11 +21,11 @@ var ExampleControl = {
             this._super()
 
             this.constructMan()
-            new Box(cc.p(), this.size, rss.man.height.total, this.space)
+            new Box(cc.p(), this.r.size, rss.man.height.total, this.r.space)
         },
 
         constructMan: function() {
-            this.controllee = new Man2(this.center, this.space)
+            this.controllee = new Man2(this.r.center, this.r.space)
             this.controllee.setVel(0, 0)
             this.addChild(this.controllee)
         },
@@ -53,20 +53,20 @@ var ExampleControl = {
             cc.log("Scene.onEnter ...")
             this._super();
 
-            this.space = new cp.Space();
-            this.space.gravity = cp.v(0, rss.exampleMan.gravity);
+            this.r.space = new cp.Space();
+            this.r.space.gravity = cp.v(0, rss.exampleMan.gravity);
 
-            this.layer = new ExampleControl.Layer(this.space);
+            this.r.layer = new ExampleControl.Layer(this.r.space);
 
-            this.addChild(this.layer);
+            this.addChild(this.r.layer);
 
             this.scheduleUpdate();
         },
 
         update: function(dt) {
-            this.space.step(dt);
+            this.r.space.step(dt);
 
-            this.layer.update(dt);
+            this.r.layer.update(dt);
         }
     })
 }

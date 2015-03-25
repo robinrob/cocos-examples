@@ -2,7 +2,7 @@ rss._DynamicBody = rss._StaticBody.extend({
     ctor: function(args) {
         this._super(args)
 
-        this.mass = args.mass
+        this.r.mass = args.mass
     },
 
     init: function() {
@@ -10,18 +10,18 @@ rss._DynamicBody = rss._StaticBody.extend({
     },
 
     addToSpace: function(space) {
-        space.addBody(this.body)
-        space.addShape(this.shape)
+        space.addBody(this.r.body)
+        space.addShape(this.r.shape)
         return this
     },
 
     getVel: function() {
         switch(rss.physics) {
             case rss.chipmunk:
-                return this.body.getVel()
+                return this.r.body.getVel()
                 break;
             case rss.box2D:
-                return this.body.GetVelocity()
+                return this.r.body.GetVelocity()
                 break;
         }
     },
@@ -29,10 +29,10 @@ rss._DynamicBody = rss._StaticBody.extend({
     setVel: function(vx, vy) {
         switch(rss.physics) {
             case rss.chipmunk:
-                this.body.setVel(cp.v(vx, vy))
+                this.r.body.setVel(cp.v(vx, vy))
                 break;
             case rss.box2D:
-                this.body.SetVelocity(vx, vy)
+                this.r.body.SetVelocity(vx, vy)
                 break;
         }
     },
@@ -42,38 +42,38 @@ rss._DynamicBody = rss._StaticBody.extend({
     },
 
     getMass: function() {
-        return this.body.m
+        return this.r.body.m
     },
 
     setAngle: function(deg) {
-        this.body.setAngle(cc.degreesToRadians(deg))
+        this.r.body.setAngle(cc.degreesToRadians(deg))
     },
 
     getAngVel: function() {
-        return this.body.w
+        return this.r.body.w
     },
 
     setAngVel: function(w) {
-        this.body.w = w
+        this.r.body.w = w
     },
 
     applyForce: function (f) {
-        this.body.applyForce(f, cp.v(0, 0))
+        this.r.body.applyForce(f, cp.v(0, 0))
     },
 
     applyForceAt: function (f, r) {
-        this.body.applyForce(f, r)
+        this.r.body.applyForce(f, r)
     },
 
     applyImpulse: function (i) {
-        this.body.applyImpulse(i, cp.v(0, 0))
+        this.r.body.applyImpulse(i, cp.v(0, 0))
     },
 
     applyImpulseAt: function (i, r) {
-        this.body.applyImpulse(i, r)
+        this.r.body.applyImpulse(i, r)
     },
 
     applyAxialImpulse: function(impulse) {
-        this.applyImpulse(impulse * this.body.rot.x, impulse * this.body.rot.y)
+        this.applyImpulse(impulse * this.r.body.rot.x, impulse * this.r.body.rot.y)
     }
 })

@@ -12,7 +12,7 @@ var ExampleDraw = {
             var draw = new cc.DrawNode()
             this.addChild(draw)
 
-            var pos = this.center
+            var pos = this.r.center
             
             var width = 50
             var height = 50
@@ -23,7 +23,7 @@ var ExampleDraw = {
                 cc.p(pos.x - width / 2, pos.y + height / 2),
                 cc.p(pos.x - width / 2, pos.y - height / 2)
             ]
-            draw.drawPoly(square, this._color, 0, this._color)
+            draw.drawPoly(square, this.r.color, 0, this.r.color)
 
 
             var pos1 = rss.add(pos, cc.p(-200, 0))
@@ -44,7 +44,7 @@ var ExampleDraw = {
                 cc.p(o +w, o+w*2+h), cc.p(o,o+w*2),             // top spike
                 cc.p(o -h, o+w)                                 // left spike
             ];
-            draw.drawPoly(star, this._color, 0, this._color)
+            draw.drawPoly(star, this.r.color, 0, this.r.color)
         }
     }),
 

@@ -20,11 +20,11 @@ rss.StaticRectBody = rss._StaticBody.extend({
     initChipmunk: function() {
         cc.log("StaticRectBody.initChipmunk ...")
         // body
-        this.body = new cp.StaticBody()
-        this.body.setPos(this.getStartPos())
+        this.r.body = new cp.StaticBody()
+        this.r.body.setPos(this.getStartPos())
 
         // shape
-        this.shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
+        this.r.shape = new cp.BoxShape(this.r.body, this.r.size.width, this.r.size.height)
     },
     
     initBox2D: function() {
@@ -49,7 +49,7 @@ rss.StaticRectBody = rss._StaticBody.extend({
             type: type,
             asset: userSprite
         }
-        this.body = world.CreateBody(bodyDef)
+        this.r.body = world.CreateBody(bodyDef)
         body.CreateFixture(fixtureDef);
     }
 })

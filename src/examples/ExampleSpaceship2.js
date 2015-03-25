@@ -7,14 +7,14 @@ var ExampleSpaceship2 = {
         ctor: function (space) {
             this._super();
 
-            this.space = space
+            this.r.space = space
 
             var winSize = cc.director.getWinSize()
-            this.center = cc.p(winSize.width / 2, winSize.height / 2)
+            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
-            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
@@ -23,13 +23,13 @@ var ExampleSpaceship2 = {
         init: function () {
             this._super()
 
-            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
 
             this.constructControllee()
         },
 
         constructControllee: function() {
-            this.controllee = new Spaceship2(this.center, rss.spaceship.mass, this.space)
+            this.controllee = new Spaceship2(this.r.center, rss.spaceship.mass, this.r.space)
             this.controllee.setVel(0, 0)
             this.controllee.setAngle(0)
             this.addChild(this.controllee)
@@ -58,21 +58,21 @@ var ExampleSpaceship2 = {
             cc.log("Scene.onEnter ...")
             this._super();
 
-            this.space = new cp.Space();
-            this.space.gravity = cp.v(0, rss.exampleSpaceship.gravity);
-            this.space.damping = 0.8
+            this.r.space = new cp.Space();
+            this.r.space.gravity = cp.v(0, rss.exampleSpaceship.gravity);
+            this.r.space.damping = 0.8
 
-            this.layer = new ExampleSpaceship2.Layer(this.space);
+            this.r.layer = new ExampleSpaceship2.Layer(this.r.space);
 
-            this.addChild(this.layer);
+            this.addChild(this.r.layer);
 
             this.scheduleUpdate();
         },
 
         update: function(dt) {
-            this.space.step(dt);
+            this.r.space.step(dt);
 
-            this.layer.update(dt);
+            this.r.layer.update(dt);
         }
     })
 }

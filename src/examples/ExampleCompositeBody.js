@@ -2,14 +2,14 @@ var ExampleCompositeBody = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
             this._super();
-            this.space = space
+            this.r.space = space
 
             var winSize = cc.director.getWinSize()
-            this.center = cc.p(winSize.width / 2, winSize.height / 2)
+            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
-            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
@@ -18,7 +18,7 @@ var ExampleCompositeBody = {
         init: function () {
             this._super()
 
-            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
 
             this.constructMan()
             this.constructPlatform()
@@ -26,16 +26,16 @@ var ExampleCompositeBody = {
         },
 
         constructMan: function() {
-            this.man = new Man(this.center, this.space)
+            this.man = new Man(this.r.center, this.r.space)
             this.man.setVel(0, 0)
         },
 
         constructPlatform: function() {
             var platform = new Platform(
-                cc.p(this.center.x - 20, this.center.y),
-                cc.p(this.center.x + 20, this.center.y),
+                cc.p(this.r.center.x - 20, this.r.center.y),
+                cc.p(this.r.center.x + 20, this.r.center.y),
                 2,
-                this.space)
+                this.r.space)
         },
 
         constructBalls: function() {
@@ -43,7 +43,7 @@ var ExampleCompositeBody = {
             for (var i = 0; i < 10; ++i) {
                 var pos = rss.add(this.man.getPos(), cc.p(i * 10, 150))
                 cc.log("new ball")
-                var ball = new Ball(pos, 10, rss.ball.mass, this.space)
+                var ball = new Ball(pos, 10, rss.ball.mass, this.r.space)
                 this.balls.push(ball)
             }
         },
@@ -63,20 +63,20 @@ var ExampleCompositeBody = {
             cc.log("Scene.onEnter ...")
             this._super();
 
-            this.space = new cp.Space();
-            this.space.gravity = cp.v(0, rss.gravity);
+            this.r.space = new cp.Space();
+            this.r.space.gravity = cp.v(0, rss.gravity);
 
-            this.layer = new ExampleCompositeBody.Layer(this.space);
+            this.r.layer = new ExampleCompositeBody.Layer(this.r.space);
 
-            this.addChild(this.layer);
+            this.addChild(this.r.layer);
 
             this.scheduleUpdate();
         },
 
         update: function(dt) {
-            this.space.step(dt);
+            this.r.space.step(dt);
 
-            this.layer.update();
+            this.r.layer.update();
         }
     })
 }

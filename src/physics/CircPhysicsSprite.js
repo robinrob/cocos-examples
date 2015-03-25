@@ -3,7 +3,7 @@ rss.CircPhysicsSprite = rss._DynamicBody.extend({
         args.size = cc.size(args.radius * 2, args.radius * 2)
         this._super(args)
 
-        this.radius = args.radius
+        this.r.radius = args.radius
 
         this.init()
     },
@@ -25,12 +25,12 @@ rss.CircPhysicsSprite = rss._DynamicBody.extend({
         cc.log("Ball.init ...")
         this._super()
 
-        this.body = new cp.Body(this.mass, cp.momentForCircle(this.mass, 0, this.radius, cp.v(0,0)))
-        this.body.setPos(this.startPos)
-        this.space.addBody(this.body)
+        this.r.body = new cp.Body(this.r.mass, cp.momentForCircle(this.r.mass, 0, this.r.radius, cp.v(0,0)))
+        this.r.body.setPos(this.r.startPos)
+        this.r.space.addBody(this.r.body)
 
-        this.shape = new cp.CircleShape(this.body, this.radius, cp.v(0, 0))
-        this.space.addShape(this.shape)
+        this.r.shape = new cp.CircleShape(this.r.body, this.r.radius, cp.v(0, 0))
+        this.r.space.addShape(this.r.shape)
     },
 
     initBox2D: function() {
@@ -39,45 +39,45 @@ rss.CircPhysicsSprite = rss._DynamicBody.extend({
         fixtureDef.friction = 0.5
         fixtureDef.restitution = 0.2
         fixtureDef.shape = new Box2D.Collision.Shapes.b2PolygonShape
-        fixtureDef.shape.SetAsBox(this.radius, this.radius)
+        fixtureDef.shape.SetAsBox(this.r.radius, this.r.radius)
 
         var bodyDef = new Box2D.Dynamics.b2BodyDef
         bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody
-        bodyDef.position.Set(this.startPos.x, this.startPos.y)
+        bodyDef.position.Set(this.r.startPos.x, this.r.startPos.y)
         bodyDef.userData = { type: "ball" }
 
-        this.body = this.space.CreateBody(bodyDef)
-        this.body.CreateFixture(fixtureDef)
+        this.r.body = this.r.space.CreateBody(bodyDef)
+        this.r.body.CreateFixture(fixtureDef)
     },
 
     applyTangentialImpulse: function(i) {
-        this.body.applyImpulse(
+        this.r.body.applyImpulse(
             cp.v(i, 0),
-            cp.v(this.getX(), this.getY() + this.radius)
+            cp.v(this.getX(), this.getY() + this.r.radius)
         )
     },
 
     applyTorque: function(f) {
-        this.body.applyForce(
+        this.r.body.applyForce(
             cp.v(f, 0),
-            cp.v(this.getX(), this.getY() + this.radius)
+            cp.v(this.getX(), this.getY() + this.r.radius)
         )
     },
 
     getSurfaceVel: function() {
-        return this.body.w * this.radius
+        return this.r.body.w * this.r.radius
     },
 
     setSurfaceVel: function(v) {
-        this.setAngularVel(v / this.radius)
+        this.setAngularVel(v / this.r.radius)
     },
 
     getAngularVel: function() {
-        return this.body.w
+        return this.r.body.w
     },
 
     setAngularVel: function(w) {
-        this.body.w = w
+        this.r.body.w = w
     }
 })
 

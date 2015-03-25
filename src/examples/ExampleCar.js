@@ -7,16 +7,16 @@ var ExampleCar = {
         ctor: function (space) {
             this._super();
 
-            this.space = space
+            this.r.space = space
 
             var winSize = cc.director.getWinSize()
 
-            this.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - rss.groundHeight)
-            this.center = cc.p(winSize.width / 2, winSize.height / 2)
+            this.r.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - rss.groundHeight)
+            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
-            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
@@ -25,7 +25,7 @@ var ExampleCar = {
         init: function () {
             this._super()
 
-            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
 
             this.constructCar()
 
@@ -33,7 +33,7 @@ var ExampleCar = {
         },
 
         constructCar: function() {
-            this.car = new Car(this.center, this.space)
+            this.car = new Car(this.r.center, this.r.space)
             this.car.setVel(0, 0)
             this.addChild(this.car)
         },
@@ -96,20 +96,20 @@ var ExampleCar = {
             cc.log("Scene.onEnter ...")
             this._super();
 
-            this.space = new cp.Space();
-            this.space.gravity = cp.v(0, rss.exampleCar.gravity);
+            this.r.space = new cp.Space();
+            this.r.space.gravity = cp.v(0, rss.exampleCar.gravity);
 
-            this.layer = new ExampleCar.Layer(this.space);
+            this.r.layer = new ExampleCar.Layer(this.r.space);
 
-            this.addChild(this.layer);
+            this.addChild(this.r.layer);
 
             this.scheduleUpdate();
         },
 
         update: function(dt) {
-            this.space.step(dt);
+            this.r.space.step(dt);
 
-            this.layer.update(dt);
+            this.r.layer.update(dt);
         }
     })
 }

@@ -9,7 +9,7 @@ var Ball = rss.CircBody.extend({
     init: function() {
         this._super()
 
-        this.shape.setElasticity(1.0)
+        this.r.shape.setElasticity(1.0)
 
         this._draw = new cc.DrawNode()
         this.addChild(this._draw)
@@ -19,7 +19,7 @@ var Ball = rss.CircBody.extend({
 
     draw:function() {
         this._draw.clear()
-        this._draw.drawDot(this.getPos(), this.radius, this.getColor())
+        this._draw.drawDot(this.getPos(), this.r.radius, this.getColor())
     },
 
     update:function() {
@@ -37,7 +37,7 @@ var Ball = rss.CircBody.extend({
             this.setVel(cp.v(this.getVel().x, 0))
         }
 
-        this.draw()
+        this.r.draw()
     }
 })
 

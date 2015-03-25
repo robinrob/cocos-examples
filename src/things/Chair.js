@@ -3,8 +3,8 @@ Chair = rss._CompositeDynamicBody.extend({
         args.size = cc.size()
         this._super(args)
 
-        this.startPos = args.pos
-        this.origin = args.pos
+        this.r.startPos = args.pos
+        this.r.origin = args.pos
     },
 
     init: function() {
@@ -51,15 +51,15 @@ Chair = rss._CompositeDynamicBody.extend({
     },
 
     worldX: function(x) {
-        return this.origin.x + x
+        return this.r.origin.x + x
     },
 
     worldY: function(y) {
-        return this.origin.y + y
+        return this.r.origin.y + y
     },
 
     worldCoords: function(x, y) {
-        return cc.p(this.origin.x + x, this.origin.y + y)
+        return cc.p(this.r.origin.x + x, this.r.origin.y + y)
     },
 
     _constructPart: function(args) {

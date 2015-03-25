@@ -2,7 +2,7 @@ var Steerable = cc.Node.extend({
     ctor: function(mass) {
         this._super()
 
-        this.mass = mass
+        this.r.mass = mass
     },
 
     init: function() {
@@ -10,27 +10,27 @@ var Steerable = cc.Node.extend({
     },
 
     applyForce: function (fx, fy, rx, ry) {
-        this.body.applyForce(cp.v(fx, fy), cp.v(rx, ry))
+        this.r.body.applyForce(cp.v(fx, fy), cp.v(rx, ry))
     },
 
     applyImpulse: function (ix, iy) {
-        this.body.applyImpulse(cp.v(ix, iy), cp.v(0, 0))
+        this.r.body.applyImpulse(cp.v(ix, iy), cp.v(0, 0))
     },
 
     applyImpulseAt: function (ix, iy, rx, ry) {
-        this.body.applyImpulse(cp.v(ix, iy), cp.v(rx, ry))
+        this.r.body.applyImpulse(cp.v(ix, iy), cp.v(rx, ry))
     },
 
     applyAxialImpulse: function(impulse) {
-        this.applyImpulse(impulse * this.body.rot.x, impulse * this.body.rot.y)
+        this.applyImpulse(impulse * this.r.body.rot.x, impulse * this.r.body.rot.y)
     },
 
     getAngle: function() {
-        return -1 * cc.radiansToDegrees(this.body.a) % 360
+        return -1 * cc.radiansToDegrees(this.r.body.a) % 360
     },
 
     setAngle: function(angle) {
-        this.body.setAngle(-1 * cc.degreesToRadians(angle))
+        this.r.body.setAngle(-1 * cc.degreesToRadians(angle))
     },
 
     upInput: function() {
@@ -50,10 +50,10 @@ var Steerable = cc.Node.extend({
     },
 
     horizontalInput: function() {
-        return this.rightInput() || this.leftInput()
+        return this.r.rightInput() || this.r.leftInput()
     },
 
     input: function() {
-        return this.upInput() || this.downInput() || this.rightInput() || this.leftInput()
+        return this.upInput() || this.downInput() || this.r.rightInput() || this.r.leftInput()
     }
 })

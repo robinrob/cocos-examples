@@ -16,7 +16,7 @@ rss.RectPhysicsSprite = rss.RectBody.extend({
     init: function() {
         this._super()
 
-        this.sprite.setBody(this.body)
+        this.sprite.setBody(this.r.body)
         this.addChild(this.sprite)
 
         return this

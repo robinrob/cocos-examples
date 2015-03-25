@@ -19,8 +19,6 @@ cc.Node.prototype.spawn = function(x, y) {
     return action
 }
 
-cc.Node.prototype.r = {}
-
 cp.Vect.prototype.toP = function() {
     return cc.p(this.x, this.y)
 }
@@ -261,7 +259,7 @@ rss.leftInput = function() {
 }
 
 rss.xInput = function() {
-    return this.rightInput() || this.leftInput()
+    return this.r.rightInput() || this.r.leftInput()
 }
 
 rss.yInput = function() {
@@ -269,5 +267,5 @@ rss.yInput = function() {
 }
 
 rss.xyInput = function() {
-    return this.upInput() || this.downInput() || this.rightInput() || this.leftInput()
+    return this.upInput() || this.downInput() || this.r.rightInput() || this.r.leftInput()
 }

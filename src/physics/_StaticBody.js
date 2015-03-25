@@ -2,13 +2,15 @@ rss._StaticBody = cc.Node.extend({
     ctor: function(args) {
         this._super()
 
-        this.startPos = args.pos
-        this.origin = args.pos
-        this.jointPs = [cc.p()]
+        this.r = {}
 
-        this.size = args.size
-        this.width = args.size.width
-        this.height = args.size.height
+        this.r.startPos = args.pos
+        this.r.origin = args.pos
+        this.r.jointPs = [cc.p()]
+
+        this.r.size = args.size
+        this.r.width = args.size.width
+        this.r.height = args.size.height
     },
 
     init: function() {
@@ -17,21 +19,21 @@ rss._StaticBody = cc.Node.extend({
     },
 
     addToSpace: function(space) {
-        space.addStaticShape(this.shape)
+        space.addStaticShape(this.r.shape)
         return this
     },
 
     getStartPos: function() {
-        return this.startPos
+        return this.r.startPos
     },
 
     getPos: function() {
         switch(rss.physics) {
             case rss.chipmunk:
-                return this.body.getPos()
+                return this.r.body.getPos()
                 break;
             case rss.box2D:
-                return this.body.GetPosition()
+                return this.r.body.GetPosition()
                 break;
         }
     },
@@ -39,25 +41,25 @@ rss._StaticBody = cc.Node.extend({
     setPos: function(p) {
         switch(rss.physics) {
             case rss.chipmunk:
-                this.body.setPos(p)
+                this.r.body.setPos(p)
                 break;
             case rss.box2D:
-                this.body.setPosition(p.x, p.y)
+                this.r.body.setPosition(p.x, p.y)
                 break;
         }
     },
 
     getX: function() {
-        return this.body.getPos().x
+        return this.r.body.getPos().x
     },
 
     getY: function() {
-        return this.body.getPos().y
+        return this.r.body.getPos().y
     },
 
     getTopLeft: function() {
         var pos = this.getPos()
-        return cc.p(pos.x, pos.y + this.size.height / 2)
+        return cc.p(pos.x, pos.y + this.r.size.height / 2)
     },
 
     getTopLeftV: function() {
@@ -66,54 +68,54 @@ rss._StaticBody = cc.Node.extend({
 
     getJointP: function(wantGlobal) {
         if (wantGlobal) {
-            return rss.add(this.getPos(), this.jointPs[0])
+            return rss.add(this.getPos(), this.r.jointPs[0])
         }
         else {
-            return this.jointPs[0]
+            return this.r.jointPs[0]
         }
     },
 
     setJointP: function(p) {
-        this.jointPs[0] = p
+        this.r.jointPs[0] = p
     },
 
     getJointPs: function() {
-        return this.jointPs
+        return this.r.jointPs
     },
 
     setJointPs: function(points) {
-        this.jointPs = points
+        this.r.jointPs = points
     },
 
     setGroup: function(group) {
-        this.shape.group = group
+        this.r.shape.group = group
     },
 
     getColor: function() {
-        return this._color
+        return this.r.color
     },
 
     setColor: function(color) {
-        this._color = color
+        this.r.color = color
     },
 
     getState: function() {
-        return this.state
+        return this.r.state
     },
 
     setState: function(state) {
-        this.state = state
+        this.r.state = state
     },
 
     setElasticity: function(e) {
-        this.shape.setElasticity(e)
+        this.r.shape.setElasticity(e)
     },
 
     setFriction: function(f) {
-        this.shape.setFriction(f)
+        this.r.shape.setFriction(f)
     },
 
     setSensor: function(bool) {
-        this.shape.setSensor(bool)
+        this.r.shape.setSensor(bool)
     }
 })

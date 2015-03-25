@@ -2,11 +2,11 @@ var ExampleBody = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
             this._super();
-            this.space = space
+            this.r.space = space
 
             switch(rss.physics) {
                 case rss.chipmunk:
-                    rss.Box.create({pos: cc.p(), size: this.size}).addToSpace(this.space)
+                    rss.Box.create({pos: cc.p(), size: this.r.size}).addToSpace(this.r.space)
                     this.debugNodeChipmunk()
                     break
                 case rss.box2D:
@@ -18,7 +18,7 @@ var ExampleBody = {
         },
 
         debugNodeChipmunk: function() {
-            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
@@ -31,16 +31,16 @@ var ExampleBody = {
             debugDraw.SetFillAlpha(0.3);
             debugDraw.SetLineThickness(1.0);
             debugDraw.SetFlags(Box2D.Dynamics.b2DebugDraw.e_shapeBit | Box2D.Dynamics.b2DebugDraw.e_jointBit);
-            this.space.SetDebugDraw(debugDraw);
-            this.space.DrawDebugData();
+            this.r.space.SetDebugDraw(debugDraw);
+            this.r.space.DrawDebugData();
         },
 
         init: function () {
             this._super()
 
-            var pos = cc.p(this.center.x, this.center.y + 100)
+            var pos = cc.p(this.r.center.x, this.r.center.y + 100)
 
-            this.ball = Ball.create({pos: pos, radius: 10, mass: rss.ball.mass}).addToSpace(this.space)
+            this.ball = Ball.create({pos: pos, radius: 10, mass: rss.ball.mass}).addToSpace(this.r.space)
             this.addChild(this.ball)
         },
 
@@ -58,19 +58,19 @@ var ExampleBody = {
 
             switch(rss.physics) {
                 case rss.chipmunk:
-                    this.space = new cp.Space();
-                    this.space.gravity = cp.v(0, rss.gravity);
+                    this.r.space = new cp.Space();
+                    this.r.space.gravity = cp.v(0, rss.gravity);
                     break;
                 case rss.box2D:
-                    this.space = new Box2D.Dynamics.b2World(rss.gravity, true);
-                    this.space.SetContinuousPhysics(true);
-                    this.space.gravity = rss.gravity
+                    this.r.space = new Box2D.Dynamics.b2World(rss.gravity, true);
+                    this.r.space.SetContinuousPhysics(true);
+                    this.r.space.gravity = rss.gravity
                     break;
             }
 
-            this.layer = new ExampleBody.Layer(this.space);
+            this.r.layer = new ExampleBody.Layer(this.r.space);
 
-            this.addChild(this.layer);
+            this.addChild(this.r.layer);
 
             this.scheduleUpdate();
         },
@@ -78,14 +78,14 @@ var ExampleBody = {
         update: function(dt) {
             switch(rss.physics) {
                 case rss.chipmunk:
-                    this.space.step(dt);
+                    this.r.space.step(dt);
                     break;
                 case rss.box2D:
-                    this.space.Step(dt, 8, 3)
+                    this.r.space.Step(dt, 8, 3)
                     break;
             }
 
-            this.layer.update();
+            this.r.layer.update();
         }
     })
 }

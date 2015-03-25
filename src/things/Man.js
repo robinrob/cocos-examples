@@ -7,7 +7,7 @@ var Man = rss._CompositeDynamicBody.extend({
         cc.log("rss.man.init ...")
         this._super()
 
-        this.state = rss.player.state.jumpDown
+        this.r.state = rss.player.state.jumpDown
 
         // legs
         var leftLeg = this._constructLeg(
@@ -53,19 +53,19 @@ var Man = rss._CompositeDynamicBody.extend({
     },
 
     joinLimbs: function(limb1, limb2) {
-        rss.pivotJoint(this.space, limb1, limb2)
+        rss.pivotJoint(this.r.space, limb1, limb2)
     },
 
     worldX: function(x) {
-        return this.origin.x + x
+        return this.r.origin.x + x
     },
 
     worldY: function(y) {
-        return this.origin.y + y
+        return this.r.origin.y + y
     },
 
     worldCoords: function(x, y) {
-        return cc.p(this.origin.x + x, this.origin.y + y)
+        return cc.p(this.r.origin.x + x, this.r.origin.y + y)
     },
 
     _constructLimb: function(pos, size, mass, color) {
@@ -73,7 +73,7 @@ var Man = rss._CompositeDynamicBody.extend({
             pos,
             size,
             mass,
-            this.space
+            this.r.space
         )
         limb.setColor(color)
         limb.setJointP(cc.p(0, size.height / 2))

@@ -3,13 +3,13 @@ var Spaceship2 = Steerable.extend({
         cc.log("Spaceship.ctor ...")
         this._super(mass)
 
-        this.startPos = position
-        this.space = space;
+        this.r.startPos = position
+        this.r.space = space;
 
         this.axialMult = 3.0
         this.rotMult = 0.3
         this.vertical = 90
-        this.angleLimit = 90
+        this.r.angleLimit = 90
 
         this.init()
     },
@@ -28,13 +28,13 @@ var Spaceship2 = Steerable.extend({
         var contentSize = this.sprite.getContentSize();
 
         this._height = contentSize.height
-        this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, contentSize.width, this._height))
-        this.body.p = this.startPos
-        this.space.addBody(this.body);
-        this.shape = new cp.BoxShape(this.body, contentSize.width, this._height);
-        this.shape.setElasticity(0.0)
-        this.space.addShape(this.shape);
-        this.sprite.setBody(this.body);
+        this.r.body = new cp.Body(this.r.mass, cp.momentForBox(this.r.mass, contentSize.width, this._height))
+        this.r.body.p = this.r.startPos
+        this.r.space.addBody(this.r.body);
+        this.r.shape = new cp.BoxShape(this.r.body, contentSize.width, this._height);
+        this.r.shape.setElasticity(0.0)
+        this.r.space.addShape(this.r.shape);
+        this.sprite.setBody(this.r.body);
 
 
         var animFrames = [];
@@ -54,34 +54,34 @@ var Spaceship2 = Steerable.extend({
     },
 
     getPos: function() {
-        return this.body.p
+        return this.r.body.p
     },
 
     setVel: function(vx, vy) {
-        this.body.setVel(cp.v(vx, vy))
+        this.r.body.setVel(cp.v(vx, vy))
     },
 
     update: function (dt) {
-        var p = this.body.getPos()
+        var p = this.r.body.getPos()
         var winSize = cc.director.getWinSize()
         var x = p.x
         var y = p.y
         var dvx = 0.0
         var dvy = 0.0
 
-        var impulse = this.mass * rss.spaceship.acc * dt
+        var impulse = this.r.mass * rss.spaceship.acc * dt
 
-        if (this.spaceInput()) {
+        if (this.r.spaceInput()) {
             var acc = -1 * rss.exampleSpaceship.gravity + rss.spaceship.acc
-            this.applyAxialImpulse(this.mass * acc * dt)
+            this.applyAxialImpulse(this.r.mass * acc * dt)
             this.stabilise(dt)
         }
 
         if (this.horizontalInput()) {
-            if (this.leftInput() && !this.rightInput()) {
+            if (this.r.leftInput() && !this.r.rightInput()) {
                 this.applyTransRotImpulse(-1 * this.rotMult * impulse, dt)
             }
-            else if (this.rightInput() && !this.leftInput()) {
+            else if (this.r.rightInput() && !this.r.leftInput()) {
                 this.applyTransRotImpulse(+1 * this.rotMult * impulse, dt)
             }
             else {
@@ -93,7 +93,7 @@ var Spaceship2 = Steerable.extend({
         }
 
         this.limitAngle()
-        this.angleFromVertical()
+        this.r.angleFromVertical()
     },
 
     getAngle: function() {
@@ -107,13 +107,13 @@ var Spaceship2 = Steerable.extend({
     limitAngle: function() {
         var angle = this.getAngle()
 
-        if (Math.abs(angle) > this.angleLimit) {
-            this.setAngle(rss.sign(angle) * this.angleLimit)
+        if (Math.abs(angle) > this.r.angleLimit) {
+            this.setAngle(rss.sign(angle) * this.r.angleLimit)
         }
     },
 
     angleWithinLimits: function() {
-        return Math.abs(this.getAngle())  < this.angleLimit
+        return Math.abs(this.getAngle())  < this.r.angleLimit
     },
 
     applyRotImpulse: function(imp) {
@@ -122,7 +122,7 @@ var Spaceship2 = Steerable.extend({
     },
 
     applyTransRotImpulse: function(imp, dt) {
-        if (this.angleWithinLimits()) {
+        if (this.r.angleWithinLimits()) {
             this.applyRotImpulse(3 * imp)
         }
 
@@ -131,7 +131,7 @@ var Spaceship2 = Steerable.extend({
             this.applyImpulse(this.axialMult * imp, 0)
         }
 
-        this.applyImpulse(0, -1 * this.mass * rss.exampleSpaceship.gravity * dt)
+        this.applyImpulse(0, -1 * this.r.mass * rss.exampleSpaceship.gravity * dt)
     },
 
     positiveAngle: function() {
@@ -139,9 +139,9 @@ var Spaceship2 = Steerable.extend({
     },
 
     stabilise: function(dt) {
-        var impulse = this.mass * rss.spaceship.acc * dt * 0.03
+        var impulse = this.r.mass * rss.spaceship.acc * dt * 0.03
 
-        var diff = this.angleFromVertical()
+        var diff = this.r.angleFromVertical()
 
         this.applyRotImpulse(-1 * diff * 0.3 * impulse)
     },

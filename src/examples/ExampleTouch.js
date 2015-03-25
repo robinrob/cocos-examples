@@ -3,9 +3,9 @@ var ExampleTouch = {
         ctor: function (space) {
             this._super();
 
-            this.space = space
+            this.r.space = space
 
-            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
@@ -18,7 +18,7 @@ var ExampleTouch = {
 
             this.balls = []
 
-            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
 
             var that = this
             cc.eventManager.addListener({
@@ -47,20 +47,20 @@ var ExampleTouch = {
             cc.log("Scene.onEnter ...")
             this._super();
 
-            this.space = new cp.Space();
-            this.space.gravity = cp.v(0, rss.gravity);
+            this.r.space = new cp.Space();
+            this.r.space.gravity = cp.v(0, rss.gravity);
 
-            this.layer = new ExampleTouch.Layer(this.space);
+            this.r.layer = new ExampleTouch.Layer(this.r.space);
 
-            this.addChild(this.layer);
+            this.addChild(this.r.layer);
 
             this.scheduleUpdate();
         },
 
         update: function(dt) {
-            this.space.step(dt);
+            this.r.space.step(dt);
 
-            this.layer.update();
+            this.r.layer.update();
         }
     })
 }

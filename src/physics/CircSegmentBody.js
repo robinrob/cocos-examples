@@ -25,21 +25,21 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
 
     initMe: function() {
         // body
-        this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this.size.width, this.size.height))
-        this.body.setPos(this.getStartPos())
+        this.r.body = new cp.Body(this.r.mass, cp.momentForBox(this.r.mass, this.r.size.width, this.r.size.height))
+        this.r.body.setPos(this.getStartPos())
 
         // shape
         this.r.vertsXY = []
         this.r.verts = []
 
         var p = cc.p(
-            this.r.radius * (1 - this.length) * Math.cos(cc.degreesToRadians(this.r.rotation + this.r.angle)),
-            this.r.radius * (1 - this.length) * Math.sin(cc.degreesToRadians(this.r.rotation + this.r.angle))
+            this.r.radius * (1 - this.r.length) * Math.cos(cc.degreesToRadians(this.r.rotation + this.r.angle)),
+            this.r.radius * (1 - this.r.length) * Math.sin(cc.degreesToRadians(this.r.rotation + this.r.angle))
         )
         this.r.vertsXY.push(p.x, p.y)
         this.r.verts.push(p)
 
-        var gap = this.r.angle / this.segments
+        var gap = this.r.angle / this.r.segments
         for (var a = this.r.angle; a >= 0; a -= gap) {
             p = cc.p(
                 this.r.radius * Math.cos(cc.degreesToRadians(a + this.r.rotation)),
@@ -50,13 +50,13 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         }
 
         p = cc.p(
-            this.r.radius * (1 - this.length) * Math.cos(cc.degreesToRadians(this.r.rotation)),
-            this.r.radius * (1 - this.length) * Math.sin(cc.degreesToRadians(this.r.rotation))
+            this.r.radius * (1 - this.r.length) * Math.cos(cc.degreesToRadians(this.r.rotation)),
+            this.r.radius * (1 - this.r.length) * Math.sin(cc.degreesToRadians(this.r.rotation))
         )
         this.r.vertsXY.push(p.x, p.y)
         this.r.verts.push(p)
 
-        this.shape = new cp.PolyShape(this.body, this.r.vertsXY, cp.v(0, 0))
+        this.r.shape = new cp.PolyShape(this.r.body, this.r.vertsXY, cp.v(0, 0))
 
         this.setJointP(cc.p(0, 0))
     },
@@ -85,8 +85,8 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         }
         else {
             return cc.p(
-                this.r.radius * this.length * Math.cos(cc.degreesToRadians(this.r.angle / 2 + this.r.rotation)),
-                this.r.radius * this.length * Math.sin(cc.degreesToRadians(this.r.angle / 2 + this.r.rotation))
+                this.r.radius * this.r.length * Math.cos(cc.degreesToRadians(this.r.angle / 2 + this.r.rotation)),
+                this.r.radius * this.r.length * Math.sin(cc.degreesToRadians(this.r.angle / 2 + this.r.rotation))
             )
         }
     },

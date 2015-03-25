@@ -46,6 +46,7 @@
         "src/layer/MenuLayer.js",
         "src/layer/MoveableObjectsLayer.js",
 
+        "src/scene/BaseScene.js",
         "src/scene/MenuScene.js",
 
         "src/examples/ExampleAnimation.js",

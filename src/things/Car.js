@@ -2,9 +2,9 @@ var Car = cc.Node.extend({
     ctor: function(position, space) {
         this._super()
 
-        this.startPos = position
-        this.origin = this.startPos
-        this.space = space
+        this.r.startPos = position
+        this.r.origin = this.r.startPos
+        this.r.space = space
 
         this.init()
     },
@@ -42,7 +42,7 @@ var Car = cc.Node.extend({
             cc.p(x, y),
             rss.car.width.wheel,
             rss.car.mass.wheel,
-            this.space
+            this.r.space
         )
         part.setColor(rss.colors.green)
         this.addChild(part)
@@ -66,7 +66,7 @@ var Car = cc.Node.extend({
             pos,
             size,
             mass,
-            this.space,
+            this.r.space,
             color
         )
         this.addChild(part)
@@ -76,20 +76,20 @@ var Car = cc.Node.extend({
     },
 
     joinParts: function(o1, o2) {
-        rss.pivotJoint(this.space, o1, o2)
-        //this.space.addConstraint(new cp.PivotJoint(limb1.body, limb2.body, limb1.getJointP()))
+        rss.pivotJoint(this.r.space, o1, o2)
+        //this.r.space.addConstraint(new cp.PivotJoint(limb1.body, limb2.body, limb1.getJointP()))
     },
 
     worldX: function(x) {
-        return this.origin.x + x
+        return this.r.origin.x + x
     },
 
     worldY: function(y) {
-        return this.origin.y + y
+        return this.r.origin.y + y
     },
 
     worldCoords: function(x, y) {
-        return cc.p(this.origin.x + x, this.origin.y + y)
+        return cc.p(this.r.origin.x + x, this.r.origin.y + y)
     },
 
     getPos: function() {

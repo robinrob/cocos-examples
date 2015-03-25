@@ -7,9 +7,9 @@ var ExampleSpaceship = {
         ctor: function (space) {
             this._super();
 
-            this.space = space
+            this.r.space = space
 
-            this._debugNode = new cc.PhysicsDebugNode(this.space);
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
@@ -20,13 +20,13 @@ var ExampleSpaceship = {
         init: function () {
             this._super()
 
-            Box.create(cc.p(this.MARGIN, 0), this.size, this.space)
+            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
 
             this.constructControllee()
         },
 
         constructControllee: function() {
-            this.controllee = new Spaceship(this.center, rss.spaceship.mass, this.space)
+            this.controllee = new Spaceship(this.r.center, rss.spaceship.mass, this.r.space)
             this.controllee.setVel(0, 0)
             this.controllee.setAngle(0)
             this.addChild(this.controllee)
@@ -55,21 +55,21 @@ var ExampleSpaceship = {
             cc.log("Scene.onEnter ...")
             this._super();
 
-            this.space = new cp.Space();
-            this.space.gravity = cp.v(0, rss.exampleSpaceship.gravity);
-            this.space.damping = 0.1
+            this.r.space = new cp.Space();
+            this.r.space.gravity = cp.v(0, rss.exampleSpaceship.gravity);
+            this.r.space.damping = 0.1
 
-            this.layer = new ExampleSpaceship.Layer(this.space);
+            this.r.layer = new ExampleSpaceship.Layer(this.r.space);
 
-            this.addChild(this.layer);
+            this.addChild(this.r.layer);
 
             this.scheduleUpdate();
         },
 
         update: function(dt) {
-            this.space.step(dt);
+            this.r.space.step(dt);
 
-            this.layer.update(dt);
+            this.r.layer.update(dt);
         }
     })
 }

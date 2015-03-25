@@ -7,11 +7,11 @@ rss.RectBody = rss._DynamicBody.extend({
         this._super()
 
         // body
-        this.body = new cp.Body(this.mass, cp.momentForBox(this.mass, this.size.width, this.size.height))
-        this.body.setPos(this.getStartPos())
+        this.r.body = new cp.Body(this.r.mass, cp.momentForBox(this.r.mass, this.r.size.width, this.r.size.height))
+        this.r.body.setPos(this.getStartPos())
 
         // shape
-        this.shape = new cp.BoxShape(this.body, this.size.width, this.size.height)
+        this.r.shape = new cp.BoxShape(this.r.body, this.r.size.width, this.r.size.height)
 
         return this
     }
