@@ -32,7 +32,7 @@ rss._CompositeStaticBody = rss._StaticBody.extend({
     addConstraints: function(constraints) {
         var that = this
         constraints.forEach(function(constr) {
-            that.constraints.push(constr)
+            that.r.constraints.push(constr)
         })
     },
 

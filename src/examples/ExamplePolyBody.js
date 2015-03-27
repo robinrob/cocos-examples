@@ -41,7 +41,7 @@ var ExamplePolyBody = {
         }
     }),
 
-    Scene: rss.BaseScene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {

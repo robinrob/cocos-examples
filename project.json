@@ -41,6 +41,7 @@
         "src/things/Spaceship.js",
         "src/things/Spaceship2.js",
         "src/things/Chair.js",
+        "src/things/CircFlyingObstacle.js",
 
         "src/layer/BaseLayer.js",
         "src/layer/MenuLayer.js",
@@ -48,6 +49,7 @@
 
         "src/scene/BaseScene.js",
         "src/scene/MenuScene.js",
+        "src/scene/ExampleScene.js",
 
         "src/examples/ExampleAnimation.js",
         "src/examples/ExampleBody.js",
@@ -61,6 +63,7 @@
         "src/examples/ExampleSpaceship2.js",
         "src/examples/ExampleChair.js",
         "src/examples/ExampleJoints.js",
-        "src/examples/ExamplePolyBody.js"
+        "src/examples/ExamplePolyBody.js",
+        "src/examples/ExampleCircularMovement.js"
     ]
 }

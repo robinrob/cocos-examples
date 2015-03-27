@@ -59,6 +59,12 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         this.r.shape = new cp.PolyShape(this.r.body, this.r.vertsXY, cp.v(0, 0))
 
         this.setJointP(cc.p(0, 0))
+
+        this.anchorX = this.getStartPos().x
+        this.anchorY = this.getStartPos().y
+
+        this.r.draw = new cc.DrawNode()
+        this.addChild(this.r.draw)
     },
 
     getTop: function(wantGlobal) {
@@ -107,20 +113,6 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         else {
             return this.r.verts
         }
-    },
-
-    draw: function() {
-        this.r.draw = new cc.DrawNode()
-        this.addChild(this.r.draw)
-
-        var wank = this.getVerts(true).reverse()
-        //cc.log("Processed:")
-        wank.forEach(function(v){
-            rss.logP(v)
-        })
-        this.r.draw.drawPoly(wank, rss.colors.blue, 0, rss.colors.blue)
-
-        return this
     }
 })
 

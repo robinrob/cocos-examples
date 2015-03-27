@@ -20,7 +20,7 @@ rss.RectPhysicsSprite = rss.RectBody.extend({
         return this
     },
 
-    constructAnimSprite: function(spriteCfg) {
+    initAnimSprite: function(spriteCfg) {
         cc.spriteFrameCache.addSpriteFrames(spriteCfg.pList);
         var spriteSheet = new cc.SpriteBatchNode(spriteCfg.spriteSheet)
         this.sprite = new cc.PhysicsSprite("#" + spriteCfg.name + "0.png");
