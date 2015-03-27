@@ -42,6 +42,7 @@
         "src/things/Spaceship2.js",
         "src/things/Chair.js",
         "src/things/CircFlyingObstacle.js",
+        "src/things/Spring.js",
 
         "src/layer/BaseLayer.js",
         "src/layer/MenuLayer.js",
@@ -64,6 +65,7 @@
         "src/examples/ExampleChair.js",
         "src/examples/ExampleJoints.js",
         "src/examples/ExamplePolyBody.js",
-        "src/examples/ExampleCircularMovement.js"
+        "src/examples/ExampleCircularMovement.js",
+        "src/examples/ExampleSpring.js"
     ]
 }

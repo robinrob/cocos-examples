@@ -1,4 +1,4 @@
-var ExampleCircularMovement = ExampleScene.extend({
+var ExampleSpring = ExampleScene.extend({
     ctor: function() {
         this._super()
     },
@@ -7,6 +7,7 @@ var ExampleCircularMovement = ExampleScene.extend({
         this._super()
 
         this.r.space = new cp.Space()
+        //this.r.space.gravity = cp.v(0, rss.gravity);
 
         this.r.layer = new this.Layer(this.r.space)
         this.addChild(this.r.layer)
@@ -27,7 +28,7 @@ var ExampleCircularMovement = ExampleScene.extend({
             this._super()
 
             this.r.space = space
-            //this.r.space.gravity = cp.v(0, rss.gravity);
+            this.r.space.gravity = cp.v(0, rss.gravity);
 
             this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
@@ -40,16 +41,11 @@ var ExampleCircularMovement = ExampleScene.extend({
         init: function () {
             this._super()
 
-            Ball.create({pos: rss.center(), radius: 10, mass: rss.ball.mass}).addToSpace(this.r.space)
-
-            this.item = CircFlyingObstacle.create({
-                pos: rss.center(),
+            this.item = Spring.create({
+                pos: rss.subY(rss.center(), 200),
                 size: cc.size(50, 50),
-                mass: 50,
-                radius: 200,
-                angle: 90,
-                rotation: 135,
-                omega: 100
+                mass: 5,
+                length: 400
             }).addToSpace(this.r.space)
 
             return this
@@ -61,6 +57,6 @@ var ExampleCircularMovement = ExampleScene.extend({
     })
 })
 
-ExampleCircularMovement.create = function() {
-    return new ExampleCircularMovement().init()
+ExampleSpring.create = function() {
+    return new ExampleSpring().init()
 }

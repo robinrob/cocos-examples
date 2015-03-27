@@ -53,6 +53,10 @@ rss._DynamicBody = rss._StaticBody.extend({
         this.r.body.setAngle(cc.degreesToRadians(deg))
     },
 
+    setVel: function(vel) {
+        this.r.body.setVel(vel)
+    },
+
     getAngVel: function() {
         return this.r.body.w
     },

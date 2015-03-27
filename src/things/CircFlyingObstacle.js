@@ -6,44 +6,29 @@ var CircFlyingObstacle = rss.RectBody.extend({
         this.r.angle = cc.degreesToRadians(args.angle)
         this.r.rotation = cc.degreesToRadians(args.rotation)
         this.r.omega = cc.degreesToRadians(args.omega)
-        this.r.mass = 10
+        this.r.tangVel = this.r.omega * this.r.radius
+        this.r.radialAcc = this.r.omega * this.r.omega * this.r.radius
     },
 
     init: function() {
         this._super()
 
-        this.r.theta = 0
-        this.setTheta(0)
+        this.setPos(rss.add(cc.p(600, 600), cc.p(this.r.radius, 0)))
+        this.setVel(cc.p(0, 1 * this.r.tangVel))
 
         return this
     },
 
-    setTheta: function (angle) {
-        this.r.theta = angle
-        this.setAngle(this.r.rotation + this.r.theta - this.r.angle / 2)
-    },
-
-    incTheta: function(da) {
-        this.setTheta(this.r.theta + da)
-    },
-
-    setAngle: function(angle) {
-        this.r.body.a = angle
-        this.setPos(cc.p(
-            this.getStartPos().x + this.r.radius * Math.cos(angle),
-            this.getStartPos().y + this.r.radius * Math.sin(angle)
-        ))
-    },
-
     move: function(dt) {
-        if (Math.abs(this.r.theta) > this.r.angle / 2) {
-            cc.log("rotation: " + this.r.rotation)
-            cc.log("angle: " + this.r.angle)
-            cc.log("theta: " + this.r.theta)
-            this.r.omega *= -1
-        }
+        var x = rss.sub(this.getPos(), cc.p(600, 600)).x
+        var y = rss.sub(this.getPos(), cc.p(600, 600)).y
+        var theta = Math.atan(Math.abs(y / x))
 
-        this.incTheta(this.r.omega * dt)
+        var ix = -1 * rss.sign(this.getVel().y) * this.getMass() * this.r.radialAcc * Math.cos(theta) * dt
+        var iy = rss.sign(this.getVel().x) * this.getMass() * this.r.radialAcc * Math.sin(theta) * dt
+        var impulse = cc.p(ix, iy)
+
+        this.applyImpulse(impulse)
     },
 
     update: function(dt) {

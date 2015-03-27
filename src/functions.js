@@ -123,6 +123,10 @@ rss.mult = function(p, m) {
     return cc.p(p.x * m, p.y * m)
 }
 
+rss.multS = function(s, m) {
+    return cc.size(s.width * m, s.height * m)
+}
+
 rss.addW = function(s, dw) {
     return cc.size(s.width + dw, s.height)
 }
@@ -145,6 +149,10 @@ rss.vecFromTo = function(a, b) {
 
 rss.unitVecFromTo = function(a, b) {
     return rss.normalize(rss.sub(b, a))
+}
+
+rss.normalVecTo = function(p) {
+    return cc.p(-1 * p.y, p.x)
 }
 
 rss.distance = function(p1, p2) {
