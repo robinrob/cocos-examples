@@ -26,13 +26,13 @@ rss._DynamicBody = rss._StaticBody.extend({
         }
     },
 
-    setVel: function(vx, vy) {
+    setVel: function(v) {
         switch(rss.physics) {
             case rss.chipmunk:
-                this.r.body.setVel(cp.v(vx, vy))
+                this.r.body.setVel(v)
                 break;
             case rss.box2D:
-                this.r.body.SetVelocity(vx, vy)
+                this.r.body.SetVelocity(v.x, v.y)
                 break;
         }
     },

@@ -75,6 +75,10 @@ rss._StaticBody = cc.Node.extend({
         }
     },
 
+    getStartPos: function() {
+        return this.r.startPos
+    },
+
     getSize: function() {
         return this.r.size
     },
