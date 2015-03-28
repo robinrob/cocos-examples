@@ -61,6 +61,10 @@ rss.CircBody = rss._DynamicBody.extend({
         )
     },
 
+    getRadius: function() {
+        return this.r.radius
+    },
+
     getAngle: function() {
         return this._super() - this.r.offset
     },
