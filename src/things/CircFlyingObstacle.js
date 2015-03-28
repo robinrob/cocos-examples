@@ -3,29 +3,45 @@ var CircFlyingObstacle = rss.RectBody.extend({
         this._super(args)
 
         this.r.radius = args.radius
-        this.r.angle = cc.degreesToRadians(args.angle)
-        this.r.rotation = cc.degreesToRadians(args.rotation)
-        this.r.omega = cc.degreesToRadians(args.omega)
+        this.r.angle = args.angle
+        this.r.rotation = args.rotation
+        this.r.omega = args.omega
         this.r.tangVel = this.r.omega * this.r.radius
-        this.r.radialAcc = this.r.omega * this.r.omega * this.r.radius
     },
 
     init: function() {
         this._super()
 
-        this.setPos(rss.add(cc.p(600, 600), cc.p(this.r.radius, 0)))
+        this.setPos(rss.add(this.r.startPos, cc.p(this.r.radius, 0)))
         this.setVel(cc.p(0, 1 * this.r.tangVel))
 
         return this
     },
 
-    move: function(dt) {
-        var x = rss.sub(this.getPos(), cc.p(600, 600)).x
-        var y = rss.sub(this.getPos(), cc.p(600, 600)).y
-        var theta = Math.atan(Math.abs(y / x))
+    hasReachedArcLimit: function() {
+        return ((this.r.omega > 0) && ((this.getAngle() - this.rotation % rss.PI2) > this.r.angle / 2))
+            || ((this.r.omega < 0) && ((this.getAngle() % rss.PI2) < -1 * this.r.angle / 2))
+    },
 
-        var ix = -1 * rss.sign(this.getVel().y) * this.getMass() * this.r.radialAcc * Math.cos(theta) * dt
-        var iy = rss.sign(this.getVel().x) * this.getMass() * this.r.radialAcc * Math.sin(theta) * dt
+    move: function(dt) {
+        var x = rss.sub(this.getPos(), this.getStartPos()).x
+        var y = rss.sub(this.getPos(), this.getStartPos()).y
+
+        var theta = Math.atan(Math.abs(y / x))
+        rss.logDeg(theta, "theta")
+        rss.logDeg(this.r.angle, "angle")
+        cc.log("body angle: " + this.getAngleDeg() % 360)
+
+        if (this.hasReachedArcLimit()) {
+            cc.log("reversing")
+            this.r.omega *= -1
+            this.setVel(rss.rotate180(this.getVel()))
+        }
+
+        var radialAcc = this.r.omega * this.r.omega * this.r.radius
+
+        var ix = -1 * rss.sign(this.getVel().y) * this.getMass() * radialAcc * Math.cos(theta) * dt
+        var iy = rss.sign(this.getVel().x) * this.getMass() * radialAcc * Math.sin(theta) * dt
         var impulse = cc.p(ix, iy)
 
         this.applyImpulse(impulse)

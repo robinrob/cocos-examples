@@ -50,9 +50,9 @@ var ExampleCircularMovement = ExampleScene.extend({
                 size: cc.size(50, 50),
                 mass: 50,
                 radius: 200,
-                angle: 90,
-                rotation: 135,
-                omega: 100
+                angle: rss.toRad(90),
+                rotation: rss.toRad(90),
+                omega: rss.toRad(100)
             }).addToSpace(this.r.space)
 
             this.r.space.addConstraints(rss.pivotJoint(box, this.item))

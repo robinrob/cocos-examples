@@ -5,6 +5,8 @@ rss.box2D = "box2d"
 //rss.physics = rss.box2D
 rss.physics = rss.chipmunk
 
+rss.PI2 = 2 * Math.PI
+
 switch(rss.physics) {
     case rss.chipmunk:
         rss.gravity = -35

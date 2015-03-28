@@ -40,7 +40,6 @@ cp.Vect.prototype.subY = function(dy) {
 }
 
 rss.log = function(obj) {
-    cc.log("Logging object: ")
     for (i in obj) {
         cc.log(i)
     }
@@ -60,6 +59,13 @@ rss.logS = function(s) {
     }
     cc.log(name + ".width: " + s.width)
     cc.log(name + ".height: " + s.height)
+}
+
+rss.logDeg = function(rad, name) {
+    if (!name) {
+        var name = "angle"
+    }
+    cc.log(name + " (deg): " + cc.radiansToDegrees(rad))
 }
 
 rss.toV = function(p) {
@@ -151,8 +157,20 @@ rss.unitVecFromTo = function(a, b) {
     return rss.normalize(rss.sub(b, a))
 }
 
-rss.normalVecTo = function(p) {
-    return cc.p(-1 * p.y, p.x)
+rss.normalVecTo = function(v) {
+    return cc.p(-1 * v.y, v.x)
+}
+
+rss.rotate90 = function(v) {
+    return cc.p(-1 * v.y, v.x)
+}
+
+rss.rotate180 = function(v) {
+    return cc.p(-1 * v.x, -1 * v.y)
+}
+
+rss.rotate270 = function(v) {
+    return cc.p(v.y, -1 * v.x)
 }
 
 rss.distance = function(p1, p2) {
