@@ -40,7 +40,10 @@ var ExampleCircularMovement = ExampleScene.extend({
         init: function () {
             this._super()
 
-            Ball.create({pos: rss.center(), radius: 10, mass: rss.ball.mass}).addToSpace(this.r.space)
+            var box = rss.StaticRectBody.create({
+                pos: rss.center(),
+                size: cc.size(10, 10)
+            }).addToSpace(this.r.space)
 
             this.item = CircFlyingObstacle.create({
                 pos: rss.center(),
@@ -51,6 +54,8 @@ var ExampleCircularMovement = ExampleScene.extend({
                 rotation: 135,
                 omega: 100
             }).addToSpace(this.r.space)
+
+            this.r.space.addConstraints(rss.pivotJoint(box, this.item))
 
             return this
         },
