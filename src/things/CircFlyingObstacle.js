@@ -2,53 +2,91 @@ var CircFlyingObstacle = rss.RectBody.extend({
     ctor: function(args) {
         this._super(args)
 
+        // Radius of circular movement
         this.r.radius = args.radius
-        this.r.angle = args.angle
-        this.r.rotation = args.rotation
+        // Range (deg) of circular movement
+        this.r.range = args.range
+        // Angular velocity
         this.r.omega = args.omega
-        this.r.tangVel = this.r.omega * this.r.radius
+        // Starting angle (deg) of circular movement
+        this.r.offset = args.offset || 0
     },
 
     init: function() {
         this._super()
 
-        this.setPos(rss.add(this.r.startPos, cc.p(this.r.radius, 0)))
-        this.setVel(cc.p(0, 1 * this.r.tangVel))
+        var startAng = this.getOffset() + this.getRange() / 2
+        var pos = rss.add(this.getOrigin(), rss.polarToCartesian(this.getRadius(), startAng))
+
+        this.setPos(pos)
+        this.setAngle(startAng)
+
+        this.initVel()
 
         return this
     },
 
+    initVel: function() {
+        // Velocity is at 90 degrees to position
+        this.setVel(rss.mult(rss.unitVec(this.getVel), Math.abs(this.r.omega) * this.r.radius))
+        var dir = rss.unitVec(rss.rotate90(this.getPosRel()))
+        this.setVel(cc.p(
+            this.r.omega * this.r.radius * dir.x,
+            this.r.omega * this.r.radius * dir.y
+        ))
+    },
+
+    restoreVel: function() {
+        this.setVel(rss.mult(rss.unitVec(this.getVel()), Math.abs(this.r.omega) * this.r.radius))
+    },
+
     hasReachedArcLimit: function() {
-        return ((this.r.omega > 0) && ((this.getAngle() - this.rotation % rss.PI2) > this.r.angle / 2))
-            || ((this.r.omega < 0) && ((this.getAngle() % rss.PI2) < -1 * this.r.angle / 2))
+        cc.log("theta: " + rss.toDeg(this.getAngle()))
+        cc.log("theta % 2PI: " + rss.toDeg(this.getAngle() % rss.PI2))
+        cc.log("offset: " + rss.toDeg(this.getOffset()))
+        cc.log("range: " + rss.toDeg(this.getRange()))
+        cc.log("offset + range: " + rss.toDeg(this.getOffset() + this.getRange()))
+        return ((this.r.omega > 0) && (this.getAngle() % rss.PI2) >= this.getOffset() + this.getRange())
+            || ((this.r.omega < 0) && (this.getAngle() % rss.PI2) <= this.getOffset())
     },
 
     move: function(dt) {
-        var x = rss.sub(this.getPos(), this.getStartPos()).x
-        var y = rss.sub(this.getPos(), this.getStartPos()).y
-
-        var theta = Math.atan(Math.abs(y / x))
-        rss.logDeg(theta, "theta")
-        rss.logDeg(this.r.angle, "angle")
-        cc.log("body angle: " + this.getAngleDeg() % 360)
-
         if (this.hasReachedArcLimit()) {
             cc.log("reversing")
             this.r.omega *= -1
             this.setVel(rss.rotate180(this.getVel()))
         }
 
-        var radialAcc = this.r.omega * this.r.omega * this.r.radius
+        var rel = this.getPosRel()
+        var theta = Math.atan(Math.abs(rel.y / rel.x))
 
-        var ix = -1 * rss.sign(this.getVel().y) * this.getMass() * radialAcc * Math.cos(theta) * dt
-        var iy = rss.sign(this.getVel().x) * this.getMass() * radialAcc * Math.sin(theta) * dt
+        var radialAcc = this.r.omega * this.r.omega * this.r.radius
+        var acc = rss.polarToCartesian(radialAcc, theta)
+
+        // Acceleration vector direction is at 90 degrees to velocity vector
+        var dir = rss.unitVec(rss.rotate90(this.getVel()))
+
+        var ix = dir.x * this.getMass() * acc.x * dt
+        var iy = dir.y * this.getMass() * acc.y * dt
+
         var impulse = cc.p(ix, iy)
 
         this.applyImpulse(impulse)
     },
 
+    getRange: function() {
+        return this.r.range
+    },
+
+    getPosRel: function() {
+        return rss.sub(this.getPos(), this.getOrigin())
+    },
+
     update: function(dt) {
-        this.move(dt)
+        if (this.getAngle() > this.getOffset() && this.getAngle() < (this.getOffset() + 0.1)) {
+            cc.log("Restoring")
+            this.restoreVel()
+        }
     }
 })
 

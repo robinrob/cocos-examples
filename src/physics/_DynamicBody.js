@@ -45,6 +45,10 @@ rss._DynamicBody = rss._StaticBody.extend({
         return this.r.body.m
     },
 
+    getRadius: function() {
+        return this.r.radius
+    },
+
     getAngle: function() {
         return this.r.body.a
     },
@@ -55,6 +59,10 @@ rss._DynamicBody = rss._StaticBody.extend({
 
     setAngle: function(deg) {
         this.r.body.setAngle(deg)
+    },
+
+    getOffset: function() {
+        return this.r.offset
     },
 
     getAngVel: function() {

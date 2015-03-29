@@ -27,6 +27,7 @@ var ExampleCircularMovement = ExampleScene.extend({
             this._super()
 
             this.r.space = space
+            this.r.space.damping = 1.0
             //this.r.space.gravity = cp.v(0, rss.gravity);
 
             this._debugNode = new cc.PhysicsDebugNode(this.r.space);
@@ -45,17 +46,20 @@ var ExampleCircularMovement = ExampleScene.extend({
                 size: cc.size(10, 10)
             }).addToSpace(this.r.space)
 
+            var range = rss.toRad(360)
+            var offset = rss.toRad(135)
             this.item = CircFlyingObstacle.create({
                 pos: rss.center(),
                 size: cc.size(50, 50),
-                mass: 50,
+                mass: 1,
                 radius: 200,
-                angle: rss.toRad(90),
-                rotation: rss.toRad(90),
+                range: range,
+                offset: offset,
                 omega: rss.toRad(100)
             }).addToSpace(this.r.space)
 
             this.r.space.addConstraints(rss.pivotJoint(box, this.item))
+            this.r.space.addConstraints(rss.rotaryLimitJoint(box, this.item, offset, offset + range))
 
             return this
         },

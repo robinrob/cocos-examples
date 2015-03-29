@@ -161,6 +161,13 @@ rss.normalVecTo = function(v) {
     return cc.p(-1 * v.y, v.x)
 }
 
+rss.rotate = function(v) {
+    return cc.p(
+        v.x * Math.cos(angle) - v.y * Math.sin(angle),
+        v.x * Math.sin(angle) + v.y * Math.cos(angle)
+    )
+}
+
 rss.rotate90 = function(v) {
     return cc.p(-1 * v.y, v.x)
 }
@@ -185,12 +192,28 @@ rss.normalize = function(vec) {
     return cc.p(vec.x / rss.mag(vec), vec.y / rss.mag(vec))
 }
 
+rss.unitVec = function(vec) {
+    return cc.p(vec.x / rss.mag(vec), vec.y / rss.mag(vec))
+}
+
 rss.toRad = function(deg) {
     return cc.degreesToRadians(deg)
 }
 
 rss.toDeg = function(rad) {
     return cc.radiansToDegrees(rad)
+}
+
+rss.polarXProj = function(r, theta) {
+    return r * Math.cos(theta)
+}
+
+rss.polarYProj = function(r, theta) {
+    return r * Math.sin(theta)
+}
+
+rss.polarToCartesian = function(r, theta) {
+    return cc.p(rss.polarXProj(r, theta), rss.polarYProj(r, theta))
 }
 
 rss.pinJoint = function(obj1, obj2) {
@@ -219,7 +242,11 @@ rss.ratchetJoint = function(obj1, obj2, offset, phase) {
 
 rss.fixedJoint = function(obj1, obj2, angle) {
     var angle = angle || 0.0
-    return rss.gearJoint(obj1, obj2, cc.degreesToRadians(angle), 1.0).concat(rss.pivotJoint(obj1, obj2))
+    return rss.gearJoint(obj1, obj2, angle, 1.0).concat(rss.pivotJoint(obj1, obj2))
+}
+
+rss.rotaryLimitJoint = function(obj1, obj2, angle1, angle2) {
+    return [new cp.RotaryLimitJoint(obj1.r.body, obj2.r.body, angle1, angle2)]
 }
 
 rss.size = function() {
