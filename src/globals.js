@@ -60,6 +60,10 @@ rss.tagOfLayer = {
     Animation: 1
 }
 
+rss.tag = {
+    man: 0
+}
+
 rss.res = {
     fish1_png  : "res/fish/fish1.png",
     fish_png  : "res/fish/fish.png",

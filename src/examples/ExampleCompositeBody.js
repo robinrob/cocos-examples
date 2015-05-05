@@ -27,7 +27,8 @@ var ExampleCompositeBody = {
 
         constructMan: function() {
             this.man = Man.create({pos: this.r.center, space: this.r.space})
-            this.man.setVel(0, 0)
+            this.man.setVel(cc.p(0, 0))
+            this.man.addToSpace(this.r.space)
         },
 
         constructPlatform: function() {

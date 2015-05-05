@@ -1,7 +1,7 @@
 var Fish = rss._DynamicBody.extend({
-    ctor:function(pos, size, mass, space) {
+    ctor:function(args) {
         cc.log("Ball.ctor ...")
-        this._super(pos, size, mass, space)
+        this._super(args)
 
         this.color = cc.color(255, 0, 0, 255)
 
@@ -30,13 +30,11 @@ var Fish = rss._DynamicBody.extend({
         this.r.body = new cp.Body(10, cp.momentForCircle(10, 0, this.r.size.width / 2, cp.v(0,0)));
         this.r.body.setPos(this.r.startPos)
         this.r.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));//run speed
-        this.r.space.addBody(this.r.body);
 
         this.sprite.setBody(this.r.body)
 
         this.r.shape = new cp.CircleShape(this.r.body, this.r.size.width / 2, cp.v(0,0))
         this.r.shape.setElasticity(0.8)
-        this.r.space.addShape(this.r.shape)
     },
 
     initBox2D: function() {

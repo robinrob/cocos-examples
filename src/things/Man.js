@@ -54,7 +54,7 @@ var Man = rss._CompositeDynamicBody.extend({
     },
 
     joinLimbs: function(limb1, limb2) {
-        rss.pivotJoint(this.r.space, limb1, limb2)
+        this.addConstraints(rss.pivotJoint(limb1, limb2))
     },
 
     worldX: function(x) {

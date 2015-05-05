@@ -22,7 +22,7 @@ var ExamplePhysicsSprite = {
         init: function () {
             this._super()
 
-            this.fish = new Fish(this.r.center, cc.size(), 10, this.r.space)
+            this.fish = new Fish({pos: this.r.center, size: cc.size(), mass: 10}).addToSpace(this.r.space)
             this.addChild(this.fish)
         },
 
@@ -31,7 +31,7 @@ var ExamplePhysicsSprite = {
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {
