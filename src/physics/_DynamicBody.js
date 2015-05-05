@@ -45,10 +45,6 @@ rss._DynamicBody = rss._StaticBody.extend({
         return this.r.body.m
     },
 
-    getRadius: function() {
-        return this.r.radius
-    },
-
     getAngle: function() {
         return this.r.body.a
     },

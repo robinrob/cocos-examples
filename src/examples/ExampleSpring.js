@@ -1,30 +1,32 @@
-var ExampleSpring = ExampleScene.extend({
-    ctor: function() {
-        this._super()
-    },
+var ExampleSpring = {
+    Scene: BaseScene.extend({
+        ctor: function () {
+            this._super()
+        },
 
-    init: function() {
-        this._super()
+        init: function () {
+            this._super()
 
-        this.r.space = new cp.Space()
-        //this.r.space.gravity = cp.v(0, rss.gravity);
+            this.r.space = new cp.Space()
+            //this.r.space.gravity = cp.v(0, rss.gravity);
 
-        this.r.layer = new this.Layer(this.r.space)
-        this.addChild(this.r.layer)
+            this.r.layer = new this.Layer(this.r.space)
+            this.addChild(this.r.layer)
 
-        this.scheduleUpdate()
+            this.scheduleUpdate()
 
-        return this
-    },
+            return this
+        },
 
-    update: function(dt) {
-        this.r.space.step(dt)
+        update: function (dt) {
+            this.r.space.step(dt)
 
-        this.getLayer().update(dt)
-    },
+            this.getLayer().update(dt)
+        }
+    }),
 
-    Layer: ExampleScene.Layer.extend({
-        ctor: function(space) {
+    Layer: BaseLayer.extend({
+        ctor: function (space) {
             this._super()
 
             this.r.space = space
@@ -51,12 +53,8 @@ var ExampleSpring = ExampleScene.extend({
             return this
         },
 
-        update: function(dt) {
+        update: function (dt) {
             this.item.update(dt)
         }
     })
-})
-
-ExampleSpring.create = function() {
-    return new ExampleSpring().init()
 }

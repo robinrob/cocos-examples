@@ -23,6 +23,20 @@ rss._StaticBody = cc.Node.extend({
         return this
     },
 
+    removeFromSpace: function(space) {
+        space.removeShape(this.getShape())
+        var body = this.getBody()
+        if (body) {
+            space.removeBody(body)
+            space.constraints.forEach(function(constr) {
+                if ((constr.a == body) || (constr.b == body)) {
+                    cc.log("REMOVING CONSTRAINT")
+                    space.removeConstraint(constr)
+                }
+            })
+        }
+    },
+
     getStartPos: function() {
         return this.r.startPos
     },
@@ -89,6 +103,30 @@ rss._StaticBody = cc.Node.extend({
 
     getHeight: function() {
         return this.r.size.height
+    },
+
+    getRadius: function() {
+        return this.r.radius
+    },
+
+    getWidthRad: function(radius) {
+        return this.getWidth() / this.getRadius()
+    },
+
+    getHeightRad: function(radius) {
+        return this.getHeight() / this.getRadius()
+    },
+
+    getShape: function() {
+        return this.r.shape
+    },
+
+    getBody: function() {
+        return this.r.body
+    },
+
+    getSprite: function() {
+        return this.r.sprite
     },
 
     getStartPos: function() {

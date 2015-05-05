@@ -1,5 +1,6 @@
 var Man = rss._CompositeDynamicBody.extend({
     ctor: function(args) {
+        args.size = cc.size(rss.man.width.total, rss.man.height.total)
         this._super(args)
     },
 
@@ -7,7 +8,7 @@ var Man = rss._CompositeDynamicBody.extend({
         cc.log("rss.man.init ...")
         this._super()
 
-        this.r.state = rss.player.state.jumpDown
+        //this.r.state = rss.player.state.jumpDown
 
         // legs
         var leftLeg = this._constructLeg(
@@ -69,16 +70,16 @@ var Man = rss._CompositeDynamicBody.extend({
     },
 
     _constructLimb: function(pos, size, mass, color) {
-        var limb = new rss.RectBody(
-            pos,
-            size,
-            mass,
-            this.r.space
-        )
+        var limb = rss.RectBody.create({
+            pos: pos,
+            size: size,
+            mass: mass,
+            space: this.r.space
+        })
         limb.setColor(color)
         limb.setJointP(cc.p(0, size.height / 2))
 
-        limb.shape.setCollisionType(rss.tag.man);
+        limb.getShape().setCollisionType(rss.tag.man);
 
         this.addComp(limb)
 

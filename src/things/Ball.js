@@ -37,7 +37,7 @@ var Ball = rss.CircBody.extend({
             this.setVel(cp.v(this.getVel().x, 0))
         }
 
-        this.r.draw()
+        this.draw()
     }
 })
 

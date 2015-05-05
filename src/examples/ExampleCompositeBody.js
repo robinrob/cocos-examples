@@ -18,7 +18,7 @@ var ExampleCompositeBody = {
         init: function () {
             this._super()
 
-            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
+            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: this.r.size, space: this.r.space})
 
             this.constructMan()
             this.constructPlatform()
@@ -26,16 +26,16 @@ var ExampleCompositeBody = {
         },
 
         constructMan: function() {
-            this.man = new Man(this.r.center, this.r.space)
+            this.man = Man.create({pos: this.r.center, space: this.r.space})
             this.man.setVel(0, 0)
         },
 
         constructPlatform: function() {
-            var platform = new Platform(
-                cc.p(this.r.center.x - 20, this.r.center.y),
-                cc.p(this.r.center.x + 20, this.r.center.y),
-                2,
-                this.r.space)
+            var platform = Platform.create({
+                p1: cc.p(this.r.center.x - 20, this.r.center.y),
+                p2: cc.p(this.r.center.x + 20, this.r.center.y),
+                thickness: 2,
+                space: this.r.space})
         },
 
         constructBalls: function() {
@@ -43,7 +43,7 @@ var ExampleCompositeBody = {
             for (var i = 0; i < 10; ++i) {
                 var pos = rss.add(this.man.getPos(), cc.p(i * 10, 150))
                 cc.log("new ball")
-                var ball = new Ball(pos, 10, rss.ball.mass, this.r.space)
+                var ball = Ball.create({pos: pos, radius: 10, mass: rss.ball.mass, space: this.r.space})
                 this.balls.push(ball)
             }
         },
@@ -56,7 +56,7 @@ var ExampleCompositeBody = {
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {
