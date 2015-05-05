@@ -1,28 +1,26 @@
-var ExampleCircularMovement = ExampleScene.extend({
-    ctor: function() {
-        this._super()
-    },
+var ExampleCircularMovement = {
+    Scene: BaseScene.extend({
+        init: function() {
+            this._super()
 
-    init: function() {
-        this._super()
+            this.r.space = new cp.Space()
 
-        this.r.space = new cp.Space()
+            this.r.layer = new this.Layer(this.r.space)
+            this.addChild(this.r.layer)
 
-        this.r.layer = new this.Layer(this.r.space)
-        this.addChild(this.r.layer)
+            this.scheduleUpdate()
 
-        this.scheduleUpdate()
+            return this
+        },
 
-        return this
-    },
+        update: function(dt) {
+            this.r.space.step(dt)
 
-    update: function(dt) {
-        this.r.space.step(dt)
+            this.getLayer().update(dt)
+        }
+    }),
 
-        this.getLayer().update(dt)
-    },
-
-    Layer: ExampleScene.Layer.extend({
+    Layer: BaseLayer.extend({
         ctor: function(space) {
             this._super()
 
@@ -68,8 +66,4 @@ var ExampleCircularMovement = ExampleScene.extend({
             this.item.update(dt)
         }
     })
-})
-
-ExampleCircularMovement.create = function() {
-    return new ExampleCircularMovement().init()
 }

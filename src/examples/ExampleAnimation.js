@@ -15,7 +15,7 @@ var ExampleAnimation = {
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         onEnter:function () {
             this._super();
 

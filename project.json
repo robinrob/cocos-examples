@@ -66,6 +66,7 @@
         "src/examples/ExampleJoints.js",
         "src/examples/ExamplePolyBody.js",
         "src/examples/ExampleCircularMovement.js",
-        "src/examples/ExampleSpring.js"
+        "src/examples/ExampleSpring.js",
+        "src/examples/ExampleGamepad.js"
     ]
 }

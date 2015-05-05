@@ -37,7 +37,9 @@ var MenuLayer = cc.Layer.extend({
             rss.ui.constructMenuItem("Spaceship2", new ExampleSpaceship2.Scene()),
             rss.ui.constructMenuItem("Chair", new ExampleChair.Scene()),
             rss.ui.constructMenuItem("Joints", new ExampleJoints.Scene()),
-            rss.ui.constructMenuItem("Poly Body", new ExampleJoints.Scene())
+            rss.ui.constructMenuItem("Poly Body", new ExampleJoints.Scene()),
+            rss.ui.constructMenuItem("Circular Movement", new ExampleCircularMovement.Scene()),
+            rss.ui.constructMenuItem("Gamepad API", new ExampleGamepad.Scene())
         ]
         return items
     }

@@ -56,13 +56,7 @@ cc.game.onStart = function(){
     cc.view.resizeWithBrowserSize(true);
     //load resources
     cc.LoaderScene.preload(rss.resources, function () {
-        //cc.director.runScene(new MenuScene());
-        //cc.director.runScene(new ExampleBody.Scene())
-        //cc.director.runScene(new ExamplePolyBody.Scene())
-        cc.director.runScene(ExampleCircularMovement.create())
-        //cc.director.runScene(ExampleSpring.create())
-        //cc.director.runScene(new ExampleControl.Scene())
-        //cc.director.runScene(new ExamplePhysicsSprite.Scene())
+        cc.director.runScene(new MenuScene());
     }, this);
 };
 cc.game.run();
