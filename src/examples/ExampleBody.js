@@ -42,10 +42,20 @@ var ExampleBody = {
 
             this.ball = Ball.create({pos: pos, radius: 10, mass: rss.ball.mass}).addToSpace(this.r.space)
             this.addChild(this.ball)
+
+            this.sphere = rss.CircBody.create({
+                pos: rss.addX(pos, 100),
+                radius: 30,
+                mass: rss.ball.mass,
+                color: rss.colors.red
+            }).addToSpace(this.r.space)
+            this.addChild(this.sphere)
         },
 
         update: function() {
             this.ball.update()
+            //this.sphere.drawDot()
+            this.sphere.drawCircle()
         }
     }),
 

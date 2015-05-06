@@ -83,6 +83,36 @@ rss.CircBody = rss._DynamicBody.extend({
 
     setAngularVel: function(w) {
         this.r.body.w = w
+    },
+
+    drawCircle: function() {
+        if (!this.r.draw) {
+            this.r.draw = new cc.DrawNode()
+            this.addChild(this.r.draw)
+        }
+        this.r.draw.clear()
+        this.r.draw.drawCircle(
+            this.getPos(),
+            this.getRadius(),
+            0,
+            20,
+            false,
+            10,
+            this.getColor()
+        )
+    },
+
+    drawDot: function() {
+        if (!this.r.draw) {
+            this.r.draw = new cc.DrawNode()
+            this.addChild(this.r.draw)
+        }
+        this.r.draw.clear()
+        this.r.draw.drawDot(
+            this.getPos(),
+            this.getRadius(),
+            this.getColor()
+        )
     }
 })
 

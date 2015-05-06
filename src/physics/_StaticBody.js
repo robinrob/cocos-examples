@@ -11,6 +11,8 @@ rss._StaticBody = cc.Node.extend({
         this.r.size = args.size
         this.r.width = args.size.width
         this.r.height = args.size.height
+
+        this.r.color = args.color
     },
 
     init: function() {
