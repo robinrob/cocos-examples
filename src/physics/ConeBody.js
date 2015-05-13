@@ -11,6 +11,7 @@ rss.ConeBody = rss._DynamicBody.extend({
     },
 
     init: function() {
+        this._super()
         // body
         this.r.body = new cp.Body(this.r.mass, cp.momentForBox(this.r.mass, this.r.size.width, this.r.size.height))
         this.r.body.setPos(this.getStartPos())

@@ -161,7 +161,7 @@ rss.normalVecTo = function(v) {
     return cc.p(-1 * v.y, v.x)
 }
 
-rss.rotate = function(v) {
+rss.rotate = function(v, angle) {
     return cc.p(
         v.x * Math.cos(angle) - v.y * Math.sin(angle),
         v.x * Math.sin(angle) + v.y * Math.cos(angle)
@@ -178,6 +178,14 @@ rss.rotate180 = function(v) {
 
 rss.rotate270 = function(v) {
     return cc.p(v.y, -1 * v.x)
+}
+
+rss.rotateAll = function(points, angle) {
+    var newps = []
+    points.forEach(function(p) {
+        newps.push(rss.rotate(p, angle))
+    })
+    return newps
 }
 
 rss.distance = function(p1, p2) {

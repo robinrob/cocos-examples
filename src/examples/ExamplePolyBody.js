@@ -20,24 +20,40 @@ var ExamplePolyBody = {
         init: function () {
             this._super()
 
-            rss.ConeBody.create({
-                pos: rss.subX(this.r.center, 300),
-                length: 100,
-                radius: 20,
-                segments: 20,
-                rotation: 90,
-                mass: 10
-            }).addToSpace(this.r.space)
+            //o=180;
+            //w=20;
+            //h=50;
+            //star = [o, o, o+w, o-h, o+w*2, o, o+w*2+h, o+w, o+w*2, o+w*2, o+w, o+w*2+h, o, o+w*2, o-h, o+w]
+            //    //cc.p(o,o), cc.p(o+w,o-h), cc.p(o+w*2, o),       // lower spike
+            //    //cc.p(o + w*2 + h, o+w ), cc.p(o + w*2, o+w*2),  // right spike
+            //    //cc.p(o +w, o+w*2+h), cc.p(o,o+w*2),             // top spike
+            //    //cc.p(o -h, o+w)                                 // left spike
+            //
+            //var draw = new cc.DrawNode()
+            //draw.setPosition(this.r.center)
+            //draw.drawPoly(star, rss.colors.red, 2, rss.colors.red)
+            //rss.PolyBody.create({
+            //    pos: rss.subX(this.r.center, 300),
+            //    verts: star,
+            //    size: cc.size(50, 50),
+            //    mass: 10
+            //}).addToSpace(this.r.space)
 
-            this.addChild(rss.CircSegmentBody.create({
-                pos: this.r.center,
-                radius: 200,
-                angle: 90,
-                segments: 1,
-                rotation: 120,
-                mass: 10,
-                length: 1.0
-            }).addToSpace(this.r.space).draw())
+            o=0;
+            w=20;
+            h=50;
+            var width = 2 * h + w
+            var radius = width / 2
+            var star = [
+                cc.p(0, 0), cc.p(w, -1 * h), //bottom
+                cc.p(w*2, 0), cc.p(w*2 + h, w), //right
+                cc.p(w*2, w*2),  cc.p(w, w*2+h), //top
+                cc.p(0,w*2), cc.p(-1 * h, w) //left
+            ];
+            var draw = new cc.DrawNode()
+            draw.setPosition(this.r.center)
+            draw.drawPoly(star, rss.colors.red, 2, rss.colors.red)
+            this.addChild(draw)
         }
     }),
 
