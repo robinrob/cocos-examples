@@ -32,6 +32,7 @@ var ExampleDraw = {
             //draw.drawPoly(star4, rss.colors.yellow, 1, rss.colors.yellow)
 
             var star = Star.create({pos: rss.center()})
+            star.setColor(rss.colors.yellow)
             star.draw()
             this.addChild(star)
 
