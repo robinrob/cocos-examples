@@ -66,14 +66,8 @@ rss.tag = {
 }
 
 rss.res = {
-    fish1_png  : "res/fish/fish1.png",
-    fish_png  : "res/fish/fish.png",
-    fish_plist : "res/fish/fish.plist",
-
-    spaceship_nofire_png: "res/spaceship/spaceship_nofire.png",
-
-    spaceship_png : "res/spaceship/spaceship.png",
-    spaceship_plist : "res/spaceship/spaceship.plist"
+    spritesheet_png : "res/spritesheet.png",
+    spritesheet_plist : "res/spritesheet.plist"
 }
 
 // Resources for pre-loading
