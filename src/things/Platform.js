@@ -1,4 +1,4 @@
-var Platform = rss._StaticBody.extend({
+var Platform = rss.StaticBody.extend({
         ctor:function(args) {
             cc.log("Platform.ctor ...")
             args.size = cc.size()
