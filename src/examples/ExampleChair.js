@@ -23,8 +23,8 @@ var ExampleChair = {
             Chair.create({pos: this.r.center}).addToSpace(this.r.space)
 
             this.addChild(Platform.create({
-                p1: rss.addX(this.r.center, -100),
-                p2: rss.addX(this.r.center, 40),
+                p1: rss.p.addX(this.r.center, -100),
+                p2: rss.p.addX(this.r.center, 40),
                 thickness: 10
             }).addToSpace(this.r.space))
         }

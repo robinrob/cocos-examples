@@ -16,7 +16,7 @@ var Spring = rss.RectBody.extend({
     },
 
     getX: function() {
-        var mid = rss.addY(cc.p(600, 400), this.r.length / 2)
+        var mid = rss.p.addY(cc.p(600, 400), this.r.length / 2)
         rss.logP(this.r.startPos, "startPos")
         rss.logP(mid, "mid")
         return this.getPos().y - mid.y

@@ -56,8 +56,8 @@ cc.game.onStart = function(){
     cc.view.resizeWithBrowserSize(true);
     //load resources
     cc.LoaderScene.preload(rss.resources, function () {
-        cc.director.runScene(new MenuScene());
-        //cc.director.runScene(new ExampleAnimation2.Scene());
+        //cc.director.runScene(new MenuScene());
+        cc.director.runScene(new ExampleDraw.Scene());
     }, this);
 };
 cc.game.run();

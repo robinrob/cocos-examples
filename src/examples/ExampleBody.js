@@ -44,7 +44,7 @@ var ExampleBody = {
             this.addChild(this.ball)
 
             this.sphere = rss.CircBody.create({
-                pos: rss.addX(pos, 100),
+                pos: rss.p.addX(pos, 100),
                 radius: 30,
                 mass: rss.ball.mass,
                 color: rss.colors.red

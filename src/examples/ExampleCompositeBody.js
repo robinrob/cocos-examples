@@ -42,7 +42,7 @@ var ExampleCompositeBody = {
         constructBalls: function() {
             this.balls = []
             for (var i = 0; i < 10; ++i) {
-                var pos = rss.add(this.man.getPos(), cc.p(i * 10, 150))
+                var pos = rss.p.add(this.man.getPos(), cc.p(i * 10, 150))
                 cc.log("new ball")
                 var ball = Ball.create({pos: pos, radius: 10, mass: rss.ball.mass, space: this.r.space})
                 this.balls.push(ball)

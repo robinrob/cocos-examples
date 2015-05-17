@@ -72,6 +72,9 @@ rss.toV = function(p) {
     return cp.v(p.x, p.y)
 }
 
+rss.v = {}
+
+
 rss.vertsToPs = function(verts, offset) {
     offset = offset || cc.p()
     var vertPs = []
@@ -102,15 +105,15 @@ rss.sign = function(number) {
 }
 
 rss.p = {}
-rss.add = function(p1, p2) {
+rss.p.add = function(p1, p2) {
     return cc.p(p1.x + p2.x, p1.y + p2.y)
 }
 
-rss.addX = function(obj, dx) {
+rss.p.addX = function(obj, dx) {
     return cc.p(obj.x + dx, obj.y)
 }
 
-rss.addY = function(obj, dy) {
+rss.p.addY = function(obj, dy) {
     return cc.p(obj.x, obj.y + dy)
 }
 
@@ -134,11 +137,11 @@ rss.multS = function(s, m) {
     return cc.size(s.width * m, s.height * m)
 }
 
-rss.addW = function(s, dw) {
+rss.p.addW = function(s, dw) {
     return cc.size(s.width + dw, s.height)
 }
 
-rss.addH = function(s, dh) {
+rss.p.addH = function(s, dh) {
     return cc.size(s.width, s.height + dh)
 }
 
@@ -181,10 +184,25 @@ rss.rotate270 = function(v) {
     return cc.p(v.y, -1 * v.x)
 }
 
+rss.allPs = function(points, func, args) {
+    var newps = []
+    points.forEach(function(p) {
+        newps.push(func(p, args))
+    })
+    return newps
+}
 rss.rotateAll = function(points, angle) {
     var newps = []
     points.forEach(function(p) {
         newps.push(rss.rotate(p, angle))
+    })
+    return newps
+}
+
+rss.p.addAll = function(points, vector) {
+    var newps = []
+    points.forEach(function(point) {
+        newps.push(rss.p.add(point, vector))
     })
     return newps
 }
@@ -266,48 +284,40 @@ rss.rotaryLimitJoint = function(obj1, obj2, angle1, angle2) {
     return [new cp.RotaryLimitJoint(obj1.getBody(), obj2.getBody(), angle1, angle2)]
 }
 
-rss.winSize = function() {
-    return cc.director.getWinSize()
-}
-
-rss.size = function() {
-    return rss.winSize()
-}
-
 rss.width = function() {
-    return rss.winSize().width
+    return cc.director.getWinSize().width
 }
 
 rss.height = function() {
-    return rss.winSize().height
+    return cc.director.getWinSize().height
 }
 
 rss.top = function() {
-    return cc.p(rss.winSize().width / 2, rss.winSize().height)
+    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height)
 }
 
 rss.bottom = function() {
-    return cc.p(rss.winSize().width / 2, 0)
+    return cc.p(cc.director.getWinSize().width / 2, 0)
 }
 
 rss.left = function() {
-    return cc.p(0, rss.winSize().height / 2)
+    return cc.p(0, cc.director.getWinSize().height / 2)
 }
 
 rss.right = function() {
-    return cc.p(rss.winSize().width, rss.winSize().height / 2)
+    return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height / 2)
 }
 
 rss.center = function() {
-    return cc.p(rss.winSize().width / 2, rss.winSize().height / 2)
+    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height / 2)
 }
 
 rss.topLeft = function() {
-    return cc.p(0, rss.winSize().height)
+    return cc.p(0, cc.director.getWinSize().height)
 }
 
 rss.topRight = function() {
-    return cc.p(rss.winSize().width, rss.winSize().height)
+    return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height)
 }
 
 /* Global game controls */

@@ -16,7 +16,7 @@ var CircFlyingObstacle = rss.RectBody.extend({
         this._super()
 
         var startAng = this.getOffset() + this.getRange() / 2
-        var pos = rss.add(this.getOrigin(), rss.polarToCartesian(this.getRadius(), startAng))
+        var pos = rss.p.add(this.getOrigin(), rss.polarToCartesian(this.getRadius(), startAng))
 
         this.setPos(pos)
         this.setAngle(startAng)

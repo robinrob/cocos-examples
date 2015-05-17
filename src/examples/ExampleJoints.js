@@ -23,7 +23,7 @@ var ExampleJoints = {
             var box = this.constructBox()
             var slider = this.constructSlider()
             //var box = this.constructSlider()
-            //slider.setPos(rss.add(box.getPos(), cc.p(50, 50)))
+            //slider.setPos(rss.p.add(box.getPos(), cc.p(50, 50)))
 
             //rss.pinJoint(this.r.space, box, slider)
             //rss.pivotJoint(this.r.space, box, slider)
@@ -39,7 +39,7 @@ var ExampleJoints = {
         },
 
         constructSlider: function() {
-            var slider = new RectBody(rss.addY(this.r.center, 50), cc.size(50, 50), 50, this.r.space)
+            var slider = new RectBody(rss.p.addY(this.r.center, 50), cc.size(50, 50), 50, this.r.space)
             slider.setJointP(cc.p(0, 0))
             slider.setGroup(1)
             return slider

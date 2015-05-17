@@ -84,7 +84,7 @@ rss._StaticBody = cc.Node.extend({
 
     getJointP: function(wantGlobal) {
         if (wantGlobal) {
-            return rss.add(this.getPos(), this.r.jointPs[0])
+            return rss.p.add(this.getPos(), this.r.jointPs[0])
         }
         else {
             return this.r.jointPs[0]
