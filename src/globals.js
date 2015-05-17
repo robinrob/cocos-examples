@@ -70,6 +70,8 @@ rss.res = {
     fish_png  : "res/fish/fish.png",
     fish_plist : "res/fish/fish.plist",
 
+    spaceship_nofire_png: "res/spaceship/spaceship_nofire.png",
+
     spaceship_png : "res/spaceship/spaceship.png",
     spaceship_plist : "res/spaceship/spaceship.plist"
 }

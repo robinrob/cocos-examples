@@ -26,6 +26,7 @@ var MenuLayer = cc.Layer.extend({
     menuItems: function() {
         var items = [
             rss.ui.constructMenuItem("Animation", new ExampleAnimation.Scene()),
+            rss.ui.constructMenuItem("Animation2", new ExampleAnimation2.Scene()),
             rss.ui.constructMenuItem("Body", new ExampleBody.Scene()),
             rss.ui.constructMenuItem("Composite Body", new ExampleCompositeBody.Scene()),
             rss.ui.constructMenuItem("Draw", new ExampleDraw.Scene()),

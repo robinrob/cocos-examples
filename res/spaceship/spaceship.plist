@@ -4,57 +4,57 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>0.png</key>
+            <key>spaceship0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{120,65}}</string>
+                <string>{{2,2},{65,120}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,65}}</string>
+                <string>{{0,0},{65,120}}</string>
                 <key>sourceSize</key>
-                <string>{120,65}</string>
+                <string>{65,120}</string>
             </dict>
-            <key>1.png</key>
+            <key>spaceship1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{69,2},{120,65}}</string>
+                <string>{{69,2},{65,120}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,65}}</string>
+                <string>{{0,0},{65,120}}</string>
                 <key>sourceSize</key>
-                <string>{120,65}</string>
+                <string>{65,120}</string>
             </dict>
-            <key>2.png</key>
+            <key>spaceship2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{136,2},{120,65}}</string>
+                <string>{{136,2},{65,120}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,65}}</string>
+                <string>{{0,0},{65,120}}</string>
                 <key>sourceSize</key>
-                <string>{120,65}</string>
+                <string>{65,120}</string>
             </dict>
-            <key>3.png</key>
+            <key>spaceship3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{203,2},{120,65}}</string>
+                <string>{{203,2},{65,120}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,65}}</string>
+                <string>{{0,0},{65,120}}</string>
                 <key>sourceSize</key>
-                <string>{120,65}</string>
+                <string>{65,120}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -66,7 +66,7 @@
             <key>size</key>
             <string>{270,124}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c991d117041406791025586bfb11912f:a657dbd41a60745a3d89b3547adc42c3:16c053cac6c0b079277cb14390734fe9$</string>
+            <string>$TexturePacker:SmartUpdate:6d5296a4c352b62aff48f0d4e87fe9c0:1591b991d92c472ea0456e05094102b6:16c053cac6c0b079277cb14390734fe9$</string>
             <key>textureFileName</key>
             <string>spaceship.png</string>
         </dict>

@@ -39,7 +39,7 @@ cp.Vect.prototype.subY = function(dy) {
     return cp.v(this.x, this.y - dy)
 }
 
-rss.log = function(obj) {
+rss.logO = function(obj) {
     for (i in obj) {
         cc.log(i)
     }
@@ -224,6 +224,14 @@ rss.polarToCartesian = function(r, theta) {
     return cc.p(rss.polarXProj(r, theta), rss.polarYProj(r, theta))
 }
 
+// Haven't tested
+rss.cartesianToPolar = function(x, y) {
+    var theta = Math.atan(y / x)
+    var radius = Math.sqrt(x * x + y * y)
+
+    return cc.p(radius, theta)
+}
+
 rss.pinJoint = function(obj1, obj2) {
     return [new cp.PinJoint(obj1.getBody(), obj2.getBody(), rss.toV(obj1.getJointP()), rss.toV(obj2.getJointP()))]
 }
@@ -257,36 +265,48 @@ rss.rotaryLimitJoint = function(obj1, obj2, angle1, angle2) {
     return [new cp.RotaryLimitJoint(obj1.getBody(), obj2.getBody(), angle1, angle2)]
 }
 
-rss.size = function() {
+rss.winSize = function() {
     return cc.director.getWinSize()
 }
 
+rss.size = function() {
+    return rss.winSize()
+}
+
 rss.width = function() {
-    return cc.director.getWinSize().width
+    return rss.winSize().width
 }
 
 rss.height = function() {
-    return cc.director.getWinSize().height
+    return rss.winSize().height
 }
 
 rss.top = function() {
-    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height)
+    return cc.p(rss.winSize().width / 2, rss.winSize().height)
 }
 
 rss.bottom = function() {
-    return cc.p(cc.director.getWinSize().width / 2, 0)
+    return cc.p(rss.winSize().width / 2, 0)
 }
 
 rss.left = function() {
-    return cc.p(0, cc.director.getWinSize().height / 2)
+    return cc.p(0, rss.winSize().height / 2)
 }
 
 rss.right = function() {
-    return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height / 2)
+    return cc.p(rss.winSize().width, rss.winSize().height / 2)
 }
 
 rss.center = function() {
-    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height / 2)
+    return cc.p(rss.winSize().width / 2, rss.winSize().height / 2)
+}
+
+rss.topLeft = function() {
+    return cc.p(0, rss.winSize().height)
+}
+
+rss.topRight = function() {
+    return cc.p(rss.winSize().width, rss.winSize().height)
 }
 
 /* Global game controls */
@@ -329,4 +349,62 @@ rss.yInput = function() {
 
 rss.xyInput = function() {
     return this.upInput() || this.downInput() || this.r.rightInput() || this.r.leftInput()
+}
+
+rss.setAlpha = function(col, alpha) {
+    return cc.color(col.r, col.g, col.b, alpha)
+}
+
+rss.circSegmentVerts = function(radius, angle, offset, segments, direction) {
+    return rss.floatingCircSegmentVerts(radius, angle, offset, segments, 1.0, direction)
+}
+
+rss.floatingCircSegmentVerts = function(radius, angle, offset, segments, heightFactor, direction) {
+    var verts = []
+
+    var direction = direction || 1.0
+
+    verts.push(rss.polarToCartesian(radius * (1 - heightFactor), offset + direction * angle))
+
+    var deltaTheta = angle / segments
+    for (var n = 0; n <= segments; ++n) {
+        verts.push(rss.polarToCartesian(radius, offset + direction * (angle - n * deltaTheta)))
+    }
+
+    verts.push(rss.polarToCartesian(radius * (1 - heightFactor), offset))
+
+    return verts
+}
+
+rss.starVerts = function(nRays, r1, r2, rayWidth) {
+    verts = []
+
+    var theta = rss.twoPI / nRays
+    for (var n = 0; n < nRays; ++n) {
+        verts.push(rss.polarToCartesian(r1, n * theta))
+        verts.push(rss.polarToCartesian(r2, (n + 1/2) * theta))
+    }
+
+    return verts
+}
+
+rss.scaleVerts = function(verts, scale) {
+    var newVerts = []
+    verts.forEach(function(vert) {
+        newVerts.push(cc.p(vert.x * scale, vert.y * scale))
+    })
+    return newVerts
+}
+
+rss.toXYVerts = function(verts) {
+    vertsXY = []
+    verts.forEach(function(vert) {
+        vertsXY.push(vert.x)
+        vertsXY.push(vert.y)
+    })
+    return vertsXY
+}
+
+rss.log = function(str) {
+    cc.log("COCOS: " + str)
 }

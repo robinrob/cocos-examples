@@ -53,6 +53,7 @@
         "src/scene/ExampleScene.js",
 
         "src/examples/ExampleAnimation.js",
+        "src/examples/ExampleAnimation2.js",
         "src/examples/ExampleBody.js",
         "src/examples/ExampleCompositeBody.js",
         "src/examples/ExamplePhysicsSprite.js",
