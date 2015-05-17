@@ -74,7 +74,6 @@ rss.toV = function(p) {
 
 rss.v = {}
 
-
 rss.vertsToPs = function(verts, offset) {
     offset = offset || cc.p()
     var vertPs = []
@@ -191,6 +190,7 @@ rss.allPs = function(points, func, args) {
     })
     return newps
 }
+
 rss.rotateAll = function(points, angle) {
     var newps = []
     points.forEach(function(p) {
@@ -366,6 +366,19 @@ rss.setAlpha = function(col, alpha) {
     return cc.color(col.r, col.g, col.b, alpha)
 }
 
+rss.squareVerts = function(width) {
+    return rss.rectVerts(width, width)
+}
+
+rss.rectVerts = function(width, height) {
+    return [
+        cc.p(+width / 2, -height / 2),
+        cc.p(+width / 2, +height / 2),
+        cc.p(-width / 2, +height / 2),
+        cc.p(-width / 2, -height / 2)
+    ]
+}
+
 rss.circSegmentVerts = function(radius, angle, offset, segments, direction) {
     return rss.floatingCircSegmentVerts(radius, angle, offset, segments, 1.0, direction)
 }
@@ -389,13 +402,11 @@ rss.floatingCircSegmentVerts = function(radius, angle, offset, segments, heightF
 
 rss.starVerts = function(nRays, r1, r2, rayWidth) {
     verts = []
-
     var theta = rss.twoPI / nRays
     for (var n = 0; n < nRays; ++n) {
         verts.push(rss.polarToCartesian(r1, n * theta))
         verts.push(rss.polarToCartesian(r2, (n + 1/2) * theta))
     }
-
     return verts
 }
 

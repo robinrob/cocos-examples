@@ -1,10 +1,12 @@
-rss.CircBody = rss._DynamicBody.extend({
+rss.CircBody = rss.DynamicBody.extend({
     ctor: function(args) {
         args.size = cc.size(args.radius * 2, args.radius * 2)
         this._super(args)
 
         this.r.offset = args.offset || 0
         this.r.radius = args.radius
+
+        this.r.segments = args.segments
     },
 
     init: function() {
@@ -16,6 +18,9 @@ rss.CircBody = rss._DynamicBody.extend({
         else if (rss.physics == rss.box2D) {
             this.initBox2D()
         }
+
+        this.r.draw = new cc.DrawNode()
+        this.addChild(this.r.draw)
 
         return this
     },
@@ -66,7 +71,7 @@ rss.CircBody = rss._DynamicBody.extend({
     },
 
     getTop: function() {
-        return rss.p.addY(this.r.startPos, this.r.radius)
+        return rss.addY(this.r.startPos, this.r.radius)
     },
 
     getSurfaceVel: function() {
@@ -86,33 +91,34 @@ rss.CircBody = rss._DynamicBody.extend({
     },
 
     drawCircle: function() {
-        if (!this.r.draw) {
-            this.r.draw = new cc.DrawNode()
-            this.addChild(this.r.draw)
+        if (this.r.draw) {
+            this.r.draw.clear()
+            this.r.draw.drawCircle(
+                this.getPos(),
+                this.getRadius(),
+                2,
+                this.getRadius(),
+                false,
+                10,
+                this.getColor()
+            )
         }
-        this.r.draw.clear()
-        this.r.draw.drawCircle(
-            this.getPos(),
-            this.getRadius(),
-            0,
-            20,
-            false,
-            10,
-            this.getColor()
-        )
     },
 
     drawDot: function() {
-        if (!this.r.draw) {
-            this.r.draw = new cc.DrawNode()
-            this.addChild(this.r.draw)
+        if (this.r.draw) {
+            this.r.draw.clear()
+            this.r.draw.drawDot(
+                this.getPos(),
+                this.getRadius(),
+                this.getColor()
+            )
         }
-        this.r.draw.clear()
-        this.r.draw.drawDot(
-            this.getPos(),
-            this.getRadius(),
-            this.getColor()
-        )
+    },
+
+    draw: function() {
+        this.drawDot()
+        this.drawCircle()
     }
 })
 

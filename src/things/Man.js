@@ -1,4 +1,4 @@
-var Man = rss._CompositeDynamicBody.extend({
+var Man = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
         args.size = cc.size(rss.man.width.total, rss.man.height.total)
         this._super(args)

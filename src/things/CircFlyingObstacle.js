@@ -42,12 +42,12 @@ var CircFlyingObstacle = rss.RectBody.extend({
 
     hasReachedArcLimit: function() {
         cc.log("theta: " + rss.toDeg(this.getAngle()))
-        cc.log("theta % 2PI: " + rss.toDeg(this.getAngle() % rss.PI2))
+        cc.log("theta % 2PI: " + rss.toDeg(this.getAngle() % rss.twoPI))
         cc.log("offset: " + rss.toDeg(this.getOffset()))
         cc.log("range: " + rss.toDeg(this.getRange()))
         cc.log("offset + range: " + rss.toDeg(this.getOffset() + this.getRange()))
-        return ((this.r.omega > 0) && (this.getAngle() % rss.PI2) >= this.getOffset() + this.getRange())
-            || ((this.r.omega < 0) && (this.getAngle() % rss.PI2) <= this.getOffset())
+        return ((this.r.omega > 0) && (this.getAngle() % rss.twoPI) >= this.getOffset() + this.getRange())
+            || ((this.r.omega < 0) && (this.getAngle() % rss.twoPI) <= this.getOffset())
     },
 
     move: function(dt) {

@@ -1,4 +1,4 @@
-Chair = rss._CompositeDynamicBody.extend({
+Chair = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
         args.size = cc.size()
         this._super(args)

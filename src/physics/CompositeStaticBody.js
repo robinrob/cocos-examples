@@ -1,6 +1,9 @@
-rss.CompositeStaticBody = rss._StaticBody.extend({
+rss.CompositeStaticBody = rss.StaticBody.extend({
     ctor: function(args) {
         this._super(args)
+
+        this.r.comps = []
+        this.r.constraints = []
     },
 
     init: function() {

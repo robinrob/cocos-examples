@@ -12,16 +12,17 @@
 
     "jsList" : [
         "src/functions.js",
+        "src/constants.js",
         "src/globals.js",
         "src/ui.js",
 
         "src/control/Controllable.js",
         "src/control/Steerable.js",
 
-        "src/physics/_StaticBody.js",
-        "src/physics/_CompositeStaticBody.js",
-        "src/physics/_CompositeDynamicBody.js",
-        "src/physics/_DynamicBody.js",
+        "src/physics/StaticBody.js",
+        "src/physics/CompositeStaticBody.js",
+        "src/physics/CompositeDynamicBody.js",
+        "src/physics/DynamicBody.js",
         "src/physics/RectBody.js",
         "src/physics/StaticRectBody.js",
         "src/physics/CircBody.js",
@@ -43,6 +44,7 @@
         "src/things/Chair.js",
         "src/things/CircFlyingObstacle.js",
         "src/things/Spring.js",
+        "src/things/Star.js",
 
         "src/layer/BaseLayer.js",
         "src/layer/MenuLayer.js",

@@ -1,4 +1,4 @@
-rss.Box = rss._CompositeStaticBody.extend({
+rss.Box = rss.CompositeStaticBody.extend({
     ctor: function(args) {
         this._super(args)
 

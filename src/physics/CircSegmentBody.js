@@ -1,4 +1,6 @@
-rss.CircSegmentBody = rss._DynamicBody.extend({
+rss.CircSegmentBody = rss.DynamicBody.extend({
+    SCALE: 1.0,
+
     ctor: function(args) {
         this._super(args)
 
@@ -10,10 +12,16 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         this.r.midPoint = this.r.offset + this.getWidth() / 2
         this.r.right = this.r.offset + this.getWidth()
         this.r.left = this.r.offset
+
+        this.r.startAngle = args.startAngle
+
+        this.r.shouldPersist = false
+        this.r.shouldDraw = true
     },
 
     init: function() {
         this._super()
+        this.r.isInSpace = true
 
         if (this.getWidth() > 0) {
             this.initMe()
@@ -31,27 +39,10 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         this.r.body.setPos(this.getStartPos())
 
         // shape
-        this.r.vertsXY = []
-        this.r.verts = []
+        this.r.verts = rss.floatingCircSegmentVerts(this.r.radius, this.getWidth(), this.r.offset, this.r.segments, this.r.size.height)
+        this.r.verts = rss.scaleVerts(this.r.verts, this.SCALE)
 
-        var p = rss.polarToCartesian(this.r.radius * (1 - this.getHeight()), this.r.right)
-        this.r.vertsXY.push(p.x, p.y)
-        this.r.verts.push(p)
-
-        var gap = this.getWidth() / this.r.segments
-        for (var a = this.getWidth(); a >= 0; a -= gap) {
-            p = cc.p(
-                this.r.radius * Math.cos(a + this.r.offset),
-                this.r.radius * Math.sin(a + this.r.offset)
-            )
-            this.r.vertsXY.push(p.x, p.y)
-            this.r.verts.push(p)
-        }
-
-        p = rss.polarToCartesian(this.r.radius * (1 - this.getHeight()), this.r.left)
-
-        this.r.vertsXY.push(p.x, p.y)
-        this.r.verts.push(p)
+        this.r.vertsXY = rss.toXYVerts(this.r.verts)
 
         this.r.shape = new cp.PolyShape(this.r.body, this.r.vertsXY, cp.v(0, 0))
 
@@ -61,7 +52,10 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         this.anchorY = this.getStartPos().y
 
         this.r.draw = new cc.DrawNode()
+        this.r.draw.setScale(1.0 / this.SCALE)
         this.addChild(this.r.draw)
+
+        this.startAng = this.r.body.a
     },
 
     getTop: function(wantGlobal) {
@@ -100,16 +94,45 @@ rss.CircSegmentBody = rss._DynamicBody.extend({
         }
     },
 
+    getStartAngle: function() {
+        return this.r.startAngle
+    },
+
+    setShouldPersist: function(bool) {
+        this.r.shouldPersist = bool
+    },
+
+    getShouldPersist: function() {
+        return this.r.shouldPersist
+    },
+
     draw: function() {
-        this.r.draw.clear()
         this.r.draw.setPosition(this.getPos())
-        this.r.draw.drawPoly(this.getVerts(false).reverse(), rss.colors.blue, 0, rss.colors.blue)
+        this.r.draw.drawPoly(
+            this.getVerts(false).reverse(),
+            rss.setAlpha(this.getColor(), 128),
+            rss.ui.linewidth / 2.0,
+            rss.setAlpha(this.getColor(), 255)
+        )
         this.r.draw.setAnchorPoint(0.5, 0)
         this.r.draw.setRotation(-1 * rss.toDeg(this.getAngle()))
     },
 
     update: function() {
-        this.draw()
+        this.r.draw.clear()
+
+        if (this.getShouldPersist()) {
+            this.draw()
+        }
+        else {
+            var ang = this.getAngle() % rss.twoPI
+            var rightEdgeAng = rss.toDeg((this.getStartAngle() - (ang + this.getWidth() / 2)))
+            var leftEdgeAng = rss.toDeg((this.getStartAngle() - (ang - this.getWidth() / 2)))
+            var limit = 20
+            if ((rightEdgeAng < limit) && (leftEdgeAng > (-1 * limit))) {
+                this.draw()
+            }
+        }
     }
 })
 
