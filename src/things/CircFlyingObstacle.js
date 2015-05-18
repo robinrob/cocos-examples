@@ -28,7 +28,7 @@ var CircFlyingObstacle = rss.RectBody.extend({
 
     initVel: function() {
         // Velocity is at 90 degrees to position
-        this.setVel(rss.mult(rss.unitVec(this.getVel), Math.abs(this.r.omega) * this.r.radius))
+        this.setVel(rss.p.mult(rss.unitVec(this.getVel), Math.abs(this.r.omega) * this.r.radius))
         var dir = rss.unitVec(rss.rotate90(this.getPosRel()))
         this.setVel(cc.p(
             this.r.omega * this.r.radius * dir.x,
@@ -37,7 +37,7 @@ var CircFlyingObstacle = rss.RectBody.extend({
     },
 
     restoreVel: function() {
-        this.setVel(rss.mult(rss.unitVec(this.getVel()), Math.abs(this.r.omega) * this.r.radius))
+        this.setVel(rss.p.mult(rss.unitVec(this.getVel()), Math.abs(this.r.omega) * this.r.radius))
     },
 
     hasReachedArcLimit: function() {
@@ -79,7 +79,7 @@ var CircFlyingObstacle = rss.RectBody.extend({
     },
 
     getPosRel: function() {
-        return rss.sub(this.getPos(), this.getOrigin())
+        return rss.p.sub(this.getPos(), this.getOrigin())
     },
 
     update: function(dt) {

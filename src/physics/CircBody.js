@@ -71,7 +71,7 @@ rss.CircBody = rss.DynamicBody.extend({
     },
 
     getTop: function() {
-        return rss.addY(this.r.startPos, this.r.radius)
+        return rss.p.addY(this.r.startPos, this.r.radius)
     },
 
     getSurfaceVel: function() {

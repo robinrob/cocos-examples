@@ -132,32 +132,32 @@ rss.mult = function(p, m) {
     return cc.p(p.x * m, p.y * m)
 }
 
-rss.multS = function(s, m) {
+rss.s.mult = function(s, m) {
     return cc.size(s.width * m, s.height * m)
 }
 
-rss.p.addW = function(s, dw) {
+rss.s.addW = function(s, dw) {
     return cc.size(s.width + dw, s.height)
 }
 
-rss.p.addH = function(s, dh) {
+rss.s.addH = function(s, dh) {
     return cc.size(s.width, s.height + dh)
 }
 
-rss.subW = function(s, dw) {
+rss.s.subW = function(s, dw) {
     return cc.size(s.width - dw, s.height)
 }
 
-rss.subH = function(s, dh) {
+rss.s.subH = function(s, dh) {
     return cc.size(s.width, s.height - dh)
 }
 
 rss.vecFromTo = function(a, b) {
-    return rss.sub(b, a)
+    return rss.p.sub(b, a)
 }
 
 rss.unitVecFromTo = function(a, b) {
-    return rss.normalize(rss.sub(b, a))
+    return rss.normalize(rss.p.sub(b, a))
 }
 
 rss.normalVecTo = function(v) {

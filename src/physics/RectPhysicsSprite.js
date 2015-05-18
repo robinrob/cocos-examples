@@ -3,7 +3,7 @@ rss.RectPhysicsSprite = rss.RectBody.extend({
         var scale = args.scale || 1.0
         var sprite = new cc.PhysicsSprite(args.spriteFrame)
         sprite.setScale(scale)
-        args.size = rss.multS(sprite.getContentSize(), scale)
+        args.size = rss.s.mult(sprite.getContentSize(), scale)
         this._super(args)
 
         this.r.sprite = sprite

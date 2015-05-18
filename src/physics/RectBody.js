@@ -21,8 +21,8 @@ rss.RectBody = rss.DynamicBody.extend({
 
     draw: function() {
         this.r.draw.drawRect(
-            rss.sub(this.getPos(), cc.p(this.getWidth() / 2, this.getHeight() / 2)),
-            rss.add(this.getPos(), cc.p(this.getWidth() / 2, this.getHeight() / 2)),
+            rss.p.sub(this.getPos(), cc.p(this.getWidth() / 2, this.getHeight() / 2)),
+            rss.p.add(this.getPos(), cc.p(this.getWidth() / 2, this.getHeight() / 2)),
             rss.setAlpha(this.getColor(), 255),
             rss.ui.linewidth,
             rss.setAlpha(this.getColor(), 255)

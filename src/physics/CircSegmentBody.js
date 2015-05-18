@@ -78,7 +78,7 @@ rss.CircSegmentBody = rss.DynamicBody.extend({
 
     getShapeBottom: function(wantGlobal) {
         if (wantGlobal) {
-            return rss.sub(this.getShapeTop(true), this.getShapeTop(false))
+            return rss.p.sub(this.getShapeTop(true), this.getShapeTop(false))
         }
         else {
             return cc.p(0, 0)
