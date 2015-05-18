@@ -20,15 +20,15 @@ rss.CompositeDynamicBody = rss.CompositeStaticBody.extend({
         return cc.p(comX, comY)
     },
 
-    setPos: function(x, y) {
+    setPos: function(pos) {
         var com = this.getPos()
-        var deltaX = x - com.x
-        var deltaY = y - com.y
+        var deltaX = pos.x - com.x
+        var deltaY = pos.y - com.y
 
         this.r.comps.forEach(function(comp) {
             var x = comp.getPos().x + deltaX
             var y = comp.getPos().y + deltaY
-            comp.setPos(x, y)
+            comp.setPos(cc.p(x, y))
         })
     },
 
