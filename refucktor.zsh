@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 sed_all 's/this\.origin/this\.r\.origin/g'
 sed_all 's/this\.jointPs/this\.r\.jointPs/g'

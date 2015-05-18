@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 sed_all 's/rss\.add(?=\b)/rss\.p\.add/g' src '*.js'
 sed_all 's/rss\.addX/rss\.p\.addX/g' src '*.js'
