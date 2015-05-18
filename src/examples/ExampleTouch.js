@@ -18,7 +18,7 @@ var ExampleTouch = {
 
             this.balls = []
 
-            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
+            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()}).addToSpace(this.r.space)
 
             var that = this
             cc.eventManager.addListener({
@@ -26,7 +26,7 @@ var ExampleTouch = {
                 swallowTouches: true,
                 onTouchBegan: function(touch, event) {
                     var pos = touch.getLocation();
-                    var ball = new Ball(pos, 10, 10, that.space)
+                    var ball = Ball.create({pos: pos, mass: 10, radius: 10}).addToSpace(that.r.space)
                     that.balls.push(ball)
                     that.addChild(ball)
                 }
@@ -40,7 +40,7 @@ var ExampleTouch = {
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {

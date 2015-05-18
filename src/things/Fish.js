@@ -23,7 +23,10 @@ var Fish = rss.DynamicBody.extend({
         cc.log("Ball.init ...")
         this._super()
 
-        this.sprite = new cc.PhysicsSprite(rss.res.fish1_png)
+        cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist);
+        var spriteSheet = new cc.SpriteBatchNode(rss.res.spritesheet_png);
+
+        this.sprite = new cc.PhysicsSprite("#fish1.png")
         this.addChild(this.sprite)
         this.r.size = this.sprite.getContentSize()
 

@@ -73,8 +73,7 @@ var Man = rss.CompositeDynamicBody.extend({
         var limb = rss.RectBody.create({
             pos: pos,
             size: size,
-            mass: mass,
-            space: this.r.space
+            mass: mass
         })
         limb.setColor(color)
         limb.setJointP(cc.p(0, size.height / 2))
@@ -87,13 +86,12 @@ var Man = rss.CompositeDynamicBody.extend({
     },
 
     _constructLeg: function(x, y) {
-        var limb = this._constructLimb(
+        return this._constructLimb(
             cc.p(x, y),
             cc.size(rss.man.width.leg, rss.man.height.leg),
             rss.man.mass.leg,
             rss.colors.green
         )
-        return limb
     },
 
     _constructArm: function(x, y) {

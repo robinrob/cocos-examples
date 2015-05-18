@@ -5,7 +5,6 @@ var ExamplePhysicsSprite = {
             this.r.space = space
 
             var winSize = cc.director.getWinSize()
-            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
@@ -22,7 +21,7 @@ var ExamplePhysicsSprite = {
         init: function () {
             this._super()
 
-            this.fish = new Fish({pos: this.r.center, size: cc.size(), mass: 10}).addToSpace(this.r.space)
+            this.fish = new Fish({pos: rss.center(), size: cc.size(), mass: 10}).addToSpace(this.r.space)
             this.addChild(this.fish)
         },
 

@@ -23,7 +23,7 @@ rss.star = {
 }
 
 rss.exampleMan = {
-    impulse: 20,
+    acc: 200,
     gravity: -350
 }
 

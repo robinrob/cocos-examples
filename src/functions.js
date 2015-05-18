@@ -285,6 +285,10 @@ rss.rotaryLimitJoint = function(obj1, obj2, angle1, angle2) {
     return [new cp.RotaryLimitJoint(obj1.getBody(), obj2.getBody(), angle1, angle2)]
 }
 
+rss.winsize = function() {
+    return cc.director.getWinSize()
+}
+
 rss.width = function() {
     return cc.director.getWinSize().width
 }

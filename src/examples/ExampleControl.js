@@ -21,12 +21,12 @@ var ExampleControl = {
             this._super()
 
             this.constructMan()
-            new Box(cc.p(), this.r.size, rss.man.height.total, this.r.space)
+            rss.Box.create({pos: cc.p(), size: rss.winsize(), thickness: rss.man.height.total}).addToSpace(this.r.space)
         },
 
         constructMan: function() {
-            this.controllee = new Man2(this.r.center, this.r.space)
-            this.controllee.setVel(0, 0)
+            this.controllee = Man2.create({pos: rss.center()}).addToSpace(this.r.space)
+            this.controllee.setVel(cc.p(0,0))
             this.addChild(this.controllee)
         },
 
@@ -46,7 +46,7 @@ var ExampleControl = {
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {

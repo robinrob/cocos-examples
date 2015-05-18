@@ -11,9 +11,6 @@ var ExampleAnimation2 = {
             cc.log("AnimationLayer.init ...")
             this._super()
 
-            var winSize = cc.director.getWinSize()
-            var center = cc.p(winSize.width / 2, winSize.height / 2)
-
             cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist);
             var spriteSheet = new cc.SpriteBatchNode(rss.res.spritesheet_png);
 

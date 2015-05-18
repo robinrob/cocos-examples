@@ -6,25 +6,24 @@ rss.Box = rss.CompositeStaticBody.extend({
         this.r.width = args.size.width
         this.r.height = args.size.height
         this.r.thickness = args.thickness
-        this.r.space = args.space
     },
 
     init: function() {
         this._super()
         this.constructWalls()
 
-        this.addComp(this.r.left)
-        this.addComp(this.r.right)
-        this.addComp(this.r.bottom)
-        this.addComp(this.r.top)
+        this.addComp(this.r.leftWall)
+        this.addComp(this.r.rightWall)
+        this.addComp(this.r.bottomWall)
+        this.addComp(this.r.topWall)
         return this
     },
 
     with3Walls: function() {
         this.r.comps = []
-        this.addComp(this.r.left)
-        this.addComp(this.r.right)
-        this.addComp(this.r.bottom)
+        this.addComp(this.r.leftWall)
+        this.addComp(this.r.rightWall)
+        this.addComp(this.r.bottomWall)
         return this
     },
 
@@ -41,17 +40,15 @@ rss.Box = rss.CompositeStaticBody.extend({
         var bottom = cp.v(this.r.width / 2, this.r.thickness / 2)
         var sHoriz = cc.size(this.r.width, this.r.thickness)
 
-        this.r.left = new rss.StaticRectBody.create({pos: left, size: sVert, space: this.r.space})
-        this.r.left.r.shape.setElasticity(1.0)
+        this.r.leftWall = new rss.StaticRectBody.create({pos: left, size: sVert})
 
-        this.r.right = new rss.StaticRectBody.create({pos: right, size: sVert, space: this.r.space})
-        this.r.right.r.shape.setElasticity(1.0)
+        this.r.rightWall = new rss.StaticRectBody.create({pos: right, size: sVert})
 
-        this.r.bottom = new rss.StaticRectBody.create({pos: bottom, size: sHoriz, space: this.r.space})
-        this.r.bottom.r.shape.setElasticity(1.0)
+        this.r.bottomWall = new rss.StaticRectBody.create({pos: bottom, size: sHoriz})
 
-        this.r.top = new rss.StaticRectBody.create({pos: top, size: sHoriz, space: this.r.space})
-        this.r.top.r.shape.setElasticity(1.0)
+        this.r.topWall = new rss.StaticRectBody.create({pos: top, size: sHoriz})
+
+        this.setElasticity(1.0)
     }
 })
 
