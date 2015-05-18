@@ -94,6 +94,54 @@ ball.mass = 100
 
 
 // Man
+//rss.man2 = new (function() {
+//    this.scale = 2.0
+//
+//    this.leg = {
+//        width: 10 * this.scale,
+//        height: 40 * this.scale,
+//        mass: 16
+//    }
+//
+//    this.crotch = {
+//        width: 5 * this.scale,
+//        height: 5 * this.scale,
+//        mass: 5
+//    }
+//
+//    this.torso = {
+//        width: 2 * this.leg.width + this.crotch.width,
+//        height: this.torso.width,
+//        mass: 20
+//    }
+//
+//    this.arm = {
+//        width: 5 * this.scale,
+//        height: 30 * this.scale,
+//        mass: 6
+//    }
+//
+//    this.armpit = {
+//        width: 5 * this.scale
+//    }
+//
+//    this.neck = {
+//        width: 5 * this.scale,
+//        height: 5 * this.scale
+//    }
+//
+//    this.head = {
+//        width: 20 * this.scale,
+//        height: 20 * this.scale,
+//        mass: 20
+//    }
+//
+//    this.comps = [this.leg, this.seat, this.back]
+//    this.width = rss.sumAttr('width', this.comps)
+//    this.height = rss.sumAttr('height', this.comps)
+//    this.mass = rss.sumAttr('mass', this.comps)
+//})()
+
 var man = {}
 rss.man = man
 
@@ -156,29 +204,68 @@ mass.body = 40
 mass.chassis = 20
 
 // Chair
-var chair = {}
-rss.chair = chair
+rss.chair = function() {
+    this.scale = 1.0
 
-rss.chair.scale = 2.0
+    // Dimensions
+    this.leg = {
+        width: 10 * this.scale,
+        height: 40 * this.scale,
+        mass: 20
+    }
 
-var width = {}
-chair.width = width
-width.leg = 10 * rss.chair.scale
-width.crotch = 20 * rss.chair.scale
-width.back = 10 * rss.chair.scale
-width.seat= 2 * width.leg + width.crotch
-width.total = rss.sum(width)
+    this.seat = {
+        width: 40 * this.scale,
+        height: 10 * this.scale,
+        mass: 50
+    }
 
-var height = {}
-chair.height = height
-height.leg = 40 * rss.chair.scale
-height.back = 35 * rss.chair.scale
-height.seat = 10 * rss.chair.scale
-height.total = rss.sum(height)
+    this.back ={
+        width: 10 * this.scale,
+        height: 35 * this.scale,
+        mass: 5
+    }
 
-var mass = {}
-chair.mass = mass
-mass.leg = 20
-mass.back = 5
-mass.seat = 50
-mass.total = rss.sum(mass)
+    // Positions
+    this.leg.left = {
+        pos: cc.p(
+            -this.seat.width / 2 + this.leg.width / 2,
+            this.leg.height / 2
+        ),
+        joint: cc.p(
+            0,
+            this.leg.height / 2 - this.seat.height / 2
+        )
+    }
+
+    this.leg.right = {
+        pos: cc.p(
+            this.seat.width / 2 - this.leg.width / 2,
+            this.leg.height / 2
+        ),
+        joint: cc.p(
+            0,
+            this.leg.height / 2 - this.seat.height / 2
+        )
+    }
+
+    this.seat.pos = cc.p(
+        0,
+        this.leg.height - this.seat.height / 2
+    )
+
+    this.back.pos = cc.p(
+        -this.seat.width / 2 + this.leg.width / 2,
+        this.leg.height - this.seat.height + this.back.height / 2
+    )
+    this.back.joint = cc.p(
+        0,
+        -this.back.height / 2 + this.seat.height / 2
+    )
+
+    // Collective chair scalar quantities
+    this.comps = [this.leg, this.seat, this.back]
+    this.width = this.seat.width
+    this.height = this.leg.height - this.seat.height + this.back.height
+    this.mass = rss.sumAttr('mass', this.comps)
+}

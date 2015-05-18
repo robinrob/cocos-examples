@@ -99,6 +99,14 @@ rss.sum = function(obj) {
     return total
 }
 
+rss.sumAttr = function(attr, items) {
+    var sum = 0
+    items.forEach(function(item) {
+        sum += item[attr]
+    })
+    return sum
+}
+
 rss.sign = function(number) {
     return number?number<0?-1:1:0
 }

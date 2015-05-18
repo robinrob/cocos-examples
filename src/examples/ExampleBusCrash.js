@@ -1,4 +1,4 @@
-var ExampleChair = {
+var ExampleBusCrash = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
             this._super();
@@ -17,7 +17,7 @@ var ExampleChair = {
 
             rss.Box.create({pos: rss.center(), size: rss.winsize()}).addToSpace(this.r.space)
 
-            Chair.create({pos: rss.p.addY(rss.center(), new rss.chair().height)}).addToSpace(this.r.space)
+            Chair.create({pos: rss.p.addY(rss.center(), rss.chair.height.total)}).addToSpace(this.r.space)
 
             this.addChild(Platform.create({
                 p1: rss.p.addX(rss.center(), -50),
@@ -35,7 +35,7 @@ var ExampleChair = {
             this.r.space = new cp.Space();
             this.r.space.gravity = cp.v(0, rss.gravity);
 
-            this.r.layer = new ExampleChair.Layer(this.r.space);
+            this.r.layer = new ExampleBusCrash.Layer(this.r.space);
 
             this.addChild(this.r.layer);
 
