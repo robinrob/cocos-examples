@@ -132,6 +132,7 @@ rss.mult = function(p, m) {
     return cc.p(p.x * m, p.y * m)
 }
 
+rss.s = {}
 rss.s.mult = function(s, m) {
     return cc.size(s.width * m, s.height * m)
 }
