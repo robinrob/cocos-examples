@@ -4,12 +4,12 @@ var ExampleChair = {
             this._super();
             this.r.space = space
 
-            this.init()
-
             this._debugNode = new cc.PhysicsDebugNode(this.r.space);
             this._debugNode.setVisible(true);
             // Parallax ratio and offset
             this.addChild(this._debugNode, 10);
+
+            this.init()
         },
 
         init: function () {
@@ -17,19 +17,17 @@ var ExampleChair = {
 
             rss.Box.create({pos: rss.center(), size: rss.winsize()}).addToSpace(this.r.space)
 
-            Chair.create({pos: rss.center()}).addToSpace(this.r.space)
+            Chair.create({pos: rss.p.addY(rss.center(), rss.chair.height.total)}).addToSpace(this.r.space)
 
-            //this.addChild(Platform.create({
-            //    p1: rss.p.addX(rss.center(), -100),
-            //    p2: rss.p.addX(rss.center(), 40),
-            //    thickness: 10
-            //}).addToSpace(this.r.space))
+            this.addChild(Platform.create({
+                p1: rss.p.addX(rss.center(), -50),
+                p2: rss.p.addX(rss.center(), 10),
+                thickness: 10
+            }).addToSpace(this.r.space))
         }
     }),
 
     Scene: BaseScene.extend({
-        space: null,
-
         onEnter:function () {
             cc.log("Scene.onEnter ...")
             this._super();

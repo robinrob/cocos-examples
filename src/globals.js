@@ -178,7 +178,7 @@ height.total = rss.sum(height)
 
 var mass = {}
 chair.mass = mass
-mass.leg = 1
+mass.leg = 20
 mass.back = 5
-mass.seat = 5
+mass.seat = 50
 mass.total = rss.sum(mass)

@@ -1,7 +1,7 @@
 /* Example of moving a body around using keyboard controls */
 
 var ExampleGamepad = {
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         onEnter: function() {
             this._super()
 
@@ -17,7 +17,7 @@ var ExampleGamepad = {
                 cc.log("DISCONNECTED")
             })
 
-            this.addChild(new BaseLayer())
+            this.addChild(new BaseLayer().init())
 
             this.scheduleUpdate()
         },

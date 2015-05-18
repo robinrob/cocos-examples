@@ -12,15 +12,22 @@ Chair = rss.CompositeDynamicBody.extend({
 
         // legs
         var leftLeg = this._constructLeg(
-            -1 * (rss.chair.width.leg + rss.chair.width.crotch) / 2,
+            -rss.chair.width.seat / 2 + rss.chair.width.leg / 2,
             rss.chair.height.leg / 2
         )
-        leftLeg.setJointP(cc.p(0, rss.chair.height.leg - rss.chair.height.seat / 2))
-        //var rightLeg = this._constructLeg(
-        //    +1 * (rss.chair.width.leg + rss.chair.width.crotch) / 2,
-        //    rss.chair.height.leg / 2
-        //)
-        //rightLeg.setJointP(cc.p(0, rightLeg.height - rss.chair.height.seat / 2))
+        leftLeg.setJointP(cc.p(
+            0,
+            rss.chair.height.leg / 2 - rss.chair.height.seat / 2)
+        )
+
+        var rightLeg = this._constructLeg(
+            rss.chair.width.seat / 2 - rss.chair.width.leg / 2,
+            rss.chair.height.leg / 2
+        )
+        rightLeg.setJointP(cc.p(
+                0,
+                rss.chair.height.leg / 2 - rss.chair.height.seat / 2)
+        )
 
         // seat
         cc.log("leftLeg.getJointP(): " + leftLeg.getJointP().y)
@@ -29,16 +36,19 @@ Chair = rss.CompositeDynamicBody.extend({
             rss.chair.height.leg - rss.chair.height.seat / 2
         )
 
-        // back
-        //var back = this._constructBack(
-        //    (-1 * rss.chair.width.seat + rss.chair.width.back) / 2,
-        //    leftLeg.getJointP().y + (rss.chair.height.back - seat.height) / 2
-        //)
-        //back.setJointP(cc.p(0, (-1 * back.height + seat.height) / 2))
+        //back
+        var back = this._constructBack(
+            -rss.chair.width.seat / 2 + rss.chair.width.leg / 2,
+            rss.chair.height.leg - rss.chair.height.seat + rss.chair.height.back / 2
+        )
+        back.setJointP(cc.p(
+                0,
+                -rss.chair.height.back / 2 + rss.chair.height.seat / 2)
+        )
 
         this.joinParts(leftLeg, seat)
-        //this.joinParts(rightLeg, seat)
-        //this.joinParts(back, seat)
+        this.joinParts(rightLeg, seat)
+        this.joinParts(back, seat)
 
         this.setPos(this.getStartPos())
 

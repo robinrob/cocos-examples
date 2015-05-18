@@ -17,6 +17,8 @@ var BaseLayer = cc.Layer.extend({
         var back = new cc.Menu(items);
         back.setPosition(rss.ui.FONT_SIZE, rss.ui.FONT_SIZE);
         this.addChild(back)
+
+        return this
     },
 
     getSpace: function() {
