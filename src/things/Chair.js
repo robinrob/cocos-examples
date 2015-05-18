@@ -12,39 +12,18 @@ Chair = rss.CompositeDynamicBody.extend({
 
         this.chair = new rss.chair()
         // legs
-        var leftLeg = this._constructLeg(
-            -this.chair.seat.width / 2 + this.chair.leg.width / 2,
-            this.chair.leg.height / 2
-        )
-        leftLeg.setJointP(cc.p(
-            0,
-            this.chair.leg.height / 2 - this.chair.seat.height / 2)
-        )
+        var leftLeg = this._constructLeg(this.chair.leg.left.pos)
+        leftLeg.setJointP(this.chair.leg.left.joint)
 
-        var rightLeg = this._constructLeg(
-            this.chair.seat.width / 2 - this.chair.leg.width / 2,
-            this.chair.leg.height / 2
-        )
-        rightLeg.setJointP(cc.p(
-                0,
-                this.chair.leg.height / 2 - this.chair.seat.height / 2)
-        )
+        var rightLeg = this._constructLeg(this.chair.leg.right.pos)
+        rightLeg.setJointP(this.chair.leg.right.joint)
 
         // seat
-        var seat = this._constructSeat(
-            0,
-            this.chair.leg.height - this.chair.seat.height / 2
-        )
+        var seat = this._constructSeat(this.chair.seat.pos)
 
         //back
-        var back = this._constructBack(
-            -this.chair.seat.width / 2 + this.chair.leg.width / 2,
-            this.chair.leg.height - this.chair.seat.height + this.chair.back.height / 2
-        )
-        back.setJointP(cc.p(
-            0,
-            -this.chair.back.height / 2 + this.chair.seat.height / 2)
-        )
+        var back = this._constructBack(this.chair.back.pos)
+        back.setJointP(this.chair.back.joint)
 
         this.joinParts(leftLeg, seat)
         this.joinParts(rightLeg, seat)

@@ -205,7 +205,7 @@ mass.chassis = 20
 
 // Chair
 rss.chair = function() {
-    this.scale = 1.0
+    this.scale = 5.0
 
     // Dimensions
     this.leg = {
