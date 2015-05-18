@@ -30,10 +30,10 @@ var ExamplePolyBody = {
             //    //cc.p(o -h, o+w)                                 // left spike
             //
             //var draw = new cc.DrawNode()
-            //draw.setPosition(this.r.center)
+            //draw.setPosition(rss.center())
             //draw.drawPoly(star, rss.colors.red, 2, rss.colors.red)
             //rss.PolyBody.create({
-            //    pos: rss.subX(this.r.center, 300),
+            //    pos: rss.subX(rss.center(), 300),
             //    verts: star,
             //    size: cc.size(50, 50),
             //    mass: 10
@@ -51,7 +51,7 @@ var ExamplePolyBody = {
                 cc.p(0,w*2), cc.p(-1 * h, w) //left
             ];
             var draw = new cc.DrawNode()
-            draw.setPosition(this.r.center)
+            draw.setPosition(rss.center())
             draw.drawPoly(star, rss.colors.red, 2, rss.colors.red)
             this.addChild(draw)
         }

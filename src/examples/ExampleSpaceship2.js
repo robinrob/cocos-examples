@@ -10,7 +10,7 @@ var ExampleSpaceship2 = {
             this.r.space = space
 
             var winSize = cc.director.getWinSize()
-            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
+            rss.center() = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
@@ -29,7 +29,7 @@ var ExampleSpaceship2 = {
         },
 
         constructControllee: function() {
-            this.controllee = new Spaceship2(this.r.center, rss.spaceship.mass, this.r.space)
+            this.controllee = new Spaceship2(rss.center(), rss.spaceship.mass, this.r.space)
             this.controllee.setVel(0, 0)
             this.controllee.setAngle(0)
             this.addChild(this.controllee)

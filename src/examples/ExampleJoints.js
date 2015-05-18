@@ -5,7 +5,7 @@ var ExampleJoints = {
             this.r.space = space
 
             var winSize = cc.director.getWinSize()
-            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
+            rss.center() = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
@@ -32,14 +32,14 @@ var ExampleJoints = {
         },
 
         constructBox: function() {
-            var box = new StaticRectBody(this.r.center, cc.size(200, 200), this.r.space)
+            var box = new StaticRectBody(rss.center(), cc.size(200, 200), this.r.space)
             box.setJointPs([cc.p(0, 50), cc.p(0, -50)])
             box.setGroup(1)
             return box
         },
 
         constructSlider: function() {
-            var slider = new RectBody(rss.p.addY(this.r.center, 50), cc.size(50, 50), 50, this.r.space)
+            var slider = new RectBody(rss.p.addY(rss.center(), 50), cc.size(50, 50), 50, this.r.space)
             slider.setJointP(cc.p(0, 0))
             slider.setGroup(1)
             return slider

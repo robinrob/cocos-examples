@@ -1,4 +1,4 @@
-var Spaceship = Steerable.extend({
+var Spaceship = rss.DynamicBody.extend({
     ctor:function(position, mass, space) {
         cc.log("Spaceship.ctor ...")
         this._super(mass)

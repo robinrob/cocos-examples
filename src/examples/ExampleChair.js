@@ -4,9 +4,6 @@ var ExampleChair = {
             this._super();
             this.r.space = space
 
-            var winSize = cc.director.getWinSize()
-            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
-
             this.init()
 
             this._debugNode = new cc.PhysicsDebugNode(this.r.space);
@@ -18,19 +15,19 @@ var ExampleChair = {
         init: function () {
             this._super()
 
-            rss.Box.create({pos: this.r.center, size: this.r.size}).addToSpace(this.r.space)
+            rss.Box.create({pos: rss.center(), size: this.r.size}).addToSpace(this.r.space)
 
-            Chair.create({pos: this.r.center}).addToSpace(this.r.space)
+            Chair.create({pos: rss.center()}).addToSpace(this.r.space)
 
             this.addChild(Platform.create({
-                p1: rss.p.addX(this.r.center, -100),
-                p2: rss.p.addX(this.r.center, 40),
+                p1: rss.p.addX(rss.center(), -100),
+                p2: rss.p.addX(rss.center(), 40),
                 thickness: 10
             }).addToSpace(this.r.space))
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {

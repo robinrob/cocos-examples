@@ -20,13 +20,13 @@ var ExampleSpaceship = {
         init: function () {
             this._super()
 
-            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
+            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()}).addToSpace(this.r.space)
 
             this.constructControllee()
         },
 
         constructControllee: function() {
-            this.controllee = new Spaceship(this.r.center, rss.spaceship.mass, this.r.space)
+            this.controllee = new Spaceship(rss.center(), rss.spaceship.mass, this.r.space)
             this.controllee.setVel(0, 0)
             this.controllee.setAngle(0)
             this.addChild(this.controllee)
@@ -48,7 +48,7 @@ var ExampleSpaceship = {
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {

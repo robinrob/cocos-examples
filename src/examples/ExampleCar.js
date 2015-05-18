@@ -9,11 +9,6 @@ var ExampleCar = {
 
             this.r.space = space
 
-            var winSize = cc.director.getWinSize()
-
-            this.r.size = cc.size(winSize.width - 2 * this.MARGIN, winSize.height - rss.groundHeight)
-            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
-
             this.init()
 
             this._debugNode = new cc.PhysicsDebugNode(this.r.space);
@@ -25,7 +20,7 @@ var ExampleCar = {
         init: function () {
             this._super()
 
-            Box.create(cc.p(this.MARGIN, 0), this.r.size, this.r.space)
+            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()}).addToSpace(this.r.space)
 
             this.constructCar()
 
@@ -33,8 +28,7 @@ var ExampleCar = {
         },
 
         constructCar: function() {
-            this.car = new Car(this.r.center, this.r.space)
-            this.car.setVel(0, 0)
+            this.car = Car.create({pos: rss.center()}).addToSpace(this.r.space)
             this.addChild(this.car)
         },
 
@@ -89,7 +83,7 @@ var ExampleCar = {
         }
     }),
 
-    Scene: cc.Scene.extend({
+    Scene: BaseScene.extend({
         space: null,
 
         onEnter:function () {

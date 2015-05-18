@@ -5,7 +5,7 @@ var ExampleCompositeBody = {
             this.r.space = space
 
             var winSize = cc.director.getWinSize()
-            this.r.center = cc.p(winSize.width / 2, winSize.height / 2)
+            rss.center() = cc.p(winSize.width / 2, winSize.height / 2)
 
             this.init()
 
@@ -26,15 +26,15 @@ var ExampleCompositeBody = {
         },
 
         constructMan: function() {
-            this.man = Man.create({pos: this.r.center, space: this.r.space})
+            this.man = Man.create({pos: rss.center(), space: this.r.space})
             this.man.setVel(cc.p(0, 0))
             this.man.addToSpace(this.r.space)
         },
 
         constructPlatform: function() {
             var platform = Platform.create({
-                p1: cc.p(this.r.center.x - 20, this.r.center.y),
-                p2: cc.p(this.r.center.x + 20, this.r.center.y),
+                p1: cc.p(rss.center().x - 20, rss.center().y),
+                p2: cc.p(rss.center().x + 20, rss.center().y),
                 thickness: 2,
                 space: this.r.space})
         },
