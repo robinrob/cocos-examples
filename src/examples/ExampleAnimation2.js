@@ -18,7 +18,7 @@ var ExampleAnimation2 = {
             this.r.downFrame = cc.spriteFrameCache.getSpriteFrame("spaceship_nofire.png")
 
             var sprite = new cc.Sprite(rss.res.spaceship_nofire_png);
-            sprite.setPosition(center)
+            sprite.setPosition(rss.center())
 
             this.addChild(sprite)
 

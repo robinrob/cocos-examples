@@ -6,7 +6,7 @@ var ExampleBody = {
 
             switch(rss.physics) {
                 case rss.chipmunk:
-                    rss.Box.create({pos: cc.p(), size: this.r.size}).addToSpace(this.r.space)
+                    rss.Box.create({pos: cc.p(), size: rss.winsize()}).addToSpace(this.r.space)
                     this.debugNodeChipmunk()
                     break
                 case rss.box2D:
@@ -38,7 +38,7 @@ var ExampleBody = {
         init: function () {
             this._super()
 
-            var pos = cc.p(this.r.center.x, this.r.center.y + 100)
+            var pos = rss.center()
 
             this.ball = Ball.create({pos: pos, radius: 10, mass: rss.ball.mass}).addToSpace(this.r.space)
             this.addChild(this.ball)

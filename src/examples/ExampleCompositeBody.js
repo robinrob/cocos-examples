@@ -18,7 +18,7 @@ var ExampleCompositeBody = {
         init: function () {
             this._super()
 
-            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: this.r.size, space: this.r.space})
+            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()})
 
             this.constructMan()
             this.constructPlatform()
