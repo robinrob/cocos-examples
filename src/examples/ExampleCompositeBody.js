@@ -4,9 +4,6 @@ var ExampleCompositeBody = {
             this._super();
             this.r.space = space
 
-            var winSize = cc.director.getWinSize()
-            rss.center() = cc.p(winSize.width / 2, winSize.height / 2)
-
             this.init()
 
             this._debugNode = new cc.PhysicsDebugNode(this.r.space);

@@ -2,9 +2,6 @@ Chair = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
         args.size = cc.size()
         this._super(args)
-
-        this.r.startPos = args.pos
-        this.r.origin = args.pos
     },
 
     init: function() {
@@ -30,7 +27,6 @@ Chair = rss.CompositeDynamicBody.extend({
             leftLeg.getJointP(true).x + (rss.chair.width.seat - rss.chair.width.leg) / 2,
             leftLeg.getJointP(true).y
         )
-        this.seat = seat
 
         // back
         var back = this._constructBack(

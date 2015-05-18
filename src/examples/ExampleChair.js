@@ -15,15 +15,15 @@ var ExampleChair = {
         init: function () {
             this._super()
 
-            rss.Box.create({pos: rss.center(), size: this.r.size}).addToSpace(this.r.space)
+            rss.Box.create({pos: rss.center(), size: rss.winsize()}).addToSpace(this.r.space)
 
             Chair.create({pos: rss.center()}).addToSpace(this.r.space)
 
-            this.addChild(Platform.create({
-                p1: rss.p.addX(rss.center(), -100),
-                p2: rss.p.addX(rss.center(), 40),
-                thickness: 10
-            }).addToSpace(this.r.space))
+            //this.addChild(Platform.create({
+            //    p1: rss.p.addX(rss.center(), -100),
+            //    p2: rss.p.addX(rss.center(), 40),
+            //    thickness: 10
+            //}).addToSpace(this.r.space))
         }
     }),
 
