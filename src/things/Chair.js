@@ -10,7 +10,7 @@ Chair = rss.CompositeDynamicBody.extend({
 
         this.parts = []
 
-        this.chair = new rss.chair()
+        this.chair = rss.chair
         // legs
         var leftLeg = this._constructLeg(this.chair.leg.left.pos)
         leftLeg.setJointP(this.chair.leg.left.joint)

@@ -204,7 +204,7 @@ mass.body = 40
 mass.chassis = 20
 
 // Chair
-rss.chair = function() {
+rss.chair = new function() {
     this.scale = 5.0
 
     // Dimensions
@@ -226,7 +226,7 @@ rss.chair = function() {
         mass: 5
     }
 
-    // Positions
+    // Positions and joints
     this.leg.left = {
         pos: cc.p(
             -this.seat.width / 2 + this.leg.width / 2,
@@ -268,4 +268,4 @@ rss.chair = function() {
     this.width = this.seat.width
     this.height = this.leg.height - this.seat.height + this.back.height
     this.mass = rss.sumAttr('mass', this.comps)
-}
+}()
