@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+[[ $fpath = *dotfiles-base* ]] || fpath=($FUNCS_HOME $fpath)
+autoload -U +X $fpath[1]/*(:t) 2> /dev/null
+source $ZSHCOLORS_PATH
+
 sed_all 's/rss\.add(?=\b)/rss\.p\.add/g' src '*.js'
 sed_all 's/rss\.addX/rss\.p\.addX/g' src '*.js'
 sed_all 's/rss\.addY/rss\.p\.addY/g' src '*.js'
