@@ -56,8 +56,8 @@ cc.game.onStart = function(){
     cc.view.resizeWithBrowserSize(true);
     //load resources
     cc.LoaderScene.preload(rss.resources, function () {
-        cc.director.runScene(new MenuScene());
-        //cc.director.runScene(new ExampleCar.Scene());
+        //cc.director.runScene(new MenuScene());
+        cc.director.runScene(new ExampleBusCrash.Scene());
     }, this);
 };
 cc.game.run();

@@ -8,7 +8,7 @@
     "renderMode" : 1,
     "engineDir":"frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d", "chipmunk", "box2d"],
+    "modules" : ["cocos2d", "chipmunk", "box2d", "extensions"],
 
     "jsList" : [
         "src/functions.js",
@@ -37,6 +37,7 @@
         "src/things/Platform.js",
         "src/things/FishAnimation.js",
         "src/things/Man.js",
+        "src/things/SidewaysMan.js",
         "src/things/Man2.js",
         "src/things/Car.js",
         "src/things/Spaceship.js",
@@ -71,6 +72,7 @@
         "src/examples/ExamplePolyBody.js",
         "src/examples/ExampleCircularMovement.js",
         "src/examples/ExampleSpring.js",
-        "src/examples/ExampleGamepad.js"
+        "src/examples/ExampleGamepad.js",
+        "src/examples/ExampleBusCrash.js"
     ]
 }

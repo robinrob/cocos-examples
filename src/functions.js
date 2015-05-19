@@ -293,45 +293,29 @@ rss.rotaryLimitJoint = function(obj1, obj2, angle1, angle2) {
     return [new cp.RotaryLimitJoint(obj1.getBody(), obj2.getBody(), angle1, angle2)]
 }
 
-rss.winsize = function() {
-    return cc.director.getWinSize()
-}
+rss.winsize = function() { return cc.director.getWinSize() }
 
-rss.width = function() {
-    return cc.director.getWinSize().width
-}
+rss.width = function() { return cc.director.getWinSize().width }
 
-rss.height = function() {
-    return cc.director.getWinSize().height
-}
+rss.height = function() { return cc.director.getWinSize().height }
 
-rss.top = function() {
-    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height)
-}
+rss.top = function() { return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height) }
 
-rss.bottom = function() {
-    return cc.p(cc.director.getWinSize().width / 2, 0)
-}
+rss.bottom = function() { return cc.p(cc.director.getWinSize().width / 2, 0) }
 
-rss.left = function() {
-    return cc.p(0, cc.director.getWinSize().height / 2)
-}
+rss.left = function() { return cc.p(0, cc.director.getWinSize().height / 2) }
 
-rss.right = function() {
-    return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height / 2)
-}
+rss.right = function() { return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height / 2) }
 
-rss.center = function() {
-    return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height / 2)
-}
+rss.center = function() { return cc.p(cc.director.getWinSize().width / 2, cc.director.getWinSize().height / 2) }
 
-rss.topLeft = function() {
-    return cc.p(0, cc.director.getWinSize().height)
-}
+rss.topLeft = function() { return cc.p(0, cc.director.getWinSize().height) }
 
-rss.topRight = function() {
-    return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height)
-}
+rss.topRight = function() { return cc.p(cc.director.getWinSize().width, cc.director.getWinSize().height) }
+
+rss.bottomLeft = function() { return cc.p(0, 0) }
+
+rss.bottomRight = function() { return cc.p(0, cc.director.getWinSize().height) }
 
 /* Global game controls */
 rss.pause = function() {

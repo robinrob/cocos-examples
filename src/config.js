@@ -145,6 +145,54 @@ rss.man = new (function() {
     this.mass = rss.sumAttr('mass', this.comps)
 })()
 
+// Sideways Man
+rss.sideMan = new (function() {
+    this.scale = 5.0
+    this.acc = 400,
+    this.gravity = -350
+
+
+    this.leg = {
+        width: 10 * this.scale,
+        height: 40 * this.scale,
+        mass: 16 * this.scale,
+        color: rss.colors.green
+    }
+
+    this.crotch = {
+        width: 5 * this.scale,
+        height: 5 * this.scale,
+        mass: 0 * this.scale
+    }
+
+    this.torso = {
+        width: 2 * this.leg.width + this.crotch.width,
+        height: 2 * this.leg.width + this.crotch.width,
+        mass: 20 * this.scale,
+        color: rss.colors.orange
+    }
+
+    this.arm = {
+        width: 5 * this.scale,
+        height: 30 * this.scale,
+        mass: 6 * this.scale,
+        color: rss.colors.yellow
+    }
+
+    this.neck = {
+        width: 5 * this.scale,
+        height: 5 * this.scale,
+        mass: 0 * this.scale
+    }
+
+    this.head = {
+        width: 20 * this.scale,
+        height: 20 * this.scale,
+        mass: 8 * this.scale,
+        color: rss.colors.pink
+    }
+})()
+
 // Car
 var car = {}
 rss.car = car
@@ -172,25 +220,23 @@ mass.body = 40
 mass.chassis = 20
 
 // Chair
-rss.chair = new function() {
-    this.scale = 5.0
-
+rss.chair = new (function() {
     // Dimensions
     this.leg = {
-        width: 10 * this.scale,
-        height: 40 * this.scale,
+        width: 10,
+        height: 40,
         mass: 20
     }
 
     this.seat = {
-        width: 40 * this.scale,
-        height: 10 * this.scale,
+        width: 40,
+        height: 10,
         mass: 50
     }
 
     this.back ={
-        width: 10 * this.scale,
-        height: 35 * this.scale,
+        width: 10,
+        height: 35,
         mass: 5
     }
 
@@ -230,10 +276,4 @@ rss.chair = new function() {
         0,
         -this.back.height / 2 + this.seat.height / 2
     )
-
-    // Collective chair scalar quantities
-    this.comps = [this.leg, this.seat, this.back]
-    this.width = this.seat.width
-    this.height = this.leg.height - this.seat.height + this.back.height
-    this.mass = rss.sumAttr('mass', this.comps)
-}()
+})()

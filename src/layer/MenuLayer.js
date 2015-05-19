@@ -41,7 +41,8 @@ var MenuLayer = cc.Layer.extend({
             //rss.ui.constructMenuItem("Joints", new ExampleJoints.Scene()),
             //rss.ui.constructMenuItem("Poly Body", new ExamplePolyBody.Scene()),
             //rss.ui.constructMenuItem("Circular Movement", new ExampleCircularMovement.Scene()),
-            rss.ui.constructMenuItem("Gamepad API", new ExampleGamepad.Scene())
+            rss.ui.constructMenuItem("Gamepad API", new ExampleGamepad.Scene()),
+            rss.ui.constructMenuItem("Bus Crash", new ExampleBusCrash.Scene())
         ]
         return items
     }

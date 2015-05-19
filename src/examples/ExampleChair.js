@@ -17,12 +17,17 @@ var ExampleChair = {
 
             rss.Box.create({pos: rss.center(), size: rss.winsize()}).addToSpace(this.r.space)
 
-            this.chair = Chair.create({pos: rss.p.addY(rss.center(), rss.chair.height)}).addToSpace(this.r.space)
+            var scale = 5.0
+
+            this.chair = Chair.create({
+                pos: rss.p.add(rss.center(), cc.p(Chair.scaledWidth(scale / 4), Chair.scaledHeight(scale))),
+                scale: scale
+            }).addToSpace(this.r.space)
             this.addChild(this.chair)
 
             this.addChild(Platform.create({
                 p1: rss.p.addX(rss.center(), -50),
-                p2: rss.p.addX(rss.center(), 10),
+                p2: rss.p.addX(rss.center(), 50),
                 thickness: 10
             }).addToSpace(this.r.space))
         },

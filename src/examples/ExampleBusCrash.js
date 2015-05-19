@@ -15,15 +15,52 @@ var ExampleBusCrash = {
         init: function () {
             this._super()
 
-            rss.Box.create({pos: rss.center(), size: rss.winsize()}).addToSpace(this.r.space)
+            cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist);
+            var spriteSheet = new cc.SpriteBatchNode(rss.res.spritesheet_png);
 
-            Chair.create({pos: rss.p.addY(rss.center(), rss.chair.height.total)}).addToSpace(this.r.space)
+            // Create the button
+            var button = new ccui.Button();
+            button.setTouchEnabled(true);
+            button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE);
+            button.setScale(3.0)
+            button.setPosition(rss.p.subY(rss.top(), 300))
+            button.addTouchEventListener(this.crash, this);
+            this.addChild(button)
 
-            this.addChild(Platform.create({
-                p1: rss.p.addX(rss.center(), -50),
-                p2: rss.p.addX(rss.center(), 10),
-                thickness: 10
-            }).addToSpace(this.r.space))
+            this.addChild(
+                rss.Box.create({
+                    pos: rss.center(),
+                    size: rss.winsize(),
+                    color: rss.colors.red
+                }).addToSpace(this.r.space))
+
+
+            var scale = 3.0
+            this.r.items = []
+
+            this.addItem(
+                Chair.create({
+                    pos: rss.p.add(
+                        rss.bottomLeft(),
+                        cc.p(2 * Chair.scaledWidth(scale), Chair.scaledHeight(scale) / 2)
+                    ),
+                    scale: scale,
+                    color: rss.colors.yellow
+                }).addToSpace(this.r.space))
+
+
+        },
+
+        addItem: function(item) {
+            this.addChild(item)
+            this.r.items.push(item)
+            return item
+        },
+
+        crash: function() {
+            this.r.items.forEach(function(item) {
+                item.applyImpulse(cc.p(1000 * item.getMass(), 0))
+            })
         }
     }),
 
