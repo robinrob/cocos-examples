@@ -4,11 +4,11 @@
 autoload -U +X $fpath[1]/*(:t) 2> /dev/null
 source $ZSHCOLORS_PATH
 
-perl_all 's/rss\.add(?=\()/rss\.p\.add/g' src '*.js'
+perl_all 's/rss\.add(?=\b/rss\.p\.add/g' src '*.js'
 sed_all 's/rss\.addX/rss\.p\.addX/g' src '*.js'
 sed_all 's/rss\.addY/rss\.p\.addY/g' src '*.js'
-perl_all 's/rss\.sub(?=\()/rss\.p\.sub/g' src '*.js'
-perl_all 's/rss\.mult(?=\()/rss\.p\.mult/g' src '*.js'
+perl_all 's/rss\.sub(?=\b/rss\.p\.sub/g' src '*.js'
+perl_all 's/rss\.mult(?=\b/rss\.p\.mult/g' src '*.js'
 
 sed_all 's/rss\.p.addW/rss\.s\.addW/g' src '*.js'
 sed_all 's/rss\.p.addH/rss\.s\.addH/g' src '*.js'

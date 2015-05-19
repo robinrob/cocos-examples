@@ -124,19 +124,19 @@ rss.p.addY = function(obj, dy) {
     return cc.p(obj.x, obj.y + dy)
 }
 
-rss.sub = function(p1, p2) {
+rss.p.sub = function(p1, p2) {
     return cc.p(p1.x - p2.x, p1.y - p2.y)
 }
 
-rss.subX = function(obj, dx) {
+rss.p.subX = function(obj, dx) {
     return cc.p(obj.x - dx, obj.y)
 }
 
-rss.subY = function(obj, dy) {
+rss.p.subY = function(obj, dy) {
     return cc.p(obj.x, obj.y - dy)
 }
 
-rss.mult = function(p, m) {
+rss.p.mult = function(p, m) {
     return cc.p(p.x * m, p.y * m)
 }
 
