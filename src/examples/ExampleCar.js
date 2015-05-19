@@ -20,7 +20,13 @@ var ExampleCar = {
         init: function () {
             this._super()
 
-            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()}).addToSpace(this.r.space)
+            this.addChild(
+                rss.Box.create({
+                    pos: cc.p(this.MARGIN, 0),
+                    size: rss.winsize(),
+                    thickness: rss.car.width.total / 2,
+                    color: rss.colors.red
+                }).addToSpace(this.r.space))
 
             this.car = Car.create({pos: rss.center()}).addToSpace(this.r.space)
             this.addChild(this.car)

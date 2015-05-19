@@ -19,8 +19,7 @@ var ExampleDraw2 = {
             this.man.setVel(cc.p(0,0))
             this.addChild(this.man)
 
-            this.r.box = rss.Box.create({pos: cc.p(), size: rss.winsize(), thickness: rss.man.height, color: rss.colors.red}).addToSpace(this.r.space)
-            this.addChild(this.r.box)
+            this.addChild(rss.Box.create({pos: cc.p(), size: rss.winsize(), thickness: rss.man.height, color: rss.colors.red}).addToSpace(this.r.space))
         },
 
         processEvent:function (event) {

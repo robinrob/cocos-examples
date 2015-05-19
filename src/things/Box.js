@@ -50,13 +50,13 @@ rss.Box = rss.CompositeStaticBody.extend({
 })
 
 rss.Box.create = function(args) {
-    args.thickness = 20
+    args.thickness = args.thickness || 20
     args.walls = 4
     return new rss.Box(args).walls().init()
 },
 
 rss.Box.createOpen = function(args) {
-    args.thickness = 20
+    args.thickness = args.thickness || 20
     args.walls = 3
     return new rss.Box(args).walls().init()
 }

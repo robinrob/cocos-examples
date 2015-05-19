@@ -17,6 +17,7 @@ var BaseLayer = cc.Layer.extend({
         var back = new cc.Menu(items);
         back.setPosition(2 * rss.ui.FONT_SIZE, 2 * rss.ui.FONT_SIZE)
         this.addChild(back)
+        back.setLocalZOrder(100)
 
         return this
     },
