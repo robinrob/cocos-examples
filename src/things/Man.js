@@ -79,6 +79,7 @@ var Man = rss.CompositeDynamicBody.extend({
 
         limb.getShape().setCollisionType(rss.tag.man);
 
+        this.addChild(limb)
         this.addComp(limb)
 
         return limb
@@ -89,7 +90,7 @@ var Man = rss.CompositeDynamicBody.extend({
             cc.p(x, y),
             cc.size(rss.man.leg.width, rss.man.leg.height),
             rss.man.leg.mass,
-            rss.colors.green
+            rss.man.leg.color
         )
     },
 
@@ -98,7 +99,7 @@ var Man = rss.CompositeDynamicBody.extend({
             cc.p(x, y),
             cc.size(rss.man.arm.width, rss.man.arm.height),
             rss.man.arm.mass,
-            rss.colors.yellow
+            rss.man.arm.color
         )
     },
 

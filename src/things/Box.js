@@ -6,31 +6,28 @@ rss.Box = rss.CompositeStaticBody.extend({
         this.r.width = args.size.width
         this.r.height = args.size.height
         this.r.thickness = args.thickness
+        this.r.walls = args.walls || 4
     },
 
     init: function() {
         this._super()
-        this.constructWalls()
 
-        this.addComp(this.r.leftWall)
-        this.addComp(this.r.rightWall)
-        this.addComp(this.r.bottomWall)
-        this.addComp(this.r.topWall)
         return this
     },
 
-    with3Walls: function() {
-        this.r.comps = []
-        this.addComp(this.r.leftWall)
-        this.addComp(this.r.rightWall)
-        this.addComp(this.r.bottomWall)
+    walls: function() {
+        this.constructWalls()
+        this.addChildComp(this.r.leftWall)
+        this.addChildComp(this.r.rightWall)
+        this.addChildComp(this.r.bottomWall)
+        if (this.r.walls > 3) {
+            this.addChildComp(this.r.topWall)
+        }
         return this
     },
 
     constructWalls: function() {
         cc.log("Box.init ...")
-
-        this.walls = []
 
         var left = cp.v(this.r.thickness / 2, this.r.height / 2)
         var right = cp.v(this.r.width - this.r.thickness / 2, this.r.height / 2)
@@ -54,10 +51,12 @@ rss.Box = rss.CompositeStaticBody.extend({
 
 rss.Box.create = function(args) {
     args.thickness = 20
-    return new rss.Box(args).init()
+    args.walls = 4
+    return new rss.Box(args).walls().init()
 },
 
 rss.Box.createOpen = function(args) {
     args.thickness = 20
-    return new rss.Box(args).init().with3Walls()
+    args.walls = 3
+    return new rss.Box(args).walls().init()
 }

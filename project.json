@@ -60,6 +60,7 @@
         "src/examples/ExampleCompositeBody.js",
         "src/examples/ExamplePhysicsSprite.js",
         "src/examples/ExampleDraw.js",
+        "src/examples/ExampleDraw2.js",
         "src/examples/ExampleTouch.js",
         "src/examples/ExampleControl.js",
         "src/examples/ExampleCar.js",

@@ -3,8 +3,13 @@ var Man2 = Man.extend({
         this._super(args)
     },
 
+    init: function() {
+        this._super()
+
+        return this
+    },
+
     update: function(dt) {
-        this.erase()
         this.draw()
 
         var p = this.getPos()

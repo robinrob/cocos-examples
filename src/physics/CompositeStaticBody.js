@@ -10,12 +10,19 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
         cc.log("CompositeStaticBody.init ...")
         this._super()
 
-        this.r.comps = []
-        this.r.constraints = []
+        cc.log("col: " + this.getColor())
+        if (typeof this.getColor() == "object") {
+            this.draw(this.getColor())
+        }
     },
 
     addComp: function(comp) {
         this.r.comps.push(comp)
+    },
+
+    addChildComp: function(comp) {
+        this.addChild(comp)
+        this.addComp(comp)
     },
 
     eachComp: function(funName, args) {
@@ -45,6 +52,10 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
         })
     },
 
+    drawCOM: function() {
+        this.r.draw.drawDot(this.getPos(), this.getWidth() / 6, rss.colors.red)
+    },
+
     setGroup: function(group) { this.eachComp('setGroup', [group]) },
 
     setCollisionType: function(type) { this.eachComp('setCollisionType', [type]) },
@@ -55,7 +66,9 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
 
     setSensor: function(bool) { this.eachComp('setSensor', [bool]) },
 
+    setColor: function(col) { this.eachComp('setColor', [col])},
+
     erase: function() { this.eachComp('erase', []) },
 
-    draw: function() { this.eachComp('draw', []) }
+    draw: function(col) { this.eachComp('draw', [col || this.getColor()]) }
 })

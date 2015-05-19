@@ -12,7 +12,10 @@ rss.StaticBody = cc.Node.extend({
         this.r.width = args.size.width
         this.r.height = args.size.height
 
-        this.r.color = args.color || rss.colors.white
+        this.r.color = args.color
+
+        this.r.draw = new cc.DrawNode()
+        this.addChild(this.r.draw)
     },
 
     init: function() {
@@ -106,6 +109,14 @@ rss.StaticBody = cc.Node.extend({
 
     getStartPos: function() {
         return this.r.startPos
+    },
+
+    getAngle: function() {
+        return this.r.body.a
+    },
+
+    getAngleDeg: function() {
+        return cc.radiansToDegrees(this.r.body.a)
     },
 
     getSize: function() {

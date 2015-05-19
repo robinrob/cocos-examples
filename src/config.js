@@ -97,7 +97,8 @@ rss.man = new (function() {
     this.leg = {
         width: 10 * this.scale,
         height: 40 * this.scale,
-        mass: 16 * this.scale
+        mass: 16 * this.scale,
+        color: rss.colors.green
     }
 
     this.crotch = {
@@ -109,13 +110,15 @@ rss.man = new (function() {
     this.torso = {
         width: 2 * this.leg.width + this.crotch.width,
         height: 2 * this.leg.width + this.crotch.width,
-        mass: 20 * this.scale
+        mass: 20 * this.scale,
+        color: rss.colors.orange
     }
 
     this.arm = {
         width: 5 * this.scale,
         height: 30 * this.scale,
-        mass: 6 * this.scale
+        mass: 6 * this.scale,
+        color: rss.colors.yellow
     }
 
     this.armpit = {
@@ -132,12 +135,13 @@ rss.man = new (function() {
     this.head = {
         width: 20 * this.scale,
         height: 20 * this.scale,
-        mass: 8 * this.scale
+        mass: 8 * this.scale,
+        color: rss.colors.pink
     }
 
     this.comps = [this.leg, this.crotch, this.torso, this.arm, this.armpit, this.neck, this.head]
-    this.width = 2 * (this.arm + this.armpit) + this.torso
-    this.height = this.leg + this.crotch + this.torso + this.neck + this.head
+    this.width = 2 * (this.arm.width + this.armpit.width) + this.torso.width
+    this.height = rss.sumAttr('height', [this.leg, this.crotch, this.torso, this.neck, this.head])
     this.mass = rss.sumAttr('mass', this.comps)
 })()
 

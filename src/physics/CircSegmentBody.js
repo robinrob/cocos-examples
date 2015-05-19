@@ -107,13 +107,13 @@ rss.CircSegmentBody = rss.DynamicBody.extend({
     },
 
     draw: function() {
-        this.r.draw.setPosition(this.getPos())
         this.r.draw.drawPoly(
             this.getVerts(false).reverse(),
             rss.setAlpha(this.getColor(), 128),
             rss.ui.linewidth / 2.0,
             rss.setAlpha(this.getColor(), 255)
         )
+        this.r.draw.setPosition(this.getPos())
         this.r.draw.setAnchorPoint(0.5, 0)
         this.r.draw.setRotation(-1 * rss.toDeg(this.getAngle()))
     },

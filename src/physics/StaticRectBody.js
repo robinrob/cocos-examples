@@ -51,6 +51,22 @@ rss.StaticRectBody = rss.StaticBody.extend({
         }
         this.r.body = world.CreateBody(bodyDef)
         body.CreateFixture(fixtureDef);
+    },
+
+    draw: function(col) {
+        this.r.draw.clear()
+
+        var col = col || this.getColor() || rss.colors.white
+        this.r.draw.drawRect(
+            cc.p(-this.getWidth() / 2, -this.getHeight() / 2),
+            cc.p(this.getWidth() / 2, this.getHeight() / 2),
+            rss.setAlpha(col, 255),
+            2,
+            rss.setAlpha(col, 255)
+        )
+        this.r.draw.setPosition(this.getPos())
+        this.r.draw.setAnchorPoint(0.5, 0.5)
+        this.r.draw.setRotation(-1 * rss.toDeg(this.getAngle()))
     }
 })
 

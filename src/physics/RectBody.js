@@ -14,23 +14,26 @@ rss.RectBody = rss.DynamicBody.extend({
         this.r.shape = new cp.BoxShape(this.r.body, this.r.size.width, this.r.size.height)
 
         this.r.draw = new cc.DrawNode()
+
         this.addChild(this.r.draw)
 
         return this
     },
 
-    erase: function() {
+    draw: function(col) {
         this.r.draw.clear()
-    },
 
-    draw: function() {
+        var col = col || this.getColor() || rss.colors.white
         this.r.draw.drawRect(
-            rss.p.sub(this.getPos(), cc.p(this.getWidth() / 2, this.getHeight() / 2)),
-            rss.p.add(this.getPos(), cc.p(this.getWidth() / 2, this.getHeight() / 2)),
-            rss.setAlpha(this.getColor(), 255),
-            rss.ui.linewidth,
-            rss.setAlpha(this.getColor(), 255)
+            cc.p(-this.getWidth() / 2, -this.getHeight() / 2),
+            cc.p(this.getWidth() / 2, this.getHeight() / 2),
+            rss.setAlpha(col, 255),
+            2,
+            rss.setAlpha(col, 255)
         )
+        this.r.draw.setPosition(this.getPos())
+        this.r.draw.setAnchorPoint(0.5, 0.5)
+        this.r.draw.setRotation(-1 * rss.toDeg(this.getAngle()))
     }
 })
 
