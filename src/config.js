@@ -1,8 +1,5 @@
 var rss = rss || {}
 
-rss.chipmunk = "chipmunk"
-rss.box2D = "box2d"
-//rss.physics = rss.box2D
 rss.physics = rss.chipmunk
 
 switch(rss.physics) {
@@ -20,11 +17,6 @@ rss.star = {
     width: 100,
     height: 100,
     mass: 1
-}
-
-rss.exampleMan = {
-    acc: 200,
-    gravity: -350
 }
 
 rss.exampleCar = {
@@ -66,7 +58,9 @@ rss.tagOfLayer = {
 }
 
 rss.tag = {
-    man: 0
+    // Note that when tag is used for collision group, 0 means all objects with that tag DO collide (in Chipmunk)
+    player: 1,
+    man: 2
 }
 
 rss.res = {
@@ -94,56 +88,61 @@ ball.mass = 100
 
 
 // Man
-//rss.man2 = new (function() {
-//    this.scale = 2.0
-//
-//    this.leg = {
-//        width: 10 * this.scale,
-//        height: 40 * this.scale,
-//        mass: 16
-//    }
-//
-//    this.crotch = {
-//        width: 5 * this.scale,
-//        height: 5 * this.scale,
-//        mass: 5
-//    }
-//
-//    this.torso = {
-//        width: 2 * this.leg.width + this.crotch.width,
-//        height: this.torso.width,
-//        mass: 20
-//    }
-//
-//    this.arm = {
-//        width: 5 * this.scale,
-//        height: 30 * this.scale,
-//        mass: 6
-//    }
-//
-//    this.armpit = {
-//        width: 5 * this.scale
-//    }
-//
-//    this.neck = {
-//        width: 5 * this.scale,
-//        height: 5 * this.scale
-//    }
-//
-//    this.head = {
-//        width: 20 * this.scale,
-//        height: 20 * this.scale,
-//        mass: 20
-//    }
-//
-//    this.comps = [this.leg, this.seat, this.back]
-//    this.width = rss.sumAttr('width', this.comps)
-//    this.height = rss.sumAttr('height', this.comps)
-//    this.mass = rss.sumAttr('mass', this.comps)
-//})()
+rss.man2 = new (function() {
+    this.scale = 2.0
+    this.acc = 200,
+    this.gravity = -350
+
+
+    this.leg = {
+        width: 10 * this.scale,
+        height: 40 * this.scale,
+        mass: 16
+    }
+
+    this.crotch = {
+        width: 5 * this.scale,
+        height: 5 * this.scale,
+        mass: 5
+    }
+
+    this.torso = {
+        width: 2 * this.leg.width + this.crotch.width,
+        height: 2 * this.leg.width + this.crotch.width,
+        mass: 20
+    }
+
+    this.arm = {
+        width: 5 * this.scale,
+        height: 30 * this.scale,
+        mass: 6
+    }
+
+    this.armpit = {
+        width: 5 * this.scale
+    }
+
+    this.neck = {
+        width: 5 * this.scale,
+        height: 5 * this.scale
+    }
+
+    this.head = {
+        width: 20 * this.scale,
+        height: 20 * this.scale,
+        mass: 20
+    }
+
+    this.comps = [this.leg, this.crotch, this.torso, this.arm, this.armpit, this.neck, this.head]
+    this.width = 2 * (this.arm + this.armpit) + this.torso
+    this.height = this.leg + this.crotch + this.torso + this.neck + this.head
+    this.mass = rss.sumAttr('mass', this.comps)
+})()
 
 var man = {}
 rss.man = man
+rss.man.acc = 200
+rss.man.gravity = -350
 
 var width = {}
 man.width = width

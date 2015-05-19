@@ -18,6 +18,12 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
         this.r.comps.push(comp)
     },
 
+    eachComp: function(funName, args) {
+        this.r.comps.forEach(function(comp) {
+            comp[funName].apply(comp, args)
+        })
+    },
+
     addToSpace: function(space) {
         this.r.comps.forEach(function(comp) {
             comp.addToSpace(space)
@@ -29,7 +35,7 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
     },
 
     addConstraint: function(constr) {
-        this.r.constraints.push(constr)
+        this.addConstraints([constr])
     },
 
     addConstraints: function(constraints) {
@@ -39,33 +45,17 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
         })
     },
 
-    setGroup: function(group) {
-        this.r.comps.forEach(function(comp) {
-            comp.r.shape.group = group
-        })
-    },
+    setGroup: function(group) { this.eachComp('setGroup', [group]) },
 
-    setCollisionType: function(type) {
-        this.r.comps.forEach(function(comp) {
-            comp.r.shape.setCollisionType(type)
-        })
-    },
+    setCollisionType: function(type) { this.eachComp('setCollisionType', [type]) },
 
-    setFriction: function(u) {
-        this.r.comps.forEach(function(comp) {
-            comp.setFriction(u)
-        })
-    },
+    setFriction: function(mu) { this.eachComp('setFriction', [mu]) },
 
-    setElasticity: function(e) {
-        this.r.comps.forEach(function(comp) {
-            comp.setElasticity(e)
-        })
-    },
+    setElasticity: function(e) { this.eachComp('setElasticity', [e]) },
 
-    setSensor: function(bool) {
-        this.r.comps.forEach(function(comp) {
-            comp.setSensor(bool)
-        })
-    }
+    setSensor: function(bool) { this.eachComp('setSensor', [bool]) },
+
+    erase: function() { this.eachComp('erase', []) },
+
+    draw: function() { this.eachComp('draw', []) }
 })

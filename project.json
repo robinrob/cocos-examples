@@ -13,7 +13,7 @@
     "jsList" : [
         "src/functions.js",
         "src/constants.js",
-        "src/globals.js",
+        "src/config.js",
         "src/ui.js",
 
         "src/control/Controllable.js",

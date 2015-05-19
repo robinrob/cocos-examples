@@ -54,7 +54,7 @@ var ExampleControl = {
             this._super();
 
             this.r.space = new cp.Space();
-            this.r.space.gravity = cp.v(0, rss.exampleMan.gravity);
+            this.r.space.gravity = cp.v(0, rss.man.gravity);
 
             this.r.layer = new ExampleControl.Layer(this.r.space);
 

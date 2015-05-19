@@ -13,19 +13,19 @@ var Man2 = Man.extend({
 
         if ((rss.keys[cc.KEY.w] || rss.keys[cc.KEY.up]) && y <= winSize.height) {
             //y += 10
-            diy = +1 * rss.exampleMan.acc * rss.man.mass.total * dt
+            diy = +1 * rss.man.acc * rss.man.mass.total * dt
         }
         if ((rss.keys[cc.KEY.s] || rss.keys[cc.KEY.down]) && y >= 0) {
             //y -= 10
-            diy = -1 * rss.exampleMan.acc * rss.man.mass.total * dt
+            diy = -1 * rss.man.acc * rss.man.mass.total * dt
         }
         if ((rss.keys[cc.KEY.a] || rss.keys[cc.KEY.left]) && x >= 0) {
             //x -= 10
-            dix = -1 * rss.exampleMan.acc * rss.man.mass.total * dt
+            dix = -1 * rss.man.acc * rss.man.mass.total * dt
         }
         if ((rss.keys[cc.KEY.d] || rss.keys[cc.KEY.right]) && x <= winSize.width) {
             //x += 10
-            dix = +1 * rss.exampleMan.acc * rss.man.mass.total * dt
+            dix = +1 * rss.man.acc * rss.man.mass.total * dt
         }
 
         if (x > winSize.width) {

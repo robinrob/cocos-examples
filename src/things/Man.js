@@ -49,7 +49,6 @@ var Man = rss.CompositeDynamicBody.extend({
         this.joinLimbs(leftLeg, torso)
         this.joinLimbs(rightLeg, torso)
 
-        this.setCollisionType(rss.tag.player)
         return this
     },
 
@@ -119,6 +118,11 @@ var Man = rss.CompositeDynamicBody.extend({
             rss.man.mass.head,
             rss.colors.pink
         )
+    },
+
+    update: function() {
+        this.erase()
+        this.draw()
     }
 })
 
