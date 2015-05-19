@@ -31,7 +31,8 @@ var ExampleBusCrash = {
                 rss.Box.create({
                     pos: rss.center(),
                     size: rss.winsize(),
-                    color: rss.colors.red
+                    color: rss.colors.red,
+                    thickness: 50
                 }).addToSpace(this.r.space))
 
 
@@ -57,7 +58,7 @@ var ExampleBusCrash = {
             return item
         },
 
-        crash: function() {
+        crash: function(evt) {
             this.r.items.forEach(function(item) {
                 item.applyImpulse(cc.p(1000 * item.getMass(), 0))
             })
