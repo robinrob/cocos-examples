@@ -88,49 +88,51 @@ ball.mass = 100
 
 
 // Man
-rss.man2 = new (function() {
-    this.scale = 2.0
-    this.acc = 200,
+rss.man = new (function() {
+    this.scale = 5.0
+    this.acc = 400,
     this.gravity = -350
 
 
     this.leg = {
         width: 10 * this.scale,
         height: 40 * this.scale,
-        mass: 16
+        mass: 16 * this.scale
     }
 
     this.crotch = {
         width: 5 * this.scale,
         height: 5 * this.scale,
-        mass: 5
+        mass: 0 * this.scale
     }
 
     this.torso = {
         width: 2 * this.leg.width + this.crotch.width,
         height: 2 * this.leg.width + this.crotch.width,
-        mass: 20
+        mass: 20 * this.scale
     }
 
     this.arm = {
         width: 5 * this.scale,
         height: 30 * this.scale,
-        mass: 6
+        mass: 6 * this.scale
     }
 
     this.armpit = {
-        width: 5 * this.scale
+        width: 5 * this.scale,
+        mass: 0 * this.scale
     }
 
     this.neck = {
         width: 5 * this.scale,
-        height: 5 * this.scale
+        height: 5 * this.scale,
+        mass: 0 * this.scale
     }
 
     this.head = {
         width: 20 * this.scale,
         height: 20 * this.scale,
-        mass: 20
+        mass: 8 * this.scale
     }
 
     this.comps = [this.leg, this.crotch, this.torso, this.arm, this.armpit, this.neck, this.head]
@@ -138,43 +140,6 @@ rss.man2 = new (function() {
     this.height = this.leg + this.crotch + this.torso + this.neck + this.head
     this.mass = rss.sumAttr('mass', this.comps)
 })()
-
-var man = {}
-rss.man = man
-rss.man.acc = 200
-rss.man.gravity = -350
-
-var width = {}
-man.width = width
-width.leg = 10
-width.crotch = 5
-width.arm = 5
-width.armpit = 5
-width.torso = 2 * width.leg + width.crotch
-width.head = 20
-width.total = rss.sum(width)
-
-var height = {}
-man.height = height
-height.leg = 40
-height.crotch = 5
-height.arm = 30
-height.torso = width.torso
-height.neck = 5
-height.head = width.head
-height.total = rss.sum(height)
-
-var mass = {}
-man.mass = mass
-mass.leg = 16
-mass.arm = 6
-mass.torso = 20
-mass.head = 8
-mass.total = rss.sum(mass)
-
-var y = {}
-man.y = y
-y.shoulder = height.leg + height.torso
 
 // Car
 var car = {}

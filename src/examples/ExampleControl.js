@@ -21,7 +21,7 @@ var ExampleControl = {
             this._super()
 
             this.constructMan()
-            rss.Box.create({pos: cc.p(), size: rss.winsize(), thickness: rss.man.height.total}).addToSpace(this.r.space)
+            rss.Box.create({pos: cc.p(), size: rss.winsize(), thickness: rss.man.height}).addToSpace(this.r.space)
         },
 
         constructMan: function() {

@@ -7,7 +7,7 @@ var Car = rss.CompositeDynamicBody.extend({
     },
 
     init: function() {
-        cc.log("rss.man.init ...")
+        cc.log("rss.man.init...")
         this._super()
 
         // wheels
