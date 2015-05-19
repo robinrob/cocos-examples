@@ -19,6 +19,10 @@ rss.RectBody = rss.DynamicBody.extend({
         return this
     },
 
+    erase: function() {
+        this.r.draw.clear()
+    },
+
     draw: function() {
         this.r.draw.drawRect(
             rss.p.sub(this.getPos(), cc.p(this.getWidth() / 2, this.getHeight() / 2)),

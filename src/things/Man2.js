@@ -4,6 +4,9 @@ var Man2 = Man.extend({
     },
 
     update: function(dt) {
+        this.erase()
+        this.draw()
+
         var p = this.getPos()
         var winSize = cc.director.getWinSize()
         var x = p.x

@@ -118,11 +118,6 @@ var Man = rss.CompositeDynamicBody.extend({
             rss.man.head.mass,
             rss.colors.pink
         )
-    },
-
-    update: function() {
-        this.erase()
-        this.draw()
     }
 })
 
