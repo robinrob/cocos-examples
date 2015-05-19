@@ -53,7 +53,9 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
     },
 
     drawCOM: function() {
-        this.r.draw.drawDot(this.getPos(), this.getWidth() / 6, rss.colors.red)
+        this.r.draw.clear()
+        this.r.draw.setPosition(this.getPos())
+        this.r.draw.drawDot(cc.p(), (this.getWidth() || 100) / 6, rss.colors.red)
     },
 
     setGroup: function(group) { this.eachComp('setGroup', [group]) },

@@ -17,13 +17,18 @@ var ExampleChair = {
 
             rss.Box.create({pos: rss.center(), size: rss.winsize()}).addToSpace(this.r.space)
 
-            Chair.create({pos: rss.p.addY(rss.center(), rss.chair.height)}).addToSpace(this.r.space)
+            this.chair = Chair.create({pos: rss.p.addY(rss.center(), rss.chair.height)}).addToSpace(this.r.space)
+            this.addChild(this.chair)
 
             this.addChild(Platform.create({
                 p1: rss.p.addX(rss.center(), -50),
                 p2: rss.p.addX(rss.center(), 10),
                 thickness: 10
             }).addToSpace(this.r.space))
+        },
+
+        update: function() {
+            this.chair.drawCOM()
         }
     }),
 
