@@ -1,7 +1,7 @@
 /* Example of moving a body around using keyboard controls */
 
 var ExampleDraw2 = {
-    Layer: MoveableObjectsLayer.extend({
+    Layer: BaseLayer.extend({
         MARGIN: 5,
 
         ctor: function (space) {
@@ -15,9 +15,9 @@ var ExampleDraw2 = {
         init: function () {
             this._super()
 
-            this.controllee = Man2.create({pos: rss.center()}).addToSpace(this.r.space)
-            this.controllee.setVel(cc.p(0,0))
-            this.addChild(this.controllee)
+            this.man = Man.create({pos: rss.center()}).addToSpace(this.r.space)
+            this.man.setVel(cc.p(0,0))
+            this.addChild(this.man)
 
             this.r.box = rss.Box.create({pos: cc.p(), size: rss.winsize(), thickness: rss.man.height, color: rss.colors.red}).addToSpace(this.r.space)
             this.addChild(this.r.box)
@@ -27,15 +27,15 @@ var ExampleDraw2 = {
             cc.log("Processing event ...")
             var winSize = cc.director.getWinSize();
             var delta = event.getDelta();
-            var curPos = this.controllee.getPos()
+            var curPos = this.man.getPos()
             curPos = cc.pAdd(curPos, delta);
             curPos = cc.pClamp(curPos, cc.p(0, 0), cc.p(winSize.width, winSize.height));
-            this.controllee.setPos(curPos.x, curPos.x)
+            this.man.setPos(curPos.x, curPos.x)
             curPos = null;
         },
 
         update: function(dt) {
-            this.controllee.update(dt)
+            this.man.draw()
         }
     }),
 

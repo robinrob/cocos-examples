@@ -15,7 +15,7 @@ var BaseLayer = cc.Layer.extend({
             rss.ui.constructMenuItem("Back", new MenuScene())
         ]
         var back = new cc.Menu(items);
-        back.setPosition(rss.ui.FONT_SIZE, rss.ui.FONT_SIZE);
+        back.setPosition(2 * rss.ui.FONT_SIZE, 2 * rss.ui.FONT_SIZE)
         this.addChild(back)
 
         return this
