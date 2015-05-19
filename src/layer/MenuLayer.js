@@ -34,7 +34,7 @@ var MenuLayer = cc.Layer.extend({
             rss.ui.constructMenuItem("Physics Sprite", new ExamplePhysicsSprite.Scene()),
             rss.ui.constructMenuItem("Touch", new ExampleTouch.Scene()),
             rss.ui.constructMenuItem("Control", new ExampleControl.Scene()),
-            //rss.ui.constructMenuItem("Car", new ExampleCar.Scene()),
+            rss.ui.constructMenuItem("Car", new ExampleCar.Scene()),
             //rss.ui.constructMenuItem("Spaceship", new ExampleSpaceship.Scene()),
             //rss.ui.constructMenuItem("Spaceship2", new ExampleSpaceship2.Scene()),
             rss.ui.constructMenuItem("Chair", new ExampleChair.Scene()),

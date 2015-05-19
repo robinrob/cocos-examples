@@ -11,10 +11,10 @@ var ExampleCar = {
 
             this.init()
 
-            this._debugNode = new cc.PhysicsDebugNode(this.r.space);
-            this._debugNode.setVisible(true);
-            // Parallax ratio and offset
-            this.addChild(this._debugNode, 10);
+            //this._debugNode = new cc.PhysicsDebugNode(this.r.space);
+            //this._debugNode.setVisible(true);
+            //// Parallax ratio and offset
+            //this.addChild(this._debugNode, 10);
         },
 
         init: function () {
@@ -22,14 +22,10 @@ var ExampleCar = {
 
             rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()}).addToSpace(this.r.space)
 
-            this.constructCar()
-
-            this.constructListeners()
-        },
-
-        constructCar: function() {
             this.car = Car.create({pos: rss.center()}).addToSpace(this.r.space)
             this.addChild(this.car)
+
+            this.constructListeners()
         },
 
         constructListeners: function() {

@@ -19,9 +19,6 @@ rss.CircBody = rss.DynamicBody.extend({
             this.initBox2D()
         }
 
-        this.r.draw = new cc.DrawNode()
-        this.addChild(this.r.draw)
-
         return this
     },
 
@@ -90,35 +87,32 @@ rss.CircBody = rss.DynamicBody.extend({
         this.r.body.w = w
     },
 
-    drawCircle: function() {
-        if (this.r.draw) {
-            this.r.draw.clear()
-            this.r.draw.drawCircle(
-                this.getPos(),
-                this.getRadius(),
-                2,
-                this.getRadius(),
-                false,
-                10,
-                this.getColor()
-            )
-        }
+    drawCircle: function(col) {
+        this.r.draw.drawCircle(
+            cc.p(),
+            this.getRadius(),
+            2,
+            this.getRadius(),
+            false,
+            10,
+            col
+        )
     },
 
-    drawDot: function() {
-        if (this.r.draw) {
-            this.r.draw.clear()
-            this.r.draw.drawDot(
-                this.getPos(),
-                this.getRadius(),
-                this.getColor()
-            )
-        }
+    drawDot: function(col) {
+        this.r.draw.drawDot(
+            cc.p(),
+            this.getRadius(),
+            col
+        )
     },
 
-    draw: function() {
-        this.drawDot()
-        this.drawCircle()
+    draw: function(col) {
+        this.r.draw.clear()
+        var col = col || this.getColor() || rss.colors.white
+        //this.drawDot(col)
+        this.drawCircle(col)
+        this.r.draw.setPosition(this.getPos())
     }
 })
 

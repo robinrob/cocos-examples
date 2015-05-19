@@ -13,10 +13,6 @@ rss.RectBody = rss.DynamicBody.extend({
         // shape
         this.r.shape = new cp.BoxShape(this.r.body, this.r.size.width, this.r.size.height)
 
-        this.r.draw = new cc.DrawNode()
-
-        this.addChild(this.r.draw)
-
         return this
     },
 

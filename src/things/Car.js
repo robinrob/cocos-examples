@@ -2,8 +2,6 @@ var Car = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
         args.size = cc.size(rss.car.width.total, rss.car.height.total)
         this._super(args)
-
-        this.init()
     },
 
     init: function() {
@@ -42,7 +40,7 @@ var Car = rss.CompositeDynamicBody.extend({
                 color: rss.colors.green
             }
         )
-        this.addComp(part)
+        this.addChildComp(part)
 
         return part
     },
@@ -54,7 +52,7 @@ var Car = rss.CompositeDynamicBody.extend({
             rss.car.mass.chassis,
             rss.colors.red
         )
-        this.addComp(part)
+        this.addChildComp(part)
         return part
     },
 
@@ -87,6 +85,7 @@ var Car = rss.CompositeDynamicBody.extend({
     },
 
     update: function() {
+        this.draw()
         var p = this.getPos()
         var x = p.x
         var y = p.y
