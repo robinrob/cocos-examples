@@ -1,49 +1,45 @@
 var SidewaysMan = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
         var scale = args.scale || 1.0
-        args.size = Man.scaledSize(scale)
-        args.mass = Man.scaledMass(scale)
+        args.size = rss.s.mult(rss.sideMan.size, scale)
+        args.mass = rss.sideMan.man * scale
 
         this._super(args)
     },
 
     init: function() {
-        cc.log("rss.man.init...")
+        cc.log("rss.sideMan.init...")
         this._super()
 
-        //this.r.state = rss.player.state.jumpDown
-
         // legs
-        var leg = this._constructLeg(
-            this.worldX(-1 * (rss.man.leg.width + rss.man.crotch.width) / 2),
-            this.worldY(rss.man.leg.height / 2)
-        )
+        var leg = this._constructLeg(rss.sideMan.leg.pos)
+        leg.setGroup(rss.tag.man)
+
+        // Rotate leg and joint 90 degrees
+        leg.setAngle(rss.toRad(90))
+        leg.setJointP(rss.rotate90(rss.p.mult(rss.sideMan.leg.joint, this.r.scale)))
+        var translation = cc.p(leg.getHeight() / 2, leg.getHeight() / 2)
+        leg.translate(translation)
 
         // torso
-        var torso = this._constructTorso(
-            this.worldX(0),
-            leftLeg.getTopLeft().y + rss.man.crotch.height + rss.man.torso.width / 2)
+        var torso = this._constructTorso(rss.sideMan.torso.pos)
+        torso.setGroup(rss.tag.man)
         this.torso = torso
 
         // arms
-        var rightArm = this._constructArm(
-            this.worldX(-1 * (rss.man.torso.width + rss.man.armpit.width + rss.man.arm.width) / 2),
-            torso.getTopLeft().y - rss.man.arm.height / 2
-        )
-        var leftArm = this._constructArm(
-            this.worldX(+1 * (rss.man.torso.width + rss.man.armpit.width + rss.man.arm.width) / 2),
-            torso.getTopLeft().y - rss.man.arm.height / 2
-        )
+        var arm = this._constructArm(rss.sideMan.arm.pos)
+        arm.setGroup(rss.tag.man)
+        arm.setJointP(rss.p.mult(rss.sideMan.arm.joint, this.r.scale))
 
         // head
-        var head = this._constructHead(
-            this.worldX(0),
-            torso.getTopLeft().y + rss.man.neck.height + rss.man.head.height / 2
-        )
+        var head = this._constructHead(rss.sideMan.head.pos)
+        head.setJointP(rss.p.mult(rss.sideMan.head.joint, this.r.scale))
 
-        this.joinLimbs(torso, head)
-        this.joinLimbs(arm, torso)
         this.joinLimbs(leg, torso)
+        this.joinLimbs(arm, torso)
+        this.joinLimbs(head, torso)
+
+        this.setPos(this.getStartPos())
 
         return this
     },
@@ -52,23 +48,11 @@ var SidewaysMan = rss.CompositeDynamicBody.extend({
         this.addConstraints(rss.pivotJoint(limb1, limb2))
     },
 
-    worldX: function(x) {
-        return this.r.origin.x + x
-    },
-
-    worldY: function(y) {
-        return this.r.origin.y + y
-    },
-
-    worldCoords: function(x, y) {
-        return cc.p(this.r.origin.x + x, this.r.origin.y + y)
-    },
-
     _constructLimb: function(pos, size, mass, color) {
         var limb = rss.RectBody.create({
-            pos: pos,
-            size: size,
-            mass: mass
+            pos: rss.p.mult(pos, this.r.scale),
+            size: rss.s.mult(size, this.r.scale),
+            mass: mass * this.r.scale
         })
         limb.setColor(color)
         limb.setJointP(cc.p(0, size.height / 2))
@@ -81,38 +65,38 @@ var SidewaysMan = rss.CompositeDynamicBody.extend({
         return limb
     },
 
-    _constructLeg: function(x, y) {
+    _constructLeg: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
-            cc.size(rss.man.leg.width, rss.man.leg.height),
-            rss.man.leg.mass,
-            rss.man.leg.color
+            pos,
+            cc.size(rss.sideMan.leg.width, rss.sideMan.leg.height),
+            rss.sideMan.leg.mass,
+            rss.sideMan.leg.color
         )
     },
 
-    _constructArm: function(x, y) {
+    _constructArm: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
-            cc.size(rss.man.arm.width, rss.man.arm.height),
-            rss.man.arm.mass,
-            rss.man.arm.color
+            pos,
+            cc.size(rss.sideMan.arm.width, rss.sideMan.arm.height),
+            rss.sideMan.arm.mass,
+            rss.sideMan.arm.color
         )
     },
 
-    _constructTorso: function(x, y) {
+    _constructTorso: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
-            cc.size(rss.man.torso.width, rss.man.torso.height),
-            rss.man.torso.mass,
+            rss.sideMan.torso.pos,
+            cc.size(rss.sideMan.torso.width, rss.sideMan.torso.height),
+            rss.sideMan.torso.mass,
             rss.colors.orange
         )
     },
 
-    _constructHead: function(x, y) {
+    _constructHead: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
-            cc.size(rss.man.head.width, rss.man.head.height),
-            rss.man.head.mass,
+            pos,
+            cc.size(rss.sideMan.head.width, rss.sideMan.head.height),
+            rss.sideMan.head.mass,
             rss.colors.pink
         )
     }
@@ -120,33 +104,4 @@ var SidewaysMan = rss.CompositeDynamicBody.extend({
 
 SidewaysMan.create = function(args) {
     return new SidewaysMan(args).init()
-}
-
-SidewaysMan.scaledWidth = function(scale) {
-    return scale(rss.sideMan.torso.width, scale)
-}
-
-SidewaysMan.scaledHeight = function(scale) {
-    return scale(
-        rss.sumAttr('height', [
-        rss.sideMan.leg,
-        rss.sideMan.crotch,
-        rss.sideMan.torso,
-        rss.sideMan.neck,
-        rss.sideMan.head.height],
-            scale))
-}
-
-SidewaysMan.scaledSize = function(scale) {
-    return cc.size(SidewaysMan.scaledWidth(scale), SidewaysMan.scaledHeight(scale))
-}
-
-SidewaysMan.scaledMass = function(scale) {
-    return scale(
-        rss.sumAttr('mass', [
-        rss.sideMan.leg,
-        rss.sideMan.torso,
-        rss.sideMan.arm,
-        rss.sideMan.head.height],
-            scale))
 }

@@ -26,43 +26,79 @@ var ExampleBusCrash = {
             button.addTouchEventListener(this.crash, this)
             this.addChild(button)
 
-            this.addChild(
-                rss.Box.create({
-                    pos: rss.center(),
-                    size: rss.winsize(),
-                    color: rss.colors.red,
-                    thickness: 50
-                }).addToSpace(this.r.space))
+            var box = rss.Box.create({
+                pos: rss.center(),
+                size: rss.winsize(),
+                color: rss.colors.red,
+                thickness: 50
+            }).addToSpace(this.r.space)
+            box.setFriction(1.0)
+            this.addChild(box)
 
-
-            var scale = 3.0
             this.r.items = []
+            this.r.chairs = []
+            this.r.men = []
 
+            this.addChairMan(2)
+            this.addChairMan(4)
+            this.addChairMan(6)
+
+            this.r.shouldStep = false
+        },
+
+        addChairMan: function(x) {
             var chair = Chair.create({
                 pos: cc.p(),
-                scale: scale,
+                scale: 3.0,
                 color: rss.colors.yellow
-            }).addToSpace(this.r.space)
-            chair.setPos(cc.p(2 * chair.getWidth(), chair.getClearance()))
+            })
+            chair.setPos(cc.p(x * chair.getWidth(), 118))
+            chair.setFriction(1.0)
+            this.addChair(chair)
+
+            var man = SidewaysMan.create({
+                pos: rss.p.add(chair.getPos(), cc.p(8, 72)),
+                scale: 2.0,
+                color: rss.colors.blue
+            })
+            man.setFriction(1.0)
+            this.addMan(man)
+        },
+
+        addChair: function(chair) {
+            chair.setGroup(this.r.chairs.length + 1)
+            this.r.chairs.push(chair)
             this.addItem(chair)
         },
 
+        addMan: function(man) {
+            man.setGroup(999 - this.r.men.length)
+            this.r.men.push(man)
+            this.addItem(man)
+        },
+
         addItem: function(item) {
+            item.addToSpace(this.r.space)
             this.addChild(item)
             this.r.items.push(item)
+            item.draw()
             return item
         },
 
         crash: function(evt) {
+            this.r.shouldStep = true
             this.r.items.forEach(function(item) {
-                item.applyImpulse(cc.p(1000 * item.getMass(), 0))
+                item.applyImpulse(cc.p(5000, 0))
             })
         },
 
-        update: function() {
-            this.r.items.forEach(function(item) {
-                item.draw()
-            })
+        update: function(dt) {
+            if (this.r.shouldStep == true) {
+                this.r.space.step(dt)
+                this.r.items.forEach(function (item) {
+                    item.draw()
+                })
+            }
         }
     }),
 
@@ -81,9 +117,7 @@ var ExampleBusCrash = {
         },
 
         update: function(dt) {
-            this.r.space.step(dt)
-
-            this.r.layer.update()
+            this.r.layer.update(dt)
         }
     })
 }

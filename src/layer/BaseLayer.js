@@ -17,7 +17,7 @@ var BaseLayer = cc.Layer.extend({
         button.setTouchEnabled(true)
         button.loadTextures("btn-back-0.png", "btn-back-1.png", "", ccui.Widget.PLIST_TEXTURE)
         button.setScale(3.0)
-        button.setPosition(rss.p.add(rss.bottomLeft(), cc.p(100, 80)))
+        button.setPosition(rss.p.add(rss.topLeft(), cc.p(100, -120)))
         button.addTouchEventListener(function() { cc.director.runScene(new MenuScene())}, this)
         button.setLocalZOrder(100)
         this.addChild(button)

@@ -45,10 +45,6 @@ rss.DynamicBody = rss.StaticBody.extend({
         return this.r.body.m
     },
 
-    setAngle: function(deg) {
-        this.r.body.setAngle(deg)
-    },
-
     getOffset: function() {
         return this.r.offset
     },

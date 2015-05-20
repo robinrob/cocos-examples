@@ -47,7 +47,7 @@ Chair = rss.CompositeDynamicBody.extend({
         args.size = rss.s.mult(args.size, this.r.scale)
         args.mass = args.mass * this.r.scale
         var part = rss.RectBody.create(args)
-        part.setGroup(1)
+        part.setGroup(rss.tag.chair)
 
         this.addChildComp(part)
 
@@ -79,7 +79,8 @@ Chair = rss.CompositeDynamicBody.extend({
     },
 
     applyImpulse: function(imp) {
-        this.r.seat.applyImpulse(imp) * this.getMass() / this.r.seat.getMass()
+        this.eachComp('applyImpulse', [imp])
+        //this.r.seat.applyImpulse(imp) * this.getMass() / this.r.seat.getMass()
     }
 })
 

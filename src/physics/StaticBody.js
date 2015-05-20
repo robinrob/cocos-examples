@@ -107,6 +107,8 @@ rss.StaticBody = cc.Node.extend({
 
     getAngleDeg: function() { return cc.radiansToDegrees(this.r.body.a) },
 
+    setAngle: function(deg) { this.r.body.setAngle(deg) },
+
     getSize: function() { return this.r.size },
 
     getWidth: function() { return this.r.size.width },
@@ -155,5 +157,7 @@ rss.StaticBody = cc.Node.extend({
 
     setSensor: function(bool) { this.r.shape.setSensor(bool) },
 
-    setCollisionType: function(type) { this.r.shape.setCollisionType(type) }
+    setCollisionType: function(type) { this.r.shape.setCollisionType(type) },
+
+    translate: function(v) { this.r.body.setPos(rss.p.add(this.r.body.getPos(), v)) }
 })

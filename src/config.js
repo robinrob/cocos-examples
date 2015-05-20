@@ -4,7 +4,7 @@ rss.physics = rss.chipmunk
 
 switch(rss.physics) {
     case rss.chipmunk:
-        rss.gravity = -35
+        rss.gravity = -350
         break;
     case rss.box2D:
         rss.gravity = new Box2D.Common.Math.b2Vec2(0, -350);
@@ -60,7 +60,8 @@ rss.tagOfLayer = {
 rss.tag = {
     // Note that when tag is used for collision group, 0 means all objects with that tag DO collide (in Chipmunk)
     player: 1,
-    man: 2
+    man: 999,
+    chair: 3
 }
 
 rss.res = {
@@ -139,6 +140,7 @@ rss.man = new (function() {
         color: rss.colors.pink
     }
 
+    // Aggregate attributes
     this.comps = [this.leg, this.crotch, this.torso, this.arm, this.armpit, this.neck, this.head]
     this.width = 2 * (this.arm.width + this.armpit.width) + this.torso.width
     this.height = rss.sumAttr('height', [this.leg, this.crotch, this.torso, this.neck, this.head])
@@ -147,50 +149,77 @@ rss.man = new (function() {
 
 // Sideways Man
 rss.sideMan = new (function() {
+    // Aggregate config
     this.scale = 5.0
     this.acc = 400,
     this.gravity = -350
 
-
+    // Element dimensions
     this.leg = {
-        width: 10 * this.scale,
-        height: 40 * this.scale,
-        mass: 16 * this.scale,
+        width: 10,
+        height: 40,
+        mass: 16,
         color: rss.colors.green
     }
 
     this.crotch = {
-        width: 5 * this.scale,
-        height: 5 * this.scale,
-        mass: 0 * this.scale
+        width: 5,
+        height: 5
     }
 
     this.torso = {
-        width: 2 * this.leg.width + this.crotch.width,
-        height: 2 * this.leg.width + this.crotch.width,
-        mass: 20 * this.scale,
+        width: 1.5 * this.leg.width + this.crotch.width,
+        height: 0.7 * this.leg.height,
+        mass: 20,
         color: rss.colors.orange
     }
 
     this.arm = {
-        width: 5 * this.scale,
-        height: 30 * this.scale,
-        mass: 6 * this.scale,
+        width: 5,
+        height: 30,
+        mass: 6,
         color: rss.colors.yellow
     }
 
     this.neck = {
-        width: 5 * this.scale,
-        height: 5 * this.scale,
-        mass: 0 * this.scale
+        width: 5,
+        height: 5
     }
 
     this.head = {
-        width: 20 * this.scale,
-        height: 20 * this.scale,
-        mass: 8 * this.scale,
+        width: 20,
+        height: 20,
+        mass: 10,
         color: rss.colors.pink
     }
+
+    // Element and joint positions
+    this.leg.pos = cc.p(0, this.leg.height / 2)
+    this.leg.joint = cc.p(0, this.leg.height / 2)
+
+    this.torso.pos = cc.p(0, this.leg.height + this.crotch.height + this.torso.height / 2)
+
+    this.arm.pos = rss.p.addY(this.torso.pos, this.torso.height * (0.5 - 1/6) - this.arm.height / 2)
+    this.arm.joint = cc.p(0, this.arm.height / 2)
+
+    this.head.pos = rss.p.addY(this.torso.pos, this.torso.height / 2 + this.neck.height + this.head.height / 2)
+    this.head.joint = cc.p(0, - this.head.height / 2)
+
+    // Aggregate dimensions
+    this.width = this.torso.width
+    this.height = rss.sumAttr('height', [
+            this.leg,
+            this.crotch,
+            this.torso,
+            this.neck,
+            this.head.height])
+    this.size = cc.size(this.width, this.height)
+    this.mass = rss.sumAttr('mass', [
+            this.leg,
+            this.torso,
+            this.arm,
+            this.head.height])
+    this.clearance = this.leg.height
 })()
 
 // Car
@@ -222,20 +251,22 @@ mass.chassis = 20
 // Chair
 rss.chair = new (function() {
     // Dimensions
+    this.thickness = 8
+
     this.leg = {
-        width: 10,
-        height: 40,
+        width: this.thickness,
+        height: 30,
         mass: 20
     }
 
     this.seat = {
         width: 40,
-        height: 10,
+        height: this.thickness,
         mass: 50
     }
 
     this.back ={
-        width: 10,
+        width: this.thickness,
         height: 35,
         mass: 5
     }
@@ -277,6 +308,7 @@ rss.chair = new (function() {
         -this.back.height / 2 + this.seat.height / 2
     )
 
+    // Aggregate attributes
     this.width = this.seat.width
     this.height = this.leg.height - this.seat.height + this.back.height
     this.size = cc.size(this.width, this.height)

@@ -64,7 +64,7 @@ var Man = rss.CompositeDynamicBody.extend({
         return this.r.origin.y + y
     },
 
-    worldCoords: function(x, y) {
+    worldCoords: function(pos) {
         return cc.p(this.r.origin.x + x, this.r.origin.y + y)
     },
 
@@ -75,6 +75,7 @@ var Man = rss.CompositeDynamicBody.extend({
             mass: mass
         })
         limb.setColor(color)
+        // Joints for all limbs are placed on top edge of limb
         limb.setJointP(cc.p(0, size.height / 2))
 
         limb.getShape().setCollisionType(rss.tag.man);
@@ -85,36 +86,36 @@ var Man = rss.CompositeDynamicBody.extend({
         return limb
     },
 
-    _constructLeg: function(x, y) {
+    _constructLeg: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
+            pos,
             cc.size(rss.man.leg.width, rss.man.leg.height),
             rss.man.leg.mass,
             rss.man.leg.color
         )
     },
 
-    _constructArm: function(x, y) {
+    _constructArm: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
+            pos,
             cc.size(rss.man.arm.width, rss.man.arm.height),
             rss.man.arm.mass,
             rss.man.arm.color
         )
     },
 
-    _constructTorso: function(x, y) {
+    _constructTorso: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
+            pos,
             cc.size(rss.man.torso.width, rss.man.torso.height),
             rss.man.torso.mass,
             rss.colors.orange
         )
     },
 
-    _constructHead: function(x, y) {
+    _constructHead: function(pos) {
         return this._constructLimb(
-            cc.p(x, y),
+            pos,
             cc.size(rss.man.head.width, rss.man.head.height),
             rss.man.head.mass,
             rss.colors.pink
