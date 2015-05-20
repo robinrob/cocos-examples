@@ -57,6 +57,14 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
         this.r.draw.drawDot(cc.p(), (this.getWidth() || 100) / 6, rss.colors.red)
     },
 
+    getMass: function() {
+        var mass = 0
+        this.comps.forEach(function(comp) {
+            mass += comp.getMass()
+        })
+        return mass
+    },
+
     setGroup: function(group) { this.eachComp('setGroup', [group]) },
 
     setCollisionType: function(type) { this.eachComp('setCollisionType', [type]) },

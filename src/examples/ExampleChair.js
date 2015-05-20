@@ -20,9 +20,10 @@ var ExampleChair = {
             var scale = 5.0
 
             this.chair = Chair.create({
-                pos: rss.p.add(rss.center(), cc.p(Chair.scaledWidth(scale / 4), Chair.scaledHeight(scale))),
+                pos: cc.p(),
                 scale: scale
             }).addToSpace(this.r.space)
+            this.chair.setPos(rss.p.add(rss.center(), cc.p(this.chair.getWidth() / 4, this.chair.getHeight())))
             this.addChild(this.chair)
 
             this.addChild(Platform.create({

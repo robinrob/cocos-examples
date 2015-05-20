@@ -9,8 +9,6 @@ rss.StaticBody = cc.Node.extend({
         this.r.jointPs = [cc.p()]
 
         this.r.size = args.size
-        this.r.width = args.size.width
-        this.r.height = args.size.height
         this.r.clearance = args.clearance
         this.r.scale = args.scale
 

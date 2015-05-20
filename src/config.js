@@ -140,11 +140,37 @@ rss.man = new (function() {
         color: rss.colors.pink
     }
 
+    this.leg.left = {
+        pos: cc.p(-1 * (this.leg.width + this.crotch.width) / 2, this.leg.height / 2)
+    }
+
+    this.leg.right = {
+        pos: cc.p(-1 * this.leg.left.pos.x, this.leg.left.pos.y)
+    }
+
+    this.torso.pos = cc.p(0, this.leg.height + this.crotch.height + this.torso.width / 2)
+
+    this.arm.left = {
+        pos: cc.p(
+            -1 * (this.torso.width + this.armpit.width + this.arm.width) / 2,
+            this.torso.pos + this.torso.height / 2 - this.arm.height / 2
+        )
+    }
+
+    this.arm.right = {
+        pos: cc.p(
+            -1 * this.arm.left.pos.x,
+            this.arm.left.pos.y
+        )
+    }
+
+    this.head.pos = rss.p.addY(this.torso.pos, this.torso.height / 2 + this.neck.height + this.head.height / 2)
+
     // Aggregate attributes
-    this.comps = [this.leg, this.crotch, this.torso, this.arm, this.armpit, this.neck, this.head]
     this.width = 2 * (this.arm.width + this.armpit.width) + this.torso.width
     this.height = rss.sumAttr('height', [this.leg, this.crotch, this.torso, this.neck, this.head])
-    this.mass = rss.sumAttr('mass', this.comps)
+    this.mass = rss.sumAttr('mass', [this.leg, this.crotch, this.torso, this.arm, this.armpit, this.neck, this.head])
+    this.size = cc.size(this.width, this.height)
 })()
 
 // Sideways Man
@@ -207,18 +233,9 @@ rss.sideMan = new (function() {
 
     // Aggregate dimensions
     this.width = this.torso.width
-    this.height = rss.sumAttr('height', [
-            this.leg,
-            this.crotch,
-            this.torso,
-            this.neck,
-            this.head.height])
+    this.height = rss.sumAttr('height', [this.leg, this.crotch, this.torso, this.neck, this.head.height])
     this.size = cc.size(this.width, this.height)
-    this.mass = rss.sumAttr('mass', [
-            this.leg,
-            this.torso,
-            this.arm,
-            this.head.height])
+    this.mass = rss.sumAttr('mass', [this.leg, this.torso, this.arm, this.head.height])
     this.clearance = this.leg.height
 })()
 

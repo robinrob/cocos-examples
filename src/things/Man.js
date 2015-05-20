@@ -1,6 +1,8 @@
 var Man = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
-        args.size = cc.size(rss.man.width, rss.man.height)
+        var scale = args.scale || 1.0
+
+        args.size = rss.s.mult(rss.man.size, scale)
         this._super(args)
     },
 
@@ -8,40 +10,21 @@ var Man = rss.CompositeDynamicBody.extend({
         cc.log("rss.man.init...")
         this._super()
 
-        //this.r.state = rss.player.state.jumpDown
-
         // legs
-        var leftLeg = this._constructLeg(
-            this.worldX(-1 * (rss.man.leg.width + rss.man.crotch.width) / 2),
-            this.worldY(rss.man.leg.height / 2)
-        )
+        var leftLeg = this._constructLeg(rss.man.leg.left.pos)
 
-        var rightLeg = this._constructLeg(
-            this.worldX(+1 * (rss.man.leg.width + rss.man.crotch.width) / 2),
-            this.worldY(rss.man.leg.height / 2)
-        )
-
-        // torso
-        var torso = this._constructTorso(
-            this.worldX(0),
-            leftLeg.getTopLeft().y + rss.man.crotch.height + rss.man.torso.width / 2)
-        this.torso = torso
-
-        // arms
-        var rightArm = this._constructArm(
-            this.worldX(-1 * (rss.man.torso.width + rss.man.armpit.width + rss.man.arm.width) / 2),
-            torso.getTopLeft().y - rss.man.arm.height / 2
-        )
-        var leftArm = this._constructArm(
-            this.worldX(+1 * (rss.man.torso.width + rss.man.armpit.width + rss.man.arm.width) / 2),
-            torso.getTopLeft().y - rss.man.arm.height / 2
-        )
-
-        // head
-        var head = this._constructHead(
-            this.worldX(0),
-            torso.getTopLeft().y + rss.man.neck.height + rss.man.head.height / 2
-        )
+        //var rightLeg = this._constructLeg(rss.man.leg.right.pos)
+        //
+        //// torso
+        //var torso = this._constructTorso(rss.man.torso.pos)
+        //this.torso = torso
+        //
+        //// arms
+        //var rightArm = this._constructArm(rss.man.arm.right.pos)
+        //var leftArm = this._constructArm(rss.man.arm.left.pos)
+        //
+        //// head
+        //var head = this._constructHead(rss.man.head.pos)
 
         this.joinLimbs(torso, head)
         this.joinLimbs(leftArm, torso)
@@ -56,18 +39,6 @@ var Man = rss.CompositeDynamicBody.extend({
         this.addConstraints(rss.pivotJoint(limb1, limb2))
     },
 
-    worldX: function(x) {
-        return this.r.origin.x + x
-    },
-
-    worldY: function(y) {
-        return this.r.origin.y + y
-    },
-
-    worldCoords: function(pos) {
-        return cc.p(this.r.origin.x + x, this.r.origin.y + y)
-    },
-
     _constructLimb: function(pos, size, mass, color) {
         var limb = rss.RectBody.create({
             pos: pos,
@@ -80,8 +51,7 @@ var Man = rss.CompositeDynamicBody.extend({
 
         limb.getShape().setCollisionType(rss.tag.man);
 
-        this.addChild(limb)
-        this.addComp(limb)
+        this.addChildComp(limb)
 
         return limb
     },

@@ -31,6 +31,7 @@ var ExampleControl = {
         constructMan: function() {
             this.controllee = Man2.create({pos: rss.center()}).addToSpace(this.r.space)
             this.controllee.setVel(cc.p(0,0))
+            this.controllee.draw(rss.colors.white)
             this.addChild(this.controllee)
         },
 
@@ -64,7 +65,7 @@ var ExampleControl = {
 
             this.addChild(this.r.layer);
 
-            this.scheduleUpdate();
+            //this.scheduleUpdate();
         },
 
         update: function(dt) {
