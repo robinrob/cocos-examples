@@ -11,6 +11,8 @@ rss.StaticBody = cc.Node.extend({
         this.r.size = args.size
         this.r.width = args.size.width
         this.r.height = args.size.height
+        this.r.clearance = args.clearance
+        this.r.scale = args.scale
 
         this.r.color = args.color
 
@@ -55,9 +57,7 @@ rss.StaticBody = cc.Node.extend({
         this.removeFromParent()
     },
 
-    getStartPos: function() {
-        return this.r.startPos
-    },
+    getStartPos: function() { return this.r.startPos },
 
     getPos: function() {
         switch(rss.physics) {
@@ -81,22 +81,16 @@ rss.StaticBody = cc.Node.extend({
         }
     },
 
-    getX: function() {
-        return this.r.body.getPos().x
-    },
+    getX: function() { return this.r.body.getPos().x },
 
-    getY: function() {
-        return this.r.body.getPos().y
-    },
+    getY: function() { return this.r.body.getPos().y },
 
     getTopLeft: function() {
         var pos = this.getPos()
         return cc.p(pos.x, pos.y + this.r.size.height / 2)
     },
 
-    getTopLeftV: function() {
-        return rss.toV(this.getTopLeft())
-    },
+    getTopLeftV: function() { return rss.toV(this.getTopLeft()) },
 
     getJointP: function(wantGlobal) {
         if (wantGlobal) {
@@ -107,111 +101,59 @@ rss.StaticBody = cc.Node.extend({
         }
     },
 
-    getStartPos: function() {
-        return this.r.startPos
-    },
+    getStartPos: function() { return this.r.startPos },
 
-    getAngle: function() {
-        return this.r.body.a
-    },
+    getAngle: function() { return this.r.body.a },
 
-    getAngleDeg: function() {
-        return cc.radiansToDegrees(this.r.body.a)
-    },
+    getAngleDeg: function() { return cc.radiansToDegrees(this.r.body.a) },
 
-    getSize: function() {
-        return this.r.size
-    },
+    getSize: function() { return this.r.size },
 
-    getWidth: function() {
-        return this.r.size.width
-    },
+    getWidth: function() { return this.r.size.width },
 
-    getHeight: function() {
-        return this.r.size.height
-    },
+    getHeight: function() { return this.r.size.height },
 
-    getRadius: function() {
-        return this.r.radius
-    },
+    getClearance: function() { return this.r.clearance },
 
-    getWidthRad: function(radius) {
-        return this.getWidth() / this.getRadius()
-    },
+    getRadius: function() { return this.r.radius },
 
-    getHeightRad: function(radius) {
-        return this.getHeight() / this.getRadius()
-    },
+    getWidthRad: function(radius) { return this.getWidth() / this.getRadius() },
 
-    getShape: function() {
-        return this.r.shape
-    },
+    getHeightRad: function(radius) { return this.getHeight() / this.getRadius() },
 
-    getBody: function() {
-        return this.r.body
-    },
+    getShape: function() { return this.r.shape },
 
-    getSprite: function() {
-        return this.r.sprite
-    },
+    getBody: function() { return this.r.body },
 
-    getDraw: function() {
-        return this.r.draw
-    },
+    getSprite: function() { return this.r.sprite },
 
-    getStartPos: function() {
-        return this.r.startPos
-    },
+    getDraw: function() { return this.r.draw },
 
-    getOrigin: function() {
-        return this.r.origin
-    },
+    getStartPos: function() { return this.r.startPos },
 
-    setJointP: function(p) {
-        this.r.jointPs[0] = p
-    },
+    getOrigin: function() { return this.r.origin },
 
-    getJointPs: function() {
-        return this.r.jointPs
-    },
+    setJointP: function(p) { this.r.jointPs[0] = p },
 
-    setJointPs: function(points) {
-        this.r.jointPs = points
-    },
+    getJointPs: function() { return this.r.jointPs },
 
-    setGroup: function(group) {
-        this.r.shape.group = group
-    },
+    setJointPs: function(points) { this.r.jointPs = points },
 
-    getColor: function() {
-        return this.r.color
-    },
+    setGroup: function(group) { this.r.shape.group = group },
 
-    setColor: function(color) {
-        this.r.color = color
-    },
+    getColor: function() { return this.r.color },
 
-    getState: function() {
-        return this.r.state
-    },
+    setColor: function(color) { this.r.color = color },
 
-    setState: function(state) {
-        this.r.state = state
-    },
+    getState: function() { return this.r.state },
 
-    setElasticity: function(e) {
-        this.r.shape.setElasticity(e)
-    },
+    setState: function(state) { this.r.state = state },
 
-    setFriction: function(f) {
-        this.r.shape.setFriction(f)
-    },
+    setElasticity: function(e) { this.r.shape.setElasticity(e) },
 
-    setSensor: function(bool) {
-        this.r.shape.setSensor(bool)
-    },
+    setFriction: function(f) { this.r.shape.setFriction(f) },
 
-    setCollisionType: function(type) {
-        this.r.shape.setCollisionType(type)
-    }
+    setSensor: function(bool) { this.r.shape.setSensor(bool) },
+
+    setCollisionType: function(type) { this.r.shape.setCollisionType(type) }
 })

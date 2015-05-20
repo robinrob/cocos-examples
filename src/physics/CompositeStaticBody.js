@@ -10,7 +10,6 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
         cc.log("CompositeStaticBody.init ...")
         this._super()
 
-        cc.log("col: " + this.getColor())
         if (typeof this.getColor() == "object") {
             this.draw(this.getColor())
         }

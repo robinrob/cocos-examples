@@ -1,11 +1,11 @@
 Chair = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
         var scale = args.scale || 1.0
-        args.size = Chair.scaledSize(scale)
-        args.mass = Chair.scaledMass(scale)
-        this._super(args)
 
-        this.r.scale = scale
+        args.size = rss.s.mult(rss.chair.size, scale)
+        args.mass = rss.chair.mass * scale
+        args.clearance = rss.chair.clearance * scale
+        this._super(args)
     },
 
     init: function() {
@@ -49,7 +49,7 @@ Chair = rss.CompositeDynamicBody.extend({
         var part = rss.RectBody.create(args)
         part.setGroup(1)
 
-        this.addComp(part)
+        this.addChildComp(part)
 
         return part
     },
@@ -85,25 +85,4 @@ Chair = rss.CompositeDynamicBody.extend({
 
 Chair.create = function(args) {
     return new Chair(args).init()
-}
-
-Chair.scale = function(val, scale) {
-    scale = scale || 1.0
-    return val * scale
-}
-
-Chair.scaledWidth = function(scale) {
-    return Chair.scale(rss.chair.seat.width, scale)
-}
-
-Chair.scaledHeight = function(scale) {
-    return Chair.scale(rss.chair.leg.height - rss.chair.seat.height + rss.chair.back.height, scale)
-}
-
-Chair.scaledSize = function(scale) {
-    return cc.size(Chair.scaledWidth(scale), Chair.scaledHeight(scale))
-}
-
-Chair.scaledMass = function(scale) {
-    Chair.scale(2 * rss.chair.leg.mass +  rss.chair.seat.mass + rss.chair.back.mass, scale)
 }

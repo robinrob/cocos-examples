@@ -1,7 +1,7 @@
 rss.ui = {
     FONT_SIZE: 45,
 
-    constructMenuItem: function (name, scene) {
+    menuItemLabel: function (name, callBack) {
         var winSize = cc.director.getWinSize()
         var width = winSize.width
         var height = this.FONT_SIZE
@@ -15,12 +15,22 @@ rss.ui = {
 
         var item = new cc.MenuItemLabel(
             lbl,
-            function () {
-                cc.director.runScene(scene)
-            },
+            callBack,
             this
         )
 
+        return item
+    },
+
+    menuItemImage: function(args) {
+        cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist)
+
+        //var item = new cc.MenuItemImage()
+        //item.initWithNormalImage(args.normal, args.selected, null, args.callBack, this)
+        //item.setScale(50, 50)
+        var normal = new cc.Sprite(args.normal, cc.rect(100, 100, 100, 100))
+        var selected = new cc.Sprite(args.selected, cc.rect(100, 100, 100, 100))
+        var item = new cc.MenuItemSprite(normal, selected, null, args.callBack, this)
         return item
     }
 }

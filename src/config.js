@@ -276,4 +276,10 @@ rss.chair = new (function() {
         0,
         -this.back.height / 2 + this.seat.height / 2
     )
+
+    this.width = this.seat.width
+    this.height = this.leg.height - this.seat.height + this.back.height
+    this.size = cc.size(this.width, this.height)
+    this.mass = 2 * this.leg.mass +  this.seat.mass + this.back.mass
+    this.clearance = this.leg.height + this.seat.height / 2
 })()

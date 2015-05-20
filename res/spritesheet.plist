@@ -7,7 +7,7 @@
             <key>animationbuttonnormal.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{896,2},{80,40}}</string>
+                <string>{{896,25},{80,40}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>animationbuttonpressed.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{896,44},{80,40}}</string>
+                <string>{{894,67},{80,40}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -29,6 +29,32 @@
                 <string>{{0,0},{80,40}}</string>
                 <key>sourceSize</key>
                 <string>{80,40}</string>
+            </dict>
+            <key>btn-back-0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{846,60},{46,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{46,32}}</string>
+                <key>sourceSize</key>
+                <string>{46,32}</string>
+            </dict>
+            <key>btn-back-1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{189,90},{46,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{46,32}}</string>
+                <key>sourceSize</key>
+                <string>{46,32}</string>
             </dict>
             <key>button_n_inner.png</key>
             <dict>
@@ -137,7 +163,7 @@
             <key>restart_s_text.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{112,90},{108,21}}</string>
+                <string>{{896,2},{108,21}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +241,7 @@
             <key>start_n_text.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{846,86},{75,21}}</string>
+                <string>{{112,90},{75,21}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,11 +254,11 @@
             <key>start_s_text.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{923,86},{75,21}}</string>
+                <string>{{978,25},{75,21}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{75,21}}</string>
                 <key>sourceSize</key>
@@ -246,9 +272,9 @@
             <key>realTextureFileName</key>
             <string>spritesheet.png</string>
             <key>size</key>
-            <string>{1000,127}</string>
+            <string>{1007,127}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:064723503c2a32f91a688744481af28b:e3a8cbc7659e6851e7555848e76368d1:1de88c2a7237d4cdf78de8d8ad4f4c7e$</string>
+            <string>$TexturePacker:SmartUpdate:794670858842571e32960824101e0292:994df50d7d6c21421af67d4834326014:1de88c2a7237d4cdf78de8d8ad4f4c7e$</string>
             <key>textureFileName</key>
             <string>spritesheet.png</string>
         </dict>

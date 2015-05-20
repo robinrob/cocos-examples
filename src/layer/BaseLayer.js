@@ -11,13 +11,16 @@ var BaseLayer = cc.Layer.extend({
     init:function() {
         this._super()
 
-        var items = [
-            rss.ui.constructMenuItem("Back", new MenuScene())
-        ]
-        var back = new cc.Menu(items);
-        back.setPosition(2 * rss.ui.FONT_SIZE, 2 * rss.ui.FONT_SIZE)
-        this.addChild(back)
-        back.setLocalZOrder(100)
+        cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist)
+
+        var button = new ccui.Button()
+        button.setTouchEnabled(true)
+        button.loadTextures("btn-back-0.png", "btn-back-1.png", "", ccui.Widget.PLIST_TEXTURE)
+        button.setScale(3.0)
+        button.setPosition(rss.p.add(rss.bottomLeft(), cc.p(100, 80)))
+        button.addTouchEventListener(function() { cc.director.runScene(new MenuScene())}, this)
+        button.setLocalZOrder(100)
+        this.addChild(button)
 
         return this
     },
