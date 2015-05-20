@@ -90,53 +90,51 @@ ball.mass = 100
 
 // Man
 rss.man = new (function() {
-    this.scale = 5.0
     this.acc = 400,
     this.gravity = -350
 
-
     this.leg = {
-        width: 10 * this.scale,
-        height: 40 * this.scale,
-        mass: 16 * this.scale,
+        width: 10,
+        height: 40,
+        mass: 16,
         color: rss.colors.green
     }
 
     this.crotch = {
-        width: 5 * this.scale,
-        height: 5 * this.scale,
-        mass: 0 * this.scale
+        width: 5,
+        height: 5,
+        mass: 0
     }
 
     this.torso = {
         width: 2 * this.leg.width + this.crotch.width,
         height: 2 * this.leg.width + this.crotch.width,
-        mass: 20 * this.scale,
+        mass: 20,
         color: rss.colors.orange
     }
 
     this.arm = {
-        width: 5 * this.scale,
-        height: 30 * this.scale,
-        mass: 6 * this.scale,
+        width: 5,
+        height: 30,
+        mass: 6,
         color: rss.colors.yellow
     }
 
     this.armpit = {
-        width: 5 * this.scale,
-        mass: 0 * this.scale
+        width: 5,
+        mass: 0
     }
 
     this.neck = {
-        width: 5 * this.scale,
-        height: 5 * this.scale,
-        mass: 0 * this.scale
+        width: 5,
+        height: 5,
+        mass: 0
     }
 
     this.head = {
-        width: 20 * this.scale,
-        height: 20 * this.scale,
-        mass: 8 * this.scale,
+        width: 20,
+        height: 20,
+        mass: 8,
         color: rss.colors.pink
     }
 
@@ -153,7 +151,7 @@ rss.man = new (function() {
     this.arm.left = {
         pos: cc.p(
             -1 * (this.torso.width + this.armpit.width + this.arm.width) / 2,
-            this.torso.pos + this.torso.height / 2 - this.arm.height / 2
+            this.torso.pos.y + this.torso.height / 2 - this.arm.height / 2
         )
     }
 
@@ -176,7 +174,6 @@ rss.man = new (function() {
 // Sideways Man
 rss.sideMan = new (function() {
     // Aggregate config
-    this.scale = 5.0
     this.acc = 400,
     this.gravity = -350
 

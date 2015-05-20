@@ -1,8 +1,8 @@
 var Man = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
-        var scale = args.scale || 1.0
+        args.scale = args.scale || 1.0
 
-        args.size = rss.s.mult(rss.man.size, scale)
+        args.size = rss.s.mult(rss.man.size, args.scale)
         this._super(args)
     },
 
@@ -13,24 +13,26 @@ var Man = rss.CompositeDynamicBody.extend({
         // legs
         var leftLeg = this._constructLeg(rss.man.leg.left.pos)
 
-        //var rightLeg = this._constructLeg(rss.man.leg.right.pos)
-        //
-        //// torso
-        //var torso = this._constructTorso(rss.man.torso.pos)
-        //this.torso = torso
-        //
-        //// arms
-        //var rightArm = this._constructArm(rss.man.arm.right.pos)
-        //var leftArm = this._constructArm(rss.man.arm.left.pos)
-        //
-        //// head
-        //var head = this._constructHead(rss.man.head.pos)
+        var rightLeg = this._constructLeg(rss.man.leg.right.pos)
 
-        this.joinLimbs(torso, head)
-        this.joinLimbs(leftArm, torso)
-        this.joinLimbs(rightArm, torso)
-        this.joinLimbs(leftLeg, torso)
-        this.joinLimbs(rightLeg, torso)
+        // torso
+        var torso = this._constructTorso(rss.man.torso.pos)
+        this.torso = torso
+
+        // arms
+        var rightArm = this._constructArm(rss.man.arm.right.pos)
+        var leftArm = this._constructArm(rss.man.arm.left.pos)
+
+        // head
+        var head = this._constructHead(rss.man.head.pos)
+
+        //this.joinLimbs(torso, head)
+        //this.joinLimbs(leftArm, torso)
+        //this.joinLimbs(rightArm, torso)
+        //this.joinLimbs(leftLeg, torso)
+        //this.joinLimbs(rightLeg, torso)
+
+        this.setPos(this.getStartPos())
 
         return this
     },
@@ -41,15 +43,15 @@ var Man = rss.CompositeDynamicBody.extend({
 
     _constructLimb: function(pos, size, mass, color) {
         var limb = rss.RectBody.create({
-            pos: pos,
-            size: size,
-            mass: mass
+            pos: rss.p.mult(pos, this.r.scale),
+            size: rss.s.mult(size, this.r.scale),
+            mass: mass * this.r.scale
         })
         limb.setColor(color)
         // Joints for all limbs are placed on top edge of limb
-        limb.setJointP(cc.p(0, size.height / 2))
+        //limb.setJointP(cc.p(0, size.height / 2))
 
-        limb.getShape().setCollisionType(rss.tag.man);
+        limb.setCollisionType(rss.tag.man);
 
         this.addChildComp(limb)
 

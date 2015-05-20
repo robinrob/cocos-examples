@@ -1,10 +1,10 @@
 Chair = rss.CompositeDynamicBody.extend({
     ctor: function(args) {
-        var scale = args.scale || 1.0
+        args.scale = args.scale || 1.0
 
-        args.size = rss.s.mult(rss.chair.size, scale)
+        args.size = rss.s.mult(rss.chair.size, args.scale)
         args.mass = rss.chair.mass * scale
-        args.clearance = rss.chair.clearance * scale
+        args.clearance = rss.chair.clearance * args.scale
         this._super(args)
     },
 
