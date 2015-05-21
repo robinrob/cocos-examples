@@ -29,10 +29,12 @@ var ExampleAnimation2 = {
             if (rss.upInput()) {
                 cc.log("UP")
                 this.r.sprite.setSpriteFrame(this.r.upFrame)
+                cc.audioEngine.playEffect(rss.res.spaceship_ogg)
             }
             else {
                 cc.log("DOWN")
                 this.r.sprite.setSpriteFrame(this.r.downFrame)
+                cc.audioEngine.stopAllEffects()
             }
         }
     }),

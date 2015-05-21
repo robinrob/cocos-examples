@@ -51,7 +51,10 @@ rss.tag = {
 
 rss.res = {
     spritesheet_png : "res/spritesheet.png",
-    spritesheet_plist : "res/spritesheet.plist"
+    spritesheet_plist : "res/spritesheet.plist",
+
+    spaceship_ogg: "res/background.ogg"
+    //spaceship_ogg: "res/delta_iv.wav"
 }
 
 // Resources for pre-loading
