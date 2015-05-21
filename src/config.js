@@ -90,7 +90,7 @@ ball.mass = 100
 
 // Man
 rss.man = new (function() {
-    this.acc = 400,
+    this.acc = 600,
     this.gravity = -350
 
     this.leg = {

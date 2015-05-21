@@ -26,11 +26,11 @@ var Man = rss.CompositeDynamicBody.extend({
         // head
         var head = this._constructHead(rss.man.head.pos)
 
-        //this.joinLimbs(torso, head)
-        //this.joinLimbs(leftArm, torso)
-        //this.joinLimbs(rightArm, torso)
-        //this.joinLimbs(leftLeg, torso)
-        //this.joinLimbs(rightLeg, torso)
+        this.joinLimbs(torso, head)
+        this.joinLimbs(leftArm, torso)
+        this.joinLimbs(rightArm, torso)
+        this.joinLimbs(leftLeg, torso)
+        this.joinLimbs(rightLeg, torso)
 
         this.setPos(this.getStartPos())
 
@@ -49,7 +49,7 @@ var Man = rss.CompositeDynamicBody.extend({
         })
         limb.setColor(color)
         // Joints for all limbs are placed on top edge of limb
-        //limb.setJointP(cc.p(0, size.height / 2))
+        limb.setJointP(cc.p(0, limb.getHeight() / 2))
 
         limb.setCollisionType(rss.tag.man);
 
