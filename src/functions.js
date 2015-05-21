@@ -443,3 +443,8 @@ rss.toXYVerts = function(verts) {
 rss.log = function(str) {
     cc.log("COCOS: " + str)
 }
+
+rss.stop = function() {
+    cc.director.pause()
+    cc.audioEngine.stopMusic()
+}
