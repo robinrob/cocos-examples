@@ -31,7 +31,7 @@ var ExampleControl = {
         constructMan: function() {
             this.controllee = Man2.create({
                 pos: rss.center(),
-                scale: 5.0,
+                scale: 3.0,
                 color: rss.colors.blue
             }).addToSpace(this.r.space)
             //this.controllee.setVel(cc.p(0,0))

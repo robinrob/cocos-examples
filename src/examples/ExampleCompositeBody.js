@@ -15,25 +15,18 @@ var ExampleCompositeBody = {
         init: function () {
             this._super()
 
-            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()})
+            rss.Box.create({pos: cc.p(this.MARGIN, 0), size: rss.winsize()}).addToSpace(this.r.space)
 
             this.constructMan()
-            this.constructPlatform()
             this.constructBalls()
         },
 
         constructMan: function() {
-            this.man = Man.create({pos: rss.center(), space: this.r.space})
+            this.man = Man.create({
+                pos: rss.center(),
+                scale: 2.0
+            }).addToSpace(this.r.space)
             this.man.setVel(cc.p(0, 0))
-            this.man.addToSpace(this.r.space)
-        },
-
-        constructPlatform: function() {
-            var platform = Platform.create({
-                p1: cc.p(rss.center().x - 20, rss.center().y),
-                p2: cc.p(rss.center().x + 20, rss.center().y),
-                thickness: 2,
-                space: this.r.space})
         },
 
         constructBalls: function() {

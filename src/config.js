@@ -329,3 +329,56 @@ rss.chair = new (function() {
     this.mass = 2 * this.leg.mass +  this.seat.mass + this.back.mass
     this.clearance = this.leg.height + this.seat.height / 2
 })()
+
+// Dog
+rss.dog = new (function() {
+    this.leg = {
+        width: 5,
+        height: 5,
+        mass: 5
+    }
+
+    this.armpit = {
+        width: 5,
+        height: 2
+    }
+
+    this.torso = {
+        width: 15,
+        height: 10,
+        mass: 15
+    }
+
+    this.tail = {
+        width: 10,
+        height: 20,
+        mass: 3
+    }
+
+    this.head = {
+        width: 10,
+        height: 10,
+        mass: 8
+    }
+
+    this.leg.left = {
+        pos: cc.p(-(this.leg.width + this.torso.width) / 2, this.leg.height / 2)
+    }
+
+    this.leg.right = {
+        pos: cc.p(-this.leg.left.pos.x, this.leg.height / 2)
+    }
+
+    this.torso.pos = cc.p(0, this.leg.height + this.armpit.height + this.torso.height / 2)
+
+    this.tail.pos = cc.p(this.torso.width / 2, this.torso.pos.y + this.torso.height / 2)
+
+    this.head.pos = cc.p(this.torso.pos.y + this.torso.height / 2 - this.head.height / 2)
+
+    // Aggregate attributes
+    this.width = this.torso.width + this.head.width
+    this.height = this.leg.height + this.armpit.height + this.torso.height
+    this.size = cc.size(this.width, this.height)
+    this.mass = 4 * this.leg.mass + this.torso.mass + this.tail.mass + this.head.mass
+    this.clearance = this.leg.height + this.seat.height / 2
+})()
