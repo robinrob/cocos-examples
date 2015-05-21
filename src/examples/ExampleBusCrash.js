@@ -41,7 +41,6 @@ var ExampleBusCrash = {
                     cc.director.resume()
                 },100)
             }, this)
-            button.setLocalZOrder(100)
             this.addChild(button)
 
             var box = rss.Box.create({
