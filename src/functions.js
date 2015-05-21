@@ -140,6 +140,14 @@ rss.p.mult = function(p, m) {
     return cc.p(p.x * m, p.y * m)
 }
 
+rss.p.dot = function(p1, p2) {
+   return cc.p(p1.x * p2.x, p1.y * p2.y)
+}
+
+rss.p.toS = function(p) {
+    return cc.size(p.x, p.y)
+}
+
 rss.s = {}
 rss.s.mult = function(s, m) {
     return cc.size(s.width * m, s.height * m)
@@ -159,6 +167,14 @@ rss.s.subW = function(s, dw) {
 
 rss.s.subH = function(s, dh) {
     return cc.size(s.width, s.height - dh)
+}
+
+rss.s.dot = function(s1, s2) {
+    return cc.size(s1.width * s2.width, s1.height * s2.height)
+}
+
+rss.s.toP = function(s) {
+    return cc.p(s.width, s.height)
 }
 
 rss.vecFromTo = function(a, b) {

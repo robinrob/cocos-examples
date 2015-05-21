@@ -133,11 +133,22 @@ rss.StaticBody = cc.Node.extend({
 
     getOrigin: function() { return this.r.origin },
 
-    setJointP: function(p) { this.r.jointPs[0] = p },
+    getJointP: function() { return this.r.jointPs[0] },
 
     getJointPs: function() { return this.r.jointPs },
 
+    setJointP: function(p) { this.r.jointPs[0] = p },
+
     setJointPs: function(points) { this.r.jointPs = points },
+
+    setJointR: function(ratio) { this.r.jointPs[0] = rss.p.dot(ratio, rss.s.toP(this.r.size)) },
+
+    setJointRs: function(ratios) {
+        this.r.jointPs = []
+        ratios.forEach(function(ratio) {
+            this.r.jointPs.push(rss.p.dot(ratio, rss.s.toP(this.r.size)))
+        })
+    },
 
     setGroup: function(group) { this.r.shape.group = group },
 

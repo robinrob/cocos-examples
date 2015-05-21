@@ -11,7 +11,7 @@ var Dog = rss.CompositeDynamicBody.extend({
 
         // legs
         var leftLeg = this._constructLeg(rss.dog.leg.left.pos)
-        leftLeg.setJointP()
+        leftLeg.setJointP(cc.p(0, leftLeg.height / 2))
 
         var rightLeg = this._constructLeg(rss.dog.leg.right.pos)
 
