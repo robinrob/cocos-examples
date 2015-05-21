@@ -46,6 +46,7 @@
         "src/things/CircFlyingObstacle.js",
         "src/things/Spring.js",
         "src/things/Star.js",
+        "src/things/Dog.js",
 
         "src/layer/BaseLayer.js",
         "src/layer/MenuLayer.js",

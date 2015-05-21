@@ -43,6 +43,13 @@ var ExampleBusCrash = {
             this.addChairMan(4)
             this.addChairMan(6)
 
+            this.addItem(
+                Dog.create({
+                    scale: 1.0,
+                    pos: rss.center()
+                })
+            )
+
             this.r.shouldStep = false
         },
 

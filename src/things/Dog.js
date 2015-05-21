@@ -11,25 +11,27 @@ var Dog = rss.CompositeDynamicBody.extend({
 
         // legs
         var leftLeg = this._constructLeg(rss.dog.leg.left.pos)
-        leftLeg.setJointP(cc.p(0, leftLeg.height / 2))
+        leftLeg.setJointR(rss.dog.leg.left.joint)
 
         var rightLeg = this._constructLeg(rss.dog.leg.right.pos)
+        leftLeg.setJointR(rss.dog.leg.right.joint)
 
         // torso
         var torso = this._constructTorso(rss.dog.torso.pos)
         this.torso = torso
 
         // tail
-        var tail = this._constructArm(rss.dog.tail.pos)
+        var tail = this._constructTail(rss.dog.tail.pos)
+        tail.setJointR(rss.dog.tail.joint)
 
         // head
         var head = this._constructHead(rss.dog.head.pos)
+        //head.setJointR(rss.dog.head.joint)
 
-        this.joinLimbs(torso, head)
-        this.joinLimbs(leftArm, torso)
-        this.joinLimbs(rightArm, torso)
-        this.joinLimbs(leftLeg, torso)
-        this.joinLimbs(rightLeg, torso)
+        //this.joinLimbs(head, torso)
+        //this.joinLimbs(leftLeg, torso)
+        //this.joinLimbs(rightLeg, torso)
+        //this.joinLimbs(tail, torso)
 
         this.setPos(this.getStartPos())
 
@@ -66,12 +68,12 @@ var Dog = rss.CompositeDynamicBody.extend({
         )
     },
 
-    _constructArm: function(pos) {
+    _constructTail: function(pos) {
         return this._constructLimb(
             pos,
-            cc.size(rss.dog.arm.width, rss.dog.arm.height),
-            rss.dog.arm.mass,
-            rss.dog.arm.color
+            cc.size(rss.dog.tail.width, rss.dog.tail.height),
+            rss.dog.tail.mass,
+            rss.dog.tail.color
         )
     },
 

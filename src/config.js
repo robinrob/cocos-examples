@@ -333,52 +333,66 @@ rss.chair = new (function() {
 // Dog
 rss.dog = new (function() {
     this.leg = {
-        width: 5,
-        height: 5,
+        width: 10,
+        height: 40,
         mass: 5
     }
 
     this.armpit = {
-        width: 5,
-        height: 2
+        height: 5,
+        width: 5
     }
 
     this.torso = {
-        width: 15,
-        height: 10,
+        width: 70,
+        height: 30,
         mass: 15
     }
 
     this.tail = {
-        width: 10,
-        height: 20,
+        width: 50,
+        height: 8,
         mass: 3
     }
 
+    this.neck = {
+        width: 5
+    }
+
     this.head = {
-        width: 10,
-        height: 10,
+        width: 40,
         mass: 8
     }
 
+    // Positions & joints
     this.leg.left = {
-        pos: cc.p(-(this.leg.width + this.torso.width) / 2, this.leg.height / 2)
+        pos: cc.p(-(this.torso.width - this.leg.width) / 2, this.leg.height / 2),
+        joint: cc.p(0, 0.5)
     }
 
     this.leg.right = {
-        pos: cc.p(-this.leg.left.pos.x, this.leg.height / 2)
+        pos: cc.p(-this.leg.left.pos.x, this.leg.height / 2),
+        joint: cc.p(0, 0.5)
     }
 
     this.torso.pos = cc.p(0, this.leg.height + this.armpit.height + this.torso.height / 2)
 
-    this.tail.pos = cc.p(this.torso.width / 2, this.torso.pos.y + this.torso.height / 2)
+    this.tail.pos = cc.p(
+        -((this.torso.width + this.tail.width) / 2 + this.armpit.width),
+        this.torso.pos.y + this.torso.height / 2 - this.tail.height / 2
+    )
+    this.tail.joint = cc.p(0.5, 0)
 
-    this.head.pos = cc.p(this.torso.pos.y + this.torso.height / 2 - this.head.height / 2)
+    this.head.pos = cc.p(
+        (this.torso.width + this.head.width) / 2 + this.neck.width,
+        this.torso.pos.y + this.torso.height / 2
+    )
+    this.head.joint = cc.p(-0.5, 0)
 
     // Aggregate attributes
     this.width = this.torso.width + this.head.width
     this.height = this.leg.height + this.armpit.height + this.torso.height
     this.size = cc.size(this.width, this.height)
     this.mass = 4 * this.leg.mass + this.torso.mass + this.tail.mass + this.head.mass
-    this.clearance = this.leg.height + this.seat.height / 2
+    this.clearance = this.leg.height
 })()
