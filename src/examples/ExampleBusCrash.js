@@ -21,6 +21,7 @@ var ExampleBusCrash = {
             var button = new ccui.Button()
             button.setTouchEnabled(true)
             button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE)
+            button.setColor(cc.color(100, 250, 100))
             button.setScale(3.0)
             button.setPosition(rss.p.add(rss.top(), cc.p(-150, -300)))
             button.addTouchEventListener(this.crash, this)
@@ -29,6 +30,7 @@ var ExampleBusCrash = {
             var button = new ccui.Button()
             button.setTouchEnabled(true)
             button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE)
+            button.setColor(cc.color(255, 200, 100))
             button.setScale(3.0)
             button.setPosition(rss.p.add(rss.top(), cc.p(150, -300)))
             button.addTouchEventListener(function() {
