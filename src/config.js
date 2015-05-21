@@ -53,8 +53,10 @@ rss.res = {
     spritesheet_png : "res/spritesheet.png",
     spritesheet_plist : "res/spritesheet.plist",
 
-    spaceship_ogg: "res/background.ogg"
-    //spaceship_ogg: "res/delta_iv.wav"
+    //spaceship_ogg: "res/correct.ogg"
+    //spaceship_ogg: "res/pickup_coin.ogg"
+    //spaceship_ogg: "res/background.ogg"
+    spaceship_ogg: "res/delta_iv.wav"
 }
 
 // Resources for pre-loading
