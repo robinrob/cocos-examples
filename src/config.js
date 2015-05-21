@@ -335,7 +335,8 @@ rss.dog = new (function() {
     this.leg = {
         width: 10,
         height: 40,
-        mass: 5
+        mass: 5,
+        color: rss.colors.green
     }
 
     this.armpit = {
@@ -346,13 +347,15 @@ rss.dog = new (function() {
     this.torso = {
         width: 70,
         height: 30,
-        mass: 15
+        mass: 15,
+        color: rss.colors.orange
     }
 
     this.tail = {
-        width: 50,
-        height: 8,
-        mass: 3
+        width: 8,
+        height: 50,
+        mass: 3,
+        color: rss.colors.purple
     }
 
     this.neck = {
@@ -362,7 +365,8 @@ rss.dog = new (function() {
     this.head = {
         width: 40,
         height: 40,
-        mass: 8
+        mass: 8,
+        color: rss.colors.pink
     }
 
     // Positions & joints
@@ -372,7 +376,7 @@ rss.dog = new (function() {
     }
 
     this.leg.right = {
-        pos: cc.p(-this.leg.left.pos.x, this.leg.height / 2),
+        pos: cc.p(-this.leg.left.pos.x, this.leg.left.pos.y),
         joint: cc.p(0, 0.5)
     }
 
@@ -382,7 +386,7 @@ rss.dog = new (function() {
         -((this.torso.width + this.tail.width) / 2 + this.armpit.width),
         this.torso.pos.y + this.torso.height / 2 - this.tail.height / 2
     )
-    this.tail.joint = cc.p(0.5, 0)
+    this.tail.joint = cc.p(0, 0.5)
 
     this.head.pos = cc.p(
         (this.torso.width + this.head.width) / 2 + this.neck.width,

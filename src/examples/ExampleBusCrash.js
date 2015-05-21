@@ -4,10 +4,10 @@ var ExampleBusCrash = {
             this._super()
             this.r.space = space
 
-            this._debugNode = new cc.PhysicsDebugNode(this.r.space)
-            this._debugNode.setVisible(true)
-            // Parallax ratio and offset
-            this.addChild(this._debugNode, 10)
+            //this._debugNode = new cc.PhysicsDebugNode(this.r.space)
+            //this._debugNode.setVisible(true)
+            //Parallax ratio and offset
+            //this.addChild(this._debugNode, 10)
 
             this.init()
         },
@@ -22,8 +22,24 @@ var ExampleBusCrash = {
             button.setTouchEnabled(true)
             button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE)
             button.setScale(3.0)
-            button.setPosition(rss.p.subY(rss.top(), 300))
+            button.setPosition(rss.p.add(rss.top(), cc.p(-150, -300)))
             button.addTouchEventListener(this.crash, this)
+            this.addChild(button)
+
+            var button = new ccui.Button()
+            button.setTouchEnabled(true)
+            button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE)
+            button.setScale(3.0)
+            button.setPosition(rss.p.add(rss.top(), cc.p(150, -300)))
+            button.addTouchEventListener(function() {
+                setTimeout(function(){
+                    var scene = cc.director.getRunningScene()
+                    cc.director.pause()
+                    cc.director.runScene(new ExampleBusCrash.Scene())
+                    cc.director.resume()
+                },100)
+            }, this)
+            button.setLocalZOrder(100)
             this.addChild(button)
 
             var box = rss.Box.create({
@@ -39,21 +55,32 @@ var ExampleBusCrash = {
             this.r.chairs = []
             this.r.men = []
 
-            this.addChairMan(2)
+            this.addChairDog(2)
             this.addChairMan(4)
             this.addChairMan(6)
-
-            this.addItem(
-                Dog.create({
-                    scale: 1.0,
-                    pos: rss.center()
-                })
-            )
 
             this.r.shouldStep = false
         },
 
         addChairMan: function(x) {
+            var chair = Chair.create({
+                pos: cc.p(),
+                scale: 3.0,
+                color: rss.colors.blue
+            })
+            chair.setPos(cc.p(x * chair.getWidth(), 118))
+            chair.setFriction(1.0)
+            this.addChair(chair)
+
+            var man = SidewaysMan.create({
+                pos: rss.p.add(chair.getPos(), cc.p(8, 72)),
+                scale: 2.0
+            })
+            man.setFriction(1.0)
+            this.addMan(man)
+        },
+
+        addChairDog: function(x) {
             var chair = Chair.create({
                 pos: cc.p(),
                 scale: 3.0,
@@ -63,13 +90,12 @@ var ExampleBusCrash = {
             chair.setFriction(1.0)
             this.addChair(chair)
 
-            var man = SidewaysMan.create({
-                pos: rss.p.add(chair.getPos(), cc.p(8, 72)),
-                scale: 2.0,
-                color: rss.colors.blue
+            var dog = Dog.create({
+                pos: rss.p.add(chair.getPos(), cc.p(35, 78)),
+                scale: 1.0
             })
-            man.setFriction(1.0)
-            this.addMan(man)
+            dog.setFriction(1.0)
+            this.addMan(dog)
         },
 
         addChair: function(chair) {
