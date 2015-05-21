@@ -96,7 +96,7 @@ rss.StaticBody = cc.Node.extend({
 
     getAngleDeg: function() { return cc.radiansToDegrees(this.r.body.a) },
 
-    setAngle: function(deg) { this.r.body.setAngle(deg) },
+    setAngle: function(rad) { this.r.body.setAngle(rad) },
 
     getSize: function() { return this.r.size },
 

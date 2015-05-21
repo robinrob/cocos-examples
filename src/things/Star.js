@@ -29,6 +29,7 @@ var Star = rss.CircBody.extend({
     draw: function() {
         this.r.draw.clear()
         this.r.draw.setPosition(this.getPos())
+        this.r.draw.setRotation(90)
         this.r.draw.drawPoly(
             rss.starVerts(5, this.r.radius, this.r.radius * 0.5, this.r.radius * 0.2),
             rss.setAlpha(this.getColor(), 128),
