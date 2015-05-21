@@ -361,6 +361,7 @@ rss.dog = new (function() {
 
     this.head = {
         width: 40,
+        height: 40,
         mass: 8
     }
 

@@ -4,10 +4,10 @@ var ExampleBusCrash = {
             this._super()
             this.r.space = space
 
-            //this._debugNode = new cc.PhysicsDebugNode(this.r.space)
-            //this._debugNode.setVisible(true)
-            //// Parallax ratio and offset
-            //this.addChild(this._debugNode, 10)
+            this._debugNode = new cc.PhysicsDebugNode(this.r.space)
+            this._debugNode.setVisible(true)
+            // Parallax ratio and offset
+            this.addChild(this._debugNode, 10)
 
             this.init()
         },
