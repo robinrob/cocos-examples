@@ -1,6 +1,8 @@
 rss.CompositeDynamicBody = rss.CompositeStaticBody.extend({
     ctor: function(args) {
         this._super(args)
+
+        this.r.updatables = []
     },
 
     init: function() {
@@ -64,5 +66,9 @@ rss.CompositeDynamicBody = rss.CompositeStaticBody.extend({
         this.r.comps.forEach(function(comp) {
             comp.applyImpulse(i)
         })
+    },
+
+    addUpdatable: function(item) {
+        this.r.updatables.push(item)
     }
 })

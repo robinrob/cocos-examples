@@ -1,7 +1,7 @@
 var ExampleDraw = {
     Layer: BaseLayer.extend({
         ctor: function () {
-            this._super();
+            this._super(ExampleDraw);
 
             this.init()
         },

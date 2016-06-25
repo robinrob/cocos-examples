@@ -3,7 +3,7 @@
 var ExampleGamepad = {
     Scene: BaseScene.extend({
         onEnter: function() {
-            this._super()
+            this._super(ExampleGamepad)
 
             var that = this
             window.addEventListener('gamepadconnected', function (e) {

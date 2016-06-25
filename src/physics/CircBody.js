@@ -12,10 +12,10 @@ rss.CircBody = rss.DynamicBody.extend({
     init: function() {
         this._super()
 
-        if (rss.physics == rss.chipmunk) {
+        if (rss.config.physics == rss.chipmunk) {
             this.initChipmunk()
         }
-        else if (rss.physics == rss.box2D) {
+        else if (rss.config.physics == rss.box2D) {
             this.initBox2D()
         }
 
@@ -23,7 +23,7 @@ rss.CircBody = rss.DynamicBody.extend({
     },
 
     initChipmunk: function() {
-        cc.log("Ball.init ...")
+        //cc.log("Ball.init ...")
         this._super()
 
         this.r.body = new cp.Body(this.r.mass, cp.momentForCircle(this.r.mass, 0, this.r.radius, cp.v(0,0)))
@@ -67,6 +67,11 @@ rss.CircBody = rss.DynamicBody.extend({
         return this._super() - this.r.offset
     },
 
+    setAngle: function(rad) {
+        var ang = this.r.offset + rad
+        this.r.body.setAngle(ang)
+    },
+
     getTop: function() {
         return rss.p.addY(this.r.startPos, this.r.radius)
     },
@@ -88,7 +93,7 @@ rss.CircBody = rss.DynamicBody.extend({
     },
 
     drawCircle: function(col) {
-        this.r.draw.drawCircle(
+        this.getDraw().drawCircle(
             cc.p(),
             this.getRadius(),
             2,
@@ -100,7 +105,7 @@ rss.CircBody = rss.DynamicBody.extend({
     },
 
     drawDot: function(col) {
-        this.r.draw.drawDot(
+        this.getDraw().drawDot(
             cc.p(),
             this.getRadius(),
             col
@@ -109,7 +114,7 @@ rss.CircBody = rss.DynamicBody.extend({
 
     draw: function(col) {
         var col = col || this.getColor() || rss.colors.white
-        //this.drawDot(col)
+        this.drawDot(col)
         this.drawCircle(col)
         this.r.draw.setPosition(this.getPos())
     }

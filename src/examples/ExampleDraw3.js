@@ -1,11 +1,11 @@
 /* Example of moving a body around using keyboard controls */
 
-var ExampleDraw2 = {
+var ExampleDraw3 = {
     Layer: BaseLayer.extend({
         MARGIN: 5,
 
         ctor: function (space) {
-            this._super();
+            this._super(ExampleDraw3);
 
             this.r.space = space
 

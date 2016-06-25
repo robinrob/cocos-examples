@@ -4,13 +4,13 @@ rss.StaticRectBody = rss.StaticBody.extend({
     },
 
     init: function() {
-        cc.log("StaticRectBody.init ...")
+        //cc.log("StaticRectBody.init ...")
         this._super()
 
-        if (rss.physics == rss.chipmunk) {
+        if (rss.config.physics == rss.chipmunk) {
             this.initChipmunk()
         }
-        else if (rss.physics == rss.box2D) {
+        else if (rss.config.physics == rss.box2D) {
             this.initBox2D()
         }
 
@@ -18,7 +18,7 @@ rss.StaticRectBody = rss.StaticBody.extend({
     },
     
     initChipmunk: function() {
-        cc.log("StaticRectBody.initChipmunk ...")
+        //cc.log("StaticRectBody.initChipmunk ...")
         // body
         this.r.body = new cp.StaticBody()
         this.r.body.setPos(this.getStartPos())
@@ -53,20 +53,18 @@ rss.StaticRectBody = rss.StaticBody.extend({
         body.CreateFixture(fixtureDef);
     },
 
-    draw: function(col) {
-        this.r.draw.clear()
-
+    draw: function(drawNode, col) {
         var col = col || this.getColor() || rss.colors.white
-        this.r.draw.drawRect(
+        drawNode.drawRect(
             cc.p(-this.getWidth() / 2, -this.getHeight() / 2),
             cc.p(this.getWidth() / 2, this.getHeight() / 2),
             rss.setAlpha(col, 255),
             2,
             rss.setAlpha(col, 255)
         )
-        this.r.draw.setPosition(this.getPos())
-        this.r.draw.setAnchorPoint(0.5, 0.5)
-        this.r.draw.setRotation(-1 * rss.toDeg(this.getAngle()))
+        //drawNode.setPosition(this.getPos())
+        //drawNode.setAnchorPoint(0.5, 0.5)
+        //drawNode.setRotation(-1 * rss.toDeg(this.getAngle()))
     }
 })
 

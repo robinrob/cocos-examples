@@ -2,7 +2,7 @@ var ExampleAnimation = {
     Layer: BaseLayer.extend({
         ctor: function () {
             cc.log("AnimationLayer.ctor ...")
-            this._super();
+            this._super(ExampleAnimation);
 
             this.init()
         },
@@ -31,6 +31,8 @@ var ExampleAnimation = {
             sprite.setPosition(center)
             sprite.runAction(cc.animate(animation).repeatForever());
             this.addChild(sprite)
+
+            this.addChild(rss.ui.restartButton(ExampleAnimation))
         }
     }),
 

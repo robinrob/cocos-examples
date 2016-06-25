@@ -7,11 +7,11 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
     },
 
     init: function() {
-        cc.log("CompositeStaticBody.init ...")
+        //cc.log("CompositeStaticBody.init ...")
         this._super()
 
-        if (typeof this.getColor() == "object") {
-            this.draw(this.getColor())
+        if (rss.config.draw && (typeof this.getColor() == "object")) {
+            this.drawSelf(this.getColor())
         }
     },
 
@@ -52,9 +52,10 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
     },
 
     drawCOM: function() {
-        this.r.draw.clear()
-        this.r.draw.setPosition(this.getPos())
-        this.r.draw.drawDot(cc.p(), (this.getWidth() || 100) / 6, rss.colors.red)
+        if (rss.config.draw) {
+            this.r.draw.setPosition(this.getPos())
+            this.r.draw.drawDot(cc.p(), (this.getWidth() || 100) / 6, rss.colors.red)
+        }
     },
 
     getMass: function() {
@@ -79,5 +80,5 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
 
     erase: function() { this.eachComp('erase', []) },
 
-    draw: function(col) { this.eachComp('draw', [col || this.getColor()]) }
+    drawSelf: function(col) { this.eachComp('drawSelf', [col || this.getColor()]) }
 })

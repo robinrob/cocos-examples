@@ -1,7 +1,9 @@
 var MenuLayer = cc.Layer.extend({
-    ctor : function(){
+    ctor : function(example){
         cc.log("MenuLayer.ctor ...")
         this._super();
+
+        this.example = example
     },
 
     init:function() {
@@ -19,36 +21,38 @@ var MenuLayer = cc.Layer.extend({
         menu.setPosition(centerPos);
         this.addChild(menu);
 
+
+
         return this
     },
 
-    // Add new example scenes here
+    // Add example scenes here
     menuItemLabels: function() {
         var items = [
-            this.newMenuItemLabel("Animation", new ExampleAnimation.Scene()),
-            this.newMenuItemLabel("Animation2", new ExampleAnimation2.Scene()),
-            this.newMenuItemLabel("Body", new ExampleBody.Scene()),
-            this.newMenuItemLabel("Composite Body", new ExampleCompositeBody.Scene()),
-            this.newMenuItemLabel("Draw", new ExampleDraw.Scene()),
-            this.newMenuItemLabel("Draw2", new ExampleDraw2.Scene()),
-            this.newMenuItemLabel("Physics Sprite", new ExamplePhysicsSprite.Scene()),
-            this.newMenuItemLabel("Touch", new ExampleTouch.Scene()),
-            this.newMenuItemLabel("Control", new ExampleControl.Scene()),
-            //this.newMenuItemLabel("Car", new ExampleCar.Scene()),
-            //this.newMenuItemLabel("Spaceship", new ExampleSpaceship.Scene()),
-            //this.newMenuItemLabel("Spaceship2", new ExampleSpaceship2.Scene()),
-            this.newMenuItemLabel("Chair", new ExampleChair.Scene()),
-            //this.newMenuItemLabel("Joints", new ExampleJoints.Scene()),
-            //this.newMenuItemLabel("Poly Body", new ExamplePolyBody.Scene()),
-            //this.newMenuItemLabel("Circular Movement", new ExampleCircularMovement.Scene()),
-            this.newMenuItemLabel("Gamepad API", new ExampleGamepad.Scene()),
-            this.newMenuItemLabel("Bus Crash", new ExampleBusCrash.Scene())
+            this.newMenuItemLabel("Animation", ExampleAnimation),
+            this.newMenuItemLabel("Animation2", ExampleAnimation2),
+            this.newMenuItemLabel("Body", ExampleBody),
+            this.newMenuItemLabel("Composite Body", ExampleCompositeBody),
+            this.newMenuItemLabel("Draw", ExampleDraw),
+            this.newMenuItemLabel("Draw2", ExampleDraw2),
+            this.newMenuItemLabel("Physics Sprite", ExamplePhysicsSprite),
+            this.newMenuItemLabel("Touch", ExampleTouch),
+            this.newMenuItemLabel("Control", ExampleControl),
+            //this.newMenuItemLabel("Car", ExampleCar),
+            //this.newMenuItemLabel("Spaceship", ExampleSpaceship),
+            //this.newMenuItemLabel("Spaceship2", ExampleSpaceship2),
+            this.newMenuItemLabel("Chair", ExampleChair),
+            //this.newMenuItemLabel("Joints", ExampleJoints),
+            //this.newMenuItemLabel("Poly Body", ExamplePolyBody),
+            //this.newMenuItemLabel("Circular Movement", ExampleCircularMovement),
+            this.newMenuItemLabel("Gamepad API", ExampleGamepad),
+            this.newMenuItemLabel("Bus Crash", ExampleBusCrash)
         ]
         return items
     },
 
-    newMenuItemLabel: function(name, scene) {
-        return rss.ui.menuItemLabel(name, function() { cc.director.runScene(scene) })
+    newMenuItemLabel: function(name, anim) {
+        return rss.ui.menuItemLabel(name, function() { cc.director.runScene(new anim.Scene()) })
     }
 });
 

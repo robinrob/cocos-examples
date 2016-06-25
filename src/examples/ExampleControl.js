@@ -5,7 +5,7 @@ var ExampleControl = {
         MARGIN: 5,
 
         ctor: function (space) {
-            this._super();
+            this._super(ExampleControl);
 
             this.r.space = space
 

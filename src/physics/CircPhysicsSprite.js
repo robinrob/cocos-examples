@@ -11,10 +11,10 @@ rss.CircPhysicsSprite = rss.DynamicBody.extend({
     init: function() {
         this._super()
 
-        if (rss.physics == rss.chipmunk) {
+        if (rss.config.physics == rss.chipmunk) {
             this.initChipmunk()
         }
-        else if (rss.physics == rss.box2D) {
+        else if (rss.config.physics == rss.box2D) {
             this.initBox2D()
         }
 
@@ -22,7 +22,7 @@ rss.CircPhysicsSprite = rss.DynamicBody.extend({
     },
 
     initChipmunk: function() {
-        cc.log("Ball.init ...")
+        //cc.log("Ball.init ...")
         this._super()
 
         this.r.body = new cp.Body(this.r.mass, cp.momentForCircle(this.r.mass, 0, this.r.radius, cp.v(0,0)))

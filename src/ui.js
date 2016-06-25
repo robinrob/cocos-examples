@@ -1,5 +1,5 @@
 rss.ui = {
-    FONT_SIZE: 45,
+    FONT_SIZE: 60,
 
     menuItemLabel: function (name, callBack) {
         var winSize = cc.director.getWinSize()
@@ -32,5 +32,23 @@ rss.ui = {
         var selected = new cc.Sprite(args.selected, cc.rect(100, 100, 100, 100))
         var item = new cc.MenuItemSprite(normal, selected, null, args.callBack, this)
         return item
+    },
+
+    restartButton: function(example) {
+        var button = new ccui.Button()
+        button.setTouchEnabled(true)
+        button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE)
+        button.setColor(cc.color(255, 200, 100))
+        button.setScale(3.0)
+        button.setPosition(rss.p.add(rss.top(), cc.p(150, -300)))
+        button.addTouchEventListener(function() {
+            setTimeout(function(){
+                cc.director.pause()
+                cc.director.runScene(new example.Scene())
+                cc.director.resume()
+            },100)
+        }, this)
+
+        return button
     }
 }

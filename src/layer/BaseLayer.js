@@ -2,10 +2,11 @@ var BaseLayer = cc.Layer.extend({
     MARGIN:25,
     THICKNESS:50,
 
-    ctor: function(){
+    ctor: function(example){
+        this.r = {}
         this._super();
 
-        this.r = {}
+        this.r.example = example
     },
 
     init:function() {
@@ -23,6 +24,8 @@ var BaseLayer = cc.Layer.extend({
         }, this)
         button.setLocalZOrder(100)
         this.addChild(button)
+
+        this.addChild(rss.ui.restartButton(this.r.example))
 
         return this
     },

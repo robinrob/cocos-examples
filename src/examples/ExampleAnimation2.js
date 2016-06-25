@@ -2,7 +2,7 @@ var ExampleAnimation2 = {
     Layer: MoveableObjectsLayer.extend({
         ctor: function () {
             cc.log("AnimationLayer.ctor ...")
-            this._super();
+            this._super(ExampleAnimation2);
 
             this.init()
         },

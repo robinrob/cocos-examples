@@ -1,7 +1,7 @@
 var ExampleTouch = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
-            this._super();
+            this._super(ExampleTouch);
 
             this.r.space = space
 

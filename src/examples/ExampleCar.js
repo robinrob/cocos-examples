@@ -5,7 +5,7 @@ var ExampleCar = {
         MARGIN: 5,
 
         ctor: function (space) {
-            this._super();
+            this._super(ExampleCar);
 
             this.r.space = space
 

@@ -1,7 +1,7 @@
 var ExampleCircularMovement = {
     Scene: BaseScene.extend({
         init: function() {
-            this._super()
+            this._super(ExampleCircularMovement)
 
             this.r.space = new cp.Space()
 

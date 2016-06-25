@@ -1,7 +1,7 @@
 var ExamplePolyBody = {
     Layer: BaseLayer.extend({
         ctor: function(space) {
-            this._super();
+            this._super(ExamplePolyBody);
             this.r.space = space
 
             rss.Box.create({pos: cc.p(), size: this.r.size}).addToSpace(this.r.space)

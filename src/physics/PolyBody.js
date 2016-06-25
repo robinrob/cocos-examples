@@ -32,8 +32,8 @@ rss.PolyBody = rss.DynamicBody.extend({
         verts.push(p.x, p.y)
 
         for (var i = 0; i < verts.length; i += 2) {
-            cc.log("x: " + verts[i])
-            cc.log("y: " + verts[i+1])
+            //cc.log("x: " + verts[i])
+            //cc.log("y: " + verts[i+1])
         }
 
         //this.r.shape = new cp.PolyShape(this.r.body, verts, cp.v(0, 0))

@@ -1,7 +1,7 @@
 var ExamplePhysicsSprite = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
-            this._super();
+            this._super(ExamplePhysicsSprite);
             this.r.space = space
 
             var winSize = cc.director.getWinSize()

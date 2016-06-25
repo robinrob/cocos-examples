@@ -16,18 +16,20 @@ rss.RectBody = rss.DynamicBody.extend({
         return this
     },
 
-    draw: function(col) {
-        var col = col || this.getColor() || rss.colors.white
-        this.r.draw.drawRect(
-            cc.p(-this.getWidth() / 2, -this.getHeight() / 2),
-            cc.p(this.getWidth() / 2, this.getHeight() / 2),
-            rss.setAlpha(col, 255),
-            2,
-            rss.setAlpha(col, 255)
-        )
-        this.r.draw.setPosition(this.getPos())
-        this.r.draw.setAnchorPoint(0.5, 0.5)
-        this.r.draw.setRotation(-1 * rss.toDeg(this.getAngle()))
+    drawSelf: function(col) {
+        col = col || this.getColor() || rss.colors.white
+        if (rss.config.draw) {
+            this.getDraw().drawRect(
+                cc.p(-this.getWidth() / 2, -this.getHeight() / 2),
+                cc.p(this.getWidth() / 2, this.getHeight() / 2),
+                rss.setAlpha(col, 255),
+                2,
+                rss.setAlpha(col, 255)
+            )
+            this.getDraw().setPosition(this.getPos())
+            this.getDraw().setAnchorPoint(0.5, 0.5)
+            this.getDraw().setRotation(-1 * rss.toDeg(this.getAngle()))
+        }
     }
 })
 

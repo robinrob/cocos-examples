@@ -1,7 +1,7 @@
 var ExampleBusCrash = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
-            this._super()
+            this._super(ExampleBusCrash)
             this.r.space = space
 
             //this._debugNode = new cc.PhysicsDebugNode(this.r.space)

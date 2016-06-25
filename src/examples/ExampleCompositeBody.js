@@ -1,7 +1,7 @@
 var ExampleCompositeBody = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
-            this._super();
+            this._super(ExampleCompositeBody);
             this.r.space = space
 
             this.init()

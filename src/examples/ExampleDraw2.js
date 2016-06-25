@@ -5,9 +5,15 @@ var ExampleDraw2 = {
         MARGIN: 5,
 
         ctor: function (space) {
-            this._super();
+            this._super(ExampleDraw2);
 
             this.r.space = space
+
+            if (rss.config.debug) {
+                this._debugNode = new cc.PhysicsDebugNode(space);
+                this._debugNode.setVisible(true);
+                this.addChild(this._debugNode, 10);
+            }
 
             this.init()
         },
@@ -16,8 +22,8 @@ var ExampleDraw2 = {
             this._super()
 
             this.addChild(Man.create({pos: rss.center()}).addToSpace(this.r.space), 0, rss.tag.man)
+            this.getMan().drawSelf()
             this.getMan().setVel(cc.p(0,0))
-            this.getMan().draw()
 
             this.addChild(
                 rss.Box.create({
@@ -25,22 +31,10 @@ var ExampleDraw2 = {
                     size: rss.winsize(),
                     color: rss.colors.red}
                 ).addToSpace(this.r.space))
+        },
 
-
-            var button = new ccui.Button()
-            button.setTouchEnabled(true)
-            button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE)
-            button.setColor(cc.color(255, 200, 100))
-            button.setScale(3.0)
-            button.setPosition(rss.p.add(rss.top(), cc.p(150, -300)))
-            button.addTouchEventListener(function() {
-                setTimeout(function(){
-                    cc.director.pause()
-                    cc.director.runScene(new ExampleDraw2.Scene())
-                    cc.director.resume()
-                },100)
-            }, this)
-            this.addChild(button)
+        getDraw: function() {
+            return this.getChildByTag(rss.tag.draw)
         },
 
         getMan: function() {
@@ -59,7 +53,7 @@ var ExampleDraw2 = {
         },
 
         update: function(dt) {
-            this.getMan().draw()
+            this.getMan().drawSelf()
         }
     }),
 
@@ -81,8 +75,8 @@ var ExampleDraw2 = {
         },
 
         update: function(dt) {
-            //this.r.space.step(dt);
-            //this.r.layer.update(dt);
+            this.r.space.step(dt);
+            this.r.layer.update(dt);
         }
     })
 }

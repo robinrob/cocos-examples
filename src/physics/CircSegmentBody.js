@@ -51,10 +51,6 @@ rss.CircSegmentBody = rss.DynamicBody.extend({
         this.anchorX = this.getStartPos().x
         this.anchorY = this.getStartPos().y
 
-        this.r.draw = new cc.DrawNode()
-        this.r.draw.setScale(1.0 / this.SCALE)
-        this.addChild(this.r.draw)
-
         this.startAng = this.r.body.a
     },
 
@@ -106,32 +102,25 @@ rss.CircSegmentBody = rss.DynamicBody.extend({
         return this.r.shouldPersist
     },
 
-    draw: function() {
-        this.r.draw.drawPoly(
-            this.getVerts(false).reverse(),
-            rss.setAlpha(this.getColor(), 128),
-            rss.ui.linewidth / 2.0,
-            rss.setAlpha(this.getColor(), 255)
-        )
-        this.r.draw.setPosition(this.getPos())
-        this.r.draw.setAnchorPoint(0.5, 0)
-        this.r.draw.setRotation(-1 * rss.toDeg(this.getAngle()))
+    isInView: function() {
+        var ang = (this.getAngle() + rss.checkpointAngles[rss.checkpointReached]) % rss.twoPI
+        var rightEdgeAng = rss.toDeg((this.getStartAngle() - (ang + this.getWidth() / 2)))
+        var leftEdgeAng = rss.toDeg((this.getStartAngle() - (ang - this.getWidth() / 2)))
+        var limit = 20
+        return (rightEdgeAng < limit) && (leftEdgeAng > (-1 * limit))
     },
 
-    update: function() {
-        this.r.draw.clear()
-
-        if (this.getShouldPersist()) {
-            this.draw()
-        }
-        else {
-            var ang = this.getAngle() % rss.twoPI
-            var rightEdgeAng = rss.toDeg((this.getStartAngle() - (ang + this.getWidth() / 2)))
-            var leftEdgeAng = rss.toDeg((this.getStartAngle() - (ang - this.getWidth() / 2)))
-            var limit = 20
-            if ((rightEdgeAng < limit) && (leftEdgeAng > (-1 * limit))) {
-                this.draw()
-            }
+    draw: function(drawNode) {
+        if (rss.config.draw) {
+            drawNode.drawPoly(
+                this.getVerts(false).reverse(),
+                rss.setAlpha(this.getColor(), 128),
+                rss.ui.linewidth / 2.0,
+                rss.setAlpha(this.getColor(), 255)
+            )
+            //drawNode.setPosition(this.getPos())
+            //drawNode.setAnchorPoint(0.5, 0)
+            //drawNode.setRotation(-1 * rss.toDeg(this.getAngle()))
         }
     }
 })

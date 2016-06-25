@@ -5,7 +5,7 @@ var ExampleSpring = {
         },
 
         init: function () {
-            this._super()
+            this._super(ExampleSpring)
 
             this.r.space = new cp.Space()
             //this.r.space.gravity = cp.v(0, rss.gravity);

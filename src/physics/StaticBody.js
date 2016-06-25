@@ -1,4 +1,6 @@
 rss.StaticBody = cc.Node.extend({
+    r: null,
+
     ctor: function(args) {
         this._super()
 
@@ -13,14 +15,13 @@ rss.StaticBody = cc.Node.extend({
         this.r.scale = args.scale
 
         this.r.color = args.color
-
-        this.r.draw = new cc.DrawNode()
-        this.addChild(this.r.draw)
     },
 
     init: function() {
         rss.log("StaticBody.init ...")
         this._super()
+
+        this.addChild(cc.DrawNode.create(), 0, rss.tag.draw)
     },
 
     addToSpace: function(space) {
@@ -32,33 +33,25 @@ rss.StaticBody = cc.Node.extend({
         var body = this.getBody()
         if (typeof body == "object") {
             //rss.log("CHECKING CONSTRAINTS")
-            //space.constraints.forEach(function(constr) {
-            //    //rss.log("CHECKING CONSTRAINT")
-            //    if ((constr.a == body) || (constr.b == body)) {
-            //        rss.log("REMOVING CONSTRAINT")
-            //        space.removeConstraint(constr)
-            //    }
-            //})
+            body.eachConstraint(function(constr) {
+                ////rss.log("CHECKING CONSTRAINT")
+                if ((constr.a == body) || (constr.b == body)) {
+                    //rss.log("REMOVING CONSTRAINT")
+                    space.removeConstraint(constr)
+                }
+            })
             space.removeBody(body)
         }
 
-        var shape = this.getShape()
-        if (typeof shape == "object") {
-            space.removeShape(shape)
-        }
-
-        if (typeof this.r.draw == "object") {
-            this.r.shouldDraw = false
-            this.r.draw.removeFromParent()
+        if (typeof this.r.shape == "object") {
+            space.removeShape(this.r.shape)
         }
 
         this.removeFromParent()
     },
 
-    getStartPos: function() { return this.r.startPos },
-
     getPos: function() {
-        switch(rss.physics) {
+        switch(rss.config.physics) {
             case rss.chipmunk:
                 return this.r.body.getPos()
                 break;
@@ -69,7 +62,7 @@ rss.StaticBody = cc.Node.extend({
     },
 
     setPos: function(p) {
-        switch(rss.physics) {
+        switch(rss.config.physics) {
             case rss.chipmunk:
                 this.r.body.setPos(p)
                 break;
@@ -90,13 +83,23 @@ rss.StaticBody = cc.Node.extend({
 
     getTopLeftV: function() { return rss.toV(this.getTopLeft()) },
 
-    getStartPos: function() { return this.r.startPos },
-
     getAngle: function() { return this.r.body.a },
 
     getAngleDeg: function() { return cc.radiansToDegrees(this.r.body.a) },
 
     setAngle: function(rad) { this.r.body.setAngle(rad) },
+
+    setAngleDeg: function(deg) { this.setAngle(rss.toRad(deg)) },
+
+    addAngle: function(rad) {
+        this.setAngle(this.getAngle() + rad)
+    },
+
+    addAngleDeg: function(deg) {
+        this.addAngle(rss.toRad(deg))
+    },
+
+    getBodyAngle: function() { return this.r.body.a },
 
     getSize: function() { return this.r.size },
 
@@ -117,8 +120,6 @@ rss.StaticBody = cc.Node.extend({
     getBody: function() { return this.r.body },
 
     getSprite: function() { return this.r.sprite },
-
-    getDraw: function() { return this.r.draw },
 
     getStartPos: function() { return this.r.startPos },
 
@@ -166,5 +167,7 @@ rss.StaticBody = cc.Node.extend({
 
     setCollisionType: function(type) { this.r.shape.setCollisionType(type) },
 
-    translate: function(v) { this.r.body.setPos(rss.p.add(this.r.body.getPos(), v)) }
+    translate: function(v) { this.r.body.setPos(rss.p.add(this.r.body.getPos(), v))},
+
+    getDraw: function() { return this.getChildByTag(rss.tag.draw) }
 })

@@ -1,7 +1,7 @@
 var ExampleBody = {
     Layer: BaseLayer.extend({
         ctor: function (space) {
-            this._super();
+            this._super(ExampleBody);
             this.r.space = space
 
             switch(rss.physics) {

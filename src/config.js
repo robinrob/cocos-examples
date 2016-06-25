@@ -1,9 +1,15 @@
 var rss = rss || {}
 rss.ui = rss.ui || {}
 
+rss.config = {
+    physics: rss.chipmunk,
+    draw: false,
+    debug: true
+}
+
 rss.physics = rss.chipmunk
 
-switch(rss.physics) {
+switch(rss.config.physics) {
     case rss.chipmunk:
         rss.gravity = -350
         break;
@@ -46,7 +52,8 @@ rss.tag = {
     // Note that when tag is used for collision group, 0 means all objects with that tag DO collide (in Chipmunk)
     player: 1,
     man: 999,
-    chair: 3
+    chair: 3,
+    draw: 4
 }
 
 rss.res = {

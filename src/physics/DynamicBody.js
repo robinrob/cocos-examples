@@ -16,7 +16,7 @@ rss.DynamicBody = rss.StaticBody.extend({
     },
 
     getVel: function() {
-        switch(rss.physics) {
+        switch(rss.config.physics) {
             case rss.chipmunk:
                 return this.r.body.getVel()
                 break;
@@ -27,7 +27,7 @@ rss.DynamicBody = rss.StaticBody.extend({
     },
 
     setVel: function(v) {
-        switch(rss.physics) {
+        switch(rss.config.physics) {
             case rss.chipmunk:
                 this.r.body.setVel(v)
                 break;
@@ -55,6 +55,14 @@ rss.DynamicBody = rss.StaticBody.extend({
 
     setAngVel: function(w) {
         this.r.body.w = w
+    },
+
+    getState: function() {
+        return this.r.state
+    },
+
+    setState: function(state) {
+        this.r.state = state
     },
 
     applyForce: function (f) {
