@@ -35,7 +35,6 @@ var ExampleBusCrash = {
             button.setPosition(rss.p.add(rss.top(), cc.p(150, -300)))
             button.addTouchEventListener(function() {
                 setTimeout(function(){
-                    var scene = cc.director.getRunningScene()
                     cc.director.pause()
                     cc.director.runScene(new ExampleBusCrash.Scene())
                     cc.director.resume()

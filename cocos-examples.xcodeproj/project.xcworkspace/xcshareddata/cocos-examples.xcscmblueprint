@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "563A45DD603587BB4040C8D948978DCA43885958",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "563A45DD603587BB4040C8D948978DCA43885958" : 0,
+    "D0CDD71CF0C47661C253D412083ECF3742B09C51" : 0,
+    "5DCAFBF5DA3A2A6B7520687F6AE445EBE12D18DC" : 0,
+    "AB0A059DC01C9CA329A607C1BE624FCF7D808BB2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "360D44A3-9562-450E-BE1A-41A67E0C2AD9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "563A45DD603587BB4040C8D948978DCA43885958" : "cocos-examples\/",
+    "D0CDD71CF0C47661C253D412083ECF3742B09C51" : "..\/..",
+    "5DCAFBF5DA3A2A6B7520687F6AE445EBE12D18DC" : "..\/..\/res",
+    "AB0A059DC01C9CA329A607C1BE624FCF7D808BB2" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "cocos-examples",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "cocos-examples.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:robinrob\/cocos-examples.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "563A45DD603587BB4040C8D948978DCA43885958"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:robinrob\/res.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5DCAFBF5DA3A2A6B7520687F6AE445EBE12D18DC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:robinrob\/javascript.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AB0A059DC01C9CA329A607C1BE624FCF7D808BB2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:robinrob\/robin",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D0CDD71CF0C47661C253D412083ECF3742B09C51"
+    }
+  ]
+}

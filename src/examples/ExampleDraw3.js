@@ -15,9 +15,9 @@ var ExampleDraw2 = {
         init: function () {
             this._super()
 
-            this.addChild(Man.create({pos: rss.center()}).addToSpace(this.r.space), 0, rss.tag.man)
-            this.getMan().setVel(cc.p(0,0))
-            this.getMan().draw()
+            this.man = Man.create({pos: rss.center()}).addToSpace(this.r.space)
+            this.man.setVel(cc.p(0,0))
+            this.addChild(this.man)
 
             this.addChild(
                 rss.Box.create({
@@ -25,41 +25,21 @@ var ExampleDraw2 = {
                     size: rss.winsize(),
                     color: rss.colors.red}
                 ).addToSpace(this.r.space))
-
-
-            var button = new ccui.Button()
-            button.setTouchEnabled(true)
-            button.loadTextures("animationbuttonnormal.png", "animationbuttonpressed.png", "", ccui.Widget.PLIST_TEXTURE)
-            button.setColor(cc.color(255, 200, 100))
-            button.setScale(3.0)
-            button.setPosition(rss.p.add(rss.top(), cc.p(150, -300)))
-            button.addTouchEventListener(function() {
-                setTimeout(function(){
-                    cc.director.pause()
-                    cc.director.runScene(new ExampleDraw2.Scene())
-                    cc.director.resume()
-                },100)
-            }, this)
-            this.addChild(button)
-        },
-
-        getMan: function() {
-            return this.getChildByTag(rss.tag.man)
         },
 
         processEvent:function (event) {
             cc.log("Processing event ...")
             var winSize = cc.director.getWinSize();
             var delta = event.getDelta();
-            var curPos = this.getMan().getPos()
+            var curPos = this.man.getPos()
             curPos = cc.pAdd(curPos, delta);
             curPos = cc.pClamp(curPos, cc.p(0, 0), cc.p(winSize.width, winSize.height));
-            this.getMan().setPos(curPos.x, curPos.x)
+            this.man.setPos(curPos.x, curPos.x)
             curPos = null;
         },
 
         update: function(dt) {
-            this.getMan().draw()
+            this.man.draw()
         }
     }),
 
@@ -81,8 +61,8 @@ var ExampleDraw2 = {
         },
 
         update: function(dt) {
-            //this.r.space.step(dt);
-            //this.r.layer.update(dt);
+            this.r.space.step(dt);
+            this.r.layer.update(dt);
         }
     })
 }

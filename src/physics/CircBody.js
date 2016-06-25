@@ -108,7 +108,6 @@ rss.CircBody = rss.DynamicBody.extend({
     },
 
     draw: function(col) {
-        this.r.draw.clear()
         var col = col || this.getColor() || rss.colors.white
         //this.drawDot(col)
         this.drawCircle(col)

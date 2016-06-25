@@ -17,8 +17,6 @@ rss.RectBody = rss.DynamicBody.extend({
     },
 
     draw: function(col) {
-        this.r.draw.clear()
-
         var col = col || this.getColor() || rss.colors.white
         this.r.draw.drawRect(
             cc.p(-this.getWidth() / 2, -this.getHeight() / 2),

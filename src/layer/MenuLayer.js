@@ -9,14 +9,14 @@ var MenuLayer = cc.Layer.extend({
         this._super();
 
         var winSize = cc.director.getWinSize();
-        var centerpos = cc.p(winSize.width / 2, winSize.height / 2);
+        var centerPos = cc.p(winSize.width / 2, winSize.height / 2);
 
         //var items = this.menuItemLabelsChipmunk()
         var items = this.menuItemLabels()
         var menu = new cc.Menu(items);
 
         menu.alignItemsVertically()
-        menu.setPosition(centerpos);
+        menu.setPosition(centerPos);
         this.addChild(menu);
 
         return this
