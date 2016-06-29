@@ -51,6 +51,7 @@
         "src/layer/BaseLayer.js",
         "src/layer/MenuLayer.js",
         "src/layer/MoveableObjectsLayer.js",
+        "src/layer/MoveableBackgroundLayer.js",
 
         "src/scene/BaseScene.js",
         "src/scene/MenuScene.js",
