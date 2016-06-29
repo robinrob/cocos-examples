@@ -4,7 +4,7 @@ rss.StaticRectBody = rss.StaticBody.extend({
     },
 
     init: function() {
-        //cc.log("StaticRectBody.init ...")
+        cc.log("StaticRectBody.init ...")
         this._super()
 
         if (rss.config.physics == rss.chipmunk) {

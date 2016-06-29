@@ -8,10 +8,6 @@ var FishAnimation = cc.Layer.extend({
     init: function() {
         this._super()
 
-        cc.spriteFrameCache.addSpriteFrames(rss.res.fish_plist);
-        var spriteSheet = new cc.SpriteBatchNode(rss.res.fish_png);
-        var sprite = new cc.Sprite("#fish1.png");
-
         var animFrames = [];
         for (var i = 1; i < 4; i++) {
             var str = "fish" + i + ".png";

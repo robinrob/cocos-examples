@@ -23,8 +23,6 @@ rss.ui = {
     },
 
     menuItemImage: function(args) {
-        cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist)
-
         //var item = new cc.MenuItemImage()
         //item.initWithNormalImage(args.normal, args.selected, null, args.callBack, this)
         //item.setScale(50, 50)

@@ -54,7 +54,6 @@
 
         "src/scene/BaseScene.js",
         "src/scene/MenuScene.js",
-        "src/scene/ExampleScene.js",
 
         "src/examples/ExampleAnimation.js",
         "src/examples/ExampleAnimation2.js",
@@ -74,6 +73,7 @@
         "src/examples/ExampleCircularMovement.js",
         "src/examples/ExampleSpring.js",
         "src/examples/ExampleGamepad.js",
-        "src/examples/ExampleBusCrash.js"
+        "src/examples/ExampleBusCrash.js",
+        "src/examples/ExampleBackground.js"
     ]
 }

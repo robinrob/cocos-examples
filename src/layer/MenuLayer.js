@@ -46,7 +46,8 @@ var MenuLayer = cc.Layer.extend({
             //this.newMenuItemLabel("Poly Body", ExamplePolyBody),
             //this.newMenuItemLabel("Circular Movement", ExampleCircularMovement),
             this.newMenuItemLabel("Gamepad API", ExampleGamepad),
-            this.newMenuItemLabel("Bus Crash", ExampleBusCrash)
+            this.newMenuItemLabel("Bus Crash", ExampleBusCrash),
+            this.newMenuItemLabel("Background", ExampleBackground)
         ]
         return items
     },

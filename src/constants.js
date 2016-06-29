@@ -19,3 +19,28 @@ rss.colors = {
     black: new cc.color(0, 0, 0, 255),
     white: new cc.color(255, 255, 255, 255)
 }
+
+rss.res = {
+    spritesheet_png : "res/spritesheet.png",
+    spritesheet_plist : "res/spritesheet.plist",
+
+    //spaceship_ogg: "res/correct.ogg",
+    //spaceship_ogg: "res/pickup_coin.ogg"
+    //spaceship_ogg: "res/background.ogg"
+    spaceship_ogg: "res/delta_iv_short.ogg",
+}
+
+// Resources for pre-loading
+rss.resources = []
+for (var i in rss.res) {
+    rss.resources.push(rss.res[i])
+}
+
+rss.tag = {
+    // Note that when tag is used for collision group, 0 means all objects with that tag DO collide (in Chipmunk)
+    player: 1,
+    man: 999,
+    chair: 3,
+    draw: 4,
+    layer: 99
+}

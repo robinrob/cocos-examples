@@ -15,8 +15,6 @@ var ExampleBusCrash = {
         init: function () {
             this._super()
 
-            cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist)
-
             // Create the button
             var button = new ccui.Button()
             button.setTouchEnabled(true)

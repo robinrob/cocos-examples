@@ -11,10 +11,6 @@ var ExampleAnimation = {
             cc.log("AnimationLayer.init ...")
             this._super()
 
-            cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist);
-            var spriteSheet = new cc.SpriteBatchNode(rss.res.spritesheet_png);
-            var sprite = new cc.Sprite("#fish1.png");
-
             var animFrames = [];
             for (var i = 1; i < 4; i++) {
                 var str = "fish" + i + ".png";

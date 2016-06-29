@@ -23,7 +23,7 @@ var ExampleControl = {
             this.constructMan()
             this.addChild(
                 rss.Box.create({
-                    pos: cc.p(),
+                    pos: cc.p(0, 0),
                     size: rss.winsize()
                 }).addToSpace(this.r.space))
         },

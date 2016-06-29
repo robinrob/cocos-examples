@@ -12,8 +12,6 @@ var BaseLayer = cc.Layer.extend({
     init:function() {
         this._super()
 
-        cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist)
-
         var button = new ccui.Button()
         button.setTouchEnabled(true)
         button.loadTextures("btn-back-1.png", "btn-back-0.png", "", ccui.Widget.PLIST_TEXTURE)

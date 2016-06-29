@@ -11,9 +11,6 @@ var ExampleAnimation2 = {
             cc.log("AnimationLayer.init ...")
             this._super()
 
-            cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist);
-            var spriteSheet = new cc.SpriteBatchNode(rss.res.spritesheet_png);
-
             this.r.upFrame = cc.spriteFrameCache.getSpriteFrame("spaceship0.png")
             this.r.downFrame = cc.spriteFrameCache.getSpriteFrame("spaceship_nofire.png")
 
@@ -29,12 +26,18 @@ var ExampleAnimation2 = {
             if (rss.upInput()) {
                 cc.log("UP")
                 this.r.sprite.setSpriteFrame(this.r.upFrame)
-                cc.audioEngine.playMusic(rss.res.spaceship_ogg)
+                if (!this.r.wasUpInput && !rss.config.mute) {
+                    this.r.rocketEffect = rss.playEffect(rss.res.spaceship_ogg, true)
+                }
+                this.r.wasUpInput = true
+            }
+            else if (this.r.wasUpInput) {
+                this.r.wasUpInput = false
+                rss.stopEffect(this.r.rocketEffect)
             }
             else {
                 cc.log("DOWN")
                 this.r.sprite.setSpriteFrame(this.r.downFrame)
-                cc.audioEngine.stopMusic()
             }
         }
     }),

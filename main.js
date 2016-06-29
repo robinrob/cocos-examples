@@ -56,8 +56,10 @@ cc.game.onStart = function(){
     cc.view.resizeWithBrowserSize(true);
     //load resources
     cc.LoaderScene.preload(rss.resources, function () {
+        cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist);
         //cc.director.runScene(new MenuScene());
-        cc.director.runScene(new ExampleDraw2.Scene());
+        //cc.director.runScene(new ExampleControl.Scene());
+        cc.director.runScene(new ExampleBackground.Scene());
     }, this);
 };
 cc.game.run();

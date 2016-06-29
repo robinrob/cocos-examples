@@ -18,10 +18,6 @@ var Spaceship2 = Steerable.extend({
         cc.log("Spaceship.init ...")
         this._super()
 
-        // create sprite sheet
-        cc.spriteFrameCache.addSpriteFrames(rss.res.spaceship_plist);
-        var spriteSheet = new cc.SpriteBatchNode(rss.res.spaceship_png);
-
         this.sprite = new cc.PhysicsSprite("#0.png");
 
         this.addChild(this.sprite)

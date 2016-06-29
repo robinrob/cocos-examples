@@ -39,6 +39,16 @@ cp.Vect.prototype.subY = function(dy) {
     return cp.v(this.x, this.y - dy)
 }
 
+rss.console = function(str){
+    console.log(str)
+}
+
+rss.consoleO = function(obj) {
+    for (i in obj) {
+        rss.console(i)
+    }
+}
+
 rss.logO = function(obj) {
     for (i in obj) {
         cc.log(i)
@@ -333,10 +343,6 @@ rss.bottomLeft = function() { return cc.p(0, 0) }
 
 rss.bottomRight = function() { return cc.p(0, cc.director.getWinSize().height) }
 
-/* Global game controls */
-rss.pause = function() {
-    rss.keys[cc.KEY.p] = true
-}
 
 /* Control inputs */
 rss.pauseInput = function() {
@@ -399,7 +405,7 @@ rss.circSegmentVerts = function(radius, angle, offset, segments, direction) {
 rss.floatingCircSegmentVerts = function(radius, angle, offset, segments, heightFactor, direction) {
     var verts = []
 
-    var direction = direction || 1.0
+    direction = direction || 1.0
 
     verts.push(rss.polarToCartesian(radius * (1 - heightFactor), offset + direction * angle))
 
@@ -414,11 +420,11 @@ rss.floatingCircSegmentVerts = function(radius, angle, offset, segments, heightF
 }
 
 rss.starVerts = function(nRays, r1, r2, rayWidth) {
-    verts = []
+    var verts = []
     var theta = rss.twoPI / nRays
-    for (var n = 0; n < nRays; ++n) {
-        verts.push(rss.polarToCartesian(r1, n * theta))
-        verts.push(rss.polarToCartesian(r2, (n + 1/2) * theta))
+    for (var n= 0; n < nRays; ++n) {
+        verts.push(rss.polarToCartesian(r1, n * theta + Math.PI / 2))
+        verts.push(rss.polarToCartesian(r2, (n + 1/2) * theta + Math.PI / 2))
     }
     return verts
 }
@@ -432,7 +438,7 @@ rss.scaleVerts = function(verts, scale) {
 }
 
 rss.toXYVerts = function(verts) {
-    vertsXY = []
+    var vertsXY = []
     verts.forEach(function(vert) {
         vertsXY.push(vert.x)
         vertsXY.push(vert.y)
@@ -444,7 +450,67 @@ rss.log = function(str) {
     cc.log("COCOS: " + str)
 }
 
-rss.stop = function() {
-    cc.director.pause()
+rss.playMusic = function(file) {
+    if (!rss.config.mute) {
+        cc.audioEngine.setMusicVolume(1)
+        cc.audioEngine.playMusic(file)
+    }
+}
+
+rss.stopMusic = function() {
     cc.audioEngine.stopMusic()
+    cc.audioEngine.stopAllEffects()
+    // Above does not stop background music mid-file!
+    cc.audioEngine.setMusicVolume(0)
+}
+
+rss.playEffect = function(file) {
+    if (!rss.config.mute) {
+        cc.audioEngine.setEffectsVolume(0.2)
+        return cc.audioEngine.playEffect(file)
+    }
+}
+
+rss.stopEffect = function(effect) {
+    if (typeof effect === 'object') {
+        cc.audioEngine.stopEffect(effect)
+    }
+}
+
+rss.pause = function() {
+    rss.stopMusic()
+    cc.director.pause()
+}
+
+rss.resume = function() {
+    rss.playMusic()
+    cc.director.resume()
+}
+
+rss.reverseMap = function(map) {
+    var reverseMap = {}
+    var val
+    for (var key in map) {
+        val = map[key]
+        reverseMap[val] = key
+    }
+    return reverseMap
+}
+
+rss.gameState = function() {
+    return rss.game.state
+}
+
+rss.gameStateName = function() {
+    return rss.gameStateNames[rss.gameState()]
+}
+
+rss.includes = function(list, item) {
+    var result = false
+    list.forEach(function(el) {
+        if (el == item) {
+            result = true
+        }
+    })
+    return result
 }

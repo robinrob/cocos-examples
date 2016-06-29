@@ -44,37 +44,8 @@ rss.ui.buttonOuterColor = rss.colors.orange
 rss.ui.buttonInnerColor = rss.colors.green
 rss.ui.buttonTextColor = rss.colors.orange
 
-rss.tagOfLayer = {
-    Animation: 1
-}
-
-rss.tag = {
-    // Note that when tag is used for collision group, 0 means all objects with that tag DO collide (in Chipmunk)
-    player: 1,
-    man: 999,
-    chair: 3,
-    draw: 4
-}
-
-rss.res = {
-    spritesheet_png : "res/spritesheet.png",
-    spritesheet_plist : "res/spritesheet.plist",
-
-    //spaceship_ogg: "res/correct.ogg"
-    //spaceship_ogg: "res/pickup_coin.ogg"
-    //spaceship_ogg: "res/background.ogg"
-    spaceship_ogg: "res/delta_iv.wav"
-}
-
-// Resources for pre-loading
-rss.resources = []
-for (var i in rss.res) {
-    rss.resources.push(rss.res[i])
-}
-
 // Used by keyboard listeners
 rss.keys = []
-
 
 /* Object configs */
 
@@ -88,7 +59,7 @@ ball.mass = 100
 // Man
 rss.man = new (function() {
     this.acc = 600,
-    this.gravity = -350
+        this.gravity = -350
 
     this.leg = {
         width: 10,
@@ -172,7 +143,7 @@ rss.man = new (function() {
 rss.sideMan = new (function() {
     // Aggregate config
     this.acc = 400,
-    this.gravity = -350
+        this.gravity = -350
 
     // Element dimensions
     this.leg = {
